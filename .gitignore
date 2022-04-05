@@ -1,3 +1,14 @@
+# my ignores
+**/.idea/
+**/.DS_Store
+**/node_modules/
+**/coverage/
+**/.vscode/
+# env files
+**/.env
+# webpack
+**/dist/
+
 # Logs
 logs
 *.log
