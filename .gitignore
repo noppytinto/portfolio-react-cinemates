@@ -8,6 +8,8 @@
 **/.env
 # webpack
 **/dist/
+# react
+**/build/
 
 # Logs
 logs
