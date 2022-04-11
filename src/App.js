@@ -3,6 +3,7 @@ import HorizontalMovieList from './components/HorizontalMoviesList/HorizontalMov
 import ListHeader from './components/HorizontalMoviesList/ListHeader/ListHeader';
 import MoviePoster from './components/reusable/MoviePoster/MoviePoster';
 import OutlineButton from './components/reusable/OutlineButton/OutlineButton';
+import * as assetsManager from './utils/AssetsManager';
 
 function App() {
     return (
@@ -12,7 +13,8 @@ function App() {
 
             <ListHeader title='Up next' buttonText='See all' />
             <ListHeader title='Coming Soon' buttonText='See all' />
-            <MoviePoster posterImageUrl='https://www.themoviedb.org/t/p/w600_and_h900_bestv2/11keFudto4QrgrXChukexJwdHPe.jpg'/>
+            <MoviePoster posterImageUrl={assetsManager.moviePoster_11}/>
+            <br/><br/>
             <HorizontalMovieList />
         </div>
     );

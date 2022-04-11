@@ -1,3 +1,11 @@
 .horizontal-movie-list {
-  
+}
+
+.horizontal-movie-list > ul {
+  padding: 1em 0;
+
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.2em;
 }

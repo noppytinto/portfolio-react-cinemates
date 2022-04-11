@@ -1,16 +1,21 @@
 import styles from './MoviePoster.module.css';
+import * as assetsManager from '../../../utils/AssetsManager';
 
-function MoviePoster({posterImageUrl='', alt=''}) {
+function MoviePoster({posterImageUrl=assetsManager.brokenImageIcon, alt=''}) {
+    let classes = `${styles['movie-poster']} `;
+    let imageClasses = `${styles['movie-poster-image']} `;
+
+    if (posterImageUrl === assetsManager.brokenImageIcon) {
+        imageClasses = imageClasses + styles['broken-image'];
+    }
 
     return (
-        <div className={styles['movie-poster']} >
-            <img className={styles['movie-poster-image']} 
+        <div className={classes} >
+            <img className={imageClasses} 
                  src={posterImageUrl} 
-                 alt={alt} />
-
-            <span class="material-icons-outlined">
-            broken_image
-            </span>
+                 alt={alt} 
+                 draggable={'false'}
+                 />
         </div>
     );
 }
