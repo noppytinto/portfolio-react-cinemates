@@ -1,0 +1,18 @@
+
+.outline-button {
+  padding: 0.2em 0.7em;
+  background-color: transparent;
+  font-weight: 600;
+  color: var(--color-primary--yellow);
+  
+  border-radius: 2em;
+  border-width: 0.25em;
+  border-style: solid;
+  border-color: var(--color-primary--yellow);
+
+  transition: all .2s;
+}
+
+.outline-button:active {
+  background-color: rgba(var(--color-rgb-raw-primary--yellow), 0.2);
+}

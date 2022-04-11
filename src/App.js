@@ -1,11 +1,21 @@
 import styles from './App.module.css';
+import HorizontalMovieList from './components/HorizontalMoviesList/HorizontalMovieList';
+import ListHeader from './components/HorizontalMoviesList/ListHeader/ListHeader';
+import MoviePoster from './components/reusable/MoviePoster/MoviePoster';
+import OutlineButton from './components/reusable/OutlineButton/OutlineButton';
 
 function App() {
-  return (
-    <div className={styles.App}>
-      <p className={styles.p}>hello world</p>
-    </div>
-  );
+    return (
+        <div className={styles.App}>
+            <h1>Header</h1>
+            <OutlineButton>Button</OutlineButton>
+
+            <ListHeader title='Up next' buttonText='See all' />
+            <ListHeader title='Coming Soon' buttonText='See all' />
+            <MoviePoster posterImageUrl='https://www.themoviedb.org/t/p/w600_and_h900_bestv2/11keFudto4QrgrXChukexJwdHPe.jpg'/>
+            <HorizontalMovieList />
+        </div>
+    );
 }
 
 export default App;
