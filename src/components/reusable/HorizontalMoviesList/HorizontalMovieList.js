@@ -1,7 +1,7 @@
-import MoviePoster from '../reusable/MoviePoster/MoviePoster';
+import MoviePoster from '../MoviePoster/MoviePoster';
 import styles from './HorizontalMovieList.module.css';
 import ListHeader from './ListHeader/ListHeader';
-import * as assetsManager from '../../utils/AssetsManager';
+import * as assetsManager from '../../../utils/AssetsManager';
 
 function HorizontalMovieList({title='Header', movieList=[], buttonText='Button'}) {
 

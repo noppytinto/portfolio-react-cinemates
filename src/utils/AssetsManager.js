@@ -1,5 +1,8 @@
 
 export const brokenImageIcon = '/images/broken_image_black_24dp.svg';
+export const extendedLogoNoLights = '/images/cinemates_logo_extended_nolights_2.png';
+export const notificationNoneIcon = '/images/notifications_none_white_24dp.svg';
+export const profilePictureTest = '/images/profile-picture.jpg';
 
 // test movie poster images
 export const moviePoster_1 = 'https://www.themoviedb.org/t/p/w1280/bcCBq9N1EMo3daNIjWJ8kYvrQm6.jpg';

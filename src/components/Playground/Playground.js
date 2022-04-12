@@ -1,6 +1,6 @@
 import styles from './Playground.module.css';
-import HorizontalMovieList from '../HorizontalMoviesList/HorizontalMovieList';
-import ListHeader from '../HorizontalMoviesList/ListHeader/ListHeader';
+import HorizontalMovieList from '../reusable/HorizontalMoviesList/HorizontalMovieList';
+import ListHeader from '../reusable/HorizontalMoviesList/ListHeader/ListHeader';
 import MoviePoster from '../reusable/MoviePoster/MoviePoster';
 import OutlineButton from '../reusable/OutlineButton/OutlineButton';
 import * as assetsManager from '../../utils/AssetsManager';
