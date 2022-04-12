@@ -1,21 +1,16 @@
+import { Route, Routes } from 'react-router-dom';
 import styles from './App.module.css';
-import HorizontalMovieList from './components/HorizontalMoviesList/HorizontalMovieList';
-import ListHeader from './components/HorizontalMoviesList/ListHeader/ListHeader';
-import MoviePoster from './components/reusable/MoviePoster/MoviePoster';
-import OutlineButton from './components/reusable/OutlineButton/OutlineButton';
-import * as assetsManager from './utils/AssetsManager';
+import Playground from './components/Playground/Playground';
+import Home from './components/Home/Home';
 
 function App() {
     return (
         <div className={styles.App}>
-            <h1>Header</h1>
-            <OutlineButton>Button</OutlineButton>
-
-            <ListHeader title='Up next' buttonText='See all' />
-            <ListHeader title='Coming Soon' buttonText='See all' />
-            <MoviePoster posterImageUrl={assetsManager.moviePoster_11}/>
-            <br/><br/>
-            <HorizontalMovieList />
+            <h1>Cinemates</h1>
+            <Routes>
+                <Route path='/' element={<Home />}/>
+                <Route path='/playground' element={<Playground />}/>
+            </Routes>
         </div>
     );
 }
