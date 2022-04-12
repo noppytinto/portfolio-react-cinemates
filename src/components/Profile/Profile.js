@@ -1,4 +1,4 @@
-import styles from './Profile.module.css';
+// import styles from './Profile.module.css';
 import PlaceholderPage from '../reusable/PlaceholderPage/PlaceholderPage';
 
 function Profile() {

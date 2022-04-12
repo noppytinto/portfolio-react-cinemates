@@ -1,4 +1,4 @@
-import styles from './WithMainHeader.module.css';
+// import styles from './WithMainHeader.module.css';
 import MainHeader from '../../MainHeader/MainHeader';
 import { Outlet } from 'react-router-dom';
 

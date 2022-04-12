@@ -1,5 +1,4 @@
-import styles from './WithoutMainHeader.module.css';
-import MainHeader from '../../MainHeader/MainHeader';
+// import styles from './WithoutMainHeader.module.css';
 import { Outlet } from 'react-router-dom';
 
 function WithoutMainHeader() {
