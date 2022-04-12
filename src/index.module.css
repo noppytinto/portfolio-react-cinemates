@@ -30,8 +30,6 @@ body {
 
   background-color: var(--color-primary--blue);
   color: #fff;
-
-  padding: 1em;
 }
 
 input[type=button], 

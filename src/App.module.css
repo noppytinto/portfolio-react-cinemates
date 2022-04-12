@@ -1,11 +1,10 @@
 
-.p {
-  color: brown;
-}
 
-/*.App {*/
-/*  text-align: center;*/
-/*}*/
+
+.App {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
 
 /*.App-logo {*/
 /*  height: 40vmin;*/

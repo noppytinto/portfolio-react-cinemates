@@ -1,9 +1,11 @@
 import styles from './Home.module.css';
-
+import MainHeader from '../MainHeader/MainHeader';
 
 function Home() {
     return (
-        <h1>Home</h1>
+        <div>
+            <h1>Home</h1>
+        </div>
     );
 }
 
