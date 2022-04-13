@@ -1,3 +1,4 @@
+import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import styles from './App.module.css';
 import Playground from './components/Playground/Playground';
@@ -5,7 +6,6 @@ import Home from './components/Home/Home';
 import Error404 from './components/Error404/Error404';
 import Notification from './components/Notification/Notification';
 import Profile from './components/Profile/Profile';
-import React from 'react';
 import WithMainHeader from './components/reusable/WithMainHeader/WithMainHeader';
 import WithoutMainHeader from './components/reusable/WithoutMainHeader/WithoutMainHeader';
 
