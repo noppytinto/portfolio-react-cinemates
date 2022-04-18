@@ -2,6 +2,7 @@
 import PlaceholderPage from '../reusable/PlaceholderPage/PlaceholderPage';
 import OutlineButton from '../reusable/OutlineButton/OutlineButton';
 import {useNavigate} from 'react-router-dom';
+import styles from "../Home/Home.module.css";
 
 function Home() {
     let navigate = useNavigate();
@@ -11,12 +12,11 @@ function Home() {
         navigate('/playground');
     };
 
-
     ////////////////////////////
     // JSX
     ////////////////////////////
     return (
-        <div>
+        <div  className={`${styles['home-page']}`}>
             <PlaceholderPage>
                 <p>
                     Home

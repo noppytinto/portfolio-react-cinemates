@@ -30,6 +30,7 @@ body {
 
   background-color: var(--color-primary--blue);
   color: #fff;
+  /*height: 100%;*/
 
 }
 
@@ -54,6 +55,10 @@ code {
     monospace;
 }
 
+html, body, #root, .App {
+  height: 100%;
+}
+
 
 /**************************************/
 /* UTILITIES */
@@ -61,3 +66,4 @@ code {
 .disable-select {     
   user-select: none;
 }
+

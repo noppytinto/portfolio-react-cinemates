@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import styles from './App.module.css';
+import './App.css';
 import Playground from './components/Playground/Playground';
 import Home from './components/Home/Home';
 import Error404 from './components/Error404/Error404';
@@ -13,7 +13,7 @@ import SearchPage from "./components/SearchPage/SearchPage";
 
 function App() {
     return (
-        <div className={styles.App}>
+        <div className={'App'}>
             <Routes>
                 <Route path='/' element={<WithMainHeader />}> 
                     <Route index element={<ExplorePage />} />
