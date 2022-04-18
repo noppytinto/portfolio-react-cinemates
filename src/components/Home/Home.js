@@ -2,7 +2,6 @@
 import PlaceholderPage from '../reusable/PlaceholderPage/PlaceholderPage';
 import OutlineButton from '../reusable/OutlineButton/OutlineButton';
 import {useNavigate} from 'react-router-dom';
-import MainNav from "../MainNav/MainNav";
 
 function Home() {
     let navigate = useNavigate();

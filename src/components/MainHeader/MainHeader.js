@@ -21,7 +21,7 @@ function MainHeader() {
                 <NavLink className={styles['main-header__link']} to={'/profile'}>
                     <img className={`${styles['main-header__link-icon']} ${styles['main-header__link-icon-profile']}`}
                          src={assetsManager.profilePictureTest}
-                         alt={'user profile photo'}/>
+                         alt={'user profile'}/>
                 </NavLink>
             </nav>
         </header>

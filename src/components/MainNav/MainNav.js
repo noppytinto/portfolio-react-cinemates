@@ -31,6 +31,10 @@ function MainNav() {
             homePageActive = false;
             searchPageActive = true;
             break;
+        default:
+            explorePageActive = true;
+            homePageActive = false;
+            searchPageActive = false;
     }
 
 
@@ -74,25 +78,14 @@ function MainNav() {
 
             <NavLink className={movieLinkStyle} to={'/explore'} onClick={onClickExploreHandler}>
                 <MovieIcon fill={movieIconColor} />
-                {/*<img className={`${styles['main-nav__link-icon']} ${styles['link-icon--active']}`}*/}
-                {/*     src={assetsManager.movieIcon}*/}
-                {/*     alt={'movie icon'}/>*/}
             </NavLink>
 
             <NavLink className={homeLinkStyle} to={'/home'} onClick={onClickHomeHandler}>
                 <HomeIcon fill={homeIconColor}/>
-
-                {/*<img className={styles['main-nav__link-icon']}*/}
-                {/*     src={assetsManager.homeIcon}*/}
-                {/*     alt={'movie icon'}/>*/}
             </NavLink>
 
             <NavLink className={searchLinkStyle} to={'/search'} onClick={onClickSearchHandler}>
                 <SearchIcon fill={searchIconColor}/>
-
-                {/*<img className={styles['main-nav__link-icon']}*/}
-                {/*     src={assetsManager.searchIcon}*/}
-                {/*     alt={'movie icon'}/>*/}
             </NavLink>
         </nav>
     );
