@@ -5,7 +5,7 @@ function ListHeader({title = 'Header', buttonText = 'Button'}) {
 
     return (
         <div className={styles['list-header']} >
-            <h1>{title}</h1>
+            <h1 className={styles['list-header__title']}>{title}</h1>
             <OutlineButton>{buttonText}</OutlineButton>
         </div>
     );
