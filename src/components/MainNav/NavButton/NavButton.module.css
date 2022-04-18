@@ -1,0 +1,25 @@
+
+.main-nav__link {
+  flex-grow: 1;
+
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-bottom-color: var(--color-primary--yellow);
+  border-bottom-style: solid;
+  border-bottom-width: 5px;
+}
+
+.main-nav__link-icon {
+  display: block;
+  color: var(--color-primary--yellow);
+
+}
+
+.link-icon--active {
+  color: var(--color-primary--yellow);
+
+}

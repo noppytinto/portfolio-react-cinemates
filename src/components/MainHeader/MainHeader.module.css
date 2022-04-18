@@ -5,6 +5,8 @@
   align-items: center;
   justify-content: space-between;
   height: 35px;
+
+  margin-bottom: 1em;
 }
 
 
@@ -50,6 +52,8 @@
 }
 
 .main-header__link-icon-profile {
+  width: 34px;
+
   border-radius: 50%;
   border-width: 2px;
   border-color: var(--color-primary--light-blue);

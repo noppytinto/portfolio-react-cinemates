@@ -1,8 +1,26 @@
 
-export const brokenImageIcon = '/images/broken_image_black_24dp.svg';
+// colors
+export const colorPrimaryBlue = '#015896';
+export const colorPrimaryDarkBlue = '#004678';
+export const colorPrimaryLightBlue = '#B2CCDF';
+export const colorPrimaryYellow= '#fed23f';
+
+
+
+
 export const extendedLogoNoLights = '/images/cinemates_logo_extended_nolights_2.png';
-export const notificationNoneIcon = '/images/notifications_none_white_24dp.svg';
 export const profilePictureTest = '/images/profile-picture.jpg';
+
+// icons
+export const brokenImageIcon = '/images/icons/broken_image_black_24dp.svg';
+export const notificationNoneIcon = '/images/icons/notifications_none_white_24dp.svg';
+export const homeIcon = '/images/icons/home_white_24dp.svg';
+export const movieIcon = '/images/icons/theaters_white_24dp.svg';
+export const searchIcon = '/images/icons/search_white_24dp.svg';
+
+
+// icons as react components
+
 
 // test movie poster images
 export const moviePoster_1 = 'https://www.themoviedb.org/t/p/w1280/bcCBq9N1EMo3daNIjWJ8kYvrQm6.jpg';
