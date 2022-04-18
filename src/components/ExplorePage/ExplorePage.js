@@ -1,5 +1,5 @@
 import styles from './ExplorePage.module.css';
-import PlaceholderPage from "../reusable/PlaceholderPage/PlaceholderPage";
+import HorizontalMovieList from "./HorizontalMoviesList/HorizontalMovieList";
 
 function ExplorePage() {
 
@@ -8,9 +8,17 @@ function ExplorePage() {
     ////////////////////////////
     return (
         <div className={`${styles['explore-page']}`}>
-            <PlaceholderPage>
-                <p>Explore page</p>
-            </PlaceholderPage>
+            <ul className={`${styles['explore-list']}`}>
+                <li className={`${styles['explore-item']}`}>
+                    <HorizontalMovieList title={'Upcoming'} buttonText={'See all'}/>
+                </li>
+                <li className={`${styles['explore-item']}`}>
+                    <HorizontalMovieList title={'Popular'} buttonText={'See all'}/>
+                </li>
+                <li className={`${styles['explore-item']}`}>
+                    <HorizontalMovieList title={'Coming soon'} buttonText={'See all'}/>
+                </li>
+            </ul>
         </div>
     );
 }

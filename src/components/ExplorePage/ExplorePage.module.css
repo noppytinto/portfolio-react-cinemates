@@ -1,9 +1,15 @@
 
 .explore-page {
-  flex-grow: 1;
+  /*flex-grow: 1;*/
 
 }
 
 .explore-page__content {
 
+}
+
+.explore-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5em;
 }

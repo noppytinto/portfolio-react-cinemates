@@ -55,9 +55,9 @@ code {
     monospace;
 }
 
-html, body, #root, .App {
-  height: 100%;
-}
+/*html, body, #root, .App {*/
+/*  height: 100%;*/
+/*}*/
 
 
 /**************************************/
