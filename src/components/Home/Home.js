@@ -1,8 +1,7 @@
-// import styles from './Home.module.css';
 import PlaceholderPage from '../reusable/PlaceholderPage/PlaceholderPage';
 import OutlineButton from '../reusable/OutlineButton/OutlineButton';
 import {useNavigate} from 'react-router-dom';
-import styles from "../Home/Home.module.css";
+import styles from "./Home.module.css";
 
 function Home() {
     let navigate = useNavigate();

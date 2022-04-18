@@ -1,26 +1,29 @@
 
 .main-nav {
-  height: 50px;
   width: 100%;
   overflow: hidden;
-
-  border-radius: .5em;
-
-  box-shadow: 2px 2px 0.2em 0 rgba(0,0,0,0.2);
-
   background-color: var(--color-primary--dark-blue);
   color: var(--color-primary--light-blue);
+  border-radius: .5em;
+  box-shadow: 2px 2px 0.2em 0 rgba(0,0,0,0.2);
 
+
+}
+
+.main-nav__list {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-
-.main-nav__link {
+.main-nav__item {
   flex-grow: 1;
 
-  height: 100%;
+}
+
+.main-nav__link {
+  padding-top: 10px;
+  padding-bottom: 5px;
 
   display: flex;
   align-items: center;
@@ -33,7 +36,6 @@
 
 .main-nav__link--active {
   border-bottom-color: var(--color-primary--yellow);
-
 }
 
 .main-nav__link-icon {

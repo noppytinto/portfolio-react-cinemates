@@ -38,11 +38,19 @@ function MainNav() {
     }
 
 
+    // icon color
+    let movieIconColor = explorePageActive ?
+        assetsManager.colorPrimaryYellow :
+        assetsManager.colorPrimaryLightBlue;
+    let homeIconColor = homePageActive ?
+        assetsManager.colorPrimaryYellow :
+        assetsManager.colorPrimaryLightBlue;
+    let searchIconColor = searchPageActive ?
+        assetsManager.colorPrimaryYellow :
+        assetsManager.colorPrimaryLightBlue;
 
-    let movieIconColor = explorePageActive ? assetsManager.colorPrimaryYellow : assetsManager.colorPrimaryLightBlue;
-    let homeIconColor = homePageActive ? assetsManager.colorPrimaryYellow : assetsManager.colorPrimaryLightBlue;
-    let searchIconColor = searchPageActive ? assetsManager.colorPrimaryYellow : assetsManager.colorPrimaryLightBlue;
 
+    // button style
     let movieLinkStyle = explorePageActive ?
         `${styles['main-nav__link']} ${styles['main-nav__link--active']}` :
         `${styles['main-nav__link']}`;
@@ -56,9 +64,7 @@ function MainNav() {
         `${styles['main-nav__link']}`;
 
 
-
     function onClickExploreHandler(ev) {
-        console.log();
         dispatcher(currentPageActions.setPage({page: 'explore'}));
     }
 
@@ -70,25 +76,40 @@ function MainNav() {
         dispatcher(currentPageActions.setPage({page: 'search'}));
     }
 
+
     ////////////////////////////
     // JSX
     ////////////////////////////
     return (
         <nav className={styles['main-nav']}>
+            <ul className={`${styles['main-nav__list']}`}>
+                <li className={`${styles['main-nav__item']}`}>
+                    <NavLink className={movieLinkStyle}
+                             to={'/explore'}
+                             onClick={onClickExploreHandler}>
+                        <MovieIcon fill={movieIconColor} />
+                    </NavLink>
+                </li>
 
-            <NavLink className={movieLinkStyle} to={'/explore'} onClick={onClickExploreHandler}>
-                <MovieIcon fill={movieIconColor} />
-            </NavLink>
+                <li className={`${styles['main-nav__item']}`}>
+                    <NavLink className={homeLinkStyle}
+                             to={'/home'}
+                             onClick={onClickHomeHandler}>
+                        <HomeIcon fill={homeIconColor}/>
+                    </NavLink>
+                </li>
 
-            <NavLink className={homeLinkStyle} to={'/home'} onClick={onClickHomeHandler}>
-                <HomeIcon fill={homeIconColor}/>
-            </NavLink>
-
-            <NavLink className={searchLinkStyle} to={'/search'} onClick={onClickSearchHandler}>
-                <SearchIcon fill={searchIconColor}/>
-            </NavLink>
+                <li className={`${styles['main-nav__item']}`}>
+                    <NavLink className={searchLinkStyle}
+                             to={'/search'}
+                             onClick={onClickSearchHandler}>
+                        <SearchIcon fill={searchIconColor}/>
+                    </NavLink>
+                </li>
+            </ul>
         </nav>
     );
-}
+}// MainNav
+
 
 export default MainNav;

@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-const EXPLORE_PAGE_KEY = 'explore';
+const EXPLORE_PAGE_KEY = 'home';
 // const HOME_PAGE_KEY = 'home';
 // const SEARCH_PAGE_KEY = 'search';
 
