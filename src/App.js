@@ -16,21 +16,15 @@ function App() {
                 <Route path='/' element={<WithMainHeader />}> 
                     <Route index element={<Home />} />
                     <Route path="/home" element={ <Navigate to="/" /> } />
-
                     <Route path='/playground' element={<Playground />} />
                     <Route path="/test" element={ <Navigate to="/playground" /> } />
-
                     <Route path='*' element={<Error404 />} />
                 </Route>
 
-                <Route path='/' element={<WithoutMainHeader />}> 
-    
-
+                <Route path='/' element={<WithoutMainHeader />}>
                     <Route path='/notification' element={<Notification />} />
                     <Route path='/profile' element={<Profile />} />
-
                 </Route>
-
             </Routes>
         </div>
     );

@@ -6,21 +6,24 @@ function MainHeader() {
 
     return (
         <header className={styles['main-header']}>
-            <NavLink className={styles['home-link']} to={'/'}>
-                <img className={styles['logo']} src={assetsManager.extendedLogoNoLights} alt={''}/>
+            <NavLink className={styles['main-header__logo-link']} to={'/'}>
+                <img className={styles['main-header__logo-image']}
+                     src={assetsManager.extendedLogoNoLights}
+                     alt={'cinemates logo'}/>
             </NavLink>
 
-            <nav className={styles['nav']}>
-                <NavLink className={styles['link']} to={'/notification'}>
-                    <img className={styles['notification-icon']}
-                        src={assetsManager.notificationNoneIcon} alt={''}/>
+            <nav className={styles['main-header__nav']}>
+                <NavLink className={styles['main-header__link']} to={'/notification'}>
+                    <img className={`${styles['main-header__link-icon']} ${styles['main-header__link-icon-notification']}`}
+                         src={assetsManager.notificationNoneIcon}
+                         alt={'notification icon'}/>
                 </NavLink>
-                <NavLink className={styles['link']} to={'/profile'}>
-                    <img className={styles['profile-icon']}
-                        src={assetsManager.profilePictureTest} alt={''}/>
+                <NavLink className={styles['main-header__link']} to={'/profile'}>
+                    <img className={`${styles['main-header__link-icon']} ${styles['main-header__link-icon-profile']}`}
+                         src={assetsManager.profilePictureTest}
+                         alt={'user profile photo'}/>
                 </NavLink>
             </nav>
-
         </header>
     );
 }
