@@ -116,6 +116,6 @@ function buildMovie(jsonObj) {
 }
 
 function buildImageUrl(imagePath) {
-    if(!imagePath || imagePath == '') return assetsManager.brokenImageIcon;
+    if(!Boolean(imagePath)) return assetsManager.brokenImageIcon;
     return IMAGE_BASE_URL + imagePath;
 }
