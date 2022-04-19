@@ -5,14 +5,22 @@
 
 .list-container {
   overflow-x: hidden;
-  overscroll-behavior-x: contain;
 }
 
 .list-container> ul {
   padding: 1em 0;
+
   overflow: auto;
   scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+
   display: flex;
   align-items: center;
   gap: 1.2em;
+}
+
+.list-container> ul::-webkit-scrollbar {
+  display: none;
 }
