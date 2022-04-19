@@ -7,10 +7,11 @@ import ListHeader from './ListHeader/ListHeader';
 function HorizontalMovieList({title = 'Header', movieList = [], buttonText = 'Button'}) {
 
   function spawnMoviePoster(movie) {
-    // console.log('poster: ', movie.poster_path);
     return (
       <li key={movie.id}>
-        <MoviePoster posterImageUrl={'https://image.tmdb.org/t/p/w300' + movie.poster_path}/>
+        <MoviePoster posterImageUrl={movie.posterUrl}
+                     alt={movie.title}
+                     movieTitle={movie.title}/>
       </li>
     );
   }

@@ -67,3 +67,6 @@ code {
   user-select: none;
 }
 
+.hidden {
+  display: none;
+}

@@ -1,11 +1,13 @@
 export default class Movie {
-    #title;
-    #posterUrl;
-    #overview;
+    id;
+    title;
+    posterUrl;
+    overview;
 
-    constructor() {
-        this.#title = '';
-        this.#posterUrl = '';
-        this.#overview = '(description not available)';
+    constructor(id, title, posterUrl, overview) {
+        this.id = id ?? '';
+        this.title = title ?? '';
+        this.posterUrl = posterUrl ?? '';
+        this.overview = overview ?? '(description not available)';
     }
 }

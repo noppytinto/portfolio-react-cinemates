@@ -13,6 +13,16 @@
   align-items: center;
 }
 
+.movie-poster--broken {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: .5em;
+}
+
+
 .movie-poster-image {
   display: block;
   width: 100%;
@@ -20,7 +30,12 @@
   object-fit: cover;
 }
 
-.broken-image {  
+.movie-poster-image--broken {
   width: 50%;
+  height: revert;
   opacity: 0.7;
+}
+
+.movie-title {
+  font-size: 0.7rem;
 }
