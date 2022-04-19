@@ -11,7 +11,7 @@ function NavButton(props) {
     ////////////////////////////
     return (
         <NavLink className={styles['main-nav__link']} to={'/'}>
-
+            
         </NavLink>
     );
 }
