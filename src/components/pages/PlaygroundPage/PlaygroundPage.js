@@ -1,11 +1,11 @@
-import styles from './Playground.module.css';
-import HorizontalMovieList from '../../ExplorePage/HorizontalMoviesList/HorizontalMovieList';
-import ListHeader from '../../ExplorePage/HorizontalMoviesList/ListHeader/ListHeader';
+import styles from './PlaygroundPage.module.css';
+import HorizontalMovieList from '../ExplorePage/HorizontalMoviesList/HorizontalMovieList';
+import ListHeader from '../ExplorePage/HorizontalMoviesList/ListHeader/ListHeader';
 import MoviePoster from '../../reusable/MoviePoster/MoviePoster';
 import OutlineButton from '../../reusable/OutlineButton/OutlineButton';
-import * as assetsManager from '../../../utils/AssetsManager';
+import * as assetsManager from '../../../utils/assets-manager';
 
-function Playground() {
+function PlaygroundPage() {
     return (
         <div className={styles.App}>
             <h1>Header</h1>
@@ -19,4 +19,4 @@ function Playground() {
     );
 }
 
-export default Playground;
+export default PlaygroundPage;

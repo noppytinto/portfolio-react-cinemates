@@ -1,15 +1,19 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
-import Playground from './components/reusable/Playground/Playground';
-import Home from './components/Home/Home';
-import Error404 from './components/Error404/Error404';
-import Notification from './components/Notification/Notification';
-import Profile from './components/Profile/Profile';
+// pages
+import ExplorePage from "./components/pages/ExplorePage/ExplorePage";
+import HomePage from './components/pages/HomePage/HomePage';
+import SearchPage from "./components/pages/SearchPage/SearchPage";
+import NotificationPage from './components/pages/NotificationPage/NotificationPage';
+import ProfilePage from './components/pages/ProfilePage/ProfilePage';
+import PlaygroundPage from './components/pages/PlaygroundPage/PlaygroundPage';
+import Error404Page from './components/pages/Error404Page/Error404Page';
+
+//
 import WithMainHeader from './components/reusable/WithMainHeader/WithMainHeader';
 import WithoutMainHeader from './components/reusable/WithoutMainHeader/WithoutMainHeader';
-import ExplorePage from "./components/ExplorePage/ExplorePage";
-import SearchPage from "./components/SearchPage/SearchPage";
+
 
 function App() {
     return (
@@ -18,17 +22,17 @@ function App() {
                 <Route path='/' element={<WithMainHeader />}> 
                     <Route index element={<ExplorePage />} />
                     <Route path="/explore" element={<ExplorePage />} />
-                    <Route path="/home" element={ <Home /> } />
+                    <Route path="/home" element={ <HomePage /> } />
                     <Route path="/search" element={<SearchPage />} />
 
-                    <Route path='/playground' element={<Playground />} />
+                    <Route path='/playground' element={<PlaygroundPage />} />
                     <Route path="/test" element={ <Navigate to="/playground" /> } />
-                    <Route path='*' element={<Error404 />} />
+                    <Route path='*' element={<Error404Page />} />
                 </Route>
 
                 <Route path='/' element={<WithoutMainHeader />}>
-                    <Route path='/notification' element={<Notification />} />
-                    <Route path='/profile' element={<Profile />} />
+                    <Route path='/notification' element={<NotificationPage />} />
+                    <Route path='/profile' element={<ProfilePage />} />
                 </Route>
             </Routes>
         </div>

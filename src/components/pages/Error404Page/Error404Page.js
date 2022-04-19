@@ -1,7 +1,7 @@
-import styles from './Error404.module.css';
+import styles from './Error404Page.module.css';
 
 
-function Error404() {
+function Error404Page() {
     const classes = `${styles['error-404']}`;
     
     return (
@@ -11,4 +11,4 @@ function Error404() {
     );
 }
 
-export default Error404;
+export default Error404Page;

@@ -1,11 +1,11 @@
 import styles from './MainNav.module.css';
-import * as assetsManager from '../../utils/AssetsManager';
+import * as assetsManager from '../../../utils/assets-manager';
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as MovieIcon } from '../reusable/Icons/theaters_white_24dp.svg';
-import { ReactComponent as HomeIcon } from '../reusable/Icons/home_white_24dp.svg';
-import { ReactComponent as SearchIcon } from '../reusable/Icons/search_white_24dp.svg';
+import { ReactComponent as MovieIcon } from '../../reusable/Icons/theaters_white_24dp.svg';
+import { ReactComponent as HomeIcon } from '../../reusable/Icons/home_white_24dp.svg';
+import { ReactComponent as SearchIcon } from '../../reusable/Icons/search_white_24dp.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import {currentPageActions} from '../../redux/slices/curent-page-slice';
+import {currentPageActions} from '../../../redux/slices/curent-page-slice';
 
 function MainNav() {
     let explorePageActive = true;

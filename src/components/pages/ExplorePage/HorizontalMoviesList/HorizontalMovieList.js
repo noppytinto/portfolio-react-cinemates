@@ -1,4 +1,4 @@
-import MoviePoster from '../../reusable/MoviePoster/MoviePoster';
+import MoviePoster from '../../../reusable/MoviePoster/MoviePoster';
 import styles from './HorizontalMovieList.module.css';
 import ListHeader from './ListHeader/ListHeader';
 

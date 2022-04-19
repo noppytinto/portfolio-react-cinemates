@@ -1,5 +1,5 @@
 import styles from './MoviePoster.module.css';
-import * as assetsManager from '../../../utils/AssetsManager';
+import * as assetsManager from '../../../utils/assets-manager';
 
 function MoviePoster({posterImageUrl=assetsManager.brokenImageIcon, alt='', movieTitle=''}) {
     let classes = `${styles['movie-poster']} `;

@@ -1,4 +1,4 @@
-import OutlineButton from '../../../reusable/OutlineButton/OutlineButton';
+import OutlineButton from '../../../../reusable/OutlineButton/OutlineButton';
 import styles from './ListHeader.module.css';
 
 function ListHeader({title = 'Header', buttonText = 'Button'}) {

@@ -1,5 +1,5 @@
 import styles from './MainHeader.module.css';
-import * as assetsManager from '../../utils/AssetsManager';
+import * as assetsManager from '../../../utils/assets-manager';
 import { NavLink } from 'react-router-dom';
 
 function MainHeader() {

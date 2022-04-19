@@ -1,9 +1,9 @@
-import PlaceholderPage from '../reusable/PlaceholderPage/PlaceholderPage';
-import OutlineButton from '../reusable/OutlineButton/OutlineButton';
+import PlaceholderPage from '../../reusable/PlaceholderPage/PlaceholderPage';
+import OutlineButton from '../../reusable/OutlineButton/OutlineButton';
 import {useNavigate} from 'react-router-dom';
-import styles from "./Home.module.css";
+import styles from "./HomePage.module.css";
 
-function Home() {
+function HomePage() {
     let navigate = useNavigate();
 
     const buttonHandler = (ev) => {
@@ -28,4 +28,4 @@ function Home() {
     );
 }// Home
 
-export default Home;
+export default HomePage;

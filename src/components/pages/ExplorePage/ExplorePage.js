@@ -1,7 +1,7 @@
 import styles from './ExplorePage.module.css';
 import HorizontalMovieList from "./HorizontalMoviesList/HorizontalMovieList";
 import {useEffect, useState} from "react";
-import {getUpcoming, getPopular, getNowPlaying} from '../../services/movieDatabaseService';
+import {getUpcoming, getPopular, getNowPlaying} from '../../../services/movieDatabaseService';
 
 function ExplorePage() {
     const [nowPlayingMovies, setNowPlayingMovies] = useState([]);

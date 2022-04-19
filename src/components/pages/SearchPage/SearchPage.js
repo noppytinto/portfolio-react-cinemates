@@ -1,5 +1,5 @@
 import styles from './SearchPage.module.css';
-import PlaceholderPage from "../reusable/PlaceholderPage/PlaceholderPage";
+import PlaceholderPage from "../../reusable/PlaceholderPage/PlaceholderPage";
 
 function SearchPage() {
 

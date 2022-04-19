@@ -1,5 +1,5 @@
 import Movie from "../models/Movie";
-import * as assetsManager from "../utils/AssetsManager";
+import * as assetsManager from "../utils/assets-manager";
 
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = '632f90b0d342606c53a9ffd5fc5ed32e';
