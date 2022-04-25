@@ -18,6 +18,7 @@ function MoviePoster({posterImageUrl=assetsManager.brokenImageIcon, alt='', movi
                  src={posterImageUrl} 
                  alt={alt} 
                  draggable={'false'}
+                 loading={'lazy'}
                  />
             <p className={movieTitleClasses}>{movieTitle}</p>
         </div>
