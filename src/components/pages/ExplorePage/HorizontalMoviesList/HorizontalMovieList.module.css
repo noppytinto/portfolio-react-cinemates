@@ -24,3 +24,10 @@
 .list-container> ul::-webkit-scrollbar {
   display: none;
 }
+
+.list-item {
+}
+
+.movie-poster {
+  width: 100px;
+}

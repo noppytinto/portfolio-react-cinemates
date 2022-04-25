@@ -111,8 +111,9 @@ function buildMovie(jsonObj) {
     const title = jsonObj.title;
     const posterUrl = buildImageUrl(jsonObj['poster_path']);
     const overview = jsonObj.overview;
+    const releaseDate = jsonObj['release_date'];
 
-    return new Movie(id, title, posterUrl, overview);
+    return new Movie(id, title, posterUrl, overview, releaseDate);
 }
 
 function buildImageUrl(imagePath) {

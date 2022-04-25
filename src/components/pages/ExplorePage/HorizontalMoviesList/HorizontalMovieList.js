@@ -6,14 +6,17 @@ import ListHeader from './ListHeader/ListHeader';
 
 function HorizontalMovieList({
                                  title = 'Header',
-                                 movieList = [],
-                                 buttonText = 'Button'
+                                 movies = [],
+                                 buttonText = 'Button',
+                                 seeAllUrl = '/',
+                                 seeAllData = {}
                              }) {
 
     function spawnMoviePoster(movie) {
         return (
-            <li key={movie.id}>
-                <MoviePoster posterImageUrl={movie.posterUrl}
+            <li className={styles['list-item']} key={movie.id}>
+                <MoviePoster className={styles['movie-poster']} 
+                             posterImageUrl={movie.posterUrl}
                              alt={movie.title}
                              movieTitle={movie.title}/>
             </li>
@@ -25,9 +28,12 @@ function HorizontalMovieList({
     ///////////////////////////////
     return (
         <div className={styles['horizontal-movie-list']}>
-            <ListHeader title={title} buttonText={buttonText}/>
+            <ListHeader title={title} 
+                        buttonText={buttonText} 
+                        buttonUrl={seeAllUrl} 
+                        linkData={seeAllData}/>
             <div className={styles['list-container']}>
-                <ul>{movieList.map(movie => spawnMoviePoster(movie))}</ul>
+                <ul>{movies.map(movie => spawnMoviePoster(movie))}</ul>
             </div>
         </div>
     );

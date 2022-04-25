@@ -1,3 +1,5 @@
+import Movie from "../models/Movie";
+
 
 // colors
 export const colorPrimaryBlue = '#015896';
@@ -34,3 +36,12 @@ export const moviePoster_8 = 'https://www.themoviedb.org/t/p/w1280/8c4a8kE7PizaG
 export const moviePoster_9 = 'https://www.themoviedb.org/t/p/w1280/lAXONuqg41NwUMuzMiFvicDET9Y.jpg';
 export const moviePoster_10 = 'https://www.themoviedb.org/t/p/w1280/qAZ0pzat24kLdO3o8ejmbLxyOac.jpg';
 export const moviePoster_11 = 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/11keFudto4QrgrXChukexJwdHPe.jpg';
+
+//
+export const testMovie = new Movie(
+    414906,
+    'The Batman'
+    ,'https://www.themoviedb.org/t/p/w1280/5P8SmMzSNYikXpxil6BYzJ16611.jpg',
+    'In his second year of fighting crime, Batman uncovers corruption in Gotham City that connects to his own family while facing a serial killer known as the Riddler.',
+    '2022-03-03'
+)

@@ -21,26 +21,44 @@ function ExplorePage() {
 
     }, [])
 
+
     ////////////////////////////
     // JSX
     ////////////////////////////
     return (
         <div className={`${styles['explore-page']}`}>
             <ul className={`${styles['explore-list']}`}>
+
                 <li className={`${styles['explore-item']}`}>
                     <HorizontalMovieList title={'Now Playing'}
                                          buttonText={'See all'}
-                                         movieList={nowPlayingMovies}/>
+                                         movies={nowPlayingMovies}
+                                         seeAllUrl={'/explore-list'}
+                                         seeAllData={{
+                                             movies: nowPlayingMovies, 
+                                             title: 'Now Playing'
+                                        }}
+                                         />
                 </li>
                 <li className={`${styles['explore-item']}`}>
                     <HorizontalMovieList title={'Upcoming'}
                                          buttonText={'See all'}
-                                         movieList={upcomingMovies}/>
+                                         movies={upcomingMovies}
+                                         seeAllUrl={'/explore-list'}
+                                         seeAllData={{
+                                            movies: upcomingMovies, 
+                                            title: 'Upcoming'
+                                       }}/>
                 </li>
                 <li className={`${styles['explore-item']}`}>
                     <HorizontalMovieList title={'Popular'}
                                          buttonText={'See all'}
-                                         movieList={popularMovies}/>
+                                         movies={popularMovies}
+                                         seeAllUrl={'/explore-list'}
+                                         seeAllData={{
+                                            movies: popularMovies, 
+                                            title: 'Popular'
+                                       }}/>
                 </li>
 
             </ul>

@@ -1,0 +1,28 @@
+.explore-page-list {
+
+}
+
+.explore-page-list__header {
+  margin-bottom: 2em;
+  
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+}
+
+.explore-page-list__btn-back {
+  display: block;
+}
+
+.explore-page-list__btn-back-icon {
+  display: block;
+  height: 35px;
+}
+
+
+.explore-page-list__title {
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+

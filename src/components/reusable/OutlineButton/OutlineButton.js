@@ -4,7 +4,7 @@ function OutlineButton(props) {
     const textContent = props.children ?? 'BUTTON';
 
     function clickHandler(ev) {
-        props.onClick(ev);
+        props.onClick?.(ev);
     }
 
 

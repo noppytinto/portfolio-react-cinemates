@@ -1,16 +1,19 @@
 .movie-poster {
   border-radius: .35em;
-  width: 100px;
-  height: 150px;
+  aspect-ratio: 1/1.6;
   overflow: hidden;
   background-color: rgba(var(--color-rgb-raw-primary--light-blue), 0.5);
 
-  box-shadow: .1em .1em .5em  rgba(0, 0, 0, 0.5);
   text-align: center;
 
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.movie-poster--shadowed {
+  box-shadow: .1em .1em .5em  rgba(0, 0, 0, 0.5);
+
 }
 
 .movie-poster--broken {

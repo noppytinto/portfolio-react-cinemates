@@ -1,10 +1,19 @@
 import styles from './MoviePoster.module.css';
 import * as assetsManager from '../../../utils/assets-manager';
 
-function MoviePoster({posterImageUrl=assetsManager.brokenImageIcon, alt='', movieTitle=''}) {
-    let classes = `${styles['movie-poster']} `;
+function MoviePoster({
+        className, 
+        posterImageUrl=assetsManager.brokenImageIcon, 
+        alt='', 
+        movieTitle='',
+        shadowed = true}
+    ) {
+    
+    let classes = `${styles['movie-poster']} ${className} `;
     let imageClasses = `${styles['movie-poster-image']} `;
     let movieTitleClasses = `${styles['movie-title']} hidden`;
+
+    if (shadowed) classes = `${classes} ${styles['movie-poster--shadowed']} `;
 
     if (posterImageUrl === assetsManager.brokenImageIcon) {
         classes = classes + styles['movie-poster--broken'];

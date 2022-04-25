@@ -13,6 +13,7 @@ import Error404Page from './components/pages/Error404Page/Error404Page';
 //
 import WithMainHeader from './components/reusable/WithMainHeader/WithMainHeader';
 import WithoutMainHeader from './components/reusable/WithoutMainHeader/WithoutMainHeader';
+import ExplorePageList from './components/reusable/ExplorePageList/ExplorePageList';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
                 <Route path='/' element={<WithoutMainHeader />}>
                     <Route path='/notification' element={<NotificationPage />} />
                     <Route path='/profile' element={<ProfilePage />} />
+                    <Route path='/explore-list' element={<ExplorePageList />} />
                 </Route>
             </Routes>
         </div>
