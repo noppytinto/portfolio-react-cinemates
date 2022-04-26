@@ -28,7 +28,7 @@ function ExplorePage() {
             movies,
             buttonText: 'See all',
             seeAllUrl: '/explore-list',
-            seeAllData: {movies, title}
+            seeAllData: {title}
         }
 
         return props;

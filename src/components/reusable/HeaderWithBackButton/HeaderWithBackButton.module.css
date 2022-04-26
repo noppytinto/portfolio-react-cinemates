@@ -1,0 +1,25 @@
+.header {
+  padding: .5em 0 .5em 0;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+
+  background-color: var(--color-primary--blue);
+}
+
+.header__btn-back {
+  display: block;
+}
+
+.header__btn-back-icon {
+  display: block;
+  height: 35px;
+}
+
+
+.header__title {
+  font-weight: 500;
+  font-size: 1rem;
+}

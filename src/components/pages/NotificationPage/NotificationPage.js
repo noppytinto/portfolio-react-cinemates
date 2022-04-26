@@ -1,9 +1,13 @@
-// import styles from './NotificationPage.module.css';
-import PlaceholderPage from '../../reusable/PlaceholderPage/PlaceholderPage';
+import styles from './NotificationPage.module.css';
+import HeaderWithBackButton
+    from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
 
-function NotificationPage() {
+function NotificationPage(props) {
+    const classes = `${styles['notification-page']} ${props.className} `;
     return (
-        <PlaceholderPage>Notification</PlaceholderPage>
+        <div className={classes}>
+            <HeaderWithBackButton backButtonUrl={'/'} title={'Notifications'} />
+        </div>
     );
 }
 

@@ -8,28 +8,9 @@
   margin-left: -1rem;
   margin-right: -1rem;
   margin-bottom: 2em;
-  padding: .5em 1rem .5em 1rem;
-  
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1em;
-  
-  background-color: var(--color-primary--blue);
-}
-
-.explore-page-list__btn-back {
-  display: block;
-}
-
-.explore-page-list__btn-back-icon {
-  display: block;
-  height: 35px;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 
-.explore-page-list__title {
-  font-weight: 500;
-  font-size: 1.2rem;
-}
 
