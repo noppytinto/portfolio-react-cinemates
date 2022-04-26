@@ -87,7 +87,7 @@ function MainNav() {
                     <NavLink className={movieLinkStyle}
                              to={'/explore'}
                              onClick={onClickExploreHandler}>
-                        <MovieIcon fill={movieIconColor} />
+                        <MovieIcon className={styles['main-nav__link-icon']} fill={movieIconColor} />
                     </NavLink>
                 </li>
 
@@ -95,7 +95,7 @@ function MainNav() {
                     <NavLink className={homeLinkStyle}
                              to={'/home'}
                              onClick={onClickHomeHandler}>
-                        <HomeIcon fill={homeIconColor}/>
+                        <HomeIcon className={styles['main-nav__link-icon']}  fill={homeIconColor}/>
                     </NavLink>
                 </li>
 
@@ -103,7 +103,7 @@ function MainNav() {
                     <NavLink className={searchLinkStyle}
                              to={'/search'}
                              onClick={onClickSearchHandler}>
-                        <SearchIcon fill={searchIconColor}/>
+                        <SearchIcon className={styles['main-nav__link-icon']}  fill={searchIconColor}/>
                     </NavLink>
                 </li>
             </ul>

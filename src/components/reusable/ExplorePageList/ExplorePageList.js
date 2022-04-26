@@ -18,6 +18,7 @@ function ExplorePageList(props) {
     ////////////////////////////////
     return (
         <div className={classes}>
+
             <header className={styles['explore-page-list__header']}>
                 <NavLink className={styles['explore-page-list__btn-back']} 
                          to={'/explore'}> 
@@ -28,9 +29,10 @@ function ExplorePageList(props) {
                 <p className={styles['explore-page-list__title']}>{listTitle}</p>
 
             </header>
-            <MovieList movies={movies} />
-        </div>
 
+            <MovieList movies={movies} />
+
+        </div>
     );
 }
 

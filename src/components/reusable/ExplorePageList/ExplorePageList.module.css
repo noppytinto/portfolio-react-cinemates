@@ -3,12 +3,19 @@
 }
 
 .explore-page-list__header {
+  position: sticky;
+  top: 0;
+  margin-left: -1rem;
+  margin-right: -1rem;
   margin-bottom: 2em;
+  padding: .5em 1rem .5em 1rem;
   
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 1em;
+  
+  background-color: var(--color-primary--blue);
 }
 
 .explore-page-list__btn-back {
