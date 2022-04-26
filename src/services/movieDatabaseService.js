@@ -3,9 +3,9 @@ import * as assetsManager from "../utils/assets-manager";
 
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = '632f90b0d342606c53a9ffd5fc5ed32e';
-const LANGUAGE = 'it';
+const LANGUAGE = 'en';
 const REGION = 'it';
-const PAGE = '1';
+const PAGE_QUERY = '&page=';
 
 const MOVIE_PATH = '/movie';
 const UPCOMING_PATH = '/upcoming';
@@ -28,48 +28,14 @@ const NOW_PLAYING_PATH = '/now_playing';
 // "original"
 //
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w342';
-const QUERIES = `&language=${LANGUAGE}&region=${REGION}&page=${PAGE}`;
+const QUERIES = `&language=${LANGUAGE}&region=${REGION}`;
 const UPCOMING_URL = `${TMDB_BASE_URL}${MOVIE_PATH}${UPCOMING_PATH}?api_key=${API_KEY}${QUERIES}`;
 const POPULAR_URL = `${TMDB_BASE_URL}${MOVIE_PATH}${POPULAR_PATH}?api_key=${API_KEY}${QUERIES}`;
 const NOW_PLAYING_URL = `${TMDB_BASE_URL}${MOVIE_PATH}${NOW_PLAYING_PATH}?api_key=${API_KEY}${QUERIES}`;
 
-export async function getUpcoming() {
+export async function getUpcoming(page = 1) {
     try {
-        const rawData = await fetchMovies(UPCOMING_URL);
-        if (!rawData) throw new Error('');
-
-
-        //
-        const movies = buildMovies(rawData);
-
-
-        return movies;
-    } catch (err) {
-        console.log('FETCH UPCOMING ERROR: ', err);
-        return [];
-    }
-}
-
-
-
-export async function getNowPlaying() {
-    try {
-        const rawData = await fetchMovies(NOW_PLAYING_URL);
-        if (!rawData) throw new Error('');
-
-        //
-        const movies = buildMovies(rawData);
-
-        return movies;
-    } catch (err) {
-        console.log('FETCH UPCOMING ERROR: ', err);
-        return [];
-    }
-}
-
-export async function getPopular() {
-    try {
-        const rawData = await fetchMovies(POPULAR_URL);
+        const rawData = await fetchMovies(UPCOMING_URL, page);
         if (!rawData) throw new Error('');
 
         //
@@ -81,9 +47,37 @@ export async function getPopular() {
     }
 }
 
-async function fetchMovies(url) {
+export async function getNowPlaying(page = 1) {
     try {
-        const res = await fetch(url);
+        const rawData = await fetchMovies(NOW_PLAYING_URL, page);
+        if (!rawData) throw new Error('');
+
+        //
+        const movies = buildMovies(rawData);
+        return movies;
+    } catch (err) {
+        console.log('FETCH UPCOMING ERROR: ', err);
+        return [];
+    }
+}
+
+export async function getPopular(page = 1) {
+    try {
+        const rawData = await fetchMovies(POPULAR_URL, page);
+        if (!rawData) throw new Error('');
+
+        //
+        const movies = buildMovies(rawData);
+        return movies;
+    } catch (err) {
+        console.log('FETCH UPCOMING ERROR: ', err);
+        return [];
+    }
+}
+
+async function fetchMovies(url, page=1) {
+    try {
+        const res = await fetch(url + PAGE_QUERY  + `${page}`);
         if (!res.ok) throw new Error(res.status);
         const data = await res.json();
 
