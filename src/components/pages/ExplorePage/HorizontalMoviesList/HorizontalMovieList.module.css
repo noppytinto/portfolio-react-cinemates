@@ -28,6 +28,11 @@
 .list-item {
 }
 
+.movie-poster-link {
+  display: block;
+}
+
 .movie-poster {
   width: 100px;
 }
+

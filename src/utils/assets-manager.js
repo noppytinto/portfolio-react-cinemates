@@ -16,12 +16,14 @@ export const stringTitlePopular = 'Popular';
 export const stringLabelSeeAll = 'See all';
 
 // paths
-export const pathHomePage = '/';
-export const pathHomeAltPage = '/home';
+export const pathRoot = '/';
+export const pathFeedsPage = '/feeds';
 export const pathExplorePage = '/explore';
 export const pathSearchPage = '/search';
 export const pathProfilePage = '/profile';
 export const pathNotificationPage = '/notification';
+export const pathMovieInfoPageWithId = '/movie/:id';
+export const pathMovieInfoPage = '/movie';
 export const pathExploreList = '/explore-list';
 
 

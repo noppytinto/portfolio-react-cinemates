@@ -1,8 +1,9 @@
 import MoviePoster from '../../../reusable/MoviePoster/MoviePoster';
 import styles from './HorizontalMovieList.module.css';
 import ListHeader from './ListHeader/ListHeader';
+import {NavLink} from "react-router-dom";
 
-// import * as assetsManager from '../../../utils/AssetsManager';
+import * as assets from '../../../../utils/assets-manager';
 
 function HorizontalMovieList({
                                  title = 'Header',
@@ -15,10 +16,13 @@ function HorizontalMovieList({
     function spawnMoviePoster(movie) {
         return (
             <li className={styles['list-item']} key={movie.id}>
-                <MoviePoster className={styles['movie-poster']} 
-                             posterImageUrl={movie.posterUrl}
-                             alt={movie.title}
-                             movieTitle={movie.title}/>
+                <NavLink className={styles['movie-poster-link']}
+                         to={`${assets.pathMovieInfoPage}/${movie.id}`}>
+                    <MoviePoster className={styles['movie-poster']}
+                                 posterImageUrl={movie.posterUrl}
+                                 alt={movie.title}
+                                 movieTitle={movie.title}/>
+                </NavLink>
             </li>
         );
     }

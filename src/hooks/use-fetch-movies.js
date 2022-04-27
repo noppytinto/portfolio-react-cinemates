@@ -24,8 +24,8 @@ function useFetchMovies(type = '') {
         if (isLoading) return;
 
         //
-        setPage(prev => prev+1);
         setIsLoading(true);
+        setPage(prev => prev+1);
     }
 
     useEffect(() => {

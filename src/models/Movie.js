@@ -4,12 +4,20 @@ export default class Movie {
     posterUrl;
     overview;
     releaseDate;
+    backdropUrl;
+    genres;
+    status;
+    duration;
 
-    constructor(id, title, posterUrl, overview, releaseDate) {
-        this.id = id ?? '';
-        this.title = title ?? '';
-        this.posterUrl = posterUrl ?? '';
-        this.overview = overview ?? '(description not available)';
-        this.releaseDate = releaseDate ?? '(not available)';
+    constructor(builder) {
+        this.id = builder.id;
+        this.title = builder.title;
+        this.posterUrl = builder.posterUrl;
+        this.overview = builder.overview;
+        this.releaseDate = builder.releaseDate;
+        this.backdropUrl = builder.backdropUrl;
+        this.genres = builder.genres;
+        this.status = builder.status;
+        this.duration = builder.duration;
     }
-}
+}// Movie
