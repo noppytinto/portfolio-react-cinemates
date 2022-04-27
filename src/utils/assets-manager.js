@@ -1,6 +1,5 @@
 import Movie from "../models/Movie";
 
-
 // colors
 export const colorPrimaryBlue = '#015896';
 export const colorPrimaryDarkBlue = '#004678';
@@ -8,17 +7,35 @@ export const colorPrimaryLightBlue = '#B2CCDF';
 export const colorPrimaryYellow= '#fed23f';
 
 
+// strings
+export const stringAppName = 'Cinemates';
+export const stringTitleMissing = '(no title)';
+export const stringTitleUpcoming = 'Upcoming';
+export const stringTitleNowPlaying = 'Now playing';
+export const stringTitlePopular = 'Popular';
+export const stringLabelSeeAll = 'See all';
+
+// paths
+export const pathHomePage = '/';
+export const pathHomeAltPage = '/home';
+export const pathExplorePage = '/explore';
+export const pathSearchPage = '/search';
+export const pathProfilePage = '/profile';
+export const pathNotificationPage = '/notification';
+export const pathExploreList = '/explore-list';
 
 
-export const extendedLogoNoLights = '/images/cinemates_logo_extended_nolights_2.png';
-export const profilePictureTest = '/images/profile-picture.jpg';
+// images
+export const imageExtendedLogoNoLights = '/images/cinemates_logo_extended_nolights_2.png';
+export const imageProfilePictureTest = '/images/profile-picture.jpg';
+
 
 // icons
-export const brokenImageIcon = '/images/icons/broken_image_black_24dp.svg';
-export const notificationNoneIcon = '/images/icons/notifications_none_white_24dp.svg';
-export const homeIcon = '/images/icons/home_white_24dp.svg';
-export const movieIcon = '/images/icons/theaters_white_24dp.svg';
-export const searchIcon = '/images/icons/search_white_24dp.svg';
+export const iconBrokenImage = '/images/icons/broken_image_black_24dp.svg';
+export const iconNotificationNone = '/images/icons/notifications_none_white_24dp.svg';
+export const iconHome = '/images/icons/home_white_24dp.svg';
+export const iconMovie = '/images/icons/theaters_white_24dp.svg';
+export const iconSearch = '/images/icons/search_white_24dp.svg';
 
 
 // icons as react components

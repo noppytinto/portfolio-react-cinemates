@@ -3,7 +3,7 @@ import * as assetsManager from '../../../utils/assets-manager';
 
 function MoviePoster({
         className, 
-        posterImageUrl=assetsManager.brokenImageIcon, 
+        posterImageUrl=assetsManager.iconBrokenImage,
         alt='', 
         movieTitle='',
         shadowed = true}
@@ -15,7 +15,7 @@ function MoviePoster({
 
     if (shadowed) classes = `${classes} ${styles['movie-poster--shadowed']} `;
 
-    if (posterImageUrl === assetsManager.brokenImageIcon) {
+    if (posterImageUrl === assetsManager.iconBrokenImage) {
         classes = classes + styles['movie-poster--broken'];
         imageClasses = imageClasses + styles['movie-poster-image--broken'];
         movieTitleClasses = `${styles['movie-title']}`;

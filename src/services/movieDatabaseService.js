@@ -35,12 +35,12 @@ const NOW_PLAYING_URL = `${TMDB_BASE_URL}${MOVIE_PATH}${NOW_PLAYING_PATH}?api_ke
 
 export async function getUpcoming(page = 1) {
     try {
-        const rawData = await fetchMovies(UPCOMING_URL, page);
-        if (!rawData) throw new Error('');
+        const [rawMovies, totalPages] = await fetchMovies(UPCOMING_URL, page);
+        if (!rawMovies) throw new Error('');
 
         //
-        const movies = buildMovies(rawData);
-        return movies;
+        const movies = buildMovies(rawMovies);
+        return [movies, totalPages];
     } catch (err) {
         console.log('FETCH UPCOMING ERROR: ', err);
         return [];
@@ -49,12 +49,12 @@ export async function getUpcoming(page = 1) {
 
 export async function getNowPlaying(page = 1) {
     try {
-        const rawData = await fetchMovies(NOW_PLAYING_URL, page);
-        if (!rawData) throw new Error('');
+        const [rawMovies, totalPages] = await fetchMovies(NOW_PLAYING_URL, page);
+        if (!rawMovies) throw new Error('');
 
         //
-        const movies = buildMovies(rawData);
-        return movies;
+        const movies = buildMovies(rawMovies);
+        return [movies, totalPages];
     } catch (err) {
         console.log('FETCH UPCOMING ERROR: ', err);
         return [];
@@ -63,12 +63,12 @@ export async function getNowPlaying(page = 1) {
 
 export async function getPopular(page = 1) {
     try {
-        const rawData = await fetchMovies(POPULAR_URL, page);
-        if (!rawData) throw new Error('');
+        const [rawMovies, totalPages] = await fetchMovies(POPULAR_URL, page);
+        if (!rawMovies) throw new Error('');
 
         //
-        const movies = buildMovies(rawData);
-        return movies;
+        const movies = buildMovies(rawMovies);
+        return [movies, totalPages];
     } catch (err) {
         console.log('FETCH UPCOMING ERROR: ', err);
         return [];
@@ -81,7 +81,10 @@ async function fetchMovies(url, page=1) {
         if (!res.ok) throw new Error(res.status);
         const data = await res.json();
 
-        return data.results;
+        const results = data.results;
+        const totalPages = data['total_pages'];
+
+        return [results, totalPages];
     } catch (err) {
         console.log('FETCH ERROR: ', err);
         return [];
@@ -111,6 +114,6 @@ function buildMovie(jsonObj) {
 }
 
 function buildImageUrl(imagePath) {
-    if(!Boolean(imagePath)) return assetsManager.brokenImageIcon;
+    if(!Boolean(imagePath)) return assetsManager.iconBrokenImage;
     return IMAGE_BASE_URL + imagePath;
 }

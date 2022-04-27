@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import styles from './MovieList.module.css';
-// import * as assetsManager from '../../../utils/assets-manager';
 import MovieListItem from './MovieListItem/MovieListItem';
+import { v4 as uuidv4 } from 'uuid';
 
 function MovieList(props) {
     let classes = `${styles['movie-list']} `;
@@ -9,20 +9,37 @@ function MovieList(props) {
     const movies = props.movies ?? [];
     const lastItemRef = React.createRef();
 
+
+    //////////////////////////////////////
+    // functions
+    //////////////////////////////////////
+
+    // when the last item is mounted
+    // trigger useEffect
     useEffect(() => {
         if (lastItemRef.current) {
             props.onLastItemMounted(lastItemRef.current);
         }
     }, [lastItemRef])
 
-
     function spawnMovies(movies) {
         return (
             movies.map((movie, index) => {
-                    if (index === movies.length-1) {
-                        return (<MovieListItem key={movie.id}  movie={movie} ref={lastItemRef}/>);
+                    // if is the last item
+                    if (index === movies.length - 1) {
+                        return (
+                            <li key={uuidv4()} ref={lastItemRef}>
+                                <MovieListItem movie={movie}/>
+                            </li>
+                        );
                     }
-                    return (<MovieListItem key={movie.id}  movie={movie}/>);
+
+                    //
+                    return (
+                        <li key={uuidv4()}>
+                            <MovieListItem movie={movie}/>
+                        </li>
+                    );
                 }
             )
         );

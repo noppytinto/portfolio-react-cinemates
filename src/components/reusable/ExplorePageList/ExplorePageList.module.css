@@ -12,5 +12,18 @@
   padding-right: 1rem;
 }
 
+.loading {
+  position: sticky;
+  bottom: 0;
+
+  padding: 1em;
+
+  text-align: center;
+
+  background-color: var(--color-primary--blue);
+  font-weight: bold;
+  border-radius: .5em;
+}
+
 
 

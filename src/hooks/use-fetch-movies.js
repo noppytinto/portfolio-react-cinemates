@@ -1,22 +1,29 @@
-import {
-    getNowPlaying,
-    getPopular,
-    getUpcoming
-} from "../services/movieDatabaseService";
-import {useCallback, useEffect, useRef, useState} from "react";
+import {getNowPlaying, getPopular, getUpcoming} from "../services/movieDatabaseService";
+import {useEffect, useRef, useState} from "react";
+import * as assets from '../utils/assets-manager';
 
 function useFetchMovies(type = '') {
+    const delay = 700;
+    let totPages = useRef(0);
+    let timer = useRef(null);
     const [movies, setMovies] = useState([]);
     const [page, setPage] = useState(1);
-    const [isLoading, setIsLoading] = useState(false);
-    let timer = useRef(null);
+    const [isLoading, setIsLoading] = useState(true);
+
 
     ////////////////////////////////////
     // functions
     ////////////////////////////////////
     function nextPage() {
-        console.log('current page: ', page);
+        console.log('current page:', page);
+        console.log('current total pages:', totPages.current);
+        if (page > totPages.current) {
+            console.log('STOP NEXT');
+            return;
+        }
         if (isLoading) return;
+
+        //
         setPage(prev => prev+1);
         setIsLoading(true);
     }
@@ -24,23 +31,28 @@ function useFetchMovies(type = '') {
     useEffect(() => {
         console.log('useFetchMovies called');
 
+        // debounce
         if (timer) clearTimeout(timer);
         timer = setTimeout(async () => {
             console.log('fetching movies................');
 
-            let fetchFunction = ((page)=>{return;});
+            // setting relative fetch function
+            let fetchFunction = ((page)=>null);
             if(type) {
-                if (type === 'Now playing') fetchFunction = getNowPlaying;
-                else if (type === 'Popular') fetchFunction = getPopular;
-                else if (type === 'Upcoming') fetchFunction = getUpcoming;
+                if (type === assets.stringTitleNowPlaying) fetchFunction = getNowPlaying;
+                else if (type === assets.stringTitlePopular) fetchFunction = getPopular;
+                else if (type === assets.stringTitleUpcoming) fetchFunction = getUpcoming;
             }
 
-            const fetched = await fetchFunction(page);
-            console.log(fetched);
+            // fetching
+            const [fetched, totalPages] = await fetchFunction(page);
+            //
+            totPages.current = totalPages;
             setMovies(prev => [...prev, ...fetched]);
             setIsLoading(false);
-        }, 2000);
-    }, [page])
+
+        }, delay);
+    }, [page, totPages, setMovies, setIsLoading, timer, delay])
 
 
     //////////////////////////////////////

@@ -13,6 +13,10 @@
   transition: all .2s;
 }
 
+.outline-button:hover {
+  cursor: pointer;
+}
+
 .outline-button:active {
   background-color: rgba(var(--color-rgb-raw-primary--yellow), 0.2);
 }

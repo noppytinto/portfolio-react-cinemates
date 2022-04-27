@@ -14,20 +14,20 @@ const root = createRoot(rootContainer);
 root.render(
     // enable strict in production
     // notes: components are rendered twice in strict mode + dev mode
-    // <React.StrictMode>
-    //     <BrowserRouter>
-    //         <Provider store={mainStore}>
-    //             <App />
-    //         </Provider>
-    //     </BrowserRouter>
-    // </React.StrictMode>
+    <React.StrictMode>
+        <BrowserRouter>
+            <Provider store={mainStore}>
+                <App />
+            </Provider>
+        </BrowserRouter>
+    </React.StrictMode>
 
     //
-    <BrowserRouter>
-        <Provider store={mainStore}>
-            <App />
-        </Provider>
-    </BrowserRouter>
+    // <BrowserRouter>
+    //     <Provider store={mainStore}>
+    //         <App />
+    //     </Provider>
+    // </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

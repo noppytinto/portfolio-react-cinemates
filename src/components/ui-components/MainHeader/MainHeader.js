@@ -8,19 +8,19 @@ function MainHeader() {
         <header className={styles['main-header']}>
             <NavLink className={styles['main-header__logo-link']} to={'/'}>
                 <img className={styles['main-header__logo-image']}
-                     src={assetsManager.extendedLogoNoLights}
+                     src={assetsManager.imageExtendedLogoNoLights}
                      alt={'cinemates logo'}/>
             </NavLink>
 
             <nav className={styles['main-header__nav']}>
                 <NavLink className={styles['main-header__link']} to={'/notification'}>
                     <img className={`${styles['main-header__link-icon']} ${styles['main-header__link-icon-notification']}`}
-                         src={assetsManager.notificationNoneIcon}
+                         src={assetsManager.iconNotificationNone}
                          alt={'notification icon'}/>
                 </NavLink>
                 <NavLink className={styles['main-header__link']} to={'/profile'}>
                     <img className={`${styles['main-header__link-icon']} ${styles['main-header__link-icon-profile']}`}
-                         src={assetsManager.profilePictureTest}
+                         src={assetsManager.imageProfilePictureTest}
                          alt={'user profile'}/>
                 </NavLink>
             </nav>

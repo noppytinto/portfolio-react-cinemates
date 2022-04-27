@@ -9,10 +9,9 @@ function OutlineButton(props) {
 
 
     return (
-        <button className={`${styles['outline-button']} disable-select`} 
-        type="button"
-        onClick={clickHandler} 
-        >
+        <button className={`${styles['outline-button']} disable-select`}
+                type="button"
+                onClick={clickHandler}>
             {textContent}
         </button>
     );
