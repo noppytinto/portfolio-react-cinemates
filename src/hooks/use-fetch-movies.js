@@ -32,8 +32,8 @@ function useFetchMovies(type = '') {
         console.log('useFetchMovies called');
 
         // debounce
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(async () => {
+        if (timer.current) clearTimeout(timer.current);
+        timer.current = setTimeout(async () => {
             console.log('fetching movies................');
 
             // setting relative fetch function
@@ -52,7 +52,7 @@ function useFetchMovies(type = '') {
             setIsLoading(false);
 
         }, delay);
-    }, [page, totPages, setMovies, setIsLoading, timer, delay])
+    }, [page, totPages, setMovies, setIsLoading, timer, delay, type])
 
 
     //////////////////////////////////////

@@ -20,7 +20,7 @@ function MovieList(props) {
         if (lastItemRef.current) {
             props.onLastItemMounted(lastItemRef.current);
         }
-    }, [lastItemRef])
+    }, [lastItemRef, props])
 
     function spawnMovies(movies) {
         return (
