@@ -12,6 +12,7 @@ function SearchPage() {
     ////////////////////////////
     function onSubmitHandler(ev) {
         ev.preventdefault();
+        setSearchQuery();
     }
     
 
