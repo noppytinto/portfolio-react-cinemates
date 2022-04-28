@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 function MainHeader() {
 
     return (
-        <header className={styles['main-header']}>
+        <div className={styles['main-header']}>
             <NavLink className={styles['main-header__logo-link']} to={'/'}>
                 <img className={styles['main-header__logo-image']}
                      src={assetsManager.imageExtendedLogoNoLights}
@@ -24,7 +24,7 @@ function MainHeader() {
                          alt={'user profile'}/>
                 </NavLink>
             </nav>
-        </header>
+        </div>
     );
 }
 

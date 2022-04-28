@@ -1,0 +1,6 @@
+.with-main-header {
+  position: sticky;
+  top: 0;
+
+  background-color: var(--color-primary--blue);
+}

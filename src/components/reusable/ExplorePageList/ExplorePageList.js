@@ -23,7 +23,7 @@ function ExplorePageList(props) {
     ////////////////////////////////////
     function onLastItemMounted(item) {
         if (isLoading) return ;
-        console.log('last item mounted: ', item);
+        // console.log('last item mounted: ', item);
 
         const observerCallback = (entries, observer) => {
             const [entry] = entries;

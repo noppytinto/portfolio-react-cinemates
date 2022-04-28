@@ -3,6 +3,7 @@ import HorizontalMovieList from "./HorizontalMoviesList/HorizontalMovieList";
 import {useEffect, useState} from "react";
 import {getUpcoming, getPopular, getNowPlaying} from '../../../services/movieDatabaseService';
 import * as assets from '../../../utils/assets-manager';
+import Snackbar from "../../../my-packages/snackbar-system/Snackbar";
 
 function ExplorePage() {
     const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
@@ -59,6 +60,8 @@ function ExplorePage() {
                 </li>
 
             </ul>
+
+            <Snackbar />
         </div>
     );
 }// ExplorePage
