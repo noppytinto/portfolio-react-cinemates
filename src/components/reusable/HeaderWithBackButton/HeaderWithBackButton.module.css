@@ -10,7 +10,8 @@
 }
 
 .header__btn-back {
-  display: block;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .header__btn-back-icon {

@@ -1,79 +1,53 @@
 import styles from './MainNav.module.css';
 import * as assets from '../../../utils/assets-manager';
-import { NavLink } from 'react-router-dom';
+import {NavLink, useLocation} from 'react-router-dom';
 import { ReactComponent as MovieIcon } from '../../reusable/Icons/theaters_white_24dp.svg';
 import { ReactComponent as HomeIcon } from '../../reusable/Icons/home_white_24dp.svg';
 import { ReactComponent as SearchIcon } from '../../reusable/Icons/search_white_24dp.svg';
-import { useSelector, useDispatch } from 'react-redux';
-import {currentPageActions} from '../../../redux/slices/curent-page-slice';
+
 
 function MainNav() {
-    let explorePageActive = true;
-    let homePageActive = false;
-    let searchPageActive = false;
+    let location = useLocation();
+    let currentPath = location.pathname;
+    let movieLinkStyle, homeLinkStyle, searchLinkStyle;
+    let movieIconColor, homeIconColor , searchIconColor;
 
-    const currentPage = useSelector((state) => state.currentPageSlice.currentPage);
-    const dispatcher = useDispatch();
+    switch (currentPath) {
+        case assets.pathExplorePage:
+            movieIconColor = assets.colorPrimaryYellow;
+            homeIconColor = assets.colorPrimaryLightBlue;
+            searchIconColor = assets.colorPrimaryLightBlue;
 
-    switch (currentPage) {
-        case 'explore':
-            explorePageActive = true;
-            homePageActive = false;
-            searchPageActive = false;
+            movieLinkStyle = `${styles['main-nav__link']} ${styles['main-nav__link--active']}`;
+            homeLinkStyle = `${styles['main-nav__link']}`;
+            searchLinkStyle = `${styles['main-nav__link']}`;
             break;
-        case 'home':
-            explorePageActive = false;
-            homePageActive = true;
-            searchPageActive = false;
+        case assets.pathFeedsPage:
+            movieIconColor = assets.colorPrimaryLightBlue;
+            homeIconColor = assets.colorPrimaryYellow;
+            searchIconColor = assets.colorPrimaryLightBlue;
+
+            movieLinkStyle = `${styles['main-nav__link']}`;
+            homeLinkStyle = `${styles['main-nav__link']} ${styles['main-nav__link--active']}`;
+            searchLinkStyle = `${styles['main-nav__link']}`;
             break;
-        case 'search':
-            explorePageActive = false;
-            homePageActive = false;
-            searchPageActive = true;
+        case assets.pathSearchPage:
+            movieIconColor = assets.colorPrimaryLightBlue;
+            homeIconColor = assets.colorPrimaryLightBlue;
+            searchIconColor = assets.colorPrimaryYellow;
+
+            movieLinkStyle = `${styles['main-nav__link']}`;
+            homeLinkStyle = `${styles['main-nav__link']}`;
+            searchLinkStyle = `${styles['main-nav__link']} ${styles['main-nav__link--active']}`;
             break;
         default:
-            explorePageActive = true;
-            homePageActive = false;
-            searchPageActive = false;
-    }
+            movieIconColor = assets.colorPrimaryYellow;
+            homeIconColor = assets.colorPrimaryLightBlue;
+            searchIconColor = assets.colorPrimaryLightBlue;
 
-
-    // icon color
-    let movieIconColor = explorePageActive ?
-        assets.colorPrimaryYellow :
-        assets.colorPrimaryLightBlue;
-    let homeIconColor = homePageActive ?
-        assets.colorPrimaryYellow :
-        assets.colorPrimaryLightBlue;
-    let searchIconColor = searchPageActive ?
-        assets.colorPrimaryYellow :
-        assets.colorPrimaryLightBlue;
-
-
-    // button style
-    let movieLinkStyle = explorePageActive ?
-        `${styles['main-nav__link']} ${styles['main-nav__link--active']}` :
-        `${styles['main-nav__link']}`;
-
-    let homeLinkStyle = homePageActive ?
-        `${styles['main-nav__link']} ${styles['main-nav__link--active']}` :
-        `${styles['main-nav__link']}`;
-
-    let searchLinkStyle = searchPageActive ?
-        `${styles['main-nav__link']} ${styles['main-nav__link--active']}` :
-        `${styles['main-nav__link']}`;
-
-
-    function onClickExploreHandler(ev) {
-        dispatcher(currentPageActions.setPage({page: assets.pathExplorePage}));
-    }
-
-    function onClickHomeHandler(ev) {
-        dispatcher(currentPageActions.setPage({page: assets.pathFeedsPage}));
-    }
-
-    function onClickSearchHandler(ev) {
-        dispatcher(currentPageActions.setPage({page: assets.pathSearchPage}));
+            movieLinkStyle = `${styles['main-nav__link']} ${styles['main-nav__link--active']}`;
+            homeLinkStyle = `${styles['main-nav__link']}`;
+            searchLinkStyle = `${styles['main-nav__link']}`;
     }
 
 
@@ -85,24 +59,21 @@ function MainNav() {
             <ul className={`${styles['main-nav__list']}`}>
                 <li className={`${styles['main-nav__item']}`}>
                     <NavLink className={movieLinkStyle}
-                             to={assets.pathExplorePage}
-                             onClick={onClickExploreHandler}>
+                             to={assets.pathExplorePage}>
                         <MovieIcon className={styles['main-nav__link-icon']} fill={movieIconColor} />
                     </NavLink>
                 </li>
 
                 <li className={`${styles['main-nav__item']}`}>
                     <NavLink className={homeLinkStyle}
-                             to={assets.pathFeedsPage}
-                             onClick={onClickHomeHandler}>
+                             to={assets.pathFeedsPage}>
                         <HomeIcon className={styles['main-nav__link-icon']}  fill={homeIconColor}/>
                     </NavLink>
                 </li>
 
                 <li className={`${styles['main-nav__item']}`}>
                     <NavLink className={searchLinkStyle}
-                             to={assets.pathSearchPage}
-                             onClick={onClickSearchHandler}>
+                             to={assets.pathSearchPage}>
                         <SearchIcon className={styles['main-nav__link-icon']}  fill={searchIconColor}/>
                     </NavLink>
                 </li>
