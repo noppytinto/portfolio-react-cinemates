@@ -4,7 +4,7 @@ import './App.css';
 import * as assets from './utils/assets-manager';
 // pages
 import ExplorePage from "./components/pages/ExplorePage/ExplorePage";
-import HomePage from './components/pages/HomePage/HomePage';
+import FeedsPage from './components/pages/FeedsPage/FeedsPage';
 import SearchPage from "./components/pages/SearchPage/SearchPage";
 import NotificationPage from './components/pages/NotificationPage/NotificationPage';
 import ProfilePage from './components/pages/ProfilePage/ProfilePage';
@@ -25,12 +25,12 @@ function App() {
                 <Route path={assets.pathRoot} element={<WithMainHeader />}>
                     <Route index element={<ExplorePage />} />
                     <Route path={assets.pathExplorePage} element={<ExplorePage />} />
-                    <Route path={assets.pathFeedsPage} element={ <HomePage /> } />
+                    <Route path={assets.pathFeedsPage} element={ <FeedsPage /> } />
                     <Route path={assets.pathSearchPage} element={<SearchPage />} />
 
-                    <Route path='/playground' element={<PlaygroundPage />} />
-                    <Route path="/test" element={ <Navigate to="/playground" /> } />
-                    <Route path='*' element={<Error404Page />} />
+                    <Route path={assets.pathPlayground} element={<PlaygroundPage />} />
+                    <Route path={assets.pathTest} element={ <Navigate to={assets.pathPlayground} /> } />
+                    <Route path={assets.pathAny} element={<Error404Page />} />
                 </Route>
 
                 <Route path={assets.pathRoot} element={<WithoutMainHeader />}>

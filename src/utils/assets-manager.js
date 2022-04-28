@@ -25,6 +25,9 @@ export const pathNotificationPage = '/notification';
 export const pathMovieInfoPageWithId = '/movie/:id';
 export const pathMovieInfoPage = '/movie';
 export const pathExploreList = '/explore-list';
+export const pathTest = '/test';
+export const pathAny = '*';
+export const pathPlayground = '/playground';
 
 
 // images
@@ -41,6 +44,10 @@ export const iconSearch = '/images/icons/search_white_24dp.svg';
 
 
 // icons as react components
+// import { ReactComponent as MovieIcon } from '../../reusable/Icons/theaters_white_24dp.svg';
+// import { ReactComponent as HomeIcon } from '../../reusable/Icons/home_white_24dp.svg';
+// import { ReactComponent as SearchIcon } from '../../reusable/Icons/search_white_24dp.svg';
+// export const ComponentIconHome = HomeIcon;
 
 
 // test movie poster images

@@ -1,11 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
-
-const EXPLORE_PAGE_KEY = 'explore';
-// const HOME_PAGE_KEY = 'home';
-// const SEARCH_PAGE_KEY = 'search';
+import * as assets from '../../utils/assets-manager';
 
 const initialState = {
-    currentPage: EXPLORE_PAGE_KEY,
+    currentPage: assets.pathFeedsPage,
 };
 
 const currentPageSlice = createSlice({

@@ -1,5 +1,5 @@
 import styles from './MainNav.module.css';
-import * as assetsManager from '../../../utils/assets-manager';
+import * as assets from '../../../utils/assets-manager';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as MovieIcon } from '../../reusable/Icons/theaters_white_24dp.svg';
 import { ReactComponent as HomeIcon } from '../../reusable/Icons/home_white_24dp.svg';
@@ -40,14 +40,14 @@ function MainNav() {
 
     // icon color
     let movieIconColor = explorePageActive ?
-        assetsManager.colorPrimaryYellow :
-        assetsManager.colorPrimaryLightBlue;
+        assets.colorPrimaryYellow :
+        assets.colorPrimaryLightBlue;
     let homeIconColor = homePageActive ?
-        assetsManager.colorPrimaryYellow :
-        assetsManager.colorPrimaryLightBlue;
+        assets.colorPrimaryYellow :
+        assets.colorPrimaryLightBlue;
     let searchIconColor = searchPageActive ?
-        assetsManager.colorPrimaryYellow :
-        assetsManager.colorPrimaryLightBlue;
+        assets.colorPrimaryYellow :
+        assets.colorPrimaryLightBlue;
 
 
     // button style
@@ -65,15 +65,15 @@ function MainNav() {
 
 
     function onClickExploreHandler(ev) {
-        dispatcher(currentPageActions.setPage({page: 'explore'}));
+        dispatcher(currentPageActions.setPage({page: assets.pathExplorePage}));
     }
 
     function onClickHomeHandler(ev) {
-        dispatcher(currentPageActions.setPage({page: 'home'}));
+        dispatcher(currentPageActions.setPage({page: assets.pathFeedsPage}));
     }
 
     function onClickSearchHandler(ev) {
-        dispatcher(currentPageActions.setPage({page: 'search'}));
+        dispatcher(currentPageActions.setPage({page: assets.pathSearchPage}));
     }
 
 
@@ -85,7 +85,7 @@ function MainNav() {
             <ul className={`${styles['main-nav__list']}`}>
                 <li className={`${styles['main-nav__item']}`}>
                     <NavLink className={movieLinkStyle}
-                             to={'/explore'}
+                             to={assets.pathExplorePage}
                              onClick={onClickExploreHandler}>
                         <MovieIcon className={styles['main-nav__link-icon']} fill={movieIconColor} />
                     </NavLink>
@@ -93,7 +93,7 @@ function MainNav() {
 
                 <li className={`${styles['main-nav__item']}`}>
                     <NavLink className={homeLinkStyle}
-                             to={'/home'}
+                             to={assets.pathFeedsPage}
                              onClick={onClickHomeHandler}>
                         <HomeIcon className={styles['main-nav__link-icon']}  fill={homeIconColor}/>
                     </NavLink>
@@ -101,7 +101,7 @@ function MainNav() {
 
                 <li className={`${styles['main-nav__item']}`}>
                     <NavLink className={searchLinkStyle}
-                             to={'/search'}
+                             to={assets.pathSearchPage}
                              onClick={onClickSearchHandler}>
                         <SearchIcon className={styles['main-nav__link-icon']}  fill={searchIconColor}/>
                     </NavLink>

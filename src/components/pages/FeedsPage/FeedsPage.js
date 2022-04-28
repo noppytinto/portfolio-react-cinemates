@@ -1,14 +1,16 @@
 import PlaceholderPage from '../../reusable/PlaceholderPage/PlaceholderPage';
 import OutlineButton from '../../reusable/OutlineButton/OutlineButton';
 import {useNavigate} from 'react-router-dom';
-import styles from "./HomePage.module.css";
+import styles from "./FeedsPage.module.css";
+import * as assets from '../../../utils/assets-manager';
 
-function HomePage() {
+
+function FeedsPage() {
     let navigate = useNavigate();
 
     const buttonHandler = (ev) => {
         ev.preventDefault();
-        navigate('/playground');
+        navigate(assets.pathPlayground);
     };
 
     ////////////////////////////
@@ -26,6 +28,6 @@ function HomePage() {
             </PlaceholderPage>
         </div>
     );
-}// Home
+}// FeedsPage
 
-export default HomePage;
+export default FeedsPage;
