@@ -1,5 +1,6 @@
 #snackbar {
-  position:sticky;
+  position: fixed;
   bottom: 0;
   z-index: 100;
+  width: 100%;
 }

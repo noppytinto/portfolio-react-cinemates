@@ -31,8 +31,8 @@ body {
 
   background-color: var(--color-primary--blue);
   color: #fff;
-  /*height: 100%;*/
 
+  overflow: auto;
 }
 
 input[type=button], 
@@ -52,9 +52,13 @@ code {
     monospace;
 }
 
-/*html, body, #root, .App {*/
-/*  height: 100%;*/
-/*}*/
+html {
+  height: 100vh;
+}
+
+body, #root, .App {
+  height: 100%;
+}
 
 
 /**************************************/

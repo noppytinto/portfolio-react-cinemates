@@ -1,8 +1,13 @@
 
 .search-page {
-  flex-grow: 1;
+  flex: 1;
 }
 
 .search-page__content {
 
+}
+
+.search-page__box {
+  position: fixed;
+  bottom: 0;
 }
