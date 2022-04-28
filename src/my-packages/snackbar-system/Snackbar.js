@@ -2,20 +2,28 @@ import './global-style.css';
 import styles from './Snackbar.module.css';
 import * as ReactDOM from 'react-dom';
 import * as assets from './utils/assets-manager';
-import { unmountComponentAtNode } from "react-dom";
-import {useEffect, useRef} from "react";
+import { useState } from 'react';
+// import { useState } from 'react';
+// import {useRef} from "react";
+
+
+export function removeSnackbar() {
+    const snackbar = document.getElementById('snackbar');
+    snackbar.removeChild(snackbar.lastChild);
+}
 
 function Snackbar(props) {
     const textContent = props.textContent ?? assets.stringTextContent;
     const actionLabel = props.actionLabel ?? assets.stringActionLabel;
-    const onActionClick = props.onActionClick ?? ((ev)=>undefined);
-    const delay = props.delay ?? assets.defaultDelay;
+    const onActionClick = props.onActionClick ?? (() => {});
     let snackbarContainerClasses = `${styles['snackbar-container']} `;
     let classes = `${styles['snackbar']} ${props.className}`;
     let mainContentClasses = `${styles['snackbar__main-content']} `;
     let actionClasses = `${styles['snackbar__action']} `;
     let actionButtonClasses = `${styles['snackbar__action-button']} `;
-    const timer = useRef();
+    // const timer = useRef();
+    // const delay = props.delay ?? assets.defaultDelay;
+    const [isOpen, setIsOpen] = useState(props.isOpen ?? true);
 
 
     ////////////////////////////////////
@@ -24,21 +32,32 @@ function Snackbar(props) {
     function actionHandler(ev) {
         ev.preventDefault();
         onActionClick(ev);
+        close();
     }
+
+    function close(ev) {
+        setIsOpen(false);
+    }
+
 
     // useEffect(()=>{
     //     if (timer.current) clearTimeout(timer.current);
-    //
+    
     //     timer.current = setTimeout(() => {
-    //         unmountComponentAtNode(document.querySelector(`${styles['snackbar-container']}`))
+    //         console.log('snackbar called');
+
+    //         removeSnackbar();
     //     }, delay);
-    //
+    
     // }, [timer, delay]);
+
+
 
 
     ////////////////////////////////////
     // JSX
     ////////////////////////////////////
+    if (!isOpen) return null;
     return (
         ReactDOM.createPortal(
             <div className={snackbarContainerClasses}>

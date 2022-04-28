@@ -9,6 +9,7 @@ function useFetchMovies(type = '') {
     const [movies, setMovies] = useState([]);
     const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(true);
+    const [isListEnded, setIsListEnded] = useState(false);
 
 
     ////////////////////////////////////
@@ -19,6 +20,7 @@ function useFetchMovies(type = '') {
         console.log('current total pages:', totPages.current);
         if (page > totPages.current) {
             console.log('STOP NEXT');
+            setIsListEnded(true);
             return;
         }
         if (isLoading) return;
@@ -57,7 +59,7 @@ function useFetchMovies(type = '') {
 
     //////////////////////////////////////
     //////////////////////////////////////
-    return [movies, nextPage, isLoading];
+    return [movies, nextPage, isLoading, isListEnded];
 }// useFetchMovies
 
 export default useFetchMovies;

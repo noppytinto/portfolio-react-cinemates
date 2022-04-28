@@ -6,6 +6,7 @@ import MovieList from '../MovieList/MovieList';
 import HeaderWithBackButton
     from "../HeaderWithBackButton/HeaderWithBackButton";
 import useFetchMovies from "../../../hooks/use-fetch-movies";
+import Snackbar from '../../../my-packages/snackbar-system/Snackbar';
 
 
 function ExplorePageList(props) {
@@ -15,8 +16,7 @@ function ExplorePageList(props) {
     const location = useLocation();
     const listTitle = location.state?.title ?? assets.stringTitleMissing;
 
-    const [movies, nextPage, isLoading] = useFetchMovies(listTitle);
-
+    const [movies, nextPage, isLoading, isListEnded] = useFetchMovies(listTitle);
 
     ////////////////////////////////////
     // functions
@@ -50,7 +50,6 @@ function ExplorePageList(props) {
         intersectionObserver.observe(item);
     }
 
-
     ////////////////////////////////
     // JSX
     ////////////////////////////////
@@ -65,6 +64,10 @@ function ExplorePageList(props) {
 
             {isLoading && <p className={styles['loading']}>Loading...</p>}
             {/*{<p className={styles['loading']}>Loading...</p>}*/}
+
+            {isListEnded && <Snackbar textContent={'No more movies'} 
+                                      actionLabel={'ok'}
+                                      />}
         </div>
     );
 }
