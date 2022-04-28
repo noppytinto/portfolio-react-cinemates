@@ -3,27 +3,20 @@ import styles from './Snackbar.module.css';
 import * as ReactDOM from 'react-dom';
 import * as assets from './utils/assets-manager';
 import { useState } from 'react';
-// import { useState } from 'react';
-// import {useRef} from "react";
 
-
-export function removeSnackbar() {
-    const snackbar = document.getElementById('snackbar');
-    snackbar.removeChild(snackbar.lastChild);
-}
 
 function Snackbar(props) {
+    const [isOpen, setIsOpen] = useState(props.isOpen ?? true);
+    if (!isOpen) return null;
+
     const textContent = props.textContent ?? assets.stringTextContent;
     const actionLabel = props.actionLabel ?? assets.stringActionLabel;
     const onActionClick = props.onActionClick ?? (() => {});
-    let snackbarContainerClasses = `${styles['snackbar-container']} `;
+    let snackbarContainerClasses = `${styles['snackbar-container']} ${styles['open']}`;
     let classes = `${styles['snackbar']} ${props.className}`;
     let mainContentClasses = `${styles['snackbar__main-content']} `;
     let actionClasses = `${styles['snackbar__action']} `;
     let actionButtonClasses = `${styles['snackbar__action-button']} `;
-    // const timer = useRef();
-    // const delay = props.delay ?? assets.defaultDelay;
-    const [isOpen, setIsOpen] = useState(props.isOpen ?? true);
 
 
     ////////////////////////////////////
@@ -57,7 +50,6 @@ function Snackbar(props) {
     ////////////////////////////////////
     // JSX
     ////////////////////////////////////
-    if (!isOpen) return null;
     return (
         ReactDOM.createPortal(
             <div className={snackbarContainerClasses}>

@@ -4,7 +4,7 @@
   --color-action-text: #B2CCDF;
 }
 
-@keyframes popup {
+@keyframes anim-open {
   from {
     opacity: 0;
     transform: scale(0)
@@ -16,14 +16,34 @@
   }
 }
 
+/* @keyframes anim-close {
+  from {
+    opacity: 1;
+    transform: scale(1)
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0)
+  }
+} */
+
 .snackbar-container {
   border-width: 1em;
   border-style: solid;
   border-color: transparent;
 
-  animation-name: popup;
   animation-duration: 100ms;
 }
+
+.open {
+  animation-name: anim-open;
+
+}
+
+/* .close {
+  animation-name: anim-close;
+} */
 
 .snackbar {
   padding: 1em 2em;
