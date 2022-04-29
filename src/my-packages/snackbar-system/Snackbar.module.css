@@ -17,7 +17,7 @@
   }
 }
 
-/* @keyframes anim-close {
+@keyframes anim-close {
   from {
     opacity: 1;
     transform: scale(1)
@@ -27,7 +27,7 @@
     opacity: 0;
     transform: scale(0)
   }
-} */
+}
 
 .snackbar-container {
   border-width: 1em;
@@ -42,9 +42,9 @@
 
 }
 
-/* .close {
+.close {
   animation-name: anim-close;
-} */
+}
 
 .snackbar {
   padding: 1em 2em;

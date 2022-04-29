@@ -1,6 +1,6 @@
 import styles from './ExplorePageList.module.css';
 import * as assets from '../../../utils/assets-manager';
-import { useLocation } from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import {useRef} from "react";
 import MovieList from '../MovieList/MovieList';
 import HeaderWithBackButton
@@ -22,7 +22,7 @@ function ExplorePageList(props) {
     // functions
     ////////////////////////////////////
     function onLastItemMounted(item) {
-        if (isLoading) return ;
+        if (isLoading) return;
         // console.log('last item mounted: ', item);
 
         const observerCallback = (entries, observer) => {
@@ -33,7 +33,7 @@ function ExplorePageList(props) {
 
                 console.log('last item intersected');
                 if (isLoading) {
-                    return ;
+                    return;
                 }
 
                 nextPage();
@@ -55,19 +55,21 @@ function ExplorePageList(props) {
     ////////////////////////////////
     return (
         <div className={classes}>
-            <HeaderWithBackButton className={styles['explore-page-list__header']}
-                                  backButtonUrl={assets.pathExplorePage}
-                                  title={listTitle}/>
+            <HeaderWithBackButton
+                className={styles['explore-page-list__header']}
+                backButtonUrl={assets.pathExplorePage}
+                title={listTitle}/>
 
             <MovieList movies={movies}
                        onLastItemMounted={onLastItemMounted}/>
 
             {isLoading && <p className={styles['loading']}>Loading...</p>}
+            {/*{isListEnded && <p className={styles['list-ended']}>-- fin --</p>}*/}
             {/*{<p className={styles['loading']}>Loading...</p>}*/}
 
-            {isListEnded && <Snackbar textContent={'No more movies'} 
-                                      actionLabel={'ok'}
-                                      />}
+            {<Snackbar textContent={'No more movies'}
+                       actionLabel={'ok'}
+                       isOpen={isListEnded}/>}
         </div>
     );
 }
