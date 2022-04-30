@@ -2,24 +2,24 @@ import './global-style.css';
 import styles from './Snackbar.module.css';
 import * as ReactDOM from 'react-dom';
 import * as assets from './utils/assets-manager';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 
 
 function Snackbar(props) {
-    const [isOpen, setIsOpen] = useState(props.isOpen ?? true);
-    useEffect(() => {
-        setIsOpen(props.isOpen);
+    // props
+    const text = props.text ?? assets.stringSnackbarDefaultText;
+    const actionLabel = props.actionLabel ?? assets.stringSnackbarActionLabel;
+    const onClickAction = props.onClickAction ?? (() => {});
 
-    }, [props.isOpen])
+    // states
+    const [isShown, setIsShown] = useState(true);
+    const [toBeDisposed, setToBeDisposed] = useState(false);
 
-    // const [isRendered, setIsRendered] = useState(props.isOpen ?? true);
-    const [animateBeforeUnmount, setAnimateBeforeUnmount] = useState(false);
-    // if (!isOpen) return null;
-
-    const textContent = props.textContent ?? assets.stringTextContent;
-    const actionLabel = props.actionLabel ?? assets.stringActionLabel;
-    const onActionClick = props.onActionClick ?? (() => {});
-    let snackbarContainerClasses = `${styles['snackbar-container']} ${(animateBeforeUnmount ? styles['close'] : styles['open'])}`;
+    // classes
+    let snackbarContainerClasses = `${styles['snackbar-container']} ${styles['open']}`;
+    if (toBeDisposed) {
+        snackbarContainerClasses = `${styles['snackbar-container']} ${styles['close']}`;
+    }
     let classes = `${styles['snackbar']} ${props.className}`;
     let mainContentClasses = `${styles['snackbar__main-content']} `;
     let actionClasses = `${styles['snackbar__action']} `;
@@ -30,45 +30,29 @@ function Snackbar(props) {
     ////////////////////////////////////
     // functions
     ////////////////////////////////////
+    function dispose() {
+        setToBeDisposed(true);
+    }
+
     function actionHandler(ev) {
         ev.preventDefault();
-        onActionClick(ev);
-        close();
+        onClickAction({dispose});
     }
-
-    function close(ev) {
-        setAnimateBeforeUnmount(true);
-    }
-
-
-    // useEffect(()=>{
-    //     if (timer.current) clearTimeout(timer.current);
-    
-    //     timer.current = setTimeout(() => {
-    //         console.log('snackbar called');
-
-    //         removeSnackbar();
-    //     }, delay);
-    
-    // }, [timer, delay]);
-
 
     const handleAnimationEnd = () => {
-        if (!animateBeforeUnmount) return;
-        setIsOpen(false);
-        setAnimateBeforeUnmount(false);
+        if (toBeDisposed) {
+            setIsShown(false);
+        }
     };
 
-
-    function rend(isOpen) {
-        console.log('---------------------- SNACKBAR RENDERED');
+    function rend() {
         return (
             ReactDOM.createPortal(
                 <div className={snackbarContainerClasses}
                      onAnimationEnd={handleAnimationEnd}>
                     <div className={classes}>
                         <div className={mainContentClasses}>
-                            {textContent}
+                            {text}
                         </div>
                         <div className={actionClasses}>
                             <button className={actionButtonClasses}
@@ -82,19 +66,13 @@ function Snackbar(props) {
                 document.getElementById('snackbar')
             )
         );
-        // if (isOpen) {
-        //
-        // }
-        // else {
-        //     console.log('---------------------- SNACKBAR NOT RENDERED');
-        //     return null;
-        // }
     }
+
 
     ////////////////////////////////////
     // JSX
     ////////////////////////////////////
-    return (rend(isOpen));
+    return (isShown && rend());
 }// Snackbar
 
 export default Snackbar;

@@ -50,6 +50,10 @@ function ExplorePageList(props) {
         intersectionObserver.observe(item);
     }
 
+    function actionHandler(snackbar) {
+        snackbar.dispose();
+    }
+
     ////////////////////////////////
     // JSX
     ////////////////////////////////
@@ -67,9 +71,9 @@ function ExplorePageList(props) {
             {/*{isListEnded && <p className={styles['list-ended']}>-- fin --</p>}*/}
             {/*{<p className={styles['loading']}>Loading...</p>}*/}
 
-            {<Snackbar textContent={'No more movies'}
-                       actionLabel={'ok'}
-                       isOpen={isListEnded}/>}
+            {isListEnded && <Snackbar text={'No more movies'}
+                                      actionLabel={'ok'}
+                                      onClickAction={actionHandler}/>}
         </div>
     );
 }
