@@ -76,7 +76,7 @@
 }
 
 .movie-page__container-listing {
-  padding: 1em .5em;
+  padding: 0 0 0 .5em;
   flex: 2;
 
 }
