@@ -98,6 +98,7 @@ function MoviePage() {
             </section>
 
             <section  className={`${styles['movie-page__container-cast']}`}>
+                <h2 className={`${styles['movie-page__cast-title']}`}>Cast</h2>
                 <CastList cast={cast} />
             </section>
         </div>

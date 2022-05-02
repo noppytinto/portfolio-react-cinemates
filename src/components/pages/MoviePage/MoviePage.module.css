@@ -66,8 +66,8 @@
 .movie-page__container-details {
   display: flex;
   justify-content: space-between;
-  gap: 1em;
-  margin-bottom: 3em;
+  gap: .5em;
+  margin-bottom: 4em;
 }
 
 .movie-page__poster {
@@ -76,8 +76,8 @@
 }
 
 .movie-page__container-listing {
+  padding: 1em .5em;
   flex: 2;
-  margin-bottom: 3em;
 
 }
 
@@ -103,6 +103,10 @@
 
 .movie-page__list-value {
   font-style: italic;
+}
+
+.movie-page__cast-title {
+
 }
 
 .movie-page__container-cast {
