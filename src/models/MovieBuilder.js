@@ -10,6 +10,7 @@ export default class MovieBuilder {
     genres;
     status;
     duration;
+    cast;
 
     constructor(id='', title='') {
         this.id = id;
@@ -48,6 +49,11 @@ export default class MovieBuilder {
 
     setDuration(duration='(not available)') {
         this.duration = duration;
+        return this;
+    }
+
+    setCast(cast=[]) {
+        this.cast = cast;
         return this;
     }
 

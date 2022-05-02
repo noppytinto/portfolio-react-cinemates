@@ -52,13 +52,13 @@ code {
     monospace;
 }
 
-html {
-  height: 100vh;
-}
+/*html {*/
+/*  height: 100vh;*/
+/*}*/
 
-body, #root, .App {
-  height: 100%;
-}
+/*body, #root, .App {*/
+/*  height: 100%;*/
+/*}*/
 
 
 /**************************************/

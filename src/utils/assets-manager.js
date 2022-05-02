@@ -8,13 +8,13 @@ import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import SearchIcon from '@mui/icons-material/Search';
 
 // icons
-// export const iconBrokenImage = '/images/icons/broken_image_black_24dp.svg';
+export const iconBrokenImage = '/images/icons/broken_image_black_24dp.svg';
 // export const iconNotificationNone = '/images/icons/notifications_none_white_24dp.svg';
 // export const iconHome = '/images/icons/home_white_24dp.svg';
 // export const iconMovie = '/images/icons/theaters_white_24dp.svg';
 // export const iconSearch = '/images/icons/search_white_24dp.svg';
 // material ui icons
-export const iconBrokenImage = BrokenImageIcon;
+export const IconBrokenImage = BrokenImageIcon;
 export const IconNotificationNone = NotificationsNoneIcon;
 export const IconBack = ArrowBackIcon;
 export const IconHome = HomeIcon;
@@ -36,6 +36,10 @@ export const stringTitleUpcoming = 'Upcoming';
 export const stringTitleNowPlaying = 'Now playing';
 export const stringTitlePopular = 'Popular';
 export const stringLabelSeeAll = 'See all';
+export const stringMovieDuration = 'Duration';
+export const stringMovieGenres = 'Genres';
+export const stringMovieStatus = 'Status';
+
 
 // paths
 export const pathRoot = '/';

@@ -1,5 +1,6 @@
-import * as assetsManager from "../utils/assets-manager";
+import * as assets from "../utils/assets-manager";
 import MovieBuilder from "../models/MovieBuilder";
+import CastMember from "../models/CastMember";
 
 const BASE_URL_TMDB = 'https://api.themoviedb.org/3';
 const API_KEY = '632f90b0d342606c53a9ffd5fc5ed32e';
@@ -11,6 +12,7 @@ const PATH_MOVIE = '/movie';
 const PATH_UPCOMING = '/upcoming';
 const PATH_POPULAR = '/popular';
 const PATH_NOW_PLAYING = '/now_playing';
+const PATH_CREDITS = '/credits';
 
 // poster sizes:
 // "w92",
@@ -29,6 +31,7 @@ const PATH_NOW_PLAYING = '/now_playing';
 //
 const BASE_URL_IMAGE = 'https://image.tmdb.org/t/p/w342';
 const BASE_URL_BACKDROP = 'https://image.tmdb.org/t/p/w780';
+const BASE_URL_CREDITS = 'https://image.tmdb.org/t/p/w300';
 const QUERIES = `&language=${DEFAULT_LANG}&region=${DEFAULT_REGION}`;
 const PARAM_LANGUAGE = `&language=`;
 // const PARAM_REGION = `&region=`;
@@ -111,6 +114,45 @@ async function fetchMovies(url, page=1) {
     }
 }
 
+export async function fetchCast(movieId) {
+    try {
+        const res = await fetch(`${BASE_URL_TMDB}${PATH_MOVIE}/${movieId}${PATH_CREDITS}?api_key=${API_KEY}${PARAM_LANGUAGE}${LANG_ENGLISH}`);
+        if (!res.ok) throw new Error(res.status);
+        const data = await res.json();
+
+        const cast = buildCredits(data.cast);
+        return cast;
+    } catch (err) {
+        console.log('FETCH ERROR: ', err);
+        return [];
+    }
+}
+
+function buildCredits(rawData) {
+    const cast = [];
+
+    rawData.forEach(rawCastMember => {
+        const castMember = buildSimpleCastMember(rawCastMember);
+        cast.push(castMember);
+    });
+
+    return cast;
+
+}
+
+function buildSimpleCastMember(jsonObj) {
+    const id = jsonObj.id;
+    const name = jsonObj.name;
+    const profilePictureUrl = buildProfilePictureUrl(jsonObj['profile_path']);
+    const character = jsonObj.character;
+
+    const member = new CastMember(id, name);
+    member.setProfilePictureUrl(profilePictureUrl);
+    member.setCharacter(character);
+    return member;
+}
+
+
 function buildMovies(rawData) {
     const movies = [];
 
@@ -144,9 +186,10 @@ function buildFullMovie(jsonObj) {
     const overview = jsonObj.overview;
     const releaseDate = jsonObj['release_date'];
     const backdropUrl = buildBackdropUrl(jsonObj['backdrop_path']);
-    const genres = jsonObj.genres;
+    const genres = buildGenres(jsonObj.genres);
     const duration = jsonObj.runtime;
     const status = jsonObj.status;
+    const cast = jsonObj.cast;
 
     return new MovieBuilder(id, title)
         .setPosterUrl(posterUrl)
@@ -157,14 +200,32 @@ function buildFullMovie(jsonObj) {
         .setReleaseDate(releaseDate)
         .setDuration(duration)
         .setStatus(status)
+        .setCast(cast)
         .build();
 }
 
+function buildGenres(genres) {
+    let result = [];
+
+    genres.forEach((gen) => {
+        result.push(`${gen.name}`)
+    })
+
+    return result;
+}
+
 function buildImageUrl(path) {
-    if(!Boolean(path)) return assetsManager.iconBrokenImage;
+    if(!Boolean(path)) return assets.iconBrokenImage;
     return BASE_URL_IMAGE + path;
 }
+
+function buildProfilePictureUrl(path) {
+    if(!Boolean(path)) return assets.iconBrokenImage;
+    return BASE_URL_CREDITS + path;
+}
+
+
 function buildBackdropUrl(path) {
-    if(!Boolean(path)) return assetsManager.iconBrokenImage;
+    if(!Boolean(path)) return assets.iconBrokenImage;
     return BASE_URL_BACKDROP + path;
 }

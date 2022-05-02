@@ -10,7 +10,7 @@ import NotificationPage from './components/pages/NotificationPage/NotificationPa
 import ProfilePage from './components/pages/ProfilePage/ProfilePage';
 import PlaygroundPage from './components/pages/PlaygroundPage/PlaygroundPage';
 import Error404Page from './components/pages/Error404Page/Error404Page';
-import MovieInfoPage from "./components/pages/MovieInfoPage/MovieInfoPage";
+import MoviePage from "./components/pages/MoviePage/MoviePage";
 
 //
 import WithMainHeader from './components/reusable/WithMainHeader/WithMainHeader';
@@ -35,7 +35,7 @@ function App() {
 
                 <Route path={assets.pathRoot} element={<WithoutMainHeader />}>
                     <Route path={assets.pathNotificationPage} element={<NotificationPage />} />
-                    <Route path={assets.pathMovieInfoPageWithId} element={<MovieInfoPage />} />
+                    <Route path={assets.pathMovieInfoPageWithId} element={<MoviePage />} />
                     <Route path={assets.pathProfilePage} element={<ProfilePage />} />
                     <Route path={assets.pathExploreList} element={<ExplorePageList />} />
                 </Route>

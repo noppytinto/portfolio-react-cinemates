@@ -1,13 +1,9 @@
-
-
-.horizontal-movie-list {
-}
-
-.list-container {
+.cast-list {
   overflow-x: hidden;
 }
 
-.list-container > ul {
+.cast-list  > ul {
+  height: 100%;
   padding: 1em 0;
 
   overflow: auto;
@@ -21,18 +17,6 @@
   gap: 1.2em;
 }
 
-.list-container> ul::-webkit-scrollbar {
+.cast-list > ul::-webkit-scrollbar {
   display: none;
 }
-
-.list-item {
-}
-
-.movie-poster-link {
-  display: block;
-}
-
-.movie-poster {
-  width: 100px;
-}
-

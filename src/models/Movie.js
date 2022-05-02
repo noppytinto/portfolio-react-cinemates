@@ -8,6 +8,7 @@ export default class Movie {
     genres;
     status;
     duration;
+    cast;
 
     constructor(builder) {
         this.id = builder.id;
@@ -19,5 +20,7 @@ export default class Movie {
         this.genres = builder.genres;
         this.status = builder.status;
         this.duration = builder.duration;
+        this.cast = builder.cast;
     }
+
 }// Movie
