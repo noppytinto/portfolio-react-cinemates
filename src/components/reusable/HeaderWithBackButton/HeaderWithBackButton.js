@@ -1,7 +1,6 @@
 import styles from './HeaderWithBackButton.module.css';
 import * as assets from '../../../utils/assets-manager';
 import {useNavigate} from 'react-router-dom';
-import BackIcon from '../Icons/arrow_back_FILL0_wght400_GRAD0_opsz48.svg'
 
 
 function HeaderWithBackButton(props) {
@@ -25,9 +24,11 @@ function HeaderWithBackButton(props) {
         <header className={classes}>
             <button className={styles['header__btn-back']}
                     onClick={onClickHandler}>
-                <img className={styles['header__btn-back-icon']}
-                     src={BackIcon}
-                     alt={''}/>
+                <assets.IconBack className={styles['header__icon-back']} />
+
+                {/*<img className={styles['header__btn-back-icon']}*/}
+                {/*     src={BackIcon}*/}
+                {/*     alt={''}/>*/}
             </button>
 
             <p className={styles['header__title']}>{title}</p>

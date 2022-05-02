@@ -1,6 +1,11 @@
 .header {
-  padding: .5em 0 .5em 0;
+  --icon-size: 2.5em;
+  --icon-color: #fff;
+}
 
+
+.header {
+  padding: .5em 0 .5em 0;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -12,11 +17,15 @@
 .header__btn-back {
   background-color: transparent;
   border-color: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.header__btn-back-icon {
-  display: block;
-  height: 35px;
+.header__icon-back {
+  color: var(--icon-color);
+  font-size: var(--icon-size);
 }
 
 

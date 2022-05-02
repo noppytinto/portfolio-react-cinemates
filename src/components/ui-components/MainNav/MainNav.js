@@ -1,53 +1,36 @@
 import styles from './MainNav.module.css';
 import * as assets from '../../../utils/assets-manager';
 import {NavLink, useLocation} from 'react-router-dom';
-import { ReactComponent as MovieIcon } from '../../reusable/Icons/theaters_white_24dp.svg';
-import { ReactComponent as HomeIcon } from '../../reusable/Icons/home_white_24dp.svg';
-import { ReactComponent as SearchIcon } from '../../reusable/Icons/search_white_24dp.svg';
 
 
 function MainNav() {
-    let location = useLocation();
-    let currentPath = location.pathname;
-    let movieLinkStyle, homeLinkStyle, searchLinkStyle;
-    let movieIconColor, homeIconColor , searchIconColor;
+    const location = useLocation();
+    const currentPath = location.pathname;
+
+    let movieLinkStyle = `${styles['main-nav__link']}`;
+    let homeLinkStyle = `${styles['main-nav__link']}`;
+    let searchLinkStyle = `${styles['main-nav__link']}`;
+
+    let movieIconStyle = `${styles['main-nav__icon']}`;
+    let homeIconStyle = `${styles['main-nav__icon']}`;
+    let searchIconStyle = `${styles['main-nav__icon']}`;
 
     switch (currentPath) {
         case assets.pathExplorePage:
-            movieIconColor = assets.colorPrimaryYellow;
-            homeIconColor = assets.colorPrimaryLightBlue;
-            searchIconColor = assets.colorPrimaryLightBlue;
-
             movieLinkStyle = `${styles['main-nav__link']} ${styles['main-nav__link--active']}`;
-            homeLinkStyle = `${styles['main-nav__link']}`;
-            searchLinkStyle = `${styles['main-nav__link']}`;
+            movieIconStyle = `${styles['main-nav__icon']} ${styles['main-nav__icon--active']}`;
             break;
         case assets.pathFeedsPage:
-            movieIconColor = assets.colorPrimaryLightBlue;
-            homeIconColor = assets.colorPrimaryYellow;
-            searchIconColor = assets.colorPrimaryLightBlue;
-
-            movieLinkStyle = `${styles['main-nav__link']}`;
             homeLinkStyle = `${styles['main-nav__link']} ${styles['main-nav__link--active']}`;
-            searchLinkStyle = `${styles['main-nav__link']}`;
+            homeIconStyle = `${styles['main-nav__icon']} ${styles['main-nav__icon--active']}`;
             break;
         case assets.pathSearchPage:
-            movieIconColor = assets.colorPrimaryLightBlue;
-            homeIconColor = assets.colorPrimaryLightBlue;
-            searchIconColor = assets.colorPrimaryYellow;
-
-            movieLinkStyle = `${styles['main-nav__link']}`;
-            homeLinkStyle = `${styles['main-nav__link']}`;
             searchLinkStyle = `${styles['main-nav__link']} ${styles['main-nav__link--active']}`;
+            searchIconStyle = `${styles['main-nav__icon']} ${styles['main-nav__icon--active']}`;
             break;
         default:
-            movieIconColor = assets.colorPrimaryYellow;
-            homeIconColor = assets.colorPrimaryLightBlue;
-            searchIconColor = assets.colorPrimaryLightBlue;
-
             movieLinkStyle = `${styles['main-nav__link']} ${styles['main-nav__link--active']}`;
-            homeLinkStyle = `${styles['main-nav__link']}`;
-            searchLinkStyle = `${styles['main-nav__link']}`;
+            movieIconStyle = `${styles['main-nav__icon']} ${styles['main-nav__icon--active']}`;
     }
 
 
@@ -60,21 +43,22 @@ function MainNav() {
                 <li className={`${styles['main-nav__item']}`}>
                     <NavLink className={movieLinkStyle}
                              to={assets.pathExplorePage}>
-                        <MovieIcon className={styles['main-nav__link-icon']} fill={movieIconColor} />
+                        {/*<MovieIcon className={styles['main-nav__link-icon']} fill={movieIconColor} />*/}
+                        <assets.IconMovie className={movieIconStyle} />
                     </NavLink>
                 </li>
 
                 <li className={`${styles['main-nav__item']}`}>
                     <NavLink className={homeLinkStyle}
                              to={assets.pathFeedsPage}>
-                        <HomeIcon className={styles['main-nav__link-icon']}  fill={homeIconColor}/>
+                        <assets.IconHome className={homeIconStyle} />
                     </NavLink>
                 </li>
 
                 <li className={`${styles['main-nav__item']}`}>
                     <NavLink className={searchLinkStyle}
                              to={assets.pathSearchPage}>
-                        <SearchIcon className={styles['main-nav__link-icon']}  fill={searchIconColor}/>
+                        <assets.IconSearch className={searchIconStyle} />
                     </NavLink>
                 </li>
             </ul>

@@ -45,7 +45,7 @@ function Snackbar(props) {
         }
     };
 
-    function rend() {
+    function render() {
         return (
             ReactDOM.createPortal(
                 <div className={snackbarContainerClasses}
@@ -66,13 +66,13 @@ function Snackbar(props) {
                 document.getElementById('snackbar')
             )
         );
-    }
+    }// render()
 
 
     ////////////////////////////////////
     // JSX
     ////////////////////////////////////
-    return (isShown && rend());
+    return (isShown && render());
 }// Snackbar
 
 export default Snackbar;

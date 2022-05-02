@@ -47,11 +47,16 @@
   justify-content: center;
 }
 
-.main-header__link-icon {
+.main-header__icon {
   width: 30px;
 }
 
-.main-header__link-icon-profile {
+.main-header__icon-notification{
+  color: var(--color-primary--light-blue);
+  font-size: 2em;
+}
+
+.main-header__icon-profile {
   width: 34px;
 
   border-radius: 50%;

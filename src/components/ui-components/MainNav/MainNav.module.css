@@ -1,10 +1,14 @@
+.main-nav {
+  --icon-size: 25px;
+}
+
 
 .main-nav {
   overflow: hidden;
   background-color: var(--color-primary--dark-blue);
   color: var(--color-primary--light-blue);
   border-radius: .5em;
-  box-shadow: 2px 2px 0.2em 0 rgba(0,0,0,0.2);
+  box-shadow: 2px 2px 0.2em 0 rgba(0, 0, 0, 0.2);
 
   margin-bottom: 1.5em;
 }
@@ -37,13 +41,12 @@
   border-bottom-color: var(--color-primary--yellow);
 }
 
-.main-nav__link-icon {
-  /* display: block; */
-  /* color: var(--color-primary--yellow); */
-
+.main-nav__icon {
+  display: block;
+  color: var(--color-primary--light-blue);
+  font-size: var(--icon-size);
 }
 
-.link-icon--active {
+.main-nav__icon--active {
   color: var(--color-primary--yellow);
-
 }

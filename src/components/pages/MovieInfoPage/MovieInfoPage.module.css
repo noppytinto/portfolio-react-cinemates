@@ -10,8 +10,12 @@
   z-index: 100;
 }
 
-.movie-info-page__header img {
-  padding: .2em;
+.movie-info-page__header svg {
+
+}
+
+.movie-info-page__header button {
+  padding: .1em;
 
   border-radius: 50%;
   box-shadow: 1px 1px 5px 0 rgba(0,0,0,.5);

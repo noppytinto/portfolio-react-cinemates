@@ -3,10 +3,12 @@ import React from 'react';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 import mainStore from './redux/main-store';
-import { Provider } from 'react-redux';
-import { createRoot } from 'react-dom/client';
+import {Provider} from 'react-redux';
+import {createRoot} from 'react-dom/client';
+// to override MUI Emotion style order
+import {StyledEngineProvider} from '@mui/material/styles';
 
 const rootContainer = document.getElementById('root');
 const root = createRoot(rootContainer);
@@ -16,9 +18,11 @@ root.render(
     // notes: components are rendered twice in strict mode + dev mode
     <React.StrictMode>
         <BrowserRouter>
-            <Provider store={mainStore}>
-                <App />
-            </Provider>
+            <StyledEngineProvider injectFirst>
+                <Provider store={mainStore}>
+                    <App/>
+                </Provider>
+            </StyledEngineProvider>
         </BrowserRouter>
     </React.StrictMode>
 

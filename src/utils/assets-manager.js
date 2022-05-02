@@ -1,4 +1,26 @@
 import Movie from "../models/Movie";
+//
+import BrokenImageIcon from '@mui/icons-material/BrokenImage';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import HomeIcon from '@mui/icons-material/Home';
+import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
+import SearchIcon from '@mui/icons-material/Search';
+
+// icons
+// export const iconBrokenImage = '/images/icons/broken_image_black_24dp.svg';
+// export const iconNotificationNone = '/images/icons/notifications_none_white_24dp.svg';
+// export const iconHome = '/images/icons/home_white_24dp.svg';
+// export const iconMovie = '/images/icons/theaters_white_24dp.svg';
+// export const iconSearch = '/images/icons/search_white_24dp.svg';
+// material ui icons
+export const iconBrokenImage = BrokenImageIcon;
+export const IconNotificationNone = NotificationsNoneIcon;
+export const IconBack = ArrowBackIcon;
+export const IconHome = HomeIcon;
+export const IconMovie = LocalMoviesIcon;
+export const IconSearch = SearchIcon;
+
 
 // colors
 export const colorPrimaryBlue = '#015896';
@@ -35,12 +57,6 @@ export const imageExtendedLogoNoLights = '/images/cinemates_logo_extended_noligh
 export const imageProfilePictureTest = '/images/profile-picture.jpg';
 
 
-// icons
-export const iconBrokenImage = '/images/icons/broken_image_black_24dp.svg';
-export const iconNotificationNone = '/images/icons/notifications_none_white_24dp.svg';
-export const iconHome = '/images/icons/home_white_24dp.svg';
-export const iconMovie = '/images/icons/theaters_white_24dp.svg';
-export const iconSearch = '/images/icons/search_white_24dp.svg';
 
 
 // icons as react components
