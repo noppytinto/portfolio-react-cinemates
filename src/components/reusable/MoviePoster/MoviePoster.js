@@ -1,6 +1,5 @@
 import styles from './MoviePoster.module.css';
 import * as assetsManager from '../../../utils/assets-manager';
-import {iconBrokenImage} from "../../../utils/assets-manager";
 
 function MoviePoster({
         className, 
