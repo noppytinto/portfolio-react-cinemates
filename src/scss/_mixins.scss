@@ -1,0 +1,21 @@
+@use './variables' as var;
+
+@mixin shadowed($color: var.$color--shadow) {
+  box-shadow: .1em .1em .5em $color;
+}
+
+@mixin not-shadowed {
+  box-shadow: revert;
+}
+
+@mixin card($border-radius: var.$size--border-radius,
+            $shadowed: true,
+            $shadow-color: var.$color--shadow, 
+            ) {
+
+  @if $shadowed {
+    @include shadowed($shadow-color);
+  }
+  
+  border-radius: $border-radius;
+}

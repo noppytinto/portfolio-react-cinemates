@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import {useRef } from 'react';
 import styles from './SearchPage.module.scss';
 import * as assets from '../../../utils/assets-manager';
-
+import Snackbar from '../../../my-packages/snackbar-system/Snackbar';
+import useSearchMovies from "../../../hooks/use-search-movies";
+import MovieList from '../../reusable/MovieList/MovieList';
 
 function SearchPage(props) {
     let classesSearchPage = `${styles['search-page']} `;
@@ -14,17 +16,68 @@ function SearchPage(props) {
     let classesSearchButton = `${styles['search-page__button']} `;
     let classesSearchIcon = `${styles['search-page__icon']} `;
 
-    const [searchQuery, setSearchQuery] = useState('');
+    const [movies, nextPage, isLoading, isListEnded, search, searchQuery] = useSearchMovies();
+
+    const searchInputRef = useRef();
+    let intersectionObserver = useRef();
     
 
     ////////////////////////////
     // FUNCTIONS
     ////////////////////////////
+    // useEffect(() => {
+    //     if (!searchQuery) return;
+    //     clearTimeout(timerRef.current);
+    //     timerRef.current = setTimeout(() => {
+    //         console.log('searching: ', searchQuery);
+
+    //     }, delay);
+
+    // }, [timerRef, searchInputRef, searchQuery, setMovies]);
+
+
+
+
     function onSubmitHandler(ev) {
         ev.preventDefault();
-        setSearchQuery();
+        const query = ev.target.query.value;
+
+        search(query);
     }
     
+    function onLastItemMounted(item) {
+        if (isLoading) return;
+        // console.log('last item mounted: ', item);
+
+        const observerCallback = (entries, observer) => {
+            const [entry] = entries;
+
+            if (entry.isIntersecting) {
+                observer.unobserve(entry.target);
+
+                console.log('last item intersected');
+                if (isLoading) {
+                    return;
+                }
+
+                nextPage();
+            }
+        }
+
+        const options = {
+            root: null,
+            threshold: [1]
+        }
+
+        intersectionObserver =
+            new IntersectionObserver(observerCallback, options);
+        intersectionObserver.observe(item);
+    }
+
+    function actionHandler(snackbar) {
+        snackbar.dispose();
+    }
+
 
     ////////////////////////////
     // JSX
@@ -32,41 +85,15 @@ function SearchPage(props) {
     return (
         <div className={classesSearchPage}>
             {/**************************** SEARCH RESULTS*/}
-            <p className={classesSearchLabel}>{assets.stringLabelSearch} {searchQuery}</p>
+            <p className={classesSearchLabel}>{assets.stringLabelSearch}   {searchQuery}</p>
 
             <div className={classesSearchResults}>
-                    <ul>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                        <li>aasdfvkjnfkbjenkjvnejrnjenfr</li>
-                    </ul>
+                <MovieList movies={movies}
+                           onLastItemMounted={onLastItemMounted}/>
+                {isLoading && <p className={styles['loading']}>Loading...</p>}
+                {isListEnded && <Snackbar text={'No more movies'}
+                                        actionLabel={'ok'}
+                                        onClickAction={actionHandler}/>}
             </div>
 
 
@@ -75,11 +102,15 @@ function SearchPage(props) {
                 <form onSubmit={onSubmitHandler}>
                     <div className={classesSearchContainerInput}>
                         <input className={classesSearchInput}
-                            type={'search'} 
-                            placeholder={assets.stringPlaceholderSearch}></input>
+                               type={'search'} 
+                               placeholder={assets.stringPlaceholderSearch}
+                               ref={searchInputRef}
+                               name='query' 
+                               ></input>
+                        
             
                         <button className={classesSearchButton} 
-                                type={'button'}>
+                                type={'submit'}>
                             <assets.IconSearch  className={classesSearchIcon}/>
                         </button>
                     </div>

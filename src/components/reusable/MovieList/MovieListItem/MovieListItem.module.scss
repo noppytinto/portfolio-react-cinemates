@@ -1,20 +1,23 @@
+@use '../../../../scss/variables' as var;
+@use '../../../../scss/mixins' as mix;
+
+
 .movie-list-item {
   padding: .6em;
   margin-bottom: 2em;
   /* height: fit-content; */
   /* height: 18vh; */
 
-
   display: flex;
   justify-content: space-between;
   gap: 1em;
 
-  background-color: var(--color-primary--dark-blue);
-  border-radius: .5em;
-  box-shadow: 2px 2px 10px 0 rgba(var(--color-rgb-raw-primary--dark-blue),1);
+  @include mix.card($shadow-color: rgba(var(--color-rgb-raw-primary--dark-blue), 1));
+  background-color: var.$color-primary--dark-blue;
+  // box-shadow: 2px 2px 10px 0 rgba(var(--color-rgb-raw-primary--dark-blue),1);
 }
 
-.movie-poster{
+.movie-poster {
   flex: 1 0;
 }
 
@@ -22,8 +25,6 @@
   flex: 2 0;
   
   overflow: hidden;
-
-
 }
 
 .movie-title{

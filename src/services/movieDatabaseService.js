@@ -13,6 +13,7 @@ const PATH_UPCOMING = '/upcoming';
 const PATH_POPULAR = '/popular';
 const PATH_NOW_PLAYING = '/now_playing';
 const PATH_CREDITS = '/credits';
+const PATH_SEARCH = '/search/movie';
 
 // poster sizes:
 // "w92",
@@ -41,6 +42,7 @@ const URL_UPCOMING = `${BASE_URL_TMDB}${PATH_MOVIE}${PATH_UPCOMING}?api_key=${AP
 const URL_POPULAR = `${BASE_URL_TMDB}${PATH_MOVIE}${PATH_POPULAR}?api_key=${API_KEY}${QUERIES}`;
 const URL_NOW_PLAYING = `${BASE_URL_TMDB}${PATH_MOVIE}${PATH_NOW_PLAYING}?api_key=${API_KEY}${QUERIES}`;
 const URL_MOVIE_INFO = `${BASE_URL_TMDB}${PATH_MOVIE}/`;
+// const URL_SEARCH_MOVIE = `${BASE_URL_TMDB}${PATH_MOVIE}/`;
 
 export async function getUpcoming(page = 1) {
     try {
@@ -101,6 +103,37 @@ export async function fetchMovie(movieId) {
 async function fetchMovies(url, page=1) {
     try {
         const res = await fetch(url + PAGE_QUERY  + `${page}`);
+        if (!res.ok) throw new Error(res.status);
+        const data = await res.json();
+
+        const results = data.results;
+        const totalPages = data['total_pages'];
+
+        return [results, totalPages];
+    } catch (err) {
+        console.log('FETCH ERROR: ', err);
+        return [];
+    }
+}
+
+export async function searchMovies(query, page = 1) {
+    try {
+        const [rawMovies, totalPages] = await queryMovies(query, page);
+        if (!rawMovies) throw new Error('');
+
+        //
+        const movies = buildMovies(rawMovies);
+        return [movies, totalPages];
+    } catch (err) {
+        console.log('SEARCH ERROR: ', err);
+        return [];
+    }
+}
+
+
+async function queryMovies(query, page) {
+    try {
+        const res = await fetch(`${BASE_URL_TMDB}${PATH_SEARCH}?api_key=${API_KEY}&language=en&query=${query}&page=${page}&include_adult=false&region=it`);
         if (!res.ok) throw new Error(res.status);
         const data = await res.json();
 

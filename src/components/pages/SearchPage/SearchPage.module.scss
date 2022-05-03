@@ -1,3 +1,6 @@
+@use '../../../scss/variables' as var;
+@use '../../../scss/mixins' as mix;
+
 
 .search-page {
 
@@ -8,8 +11,10 @@
 }
 
 .search-page__label {
-  
   margin-bottom: 2em;
+  
+  color: var.$color-primary--light-blue;
+  font-weight: bold;
 }
 
 .search-page__results {
@@ -22,9 +27,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 150px;
-  padding: 1em;
-
+  padding: 1.5em;
 
   overflow: hidden;
 
@@ -51,23 +54,56 @@
 
 
 .search-page__container-input {
-
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .search-page__input {
+  flex-grow: 1;
+  align-self: stretch;
+  padding: .5em 1em;
+
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: inherit;
+  color: var.$color--white;
+
   border-radius: 3em;
   border-style: solid;
-  border-width: 2px;
+  border-width: 3px;
   border-color: var(--color-primary--light-blue);
-  padding: .5em 1em;
+  background-color: var(--color-primary--blue);
+}
+
+.search-page__input::placeholder {
+  font-size: inherit;
+  font-family: inherit;
+  color: var(--color-primary--light-blue);
+}
+
+.search-page__input::-webkit-search-cancel-button {
+  color: var.$color-primary--yellow;
 }
 
 .search-page__button {
+
   border-radius: 50%;
   padding: 1em;
   border-color: transparent;
-  background-color: var(--color-primary--yellow);
+  background-color: var.$color-primary--yellow;
+
+  @include mix.shadowed;
+  transition: all .2s;
+  transition-timing-function: ease-out;
 }
+
+.search-page__button:active {
+  @include mix.not-shadowed;
+  transform: scale(.8) ;
+}
+
 
 .search-page__icon {
   display: block;

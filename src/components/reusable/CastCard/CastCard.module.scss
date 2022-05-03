@@ -1,14 +1,17 @@
+@use '../../../scss/variables' as var;
+@use '../../../scss/mixins' as mix;
+
+
 .cast-card {
   width: 100px;
-
   aspect-ratio: 1/1.6;
   border-radius: .35em;
-  background-color: rgba(var(--color-rgb-raw-primary--light-blue), 0.5);
-  box-shadow: .1em .1em .5em  rgba(0, 0, 0, 0.5);
-
+  
   text-align: center;
   overflow: hidden;
 
+  @include mix.shadowed;
+  background-color: rgba(var(--color-rgb-raw-primary--light-blue), 0.5);
 }
 
 .cast-card--broken {

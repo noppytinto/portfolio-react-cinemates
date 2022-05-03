@@ -1,19 +1,23 @@
+@use '../../../scss/variables' as var;
+@use '../../../scss/mixins' as mix;
+
+
 .movie-poster {
-  border-radius: .35em;
-  aspect-ratio: 1/1.6;
-  overflow: hidden;
-  background-color: rgba(var(--color-rgb-raw-primary--light-blue), 0.5);
-
-  text-align: center;
-
   display: flex;
   justify-content: center;
   align-items: center;
+  aspect-ratio: 1/1.6;
+
+  text-align: center;
+  overflow: hidden;
+
+  @include mix.card($shadowed: false, $border-radius: .35em);
+  background-color: rgba(var(--color-rgb-raw-primary--light-blue), 0.5);
+
 }
 
 .movie-poster--shadowed {
-  box-shadow: .1em .1em .5em  rgba(0, 0, 0, 0.5);
-
+  @include mix.card($shadowed: true, $border-radius: .35em);
 }
 
 .movie-poster--broken {

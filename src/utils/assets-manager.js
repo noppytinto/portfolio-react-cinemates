@@ -39,7 +39,8 @@ export const stringLabelSeeAll = 'See all';
 export const stringMovieDuration = 'Duration';
 export const stringMovieGenres = 'Genres';
 export const stringMovieStatus = 'Status';
-export const stringLabelSearch = 'search result for:';
+export const stringLabelSearch = 'results for:  ';
+export const stringLabelSearchNoResults = 'no results for:  ';
 export const stringPlaceholderSearch = 'search...';
 
 
