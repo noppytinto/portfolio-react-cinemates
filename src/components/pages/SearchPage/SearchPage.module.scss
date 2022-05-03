@@ -61,6 +61,7 @@
 }
 
 .search-page__input {
+  min-width: 10px;
   flex-grow: 1;
   align-self: stretch;
   padding: .5em 1em;
