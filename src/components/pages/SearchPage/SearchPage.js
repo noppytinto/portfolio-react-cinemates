@@ -4,6 +4,7 @@ import * as assets from '../../../utils/assets-manager';
 import Snackbar from '../../../my-packages/snackbar-system/Snackbar';
 import useSearchMovies from "../../../hooks/use-search-movies";
 import MovieList from '../../reusable/MovieList/MovieList';
+import { useLocation } from 'react-router-dom';
 
 function SearchPage(props) {
     let classesSearchPage = `${styles['search-page']} `;
@@ -21,6 +22,10 @@ function SearchPage(props) {
     const searchInputRef = useRef();
     let intersectionObserver = useRef();
     
+    const location = useLocation();
+    console.log('previous page:', location);
+
+
 
     ////////////////////////////
     // FUNCTIONS
