@@ -1,4 +1,4 @@
-import styles from './PlaceholderPage.module.css';
+import styles from './PlaceholderPage.module.scss';
 
 function PlaceholderPage(props) {
     return (

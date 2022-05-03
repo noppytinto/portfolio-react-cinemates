@@ -1,5 +1,5 @@
 import MoviePoster from '../../../reusable/MoviePoster/MoviePoster';
-import styles from './HorizontalMovieList.module.css';
+import styles from './HorizontalMovieList.module.scss';
 import ListHeader from './ListHeader/ListHeader';
 import {NavLink} from "react-router-dom";
 

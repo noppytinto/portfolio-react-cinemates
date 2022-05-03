@@ -1,4 +1,4 @@
-import styles from './MoviePoster.module.css';
+import styles from './MoviePoster.module.scss';
 import * as assetsManager from '../../../utils/assets-manager';
 
 function MoviePoster({

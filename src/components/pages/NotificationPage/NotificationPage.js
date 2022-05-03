@@ -1,4 +1,4 @@
-import styles from './NotificationPage.module.css';
+import styles from './NotificationPage.module.scss';
 import HeaderWithBackButton
     from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
 

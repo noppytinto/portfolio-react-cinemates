@@ -1,4 +1,4 @@
-import styles from './MoviePage.module.css';
+import styles from './MoviePage.module.scss';
 import * as assets from '../../../utils/assets-manager';
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
@@ -36,7 +36,10 @@ function MoviePage() {
         <div className={classesMoviePage}>
             <HeaderWithBackButton className={`${styles['movie-page__header']}`}
                                   title={''}/>
-            <section className={`${styles['movie-page__backdrop-container']}`}>
+
+
+            {/******************** MOVIE BACKDROP */}
+            <section className={`${styles['movie-page__container-backdrop']}`}>
                 <div className={`${styles['movie-page__gradient']}`}></div>
                 <img className={`${styles['movie-page__backdrop']}`}
                      src={movie.backdropUrl}
@@ -46,7 +49,7 @@ function MoviePage() {
                 </h1>
             </section>
 
-
+            {/******************** MOVIE OVERVIEW */}
             <section className={`${styles['movie-page__container-overview']}`}>
                 <div className={`${styles['movie-page__release-date']}`}>
                     {`(${movie.releaseDate?.split('-')[0] || ''})`}
@@ -57,7 +60,7 @@ function MoviePage() {
                 </p>
             </section>
 
-
+            {/******************** MOVIE DETAILS */}
             <section className={`${styles['movie-page__container-details']}`}>
                 <MoviePoster className={`${styles['movie-page__poster']}`}
                              posterImageUrl={movie.posterUrl}
@@ -97,6 +100,7 @@ function MoviePage() {
 
             </section>
 
+            {/******************** CAST */}
             <section  className={`${styles['movie-page__container-cast']}`}>
                 <h2 className={`${styles['movie-page__cast-title']}`}>Cast</h2>
                 <CastList cast={cast} />

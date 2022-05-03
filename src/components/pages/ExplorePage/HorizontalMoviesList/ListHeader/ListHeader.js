@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import OutlineButton from '../../../../reusable/OutlineButton/OutlineButton';
-import styles from './ListHeader.module.css';
+import styles from './ListHeader.module.scss';
 
 function ListHeader({
     title = 'Header', 

@@ -1,4 +1,4 @@
-import styles from './HeaderWithBackButton.module.css';
+import styles from './HeaderWithBackButton.module.scss';
 import * as assets from '../../../utils/assets-manager';
 import {useNavigate} from 'react-router-dom';
 

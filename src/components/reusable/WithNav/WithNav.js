@@ -1,5 +1,5 @@
 // import { Outlet } from 'react-router-dom';
-// import styles from './WithNav.module.css';
+// import styles from './WithNav.module.scss';
 // import * as assetsManager from '../../utils/AssetsManager';
 
 // function MainHeader() {

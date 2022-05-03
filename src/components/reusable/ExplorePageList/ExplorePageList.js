@@ -1,4 +1,4 @@
-import styles from './ExplorePageList.module.css';
+import styles from './ExplorePageList.module.scss';
 import * as assets from '../../../utils/assets-manager';
 import {useLocation} from 'react-router-dom';
 import {useRef} from "react";

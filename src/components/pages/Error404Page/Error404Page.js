@@ -1,4 +1,4 @@
-import styles from './Error404Page.module.css';
+import styles from './Error404Page.module.scss';
 
 
 function Error404Page() {

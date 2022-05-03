@@ -1,4 +1,4 @@
-import styles from './CastCard.module.css';
+import styles from './CastCard.module.scss';
 import * as assetsManager from '../../../utils/assets-manager';
 
 function CastCard({

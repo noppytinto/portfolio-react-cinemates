@@ -1,7 +1,7 @@
 import PlaceholderPage from '../../reusable/PlaceholderPage/PlaceholderPage';
 import OutlineButton from '../../reusable/OutlineButton/OutlineButton';
 import {useNavigate} from 'react-router-dom';
-import styles from "./FeedsPage.module.css";
+import styles from "./FeedsPage.module.scss";
 import * as assets from '../../../utils/assets-manager';
 
 

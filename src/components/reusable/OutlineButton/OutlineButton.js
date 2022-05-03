@@ -1,4 +1,4 @@
-import styles from './OutlineButton.module.css';
+import styles from './OutlineButton.module.scss';
 
 function OutlineButton(props) {
     const textContent = props.children ?? 'BUTTON';

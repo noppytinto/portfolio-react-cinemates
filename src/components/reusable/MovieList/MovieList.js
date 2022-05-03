@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import styles from './MovieList.module.css';
+import styles from './MovieList.module.scss';
 import MovieListItem from './MovieListItem/MovieListItem';
 import { v4 as uuidv4 } from 'uuid';
 

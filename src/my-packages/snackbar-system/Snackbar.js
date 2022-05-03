@@ -1,5 +1,5 @@
-import './global-style.css';
-import styles from './Snackbar.module.css';
+import './global-style.scss';
+import styles from './Snackbar.module.scss';
 import * as ReactDOM from 'react-dom';
 import * as assets from './utils/assets-manager';
 import {useState} from 'react';

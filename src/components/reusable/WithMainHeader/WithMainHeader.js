@@ -1,4 +1,4 @@
-import styles from './WithMainHeader.module.css';
+import styles from './WithMainHeader.module.scss';
 import MainHeader from '../../ui-components/MainHeader/MainHeader';
 import { Outlet } from 'react-router-dom';
 import MainNav from "../../ui-components/MainNav/MainNav";

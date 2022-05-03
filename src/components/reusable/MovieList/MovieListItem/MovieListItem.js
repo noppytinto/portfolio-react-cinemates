@@ -1,4 +1,4 @@
-import styles from './MovieListItem.module.css';
+import styles from './MovieListItem.module.scss';
 import MoviePoster from '../../MoviePoster/MoviePoster';
 
 

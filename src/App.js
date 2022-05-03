@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import * as assets from './utils/assets-manager';
 // pages
 import ExplorePage from "./components/pages/ExplorePage/ExplorePage";

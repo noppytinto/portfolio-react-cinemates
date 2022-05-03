@@ -1,4 +1,4 @@
-import styles from './MainNav.module.css';
+import styles from './MainNav.module.scss';
 import * as assets from '../../../utils/assets-manager';
 import {NavLink, useLocation} from 'react-router-dom';
 

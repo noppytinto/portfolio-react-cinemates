@@ -1,4 +1,4 @@
-import styles from './PlaygroundPage.module.css';
+import styles from './PlaygroundPage.module.scss';
 import HorizontalMovieList from '../ExplorePage/HorizontalMoviesList/HorizontalMovieList';
 import ListHeader from '../ExplorePage/HorizontalMoviesList/ListHeader/ListHeader';
 import MoviePoster from '../../reusable/MoviePoster/MoviePoster';

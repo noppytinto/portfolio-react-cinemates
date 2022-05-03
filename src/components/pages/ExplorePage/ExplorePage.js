@@ -1,4 +1,4 @@
-import styles from './ExplorePage.module.css';
+import styles from './ExplorePage.module.scss';
 import HorizontalMovieList from "./HorizontalMoviesList/HorizontalMovieList";
 import {useEffect, useState} from "react";
 import {getUpcoming, getPopular, getNowPlaying} from '../../../services/movieDatabaseService';

@@ -1,4 +1,4 @@
-import styles from './ProfilePage.module.css';
+import styles from './ProfilePage.module.scss';
 import HeaderWithBackButton
     from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
 
