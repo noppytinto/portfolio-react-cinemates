@@ -1,22 +1,26 @@
 
-// import {searchMovies} from "../services/movieDatabaseService";
+import {searchMovies} from "../services/movieDatabaseService";
 
 
-// export async function search(query) {
-//     let result = [];
-//     const lastSearchQuery = localStorage.getItem('last-search-query');
+export async function searchMovies(query) {
+
     
-//     console.log('last search query:', lastSearchQuery);
+    const [fetched, totalPages] = await searchMovies(searchQuery);
+
+    let result = [];
+    const lastSearchQuery = localStorage.getItem('last-search-query');
     
-//     if (!lastSearchQuery) {
-//         // return cached
-//         console.log('returning cached');
+    console.log('last search query:', lastSearchQuery);
+    
+    if (!lastSearchQuery) {
+        // return cached
+        console.log('returning cached');
 
-//     }
+    }
 
-//     console.log('fetching new data');
-//     const [fetched, totalPages] = await searchMovies(searchQuery);
+    console.log('fetching new data');
+    const [fetched, totalPages] = await searchMovies(searchQuery);
 
 
 
-// }
+}

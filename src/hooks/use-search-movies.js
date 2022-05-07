@@ -1,6 +1,7 @@
 import {searchMovies} from "../services/movieDatabaseService";
 import {useEffect, useRef, useState} from "react";
-
+import { useDispatch } from "react-redux";
+import {searchMoviePageActions} from '../redux/slices/search-movie-page-slice';
 
 function useSearchMovies() {
     const delay = 700;
@@ -18,22 +19,25 @@ function useSearchMovies() {
     // functions
     ////////////////////////////////////
 
-    function search(query) {
+    function searchMovie(query) {
         if (!query) return;
 
+        scrollToTop();
+        // reset nextPage state
+        setIsListEnded(false);
+        setGetNextPage(false);
+        setPage(1);
+        //
+        setSearchQuery(query);
+    }
+
+    function scrollToTop() {
         window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth"
         });
-
-        // reset nextPage state
-        setIsListEnded(false);
-        setGetNextPage(false);
-        setPage(1);
-        setSearchQuery(query);
     }
-
 
     function nextPage() {
         console.log('current page:', page);
@@ -56,8 +60,6 @@ function useSearchMovies() {
     useEffect(() => {
         if (!searchQuery) return;
 
-        console.log('useSearchMovies called');
-
         // debounce
         if (timer.current) clearTimeout(timer.current);
         timer.current = setTimeout(async () => {
@@ -65,7 +67,9 @@ function useSearchMovies() {
 
             // fetching
             const [fetched, totalPages] = await searchMovies(searchQuery);
-            console.log(fetched);
+            // cache results
+            // useDispatch(searchMoviePageActions.setHasCachedResults(true));
+            
             //
             totPages.current = totalPages;
             setMovies(fetched);
@@ -96,7 +100,7 @@ function useSearchMovies() {
 
     //////////////////////////////////////
     //////////////////////////////////////
-    return [movies, nextPage, isLoading, isListEnded, search, searchQuery];
+    return [movies, nextPage, isLoading, isListEnded, searchMovie, searchQuery];
 }// useSearchMovies
 
 export default useSearchMovies;
