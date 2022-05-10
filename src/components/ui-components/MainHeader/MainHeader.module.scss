@@ -1,4 +1,4 @@
-
+@use '../../../scss/variables' as var;
 
 .main-header {
   display: flex;
@@ -47,8 +47,21 @@
   justify-content: center;
 }
 
+.main-header__icon-container {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .main-header__icon {
   width: 30px;
+  height: 30px;
+  color: var.$color-primary--light-blue;
+  
 }
 
 .main-header__icon-notification{
@@ -58,6 +71,7 @@
 
 .main-header__icon-profile {
   width: 34px;
+  height: 34px;
 
   border-radius: 50%;
   border-width: 2px;

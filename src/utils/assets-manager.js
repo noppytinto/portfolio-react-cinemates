@@ -7,6 +7,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 // icons
 export const iconBrokenImage = '/images/icons/broken_image_black_24dp.svg';
@@ -22,6 +24,8 @@ export const IconHome = HomeIcon;
 export const IconMovie = LocalMoviesIcon;
 export const IconSearch = SearchIcon;
 export const IconClear = ClearIcon;
+export const IconPerson = PersonIcon;
+export const IconLogout = LogoutIcon;
 
 
 // colors

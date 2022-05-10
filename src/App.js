@@ -2,6 +2,8 @@ import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.scss';
 import * as assets from './utils/assets-manager';
+// import * as authService from './services/auth-service';
+
 // pages
 import ExplorePage from "./components/pages/ExplorePage/ExplorePage";
 import FeedsPage from './components/pages/FeedsPage/FeedsPage';
@@ -19,6 +21,15 @@ import ExplorePageList from './components/reusable/ExplorePageList/ExplorePageLi
 
 
 function App() {
+    // authService.signIn('test@mail.com', '123456', (user) => {
+    //     console.log('LOGIN SUCCESSFUL:', user);
+    // }, (errorCode, errorMessage) => {
+    //     console.log('LOGIN FAIL');
+    //     console.log('error code:', errorCode);
+    //     console.log('error message:', errorMessage);
+    // })
+
+
     return (
         <div className={'App'}>
             <Routes>

@@ -1,6 +1,7 @@
 import React from 'react';
 // import ReactDOM from 'react-dom';
 import './index.scss';
+import * as authService from './services/auth-service';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
@@ -10,9 +11,13 @@ import {createRoot} from 'react-dom/client';
 // to override MUI Emotion style order
 import {StyledEngineProvider} from '@mui/material/styles';
 
+
+// init backend
+authService.init();
+
+// render
 const rootContainer = document.getElementById('root');
 const root = createRoot(rootContainer);
-
 root.render(
     // enable strict in production
     // notes: components are rendered twice in strict mode + dev mode
