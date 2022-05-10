@@ -6,6 +6,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import HomeIcon from '@mui/icons-material/Home';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from '@mui/icons-material/Clear';
 
 // icons
 export const iconBrokenImage = '/images/icons/broken_image_black_24dp.svg';
@@ -20,6 +21,7 @@ export const IconBack = ArrowBackIcon;
 export const IconHome = HomeIcon;
 export const IconMovie = LocalMoviesIcon;
 export const IconSearch = SearchIcon;
+export const IconClear = ClearIcon;
 
 
 // colors
@@ -42,6 +44,7 @@ export const stringMovieStatus = 'Status';
 export const stringLabelSearch = 'results for:  ';
 export const stringLabelSearchNoResults = 'no results for:  ';
 export const stringPlaceholderSearch = 'search...';
+export const stringLabelLoading = 'loading...';
 
 
 // paths

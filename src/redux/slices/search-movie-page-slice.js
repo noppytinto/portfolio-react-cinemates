@@ -4,6 +4,7 @@ import {createSlice} from '@reduxjs/toolkit';
 const initialState = {
     hasCachedResults: false,
     cachedResults: [],
+    query: '',
 };
 
 const searchMoviePageSlice = createSlice({
@@ -19,6 +20,13 @@ const searchMoviePageSlice = createSlice({
         resetCachedResults(state, action) {
             state.cachedResults = [];
         },
+        saveQueryString(state, action) {
+            console.log('saving query string: ', action.payload.query);
+            state.query = action.payload.query;
+        },
+        resetQueryString(state, action) {
+            state.query = '';
+        }
     },
 });
 

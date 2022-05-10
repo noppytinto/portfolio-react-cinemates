@@ -1,7 +1,6 @@
 import {searchMovies} from "../services/movieDatabaseService";
 import {useEffect, useRef, useState} from "react";
-import { useDispatch } from "react-redux";
-import {searchMoviePageActions} from '../redux/slices/search-movie-page-slice';
+
 
 function useSearchMovies() {
     const delay = 700;
@@ -19,7 +18,7 @@ function useSearchMovies() {
     // functions
     ////////////////////////////////////
 
-    function searchMovie(query) {
+    function searchMovie(query, useCached = false) {
         if (!query) return;
 
         scrollToTop();
@@ -29,6 +28,15 @@ function useSearchMovies() {
         setPage(1);
         //
         setSearchQuery(query);
+    }
+
+    function resetState() {
+        setIsLoading(false);
+        setIsListEnded(false);
+        setGetNextPage(false);
+        setPage(1);
+        setSearchQuery('');
+        setMovies([]);
     }
 
     function scrollToTop() {
@@ -56,7 +64,7 @@ function useSearchMovies() {
         setPage(prev => prev+1);
     }
 
-    // effect for search
+    // effect for searching
     useEffect(() => {
         if (!searchQuery) return;
 
@@ -100,7 +108,7 @@ function useSearchMovies() {
 
     //////////////////////////////////////
     //////////////////////////////////////
-    return [movies, nextPage, isLoading, isListEnded, searchMovie, searchQuery];
+    return [movies, nextPage, isLoading, isListEnded, searchMovie, searchQuery, resetState];
 }// useSearchMovies
 
 export default useSearchMovies;
