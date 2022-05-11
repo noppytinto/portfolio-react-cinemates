@@ -8,7 +8,7 @@ const authSlice = createSlice({
     name: 'authSlice',
     initialState,
     reducers: {
-        setPage(state, action) {
+        setIsLogged(state, action) {
             state.isLogged = action.payload.isLogged;
         },
     },

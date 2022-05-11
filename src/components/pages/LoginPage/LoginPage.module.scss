@@ -1,0 +1,101 @@
+@use '../../../scss/variables' as var;
+@use '../../../scss/mixins' as mix;
+
+
+.login-page {
+  //height: 100%;
+
+}
+
+.login-page__logo {
+  display: block;
+  width: 70%;
+  margin-inline: auto;
+  margin-top: 5em;
+  margin-bottom: 5em;
+  
+}
+
+.login-page__form {
+  margin-inline: 10%;
+
+}
+
+.login-page__input-label {
+  margin-bottom: .5em;
+  display: block;
+  
+  font-weight: 550;
+  font-size: 1.1rem;
+  color: var.$color-primary--light-blue
+}
+
+.login-page__input-text {
+  width: 100%;
+  padding: .7em .5em;
+  margin-bottom: 2em;
+  
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  
+  background: var.$color-primary--light-blue-200;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-top-width: 0;
+  border-top-left-radius: .5em;
+  border-top-right-radius: .5em;
+  border-color: transparent;
+  border-bottom-color: var.$color-primary--light-blue;
+}
+
+.login-page__input-text:hover,
+.login-page__input-text:focus,
+.login-page__input-text:active {
+  border-bottom-color: var.$color-primary--yellow;
+}
+
+.login-page__input-text::placeholder {
+  color: #fff;
+  opacity: .2;
+}
+
+.login-page__btn-login {
+  display: block;
+  padding: .5em 4em;
+  margin-inline: auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  
+  font-family: inherit;
+  font-size: 1.3rem;
+  font-weight: bold;
+  
+  background: var.$color-primary--yellow;
+  border-radius: 1em;
+  border-width: 0;
+  box-shadow: .1em .1em 1em 0 rgba(84, 68, 21, .5);
+  
+  transition: all .2s;
+}
+
+.login-page__btn-login:active {
+  transform: scale(.97);
+  box-shadow: revert;
+}
+
+.login-page__btn-signup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  padding: 1em 0;
+  border-width: 0;
+  
+  font-weight: bold;
+  font-size: 1rem;
+  color: var.$color-primary--blue;
+  
+  background-color: var.$color-primary--light-blue;
+}

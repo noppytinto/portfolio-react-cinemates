@@ -15,7 +15,7 @@ function MainHeader() {
     /////////////////////////////
     function showAnonymousUserButton() {
         return (
-            <NavLink className={styles['main-header__link']} to={assets.pathProfilePage}>
+            <NavLink className={styles['main-header__link']} to={assets.pathLoginPage}>
                 <div className={`${styles['main-header__icon-container']}`}>
                     <assets.IconPerson className={`${styles['main-header__icon']}`}/>
 

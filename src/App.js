@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.scss';
 import * as assets from './utils/assets-manager';
-// import * as authService from './services/auth-service';
 
 // pages
 import ExplorePage from "./components/pages/ExplorePage/ExplorePage";
@@ -18,17 +17,11 @@ import MoviePage from "./components/pages/MoviePage/MoviePage";
 import WithMainHeader from './components/reusable/WithMainHeader/WithMainHeader';
 import WithoutMainHeader from './components/reusable/WithoutMainHeader/WithoutMainHeader';
 import ExplorePageList from './components/reusable/ExplorePageList/ExplorePageList';
+import SignUpPage from "./components/pages/SignUpPage/SignUpPage";
+import LoginPage from "./components/pages/LoginPage/LoginPage";
 
 
 function App() {
-    // authService.signIn('test@mail.com', '123456', (user) => {
-    //     console.log('LOGIN SUCCESSFUL:', user);
-    // }, (errorCode, errorMessage) => {
-    //     console.log('LOGIN FAIL');
-    //     console.log('error code:', errorCode);
-    //     console.log('error message:', errorMessage);
-    // })
-
 
     return (
         <div className={'App'}>
@@ -47,6 +40,8 @@ function App() {
                 <Route path={assets.pathRoot} element={<WithoutMainHeader />}>
                     <Route path={assets.pathNotificationPage} element={<NotificationPage />} />
                     <Route path={assets.pathMovieInfoPageWithId} element={<MoviePage />} />
+                    <Route path={assets.pathSinUpPage} element={<SignUpPage />} />
+                    <Route path={assets.pathLoginPage} element={<LoginPage />} />
                     <Route path={assets.pathProfilePage} element={<ProfilePage />} />
                     <Route path={assets.pathExploreList} element={<ExplorePageList />} />
                 </Route>

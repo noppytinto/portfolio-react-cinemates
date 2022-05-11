@@ -95,6 +95,9 @@ function SearchPage(props) {
         resetState();
     }
 
+    // function onChangeInpuFieldHandler(ev) {
+    //     // TODO: hide clear button when field is empty
+    // }
 
     ////////////////////////////
     // JSX
