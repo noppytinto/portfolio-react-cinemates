@@ -1,24 +1,24 @@
 import {
     getAuth,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    signOut
 } from "firebase/auth";
 import {initializeApp} from "firebase/app";
 
+
 export function init() {
     const firebaseConfig = {
-        apiKey: "AIzaSyCidA5N15VzzlbCigsjPNj9HB0vRO0kyLU",
-        authDomain: "cinemates-react.firebaseapp.com",
-        projectId: "cinemates-react",
-        storageBucket: "cinemates-react.appspot.com",
-        messagingSenderId: "512895330736",
-        appId: "1:512895330736:web:f0874f15c2cb92fe920e75",
-        measurementId: "G-E1MKYW7KJJ"
+        apiKey: process.env.REACT_APP_API_KEY,
+        authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+        projectId: process.env.REACT_APP_PROJECT_ID,
+        storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+        messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+        appId: process.env.REACT_APP_APP_ID,
+        measurementId: process.env.REACT_APP_MEASUREMENT_ID
     };
 
     initializeApp(firebaseConfig);
-    // const app = initializeApp(firebaseConfig);
-    // console.log('auth service initilized:', app);
     console.log('auth service initilized');
 }
 
@@ -58,13 +58,17 @@ export function signIn(email, password, onSuccess, onFailure) {
         });
 }
 
-export function signOut() {
+export function logout(onSuccess, onFailure) {
     const auth = getAuth();
     signOut(auth)
         .then(() => {
             // Sign-out successful.
+            onSuccess();
         }).catch((error) => {
-        // An error happened.
+            // An error happened.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            onFailure(errorCode, errorMessage);
         });
 }
 

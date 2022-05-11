@@ -1,12 +1,10 @@
 import styles from './MainHeader.module.scss';
 import * as assets from '../../../utils/assets-manager';
 import { NavLink } from 'react-router-dom';
-import {authActions} from '../../../redux/slices/auth-slice'
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 
 
 function MainHeader() {
-    const dispatcher = useDispatch();
     const userIsLogged = useSelector((state) => state.authSlice.isLogged);
 
 

@@ -6,7 +6,7 @@ function NotificationPage(props) {
     const classes = `${styles['notification-page']} ${props.className} `;
     return (
         <div className={classes}>
-            <HeaderWithBackButton backButtonUrl={'/'} title={'Notifications'} />
+            <HeaderWithBackButton title={'Notifications'} />
         </div>
     );
 }

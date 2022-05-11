@@ -1,8 +1,8 @@
 import styles from './LoginPage.module.scss';
 import * as assets from '../../../utils/assets-manager';
-import {NavLink} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {authActions} from '../../../redux/slices/auth-slice'
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import HeaderWithBackButton
     from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
 import {useRef} from "react";
@@ -18,8 +18,8 @@ function LoginPage(props) {
     const classesLoginButton = `${styles['login-page__btn-login']}`;
     const classesSignUpButton = `${styles['login-page__btn-signup']}`;
 
+    const navigate = useNavigate();
     const dispatcher = useDispatch();
-    const userIsLogged = useSelector((state) => state.authSlice.isLogged);
 
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -40,7 +40,7 @@ function LoginPage(props) {
         authService.signIn(email, pass, (user) => {
             console.log('LOGIN SUCCESSFUL:', user);
             dispatcher(authActions.setIsLogged({isLogged: true}));
-
+            navigate('/profile');
         }, (errorCode, errorMessage) => {
             console.log('LOGIN FAIL');
             console.log('error code:', errorCode);

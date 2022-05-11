@@ -6,6 +6,7 @@ import {useNavigate} from 'react-router-dom';
 function HeaderWithBackButton(props) {
     let classes = `${styles['header']} ${props.className} `;
     const title = props.title ?? assets.stringTitleMissing;
+    const backTo = props.backTo ?? -1;
     const navigate = useNavigate();
 
 
@@ -13,7 +14,7 @@ function HeaderWithBackButton(props) {
     // FUNCTIONS
     ////////////////////////////////
     function onClickHandler() {
-        navigate(-1);
+        navigate(backTo);
     }
 
 

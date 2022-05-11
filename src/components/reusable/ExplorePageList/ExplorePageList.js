@@ -61,7 +61,6 @@ function ExplorePageList(props) {
         <div className={classes}>
             <HeaderWithBackButton
                 className={styles['explore-page-list__header']}
-                backButtonUrl={assets.pathExplorePage}
                 title={listTitle}/>
 
             <MovieList movies={movies}
