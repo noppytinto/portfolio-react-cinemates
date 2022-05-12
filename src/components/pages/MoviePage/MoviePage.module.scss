@@ -68,16 +68,18 @@
   justify-content: space-between;
   gap: .5em;
   margin-bottom: 4em;
+  
+  font-size: .8rem;
 }
 
 .movie-page__poster {
-  flex: 1;
+  flex: 2;
 
 }
 
 .movie-page__container-listing {
   padding: 0 0 0 .5em;
-  flex: 2;
+  flex: 3;
 
 }
 
@@ -86,7 +88,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
 }
 
 .movie-page__list-item {
@@ -96,7 +97,7 @@
 .movie-page__list-title {
   margin-bottom: .1em;
 
-  font-size: 1.1rem;
+  font-size: .9rem;
 
   color: var(--color-primary--light-blue);
 }

@@ -9,8 +9,6 @@ import {useDispatch, useSelector} from "react-redux";
 
 
 function SearchPage(props) {
-    const dispatch = useDispatch();
-    const previousQueryString = useSelector((state) => state.searchMoviePageSlice.query);
     let classesSearchPage = `${styles['search-page']} `;
     let classesSearchLabel = `${styles['search-page__label']} `;
     let classesSearchResults = `${styles['search-page__results']} `;
@@ -22,6 +20,10 @@ function SearchPage(props) {
     let classesClearButton = `${styles['search-page__btn-clear']} `;
     let classesSearchIcon = `${styles['search-page__icon-search']} `;
     let classesClearIcon = `${styles['search-page__icon-clear']} `;
+
+    const dispatch = useDispatch();
+    const previousQueryString = useSelector((state) => state.searchMoviePageSlice.query);
+    // const previousQueryString = localStorage.getItem('previousQueryString');
 
     const [movies, nextPage, isLoading, isListEnded, searchMovie, searchQuery, resetState] = useSearchMovies();
 
@@ -40,9 +42,6 @@ function SearchPage(props) {
             searchMovie(previousQueryString);
         }
 
-        // return () => {
-        //     console.log('component unmounted, search query:', searchQuery);
-        // };
     }, []);
 
     function onSubmitHandler(ev) {

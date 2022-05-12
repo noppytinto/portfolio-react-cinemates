@@ -12,7 +12,7 @@ function useSearchMovies() {
     const [getNextPage, setGetNextPage] = useState(false);
     const [isListEnded, setIsListEnded] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-
+    // const willUseCached = useRef(false);
 
     ////////////////////////////////////
     // functions
@@ -21,11 +21,15 @@ function useSearchMovies() {
     function searchMovie(query, useCached = false) {
         if (!query) return;
 
+        // willUseCached.current = useCached;
+
         scrollToTop();
+
         // reset nextPage state
         setIsListEnded(false);
         setGetNextPage(false);
         setPage(1);
+
         //
         setSearchQuery(query);
     }
@@ -74,9 +78,24 @@ function useSearchMovies() {
             console.log('searching movies................');
 
             // fetching
+            // let fetched = [];
+            // let totalPages = 0;
+            // if (willUseCached) {
+            //     fetched = localStorage.setItem('searchPageMovies');
+            //     localStorage.setItem('searchPageTotalPage');
+            //     totalPages = localStorage.getItem('searchPageTotalPages');
+            // }
+            // else {
+            //     [fetched, totalPages] = await searchMovies(searchQuery);
+
+            //     // cache results
+            //     // useDispatch(searchMoviePageActions.setHasCachedResults(true));
+            //     localStorage.setItem('searchPageMovies', fetched);
+            //     localStorage.setItem('searchPageTotalPage', page);
+            //     localStorage.setItem('searchPageTotalPages', totalPages);
+            // }
+
             const [fetched, totalPages] = await searchMovies(searchQuery);
-            // cache results
-            // useDispatch(searchMoviePageActions.setHasCachedResults(true));
             
             //
             totPages.current = totalPages;
@@ -98,8 +117,15 @@ function useSearchMovies() {
 
             // fetching
             const [fetched] = await searchMovies(searchQuery, page);
+            // localStorage.setItem('searchPageTotalPage', page);
+            // localStorage.setItem('searchPageTotalPages', totalPages);
+
             //
-            setMovies(prev => [...prev, ...fetched]);
+            setMovies(prev => {
+                const newMovies = [...prev, ...fetched];
+                // localStorage.setItem('searchPageMovies', fetched);
+                return newMovies;
+            });
             setIsLoading(false);
 
         }, delay);

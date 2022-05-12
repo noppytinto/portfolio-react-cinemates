@@ -11,7 +11,7 @@ function ExplorePage() {
 
 
     ////////////////////////////////////
-    // functions
+    // FUNCTIONS
     ////////////////////////////////////
 
     // fetch movies on page mounted
@@ -41,9 +41,9 @@ function ExplorePage() {
     }
 
 
-    ////////////////////////////
+    ////////////////////////////////////
     // JSX
-    ////////////////////////////
+    ////////////////////////////////////
     return (
         <div className={`${styles['explore-page']}`}>
             <ul className={`${styles['explore-list']}`}>

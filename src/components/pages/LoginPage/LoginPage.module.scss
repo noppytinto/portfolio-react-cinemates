@@ -65,7 +65,7 @@
   padding: .5em 4em;
   margin-inline: auto;
   margin-top: 1em;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
   
   font-family: inherit;
   font-size: 1.3rem;
@@ -84,18 +84,25 @@
   box-shadow: revert;
 }
 
+.login-page__paragraph {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
 .login-page__btn-signup {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  
-  padding: 1em 0;
-  border-width: 0;
-  
+  display: block;
+  margin-inline: auto;
+  margin-bottom: 3em;
+  padding: .5em 1em;
+
   font-weight: bold;
   font-size: 1rem;
-  color: var.$color-primary--blue;
+  color: var.$color-primary--light-blue;
   
-  background-color: var.$color-primary--light-blue;
+  border-radius: 1em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var.$color-primary--light-blue;
+  background-color: transparent;
 }

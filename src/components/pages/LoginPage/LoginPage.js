@@ -16,6 +16,7 @@ function LoginPage(props) {
     const classesInputLabel = `${styles['login-page__input-label']}`;
     const classesInputText = `${styles['login-page__input-text']}`;
     const classesLoginButton = `${styles['login-page__btn-login']}`;
+    const classesParagraph = `${styles['login-page__paragraph']}`;
     const classesSignUpButton = `${styles['login-page__btn-signup']}`;
 
     const navigate = useNavigate();
@@ -85,6 +86,7 @@ function LoginPage(props) {
                             onClick={onClickLoginHandler}> LOGIN </button>
                 </form>
 
+                <p className={classesParagraph}>or</p>
                 <button className={classesSignUpButton}
                         type={'button'}> SIGN UP </button>
             </main>

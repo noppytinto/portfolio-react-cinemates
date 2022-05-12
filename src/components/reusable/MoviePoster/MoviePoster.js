@@ -21,6 +21,15 @@ function MoviePoster({
         movieTitleClasses = `${styles['movie-title']}`;
     }
 
+
+    ////////////////////////////////////
+    // FUNCTIONS
+    ////////////////////////////////////
+
+
+    ////////////////////////////////////
+    // JSX
+    ////////////////////////////////////
     return (
         <div className={classes} >
             <img className={imageClasses} 

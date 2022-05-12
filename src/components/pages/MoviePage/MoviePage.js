@@ -15,6 +15,7 @@ function MoviePage() {
     const [movie, setMovie] = useState({});
     const [cast, setCast] = useState([]);
 
+    
     ////////////////////////////////////
     // FUNCTIONS
     ////////////////////////////////////
