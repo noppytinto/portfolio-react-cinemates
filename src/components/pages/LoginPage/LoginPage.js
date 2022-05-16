@@ -5,8 +5,9 @@ import {authActions} from '../../../redux/slices/auth-slice'
 import {useDispatch} from "react-redux";
 import HeaderWithBackButton
     from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import * as authService from '../../../services/auth-service';
+import Dialog from '../../reusable/Dialog/Dialog';
 
 
 function LoginPage(props) {
@@ -25,29 +26,47 @@ function LoginPage(props) {
     const emailRef = useRef();
     const passwordRef = useRef();
 
-
+    const [showDialog, setShowDialog] = useState(false);
 
     /////////////////////////////
     // FUNCTIONS
     /////////////////////////////
     function onClickLoginHandler(ev) {
-        ev.preventDefault();
         const email = emailRef.current.value;
         const pass = passwordRef.current.value;
 
         console.log('email:', email);
         console.log('pass:', pass);
 
-        authService.signIn(email, pass, (user) => {
-            console.log('LOGIN SUCCESSFUL:', user);
-            dispatcher(authActions.setIsLogged({isLogged: true}));
-            navigate('/profile');
-        }, (errorCode, errorMessage) => {
-            console.log('LOGIN FAIL');
-            console.log('error code:', errorCode);
-            console.log('error message:', errorMessage);
-        })
+        // authService.signIn(email, pass, (user) => {
+        //     console.log('LOGIN SUCCESSFUL:', user);
+        //     dispatcher(authActions.setIsLogged({isLogged: true}));
+        //     navigate('/profile');
+        // }, (errorCode, errorMessage) => {
+        //     console.log('LOGIN FAIL');
+        //     console.log('error code:', errorCode);
+        //     console.log('error message:', errorMessage);
+        // })
+
+        setShowDialog(true);
     }
+
+    function onClickOuterAreaHandler(ev) {
+        setShowDialog(false);
+        console.log('outer area clicked');
+
+    }
+
+    function onClickButtonLeftHandler() {
+
+    }
+
+    function onClickButtonRightHandler() {
+        console.log('outer area clicked');
+        setShowDialog(false);
+
+    }
+
 
 
     /////////////////////////////
@@ -90,6 +109,14 @@ function LoginPage(props) {
                 <button className={classesSignUpButton}
                         type={'button'}> SIGN UP </button>
             </main>
+
+            {showDialog && <Dialog message={'hello world'} 
+                                   onClickOuterArea={onClickOuterAreaHandler} 
+                                   buttonActionLeft={onClickButtonLeftHandler}
+                                   buttonRightAction={onClickButtonRightHandler}
+                                   buttonLeftLabel={'ok'}
+                                   buttonRightLabel={'cancel'}
+                                   />}
         </div>
     );
 }
