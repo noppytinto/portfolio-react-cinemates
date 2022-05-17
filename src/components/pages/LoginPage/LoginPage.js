@@ -7,7 +7,7 @@ import HeaderWithBackButton
     from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
 import {useRef, useState} from "react";
 import * as authService from '../../../services/auth-service';
-import Dialog from '../../reusable/Dialog/Dialog';
+import LoadingDialog from '../../reusable/Dialog/LoadingDialog/LoadingDialog';
 
 
 function LoginPage(props) {
@@ -38,35 +38,20 @@ function LoginPage(props) {
         console.log('email:', email);
         console.log('pass:', pass);
 
-        // authService.signIn(email, pass, (user) => {
-        //     console.log('LOGIN SUCCESSFUL:', user);
-        //     dispatcher(authActions.setIsLogged({isLogged: true}));
-        //     navigate('/profile');
-        // }, (errorCode, errorMessage) => {
-        //     console.log('LOGIN FAIL');
-        //     console.log('error code:', errorCode);
-        //     console.log('error message:', errorMessage);
-        // })
-
         setShowDialog(true);
-    }
-
-    function onClickOuterAreaHandler(ev) {
-        setShowDialog(false);
-        console.log('outer area clicked');
-
-    }
-
-    function onClickButtonLeftHandler() {
-
-    }
-
-    function onClickButtonRightHandler() {
-        console.log('outer area clicked');
-        setShowDialog(false);
+        authService.signIn(email, pass, (user) => {
+            console.log('LOGIN SUCCESSFUL:', user);
+            dispatcher(authActions.setIsLogged({isLogged: true}));
+            setShowDialog(false);
+            navigate('/profile');
+        }, (errorCode, errorMessage) => {
+            console.log('LOGIN FAIL');
+            console.log('error code:', errorCode);
+            console.log('error message:', errorMessage);
+            setShowDialog(false);
+        })
 
     }
-
 
 
     /////////////////////////////
@@ -110,13 +95,7 @@ function LoginPage(props) {
                         type={'button'}> SIGN UP </button>
             </main>
 
-            {showDialog && <Dialog message={'hello world'} 
-                                   onClickOuterArea={onClickOuterAreaHandler} 
-                                   buttonActionLeft={onClickButtonLeftHandler}
-                                   buttonRightAction={onClickButtonRightHandler}
-                                   buttonLeftLabel={'ok'}
-                                   buttonRightLabel={'cancel'}
-                                   />}
+            {showDialog && <LoadingDialog message={'login...'}/>}
         </div>
     );
 }
