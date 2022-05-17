@@ -28,7 +28,6 @@
   left: 0;
   z-index: 500;
 
-
   backdrop-filter: blur(2px);
   background-color: rgba($color: #000000, $alpha: .4);
 
@@ -40,7 +39,7 @@
 
 .dialog {
   background-color: #015896;
-  box-shadow: 5px 5px 1.5em rgba($color: #000000, $alpha: .7);
+  box-shadow: 5px 5px .8em .2em rgba($color: #000000, $alpha: .2);
   border-radius: .5em;
 
   animation-duration: 200ms;

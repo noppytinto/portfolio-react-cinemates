@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './LoginPage.module.scss';
 import * as assets from '../../../utils/assets-manager';
 import {useNavigate} from 'react-router-dom';
@@ -8,14 +9,13 @@ import HeaderWithBackButton
 import {useRef, useState} from "react";
 import * as authService from '../../../services/auth-service';
 import LoadingDialog from '../../reusable/Dialog/LoadingDialog/LoadingDialog';
+import TextField from '../../reusable/TextField/TextField';
 
 
 function LoginPage(props) {
     const classesLoginPage = `${styles['login-page']}`;
     const classesLogoImage = `${styles['login-page__logo']}`;
     const classesForm = `${styles['login-page__form']}`;
-    const classesInputLabel = `${styles['login-page__input-label']}`;
-    const classesInputText = `${styles['login-page__input-text']}`;
     const classesLoginButton = `${styles['login-page__btn-login']}`;
     const classesParagraph = `${styles['login-page__paragraph']}`;
     const classesSignUpButton = `${styles['login-page__btn-signup']}`;
@@ -23,10 +23,16 @@ function LoginPage(props) {
     const navigate = useNavigate();
     const dispatcher = useDispatch();
 
-    const emailRef = useRef();
+    const emailRef = React.createRef();
     const passwordRef = useRef();
 
     const [showDialog, setShowDialog] = useState(false);
+    const [emailIsValid, setEmailIsValid] = useState(true);
+    const [passwordIsValid, setPasswordIsValid] = useState(true);
+
+    let emailErrorText = useRef('');
+    let passwordErrorText = useRef('');
+
 
     /////////////////////////////
     // FUNCTIONS
@@ -41,17 +47,52 @@ function LoginPage(props) {
         setShowDialog(true);
         authService.signIn(email, pass, (user) => {
             console.log('LOGIN SUCCESSFUL:', user);
+
             dispatcher(authActions.setIsLogged({isLogged: true}));
+
+            setEmailIsValid(true);
+            setPasswordIsValid(true);
             setShowDialog(false);
+
+            authService.getUserData(user.uid);
+
             navigate('/profile');
+
         }, (errorCode, errorMessage) => {
+            setShowDialog(false);
             console.log('LOGIN FAIL');
             console.log('error code:', errorCode);
             console.log('error message:', errorMessage);
-            setShowDialog(false);
+
+            if (errorCode === 'auth/invalid-email') {
+                emailErrorText.current = 'invalid email';
+                // passwordErrorText.current = 'user not found';
+                setEmailIsValid(false);
+                setPasswordIsValid(true);
+            }
+            if (errorCode === 'auth/user-not-found') {
+                emailErrorText.current = 'user not found';
+                passwordErrorText.current = 'user not found';
+                setEmailIsValid(false);
+                setPasswordIsValid(false);
+            }
+            if (errorCode === 'auth/wrong-password') {
+                passwordErrorText.current = 'wrong password';
+                setEmailIsValid(true);
+                setPasswordIsValid(false);
+            }
+
+            if (errorCode === 'auth/too-many-requests') {
+                emailErrorText.current = 'too many requests, temporary blocked';
+                passwordErrorText.current = 'too many requests, temporary blocked';
+                setEmailIsValid(false);
+                setPasswordIsValid(false);
+            }
+            
         })
 
     }
+
 
 
     /////////////////////////////
@@ -67,23 +108,23 @@ function LoginPage(props) {
                      alt={'app logo'}/>
 
                 <form className={classesForm}>
-                    <label className={classesInputLabel}
-                           htmlFor={'email'}>Email</label>
-                    <input id={'email'}
-                           className={classesInputText}
-                           type={'email'}
-                           name={'email'}
-                           placeholder={'user@mail.com'}
-                           ref={emailRef}/>
+                    <TextField type={'email'}
+                               name={'email'}
+                               placeholder={'user@mail.com'}
+                               ref={emailRef}
+                               label={'Email'}
+                               errorText={emailErrorText.current}
+                               inputIsValid={emailIsValid}
+                               />
 
-                    <label className={classesInputLabel}
-                           htmlFor={'password'}>Password</label>
-                    <input id={'password'}
-                           className={classesInputText}
-                           type={'password'}
-                           name={'password'}
-                           placeholder={'******'}
-                           ref={passwordRef}/>
+                    <TextField type={'password'}
+                               name={'password'}
+                               placeholder={'******'}
+                               ref={passwordRef}
+                               label={'Password'}
+                               errorText={passwordErrorText.current}
+                               inputIsValid={passwordIsValid}
+                               />
 
                     <button className={classesLoginButton}
                             type={'button'}

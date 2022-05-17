@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import styles from './Dialog.module.scss';
 
 
@@ -19,14 +18,13 @@ function Dialog(props) {
     //////////////////////////////
     // JSX
     //////////////////////////////
-    const dialog = (
+    return (
         <div className={classesDialogContainer} onClick={onClickOuterAreaHandler}>
             <div className={classesDialog}>
                 {children}
             </div>
         </div>
     );
-    return dialog;
 }// Dialog
 
 export default Dialog;

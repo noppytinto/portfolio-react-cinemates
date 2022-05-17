@@ -5,7 +5,8 @@ import {
     signOut
 } from "firebase/auth";
 import {initializeApp} from "firebase/app";
-
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+let app = null;
 
 export function init() {
     const firebaseConfig = {
@@ -18,7 +19,7 @@ export function init() {
         measurementId: process.env.REACT_APP_MEASUREMENT_ID
     };
 
-    initializeApp(firebaseConfig);
+    app = initializeApp(firebaseConfig);
     console.log('auth service initilized');
 }
 
@@ -72,3 +73,17 @@ export function logout(onSuccess, onFailure) {
         });
 }
 
+export async function getUserData(userId) {
+    const db = getFirestore(app);
+
+    console.log(userId);
+    const docRef = doc(db, "users", userId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+}
