@@ -8,6 +8,7 @@ import {initializeApp} from "firebase/app";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 let app = null;
 
+
 export function init() {
     const firebaseConfig = {
         apiKey: process.env.REACT_APP_API_KEY,

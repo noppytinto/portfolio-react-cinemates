@@ -35,8 +35,6 @@ function LoginPage(props) {
     let emailErrorText = useRef('');
     let passwordErrorText = useRef('');
 
-
-
     /////////////////////////////
     // FUNCTIONS
     /////////////////////////////
@@ -50,19 +48,22 @@ function LoginPage(props) {
         setShowDialog(true);
         authService.signIn(email, pass, (user) => {
             console.log('LOGIN SUCCESSFUL:', user);
-
             dispatcher(authActions.setIsLogged({isLogged: true}));
+
+            //
+            dispatcher(authActions.setUserData());
 
             setEmailIsValid(true);
             setPasswordIsValid(true);
             setShowDialog(false);
-
+           
             authService.getUserData(user.uid);
 
             navigate('/profile');
 
         }, (errorCode, errorMessage) => {
             setShowDialog(false);
+
             console.log('LOGIN FAIL');
             console.log('error code:', errorCode);
             console.log('error message:', errorMessage);
@@ -91,10 +92,9 @@ function LoginPage(props) {
                 setEmailIsValid(false);
                 setPasswordIsValid(false);
             }
-            
+
         })
     }
-
 
 
     /////////////////////////////
@@ -122,13 +122,13 @@ function LoginPage(props) {
                                />
 
                     <TextField type={'password'}
-                               name={'password'}
-                               placeholder={'******'}
-                               ref={passwordRef}
-                               label={'Password'}
-                               errorText={passwordErrorText.current}
-                               inputIsValid={passwordIsValid}
-                               />
+                        name={'password'}
+                        placeholder={'******'}
+                        ref={passwordRef}
+                        label={'Password'}
+                        errorText={passwordErrorText.current}
+                        inputIsValid={passwordIsValid}
+                        />
 
                     <button className={classesLoginButton}
                             type={'button'}
