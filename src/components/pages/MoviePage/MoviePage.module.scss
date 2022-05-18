@@ -1,8 +1,6 @@
-.movie-page {
+@use '../../../scss/variables' as var;
 
-}
-
-.movie-page__header {
+.header {
   position: fixed;
   top: 0;
   z-index: 100;
@@ -10,7 +8,7 @@
   background-color: transparent;
 }
 
-.movie-page__header button {
+.header button {
   padding: .1em;
   border-radius: 50%;
 
@@ -19,97 +17,132 @@
   backdrop-filter: blur(5px);
 }
 
-.movie-page__container-backdrop {
-  position: relative;
-  margin: -1rem -1rem 1em -1rem;
-}
 
-.movie-page__gradient {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.movie-page {
 
-  background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,0));
-}
 
-.movie-page__backdrop {
-  width: 100vw;
-  height: 300px;
-  display: block;
 
-  object-fit: cover;
-}
 
-.movie-page__title {
-  position: absolute;
-  bottom: 0;
-  padding: .1em 1rem;
 
-  font-size: 1.6rem;
-}
-
-.movie-page__container-overview {
-  margin-bottom: 3em;
-
-}
-
-.movie-page__release-date {
-  font-size: 1.1rem;
-  color: var(--color-primary--light-blue);
-}
-
-.movie-page__overview {
-}
-
-.movie-page__container-details {
-  display: flex;
-  justify-content: space-between;
-  gap: .5em;
-  margin-bottom: 4em;
   
-  font-size: .8rem;
+  &__container-backdrop {
+    position: relative;
+    margin: -1rem -1rem 1em -1rem;
+  }
+  
+  &__gradient {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  
+    background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,0));
+  }
+  
+  &__backdrop {
+    width: 100vw;
+    height: 300px;
+    display: block;
+  
+    object-fit: cover;
+  }
+  
+  &__title {
+    position: absolute;
+    bottom: 0;
+    padding: .1em 2.5em .5em 1rem;
+  
+    font-size: 1.5rem;
+  }
+  
+  &__btn-add-to-list {
+    width: 50px;
+    height: 50px;
+
+    position: absolute;
+    right: 1rem;
+    bottom: -25px;
+
+    font-family: inherit;
+    font-size: 2rem;
+    color: #000;
+    font-weight: normal;
+
+    border-color: transparent;
+    border-radius: 50%;
+    background-color: var.$color-primary--yellow;
+    box-shadow: .1em .1em .5em 0 rgba($color: #000000, $alpha: .5);
+    transition: all .1s;
+  }
+
+  &__btn-add-to-list:active {
+    transform: scale(.9);
+    box-shadow: none;
+  }
+
+  &__container-overview {
+    margin-bottom: 3em;
+  }
+  
+  &__release-date {
+    font-size: 1.1rem;
+    color: var(--color-primary--light-blue);
+  }
+  
+  &__overview {
+  }
+  
+  &__container-details {
+    display: flex;
+    justify-content: space-between;
+    gap: .5em;
+    margin-bottom: 4em;
+    
+    font-size: .8rem;
+  }
+  
+  &__poster {
+    flex: 2;
+  
+  }
+  
+  &__container-listing {
+    padding: 0 0 0 .5em;
+    flex: 3;
+  
+  }
+  
+  &__listing {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  &__list-item {
+  
+  }
+  
+  &__list-title {
+    margin-bottom: .1em;
+  
+    font-size: .9rem;
+  
+    color: var(--color-primary--light-blue);
+  }
+  
+  &__list-value {
+    font-style: italic;
+  }
+  
+  &__cast-title {
+  
+  }
+  
+  &__container-cast {
+    margin-bottom: 3em;
+  }
+
 }
 
-.movie-page__poster {
-  flex: 2;
-
-}
-
-.movie-page__container-listing {
-  padding: 0 0 0 .5em;
-  flex: 3;
-
-}
-
-.movie-page__listing {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.movie-page__list-item {
-
-}
-
-.movie-page__list-title {
-  margin-bottom: .1em;
-
-  font-size: .9rem;
-
-  color: var(--color-primary--light-blue);
-}
-
-.movie-page__list-value {
-  font-style: italic;
-}
-
-.movie-page__cast-title {
-
-}
-
-.movie-page__container-cast {
-  margin-bottom: 3em;
-}

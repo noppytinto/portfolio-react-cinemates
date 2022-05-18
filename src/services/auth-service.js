@@ -6,7 +6,9 @@ import {
 } from "firebase/auth";
 import {initializeApp} from "firebase/app";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-let app = null;
+import { getStorage, ref } from "firebase/storage";
+
+let firebaseApp = null;
 
 
 export function init() {
@@ -20,7 +22,7 @@ export function init() {
         measurementId: process.env.REACT_APP_MEASUREMENT_ID
     };
 
-    app = initializeApp(firebaseConfig);
+    firebaseApp = initializeApp(firebaseConfig);
     console.log('auth service initilized');
 }
 
@@ -49,7 +51,7 @@ export function signIn(email, password, onSuccess, onFailure) {
             // Signed in
             const user = userCredential.user;
             // ...
-
+            
             onSuccess(user);
         })
         .catch((error) => {
@@ -75,16 +77,36 @@ export function logout(onSuccess, onFailure) {
 }
 
 export async function getUserData(userId) {
-    const db = getFirestore(app);
+    let userData = null;
 
-    console.log(userId);
+    const db = getFirestore(firebaseApp);
     const docRef = doc(db, "users", userId);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
+        // console.log("Document data:", docSnap.data());
+        userData = docSnap.data();
     } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
     }
+
+    return userData;
+}
+
+export function getProfileImageByUsername(username) {
+    const profileImagesRef = _getProfileImagesRef();
+    const fileName = username;
+    const extensionJpg = '.jpg';
+
+    const image = ref(profileImagesRef, fileName + extensionJpg);
+
+    return image;
+}
+
+function _getProfileImagesRef() {
+    const storage = getStorage(firebaseApp);
+    const storageRef = ref(storage);
+    const profileImagesRef = ref(storageRef, 'profileImages');
+    return profileImagesRef;
 }

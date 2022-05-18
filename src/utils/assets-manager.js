@@ -49,6 +49,18 @@ export const stringLabelSearch = 'results for:  ';
 export const stringLabelSearchNoResults = 'no results for:  ';
 export const stringPlaceholderSearch = 'search...';
 export const stringLabelLoading = 'loading...';
+export const stringPersonalProfile = 'Personal profile';
+export const stringProfile = 'Profile';
+export const stringSettings = 'settings';
+export const stringLists = 'lists';
+export const stringLogout = 'logout';
+export const stringLogin = 'login';
+
+export const stringAltProfilePicture = 'profile picture';
+export const stringAltUserProfile = 'user profile';
+export const stringAltCinematesLogo = 'cinemates logo';
+
+
 
 
 // paths

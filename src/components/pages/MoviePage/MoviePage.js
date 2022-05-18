@@ -7,6 +7,7 @@ import HeaderWithBackButton
 import {fetchCast, fetchMovie} from '../../../services/movieDatabaseService';
 import MoviePoster from "../../reusable/MoviePoster/MoviePoster";
 import CastList from "../../reusable/CastList/CastList";
+import OptionsDialog from '../../reusable/Dialog/OptionsDialog/OptionsDialog';
 
 function MoviePage() {
     const classesMoviePage = `${styles['movie-page']} `;
@@ -14,6 +15,7 @@ function MoviePage() {
     const movieId = params.id;
     const [movie, setMovie] = useState({});
     const [cast, setCast] = useState([]);
+    const [showDialogList, setShowDialogList] = useState(false);
 
     
     ////////////////////////////////////
@@ -29,13 +31,31 @@ function MoviePage() {
         })();
     }, [setMovie, movieId]);
 
+    function onClickAddToListHandler() {
+        setShowDialogList(true);
+    }
+
+    function onClickOutsideAreaHandler(ev) {
+        setShowDialogList(false);
+        console.log('clicked outside');
+    }
+
+    function buttonLeftHandler() {
+
+    }
+
+    function buttonRightHandler() {
+        setShowDialogList(false);
+
+    }
+
 
     ////////////////////////////////////
     // JSX
     ////////////////////////////////////
     return (
         <div className={classesMoviePage}>
-            <HeaderWithBackButton className={`${styles['movie-page__header']}`}
+            <HeaderWithBackButton className={`${styles['header']}`}
                                   title={''}/>
 
 
@@ -46,19 +66,27 @@ function MoviePage() {
                      src={movie.backdropUrl}
                      alt={movie.title}/>
                 <h1 className={`${styles['movie-page__title']}`}>
-                    {movie.title}
-                </h1>
+                    {movie.title}</h1>
+                <button className={styles['movie-page__btn-add-to-list']} 
+                        type={'button'}
+                        onClick={onClickAddToListHandler}>+</button>
+                {showDialogList && <OptionsDialog lists={['watch list']} 
+                                                  onClickOutsideArea={onClickOutsideAreaHandler}
+                                                  buttonLeftLabel={'ok'}
+                                                  buttonRightLabel={'cancel'}
+                                                  buttonLeftAction={buttonLeftHandler}
+                                                  buttonRightAction={buttonRightHandler}
+                                                  />}
+
             </section>
 
             {/******************** MOVIE OVERVIEW */}
             <section className={`${styles['movie-page__container-overview']}`}>
                 <div className={`${styles['movie-page__release-date']}`}>
-                    {`(${movie.releaseDate?.split('-')[0] || ''})`}
-                </div>
+                    {`(${movie.releaseDate?.split('-')[0] || ''})`}</div>
 
                 <p className={`${styles['movie-page__overview']}`}>
-                    {movie.overview}
-                </p>
+                    {movie.overview}</p>
             </section>
 
             {/******************** MOVIE DETAILS */}
@@ -72,30 +100,21 @@ function MoviePage() {
                     <ul  className={`${styles['movie-page__listing']}`}>
                         <li  className={`${styles['movie-page__list-item']}`}>
                             <h3 className={`${styles['movie-page__list-title']}`}>
-                                {assets.stringMovieDuration}
-                            </h3>
+                                {assets.stringMovieDuration}</h3>
                             <p className={`${styles['movie-page__list-value']}`}>
-                                {movie.duration + 'm'}
-                            </p>
-                        </li>
+                                {movie.duration + 'm'}</p></li>
 
                         <li  className={`${styles['movie-page__list-item']}`}>
                             <h3 className={`${styles['movie-page__list-title']}`}>
-                                {assets.stringMovieGenres}
-                            </h3>
+                                {assets.stringMovieGenres}</h3>
                             <p className={`${styles['movie-page__list-value']}`}>
-                                {movie.genres?.join(', ')}
-                            </p>
-                        </li>
+                                {movie.genres?.join(', ')}</p></li>
 
                         <li  className={`${styles['movie-page__list-item']}`}>
                             <h3 className={`${styles['movie-page__list-title']}`}>
-                                {assets.stringMovieStatus}
-                            </h3>
+                                {assets.stringMovieStatus}</h3>
                             <p className={`${styles['movie-page__list-value']}`}>
-                                {movie.status}
-                            </p>
-                        </li>
+                                {movie.status}</p></li>
                     </ul>
                 </div>
 

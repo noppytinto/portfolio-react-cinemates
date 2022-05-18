@@ -14,9 +14,30 @@
 
 
   &__main {
-    padding: 0 1rem;
+    padding: 2rem 1rem;
     
     
+  }
+
+  &__user-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
+
+  &__profile-image {
+    border-style: solid;
+    border-radius: 50%;
+    border-width: 3px;
+    border-color: var.$color-primary--light-blue;
+    box-shadow: .1em .1em 1em 0 rgba($color: #000000, $alpha: .5);
+  }
+
+
+  &__username {
+    font-size: 1rem;
+    font-weight: bold;
   }
 
 
@@ -46,6 +67,8 @@
     background-color: transparent;
     
   }
+
+
 }
 
 

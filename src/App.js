@@ -3,6 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.scss';
 import * as assets from './utils/assets-manager';
 
+
 // pages
 import ExplorePage from "./components/pages/ExplorePage/ExplorePage";
 import FeedsPage from './components/pages/FeedsPage/FeedsPage';
@@ -22,7 +23,7 @@ import LoginPage from "./components/pages/LoginPage/LoginPage";
 
 
 function App() {
-
+    
     return (
         <div className={'App'}>
             <Routes>

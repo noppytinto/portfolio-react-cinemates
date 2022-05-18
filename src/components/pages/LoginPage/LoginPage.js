@@ -35,6 +35,7 @@ function LoginPage(props) {
     let emailErrorText = useRef('');
     let passwordErrorText = useRef('');
 
+    
     /////////////////////////////
     // FUNCTIONS
     /////////////////////////////
@@ -42,58 +43,80 @@ function LoginPage(props) {
         const email = emailRef.current.value;
         const pass = passwordRef.current.value;
 
-        console.log('email:', email);
-        console.log('pass:', pass);
+        if (! validateInput(email, pass)) return;
 
         setShowDialog(true);
-        authService.signIn(email, pass, (user) => {
+        authService.signIn(email.trim(), pass.trim(), async (user) => {
             console.log('LOGIN SUCCESSFUL:', user);
-            dispatcher(authActions.setIsLogged({isLogged: true}));
 
-            //
-            dispatcher(authActions.setUserData());
+            dispatcher(authActions.setIsLogged({isLogged: true}));
+            const userData = await authService.getUserData(user.uid);
+            dispatcher(authActions.setUserData({userData}));
 
             setEmailIsValid(true);
             setPasswordIsValid(true);
             setShowDialog(false);
            
-            authService.getUserData(user.uid);
-
             navigate('/profile');
 
         }, (errorCode, errorMessage) => {
             setShowDialog(false);
+            processErrorCodes(errorCode, errorMessage);
+        })
+    }
 
-            console.log('LOGIN FAIL');
-            console.log('error code:', errorCode);
-            console.log('error message:', errorMessage);
+    function processErrorCodes(errorCode, errorMessage) {
+        console.log('LOGIN FAIL');
+        console.log('error code:', errorCode);
+        console.log('error message:', errorMessage);
 
-            if (errorCode === 'auth/invalid-email') {
+        switch(errorCode) {
+            case 'auth/invalid-email': 
                 emailErrorText.current = 'invalid email';
-                // passwordErrorText.current = 'user not found';
                 setEmailIsValid(false);
                 setPasswordIsValid(true);
-            }
-            if (errorCode === 'auth/user-not-found') {
+                break;
+            case 'auth/user-not-found': 
                 emailErrorText.current = 'user not found';
                 passwordErrorText.current = 'user not found';
                 setEmailIsValid(false);
                 setPasswordIsValid(false);
-            }
-            if (errorCode === 'auth/wrong-password') {
+                break;
+            case 'auth/wrong-password': 
                 passwordErrorText.current = 'wrong password';
                 setEmailIsValid(true);
                 setPasswordIsValid(false);
-            }
-
-            if (errorCode === 'auth/too-many-requests') {
+                break;
+            case 'auth/too-many-requests': 
                 emailErrorText.current = 'too many requests, temporary blocked';
                 passwordErrorText.current = 'too many requests, temporary blocked';
                 setEmailIsValid(false);
                 setPasswordIsValid(false);
-            }
+                break;
+            default: 
+                emailErrorText.current = 'internal error';
+                passwordErrorText.current = 'internal error';
+                setEmailIsValid(false);
+                setPasswordIsValid(false);
+        }
+    }
 
-        })
+    function validateInput(email, password) {
+        let isValid = true;
+
+        if (!email.trim()) {
+            emailErrorText.current = 'empty field';
+            setEmailIsValid(false);
+            isValid = false;
+        }
+
+        if (!password.trim()) {
+            passwordErrorText.current = 'empty field';
+            setPasswordIsValid(false);
+            isValid = false;
+        }
+
+        return isValid;
     }
 
 

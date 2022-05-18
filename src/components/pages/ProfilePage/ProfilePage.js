@@ -5,21 +5,29 @@ import {useDispatch, useSelector} from "react-redux";
 import {authActions} from "../../../redux/slices/auth-slice";
 import {useNavigate} from "react-router-dom";
 import * as authService from '../../../services/auth-service';
-
+import * as cloudinaryService from '../../../services/cloudinary-service';
+import { AdvancedImage } from '@cloudinary/react';
+import * as assets from '../../../utils/assets-manager';
+import * as utils from '../../../utils/utils';
 
 function ProfilePage(props) {
     const classesHeader = `${styles['header']}`;
     const classesProfilePage = `${styles['profile-page']}`;
     const classesMain = `${styles['profile-page__main']}`;
     const classesUserData = `${styles['profile-page__user-data']}`;
+    const classesProfileImage = `${styles['profile-page__profile-image']}`;
+    const classesUsername = `${styles['profile-page__profile-username']}`;
     const classesLists = `${styles['profile-page__lists']}`;
     const classesSettings = `${styles['profile-page__settings']}`;
     const classesLabel = `${styles['profile-page__label']}`;
     const classesLogoutButton = `${styles['profile-page__btn-option']} ${styles['profile-page__btn-logout']}`;
 
-    const userData = props.userData;
-    // const username = userData.username;
-    // const profileImageUrl = userData.profileImageUrl;
+    const userData = useSelector(state => state.authSlice.userData);
+    const isLogged = useSelector(state => state.authSlice);
+    console.log(isLogged);
+    const username = userData?.username ?? '';
+    const imageId = userData?.imageId ?? '';
+    const profileImage = cloudinaryService.getTransformedImage(imageId);
     // const email = userData.email;
 
     const navigate = useNavigate();
@@ -52,19 +60,29 @@ function ProfilePage(props) {
     /////////////////////////////
     return (
         <div className={classesProfilePage}>
-            <HeaderWithBackButton className={classesHeader} backTo={'/'} title={'Profile'} />
+            <HeaderWithBackButton className={classesHeader} 
+                                  backTo={assets.pathRoot} 
+                                  title={assets.stringPersonalProfile} />
 
             <main className={classesMain}>
                 <section className={classesUserData}>
-                    {/* <img src={} alt={}></img> */}
+                    <AdvancedImage className={classesProfileImage}
+                                   cldImg={profileImage} 
+                                   alt={assets.stringAltProfilePicture} />
+                    <p className={classesUsername}>{'@' + username}</p>
+
                 </section>
-                <section className={classesLists}></section>
+
+                <section className={classesLists}>
+                    <h2 className={classesLabel}> {utils.capitalizeFirstLetter(assets.stringLists)} </h2>
+
+                </section>
             </main>
 
             <footer className={classesSettings}>
-                <h2 className={classesLabel}>Settings</h2>
+                <h2 className={classesLabel}> {utils.capitalizeFirstLetter(assets.stringSettings)} </h2>
                 <button className={classesLogoutButton}
-                        onClick={onClickLogoutHandler}> logout </button>
+                        onClick={onClickLogoutHandler}> {assets.stringLogout} </button>
             </footer>
 
         </div>
