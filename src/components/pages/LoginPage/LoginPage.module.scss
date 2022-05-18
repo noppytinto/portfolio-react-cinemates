@@ -1,9 +1,21 @@
 @use '../../../scss/variables' as var;
 @use '../../../scss/mixins' as mix;
 
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-left: 1rem;
+
+  // border-bottom-color: #0068b3;
+  // border-bottom-width: 1px;
+  // border-bottom-style: solid;
+}
 
 .login-page {
   //height: 100%;
+  
 
 }
 
@@ -44,8 +56,8 @@
   border-left-width: 0;
   border-right-width: 0;
   border-top-width: 0;
-  border-top-left-radius: .5em;
-  border-top-right-radius: .5em;
+  border-top-left-radius: .3em;
+  border-top-right-radius: .3em;
   border-color: transparent;
   border-bottom-color: var.$color-primary--light-blue;
 }
@@ -65,8 +77,8 @@
   display: block;
   padding: .5em 4em;
   margin-inline: auto;
-  margin-top: 1em;
-  margin-bottom: 2em;
+  margin-top: 2em;
+  margin-bottom: 1em;
   
   font-family: inherit;
   font-size: 1.3rem;

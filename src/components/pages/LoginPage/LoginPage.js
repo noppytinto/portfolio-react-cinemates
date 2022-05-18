@@ -14,6 +14,7 @@ import TextField from '../../reusable/TextField/TextField';
 
 function LoginPage(props) {
     const classesLoginPage = `${styles['login-page']}`;
+    const classesHeader = `${styles['header']}`;
     const classesLogoImage = `${styles['login-page__logo']}`;
     const classesForm = `${styles['login-page__form']}`;
     const classesLoginButton = `${styles['login-page__btn-login']}`;
@@ -21,6 +22,7 @@ function LoginPage(props) {
     const classesSignUpButton = `${styles['login-page__btn-signup']}`;
 
     const navigate = useNavigate();
+
     const dispatcher = useDispatch();
 
     const emailRef = React.createRef();
@@ -32,6 +34,7 @@ function LoginPage(props) {
 
     let emailErrorText = useRef('');
     let passwordErrorText = useRef('');
+
 
 
     /////////////////////////////
@@ -90,7 +93,6 @@ function LoginPage(props) {
             }
             
         })
-
     }
 
 
@@ -100,7 +102,9 @@ function LoginPage(props) {
     /////////////////////////////
     return (
         <div className={classesLoginPage}>
-            <HeaderWithBackButton backButtonUrl={'/'} title={'Login'}/>
+            <HeaderWithBackButton className={classesHeader} 
+                                  backButtonUrl={'/'} 
+                                  title={'Login'} />
 
             <main>
                 <img className={classesLogoImage}

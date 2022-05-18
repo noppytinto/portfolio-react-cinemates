@@ -8,12 +8,22 @@ import * as authService from '../../../services/auth-service';
 
 
 function ProfilePage(props) {
+    const classesHeader = `${styles['header']}`;
     const classesProfilePage = `${styles['profile-page']}`;
     const classesMain = `${styles['profile-page__main']}`;
+    const classesUserData = `${styles['profile-page__user-data']}`;
+    const classesLists = `${styles['profile-page__lists']}`;
+    const classesSettings = `${styles['profile-page__settings']}`;
     const classesLabel = `${styles['profile-page__label']}`;
     const classesLogoutButton = `${styles['profile-page__btn-option']} ${styles['profile-page__btn-logout']}`;
 
+    const userData = props.userData;
+    // const username = userData.username;
+    // const profileImageUrl = userData.profileImageUrl;
+    // const email = userData.email;
+
     const navigate = useNavigate();
+
     const dispatcher = useDispatch();
     const userIsLogged = useSelector((state) => state.authSlice.isLogged);
 
@@ -37,25 +47,29 @@ function ProfilePage(props) {
     }
 
 
-
     /////////////////////////////
     // JSX
     /////////////////////////////
     return (
         <div className={classesProfilePage}>
-            <HeaderWithBackButton backTo={'/'} title={'Profile'} />
+            <HeaderWithBackButton className={classesHeader} backTo={'/'} title={'Profile'} />
 
             <main className={classesMain}>
-                <h2 className={classesLabel}>Settings</h2>
-
+                <section className={classesUserData}>
+                    {/* <img src={} alt={}></img> */}
+                </section>
+                <section className={classesLists}></section>
             </main>
 
-            <button className={classesLogoutButton}
-                    onClick={onClickLogoutHandler}>
-                logout
-            </button>
+            <footer className={classesSettings}>
+                <h2 className={classesLabel}>Settings</h2>
+                <button className={classesLogoutButton}
+                        onClick={onClickLogoutHandler}> logout </button>
+            </footer>
+
         </div>
     );
-}
+
+}// ProfilePage
 
 export default ProfilePage;
