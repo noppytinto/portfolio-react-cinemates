@@ -1,4 +1,4 @@
-import {searchMovies} from "../services/movieDatabaseService";
+import {searchMovies} from "../services/movie-database-service";
 import {useEffect, useRef, useState} from "react";
 
 

@@ -2,7 +2,7 @@
 // const request = require('supertest');
 // const assert = require('assert');
 // const express = require('express');
-import {getNowPlaying, getUpcoming, getPopular} from '../../services/movieDatabaseService';
+import {getNowPlaying, getUpcoming, getPopular} from '../../services/movie-database-service';
 
 
 

@@ -4,10 +4,13 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import HeaderWithBackButton
     from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
-import {fetchCast, fetchMovie} from '../../../services/movieDatabaseService';
+import {fetchCast, fetchMovie} from '../../../services/movie-database-service';
 import MoviePoster from "../../reusable/MoviePoster/MoviePoster";
 import CastList from "../../reusable/CastList/CastList";
 import OptionsDialog from '../../reusable/Dialog/OptionsDialog/OptionsDialog';
+import * as userDao from '../../../dao/user-dao';
+import {useSelector} from "react-redux";
+
 
 function MoviePage() {
     const classesMoviePage = `${styles['movie-page']} `;
@@ -16,8 +19,13 @@ function MoviePage() {
     const [movie, setMovie] = useState({});
     const [cast, setCast] = useState([]);
     const [showDialogList, setShowDialogList] = useState(false);
+    const userData = useSelector(state => state.authSlice.userData);
+    // console.log(userData);
+    let lists = [];
+    if (Object.keys(userData).length !== 0) {
+        lists =  userData?.lists ?? [];
+    }
 
-    
     ////////////////////////////////////
     // FUNCTIONS
     ////////////////////////////////////
@@ -40,13 +48,14 @@ function MoviePage() {
         // console.log('clicked outside');
     }
 
-    function buttonLeftHandler() {
-
+    function positiveButtonHandler() {
+        console.log('adding movie');
+        setShowDialogList(false);
+        userDao.addToWatchlist(movieId);
     }
 
-    function buttonRightHandler() {
+    function negativeButtonHandler() {
         setShowDialogList(false);
-
     }
 
 
@@ -70,12 +79,13 @@ function MoviePage() {
                 <button className={styles['movie-page__btn-add-to-list']} 
                         type={'button'}
                         onClick={onClickAddToListHandler}>+</button>
-                {showDialogList && <OptionsDialog lists={['watch list']} 
+                {showDialogList && <OptionsDialog movieId={movieId}
+                                                  lists={lists}
                                                   onClickOutsideArea={onClickOutsideAreaHandler}
                                                   buttonLeftLabel={'ok'}
                                                   buttonRightLabel={'cancel'}
-                                                  buttonLeftAction={buttonLeftHandler}
-                                                  buttonRightAction={buttonRightHandler}
+                                                  buttonLeftAction={positiveButtonHandler}
+                                                  buttonRightAction={negativeButtonHandler}
                                                   />}
 
             </section>

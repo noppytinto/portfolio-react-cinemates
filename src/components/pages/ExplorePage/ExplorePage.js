@@ -1,7 +1,7 @@
 import styles from './ExplorePage.module.scss';
 import HorizontalMovieList from "./HorizontalMoviesList/HorizontalMovieList";
 import {useEffect, useState} from "react";
-import {getUpcoming, getPopular, getNowPlaying} from '../../../services/movieDatabaseService';
+import {getUpcoming, getPopular, getNowPlaying} from '../../../services/movie-database-service';
 import * as assets from '../../../utils/assets-manager';
 
 function ExplorePage() {

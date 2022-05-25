@@ -35,6 +35,14 @@ export function init() {
 
 }
 
+export function getFirebaseApp() {
+    return firebaseApp;
+}
+
+export function getFirebaseAuth() {
+    return auth;
+}
+
 export function listenAuthStateChanges(onStateChanged) {
     // listen for authentication state changes
     onAuthStateChanged(auth, (user) => {

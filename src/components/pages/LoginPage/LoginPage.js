@@ -50,6 +50,7 @@ function LoginPage(props) {
 
             dispatcher(authActions.setIsLogged({isLogged: true}));
             const userData = await authService.getUserData(user.uid);
+            userData.firebaseId = user.uid;
             dispatcher(authActions.setUserData({userData}));
 
             setEmailIsValid(true);

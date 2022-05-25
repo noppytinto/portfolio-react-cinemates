@@ -1,4 +1,4 @@
-import {getNowPlaying, getPopular, getUpcoming} from "../services/movieDatabaseService";
+import {getNowPlaying, getPopular, getUpcoming} from "../services/movie-database-service";
 import {useEffect, useRef, useState} from "react";
 import * as assets from '../utils/assets-manager';
 
