@@ -1,12 +1,11 @@
-import React from 'react';
 import styles from './LoginPage.module.scss';
+import React, {useRef, useState} from 'react';
 import * as assets from '../../../utils/assets-manager';
 import {useNavigate} from 'react-router-dom';
 import {authActions} from '../../../redux/slices/auth-slice'
 import {useDispatch} from "react-redux";
 import HeaderWithBackButton
     from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
-import {useRef, useState} from "react";
 import * as authService from '../../../services/auth-service';
 import LoadingDialog from '../../reusable/Dialog/LoadingDialog/LoadingDialog';
 import TextField from '../../reusable/TextField/TextField';

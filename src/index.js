@@ -1,7 +1,6 @@
 import React from 'react';
 // import ReactDOM from 'react-dom';
 import './index.scss';
-import * as authService from './services/auth-service';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
@@ -12,8 +11,7 @@ import {createRoot} from 'react-dom/client';
 import {StyledEngineProvider} from '@mui/material/styles';
 
 
-// init backend
-authService.init();
+
 
 // render
 const rootContainer = document.getElementById('root');

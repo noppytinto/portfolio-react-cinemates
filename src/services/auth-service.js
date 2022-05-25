@@ -1,5 +1,9 @@
 import {
     getAuth,
+    onAuthStateChanged,
+    setPersistence,
+    browserSessionPersistence,
+    browserLocalPersistence,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut
@@ -8,9 +12,11 @@ import {initializeApp} from "firebase/app";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getStorage, ref } from "firebase/storage";
 
+// global properties
 let firebaseApp = null;
+let auth = null;
 
-
+//
 export function init() {
     const firebaseConfig = {
         apiKey: process.env.REACT_APP_API_KEY,
@@ -24,10 +30,19 @@ export function init() {
 
     firebaseApp = initializeApp(firebaseConfig);
     console.log('auth service initilized');
+
+    auth = getAuth();
+
+}
+
+export function listenAuthStateChanges(onStateChanged) {
+    // listen for authentication state changes
+    onAuthStateChanged(auth, (user) => {
+        onStateChanged(user);
+    });
 }
 
 export function createUserAccount(email, password, onSuccess, onFailure) {
-    const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in
@@ -45,7 +60,6 @@ export function createUserAccount(email, password, onSuccess, onFailure) {
 }
 
 export function signIn(email, password, onSuccess, onFailure) {
-    const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in
@@ -63,7 +77,6 @@ export function signIn(email, password, onSuccess, onFailure) {
 }
 
 export function logout(onSuccess, onFailure) {
-    const auth = getAuth();
     signOut(auth)
         .then(() => {
             // Sign-out successful.
@@ -110,3 +123,23 @@ function _getProfileImagesRef() {
     const profileImagesRef = ref(storageRef, 'profileImages');
     return profileImagesRef;
 }
+
+
+// web browser use "local" as default persistence
+//
+// function _setAuthStatePersistence() {
+//     setPersistence(auth, browserLocalPersistence)
+//         .then(() => {
+//             // Existing and future Auth states are now persisted in the current
+//             // session only. Closing the window would clear any existing state even
+//             // if a user forgets to sign out.
+//             // ...
+//             // New sign-in will be persisted with session persistence.
+//             // return signInWithEmailAndPassword(auth, email, password);
+//         })
+//         .catch((error) => {
+//             // Handle Errors here.
+//             const errorCode = error.code;
+//             const errorMessage = error.message;
+//         });
+// }

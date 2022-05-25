@@ -6,9 +6,10 @@ import * as cloudinaryService from '../../../services/cloudinary-service';
 import { AdvancedImage } from '@cloudinary/react';
 
 function MainHeader() {
+    console.log('header called');
     const userIsLogged = useSelector((state) => state.authSlice.isLogged);
     const userData = useSelector((state) => state.authSlice.userData);
-    const userImage = cloudinaryService.getTransformedImage(userData.imageId);
+
 
 
     /////////////////////////////
@@ -26,6 +27,8 @@ function MainHeader() {
     }
 
     function showLoggedUserButton() {
+        const userImage = cloudinaryService.getTransformedImage(userData.imageId);
+
         return (
             <NavLink className={styles['main-header__link']} to={assets.pathProfilePage}>
                 <div className={`${styles['main-header__icon-container']}`}>

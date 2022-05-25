@@ -9,7 +9,8 @@ function Snackbar(props) {
     // props
     const text = props.text ?? assets.stringSnackbarDefaultText;
     const actionLabel = props.actionLabel ?? assets.stringSnackbarActionLabel;
-    const onClickAction = props.onClickAction ?? (() => {});
+    const onClickAction = props.onClickAction ?? null;
+    // const showActions = onClickAction!==null ? true : false;
 
     // states
     const [isShown, setIsShown] = useState(true);
@@ -54,6 +55,17 @@ function Snackbar(props) {
                         <div className={mainContentClasses}>
                             {text}
                         </div>
+
+                        {/*{showActions &&*/}
+                        {/*    <div className={actionClasses}>*/}
+                        {/*        <button className={actionButtonClasses}*/}
+                        {/*                type={"button"}*/}
+                        {/*                onClick={actionHandler}>*/}
+                        {/*            {actionLabel}*/}
+                        {/*        </button>*/}
+                        {/*    </div>*/}
+                        {/*}*/}
+
                         <div className={actionClasses}>
                             <button className={actionButtonClasses}
                                     type={"button"}

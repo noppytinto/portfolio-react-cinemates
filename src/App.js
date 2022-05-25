@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.scss';
 import * as assets from './utils/assets-manager';
-
+import * as authService from './services/auth-service';
 
 // pages
 import ExplorePage from "./components/pages/ExplorePage/ExplorePage";
@@ -20,10 +20,36 @@ import WithoutMainHeader from './components/reusable/WithoutMainHeader/WithoutMa
 import ExplorePageList from './components/reusable/ExplorePageList/ExplorePageList';
 import SignUpPage from "./components/pages/SignUpPage/SignUpPage";
 import LoginPage from "./components/pages/LoginPage/LoginPage";
+import {useDispatch} from "react-redux";
+import {authActions} from './redux/slices/auth-slice'
 
+// init backend
+authService.init();
 
 function App() {
-    
+    const dispatcher = useDispatch();
+
+    authService.listenAuthStateChanges(async (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            const uid = user.uid;
+            console.log('USER SIGNED IN: ', uid);
+
+            dispatcher(authActions.setIsLogged({isLogged: true}));
+            const userData = await authService.getUserData(user.uid);
+            dispatcher(authActions.setUserData({userData}));
+            // ...
+        } else {
+            // User is signed out
+            // ...
+            console.log('USER SIGNED OUT');
+            dispatcher(authActions.setIsLogged({isLogged: false}));
+            dispatcher(authActions.setUserData({}));
+
+        }
+    })
+
     return (
         <div className={'App'}>
             <Routes>
