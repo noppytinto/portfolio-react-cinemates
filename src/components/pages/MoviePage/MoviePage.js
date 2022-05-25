@@ -37,7 +37,7 @@ function MoviePage() {
 
     function onClickOutsideAreaHandler(ev) {
         setShowDialogList(false);
-        console.log('clicked outside');
+        // console.log('clicked outside');
     }
 
     function buttonLeftHandler() {

@@ -25,7 +25,7 @@ function WithMainHeader(props) {
 
     return (
         <>
-            <header className={classes}>
+            <header className={classes} >
                 <MainHeader />
                 <MainNav />
             </header>

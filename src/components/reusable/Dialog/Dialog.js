@@ -12,7 +12,7 @@ function Dialog(props) {
     // FUNCTIONS
     //////////////////////////////
     function onClickOutsideAreaHandler(ev) {
-        console.log(ev.target.classList);
+        // console.log(ev.target.classList);
         if (ev.target.classList.contains(classesDialogContainer)) 
             props.onClickOuterArea();
     }
