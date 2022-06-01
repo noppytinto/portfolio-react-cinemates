@@ -11,31 +11,32 @@ import {createRoot} from 'react-dom/client';
 import {StyledEngineProvider} from '@mui/material/styles';
 
 
-
-
 // render
 const rootContainer = document.getElementById('root');
 const root = createRoot(rootContainer);
 root.render(
     // enable strict in production
     // notes: components are rendered twice in strict mode + dev mode
-    <React.StrictMode>
-        <BrowserRouter>
-            <StyledEngineProvider injectFirst>
-                <Provider store={mainStore}>
-                    <App/>
-                </Provider>
-            </StyledEngineProvider>
-        </BrowserRouter>
-    </React.StrictMode>
+    // <React.StrictMode>
+    //     <BrowserRouter>
+    //         <StyledEngineProvider injectFirst>
+    //             <Provider store={mainStore}>
+    //                 <App/>
+    //             </Provider>
+    //         </StyledEngineProvider>
+    //     </BrowserRouter>
+    // </React.StrictMode>
 
-    //
-    // <BrowserRouter>
-    //     <Provider store={mainStore}>
-    //         <App />
-    //     </Provider>
-    // </BrowserRouter>
-);
+//
+    <BrowserRouter>
+        <StyledEngineProvider injectFirst>
+            <Provider store={mainStore}>
+                <App/>
+            </Provider>
+        </StyledEngineProvider>
+    </BrowserRouter>
+)
+;
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

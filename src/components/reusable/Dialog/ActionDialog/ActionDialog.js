@@ -4,21 +4,18 @@ import Dialog from '../Dialog';
 
 function ActionDialog(props) {
     const title = props.title ?? '';
-    // const message = props.message ?? 'message';
-    const buttonLeftLabel = props.buttonLeftLabel ?? 'button 1';
-    const buttonRightLabel = props.buttonRightLabel ?? 'button 2';
-    const buttonLeftAction = props.buttonLeftAction ?? null;
-    const buttonRightAction = props.buttonRightAction ?? null;
+    const buttonNegativeLabel = props.buttonNegativeLabel ?? 'cancel';
+    const buttonPositiveLabel = props.buttonPositiveLabel ?? 'ok';
+    const buttonNegativeAction = props.buttonNegativeAction ?? null;
+    const buttonPositiveAction = props.buttonPositiveAction ?? null;
     const onClickOutsideAreaHandler = props.onClickOutsideArea;
 
     let classesDialog = `${styles['dialog']}`;
     let classesTitle = `${styles['dialog__title']}`;
     let classesMainContent = `${styles['dialog__main-content']} ${props.className}`;
     let classesButtons = `${styles['dialog__buttons']}`;
-    let classesButtonLeft = `${styles['dialog__button']} ${styles['dialog__button-left']}`;
-    let classesButtonRight = `${styles['dialog__button']} ${styles['dialog__button-right']}`;
-
-
+    let classesButtonNegative = `${styles['dialog__button']} ${styles['dialog__button-negative']}`;
+    let classesButtonPositive = `${styles['dialog__button']} ${styles['dialog__button-positive']}`;
 
 
     //////////////////////////////
@@ -26,26 +23,28 @@ function ActionDialog(props) {
     //////////////////////////////
 
 
-
     //////////////////////////////
     // JSX
     //////////////////////////////
-    const dialog = (
-        <Dialog className={classesDialog} onClickOuterArea={onClickOutsideAreaHandler}>
+    return (
+        <Dialog className={classesDialog}
+                onClickOuterArea={onClickOutsideAreaHandler}>
+
             {title ?? <h1 className={classesTitle}>{title}</h1>}
+
             <div className={classesMainContent}>{props.children}</div>
+
             <div className={classesButtons}>
-                <button className={classesButtonLeft}
+                <button className={classesButtonNegative}
                         type={'button'}
-                        onClick={buttonLeftAction}>{buttonLeftLabel}</button>
-                <button className={classesButtonRight}
+                        onClick={buttonNegativeAction}>{buttonNegativeLabel}</button>
+
+                <button className={classesButtonPositive}
                         type={'button'}
-                        onClick={buttonRightAction}>{buttonRightLabel}</button>
+                        onClick={buttonPositiveAction}>{buttonPositiveLabel}</button>
             </div>
         </Dialog>
     );
-    // return ReactDOM.createPortal(dialog, document.getElementById('dialog'));
-    return dialog;
 }// ActionDialog
 
 export default ActionDialog;

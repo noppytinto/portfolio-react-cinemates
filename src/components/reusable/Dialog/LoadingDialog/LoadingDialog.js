@@ -20,13 +20,12 @@ function LoadingDialog(props) {
     //////////////////////////////
     // JSX
     //////////////////////////////
-    const dialog = (
+    return (
         <Dialog className={classesDialog} onClickOuterArea={onClickOuterAreaHandler}>
             <LoadingSpinner />
             <p className={classesMessage}>{message}</p>
         </Dialog>
     );
-    return ReactDOM.createPortal(dialog, document.getElementById('dialog'));
 }// LoadingDialog
 
 export default LoadingDialog;

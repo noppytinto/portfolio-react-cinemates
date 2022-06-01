@@ -1,19 +1,18 @@
 import ReactDOM from 'react-dom';
 import styles from './OptionsDialog.module.scss';
 import ActionDialog from '../ActionDialog/ActionDialog';
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import {useRef} from "react";
-
+import Checkbox from "../../Checkbox/Checkbox";
 
 function OptionsDialog(props) {
     const title = props.title ?? '';
-    const lists = props.lists ?? [];
-    const movieId = props.movieId ?? null;
-    // const message = props.message ?? 'message';
-    const buttonLeftLabel = props.buttonLeftLabel ?? 'button 1';
-    const buttonRightLabel = props.buttonRightLabel ?? 'button 2';
-    const buttonLeftAction = props.buttonLeftAction ?? null;
-    const buttonRightAction = props.buttonRightAction ?? null;
+    const items = props.items ?? [];
+    const checkedItems = props.checkedItems ?? [];
+    const buttonNegativeLabel = props.buttonNegativeLabel ?? 'cancel';
+    const buttonPositiveLabel = props.buttonPositiveLabel ?? 'ok';
+    const buttonNegativeAction = props.buttonNegativeAction ?? null;
+    const buttonPositiveAction = props.buttonPositiveAction ?? null;
     const onClickOutsideAreaHandler = props.onClickOutsideArea;
 
     let classesDialog = `${styles['dialog']}`;
@@ -27,85 +26,65 @@ function OptionsDialog(props) {
     //////////////////////////////
     // FUNCTIONS
     //////////////////////////////
-    function spawnLists(lists, movieId) {
-        const views = [];
+    function spawnItems(items, checkedItems) {
 
-        for (const [key, list] of Object.entries(lists)) {
-            const listName = key;
-
-            if (list.includes(movieId)) {
-                checkedLists.push(key);
-                views.push(
-                    <li key={listName} >
-                        <input id={listName}
-                               type={'checkbox'}
-                               value={listName}
-                               onChange={ev => onListChecked(ev, listName)}
-                               checked={true}
+        return items.map((item, i) => {
+            if (checkedItems[i]) {
+                return (
+                    <li key={item}>
+                        <Checkbox id={item}
+                                  value={item}
+                                  onChange={ev => onListChecked(ev, i)}
+                                  checked={true}
                         />
-                        <label htmlFor={listName}>{listName}</label>
+                        <label htmlFor={item}>{item}</label>
                     </li>
                 )
             }
-            else {
-                views.push(
-                    <li key={listName} >
-                        <input id={listName}
-                               type={'checkbox'}
-                               value={listName}
-                               onChange={ev => onListChecked(ev, listName)}
-                        />
-                        <label htmlFor={listName}>{listName}</label>
-                    </li>
-                )
-            }
-        }
-        return views;
+
+            return (
+                <li key={item}>
+                    <Checkbox id={item}
+                              value={item}
+                              onChange={ev => onListChecked(ev, i)}
+                    />
+                    <label htmlFor={item}>{item}</label>
+                </li>
+            )
+        })
     }
 
-    function onListChecked(ev, list) {
-        console.log(`list: ${list}`);
-        ev.target.checked ? checkedLists.push(list) : (removeItem(checkedLists, list));
-        console.log(checkedLists);
+    function onListChecked(ev, i) {
+        checkedItems[i] = ev.target.checked;
     }
 
-    function removeItem(arr, value) {
-        const index = arr.indexOf(value);
-        if (index > -1) {
-            arr.splice(index, 1);
-        }
-        return arr;
+    function onClickPositiveButton(ev, checkedItems) {
+        buttonPositiveAction?.(ev, checkedItems);
     }
 
-    function onClickRightButton() {
-        console.log(formRef.current);
-        buttonRightAction?.();
-    }
-
-    function onClickLeftButton() {
-        console.log(formRef.current);
-        buttonLeftAction?.();
+    function onClickNegativeButton(ev, checkedItems) {
+        buttonNegativeAction?.(ev, checkedItems);
     }
 
 
     //////////////////////////////
     // JSX
     //////////////////////////////
-    const dialog = (
-        <ActionDialog className={classesDialog} 
+    return ReactDOM.createPortal(
+        <ActionDialog className={classesDialog}
                       title={title}
+                      buttonNegativeLabel={buttonNegativeLabel}
+                      buttonPositiveLabel={buttonPositiveLabel}
+                      buttonNegativeAction={ev => onClickNegativeButton(ev, checkedItems)}
+                      buttonPositiveAction={ev => onClickPositiveButton(ev, checkedItems)}
                       onClickOutsideArea={onClickOutsideAreaHandler}
-                      buttonLeftLabel={buttonLeftLabel}
-                      buttonRightLabel={buttonRightLabel}
-                      buttonLeftAction={onClickLeftButton}
-                      buttonRightAction={onClickRightButton}
-                      >
+        >
             <form ref={formRef}>
-                <ul>{spawnLists(lists, movieId)}</ul>
+                <ul>{spawnItems(items, checkedItems)}</ul>
             </form>
         </ActionDialog>
+        , document.getElementById('dialog')
     );
-    return ReactDOM.createPortal(dialog, document.getElementById('dialog'));
 
 }// OptionsDialog
 

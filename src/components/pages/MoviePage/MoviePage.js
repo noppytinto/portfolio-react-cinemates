@@ -9,8 +9,8 @@ import MoviePoster from "../../reusable/MoviePoster/MoviePoster";
 import CastList from "../../reusable/CastList/CastList";
 import OptionsDialog from '../../reusable/Dialog/OptionsDialog/OptionsDialog';
 import * as userDao from '../../../dao/user-dao';
-import {useSelector} from "react-redux";
-
+import {useDispatch, useSelector} from "react-redux";
+import {authActions} from '../../../redux/slices/auth-slice';
 
 function MoviePage() {
     const classesMoviePage = `${styles['movie-page']} `;
@@ -20,13 +20,24 @@ function MoviePage() {
     const [cast, setCast] = useState([]);
     const [showDialogList, setShowDialogList] = useState(false);
     const isLogged = useSelector(state => state.authSlice.isLogged);
+    const dispatcher = useDispatch()
 
-    let lists = [];
+    let lists = {};
+    let listNames = [];
+    let checkedLists = [];
     const userData = useSelector(state => state.authSlice.userData);
     if (isLogged) {
         // console.log(userData);
         if (Object.keys(userData).length !== 0) {
-            lists =  userData?.lists ?? [];
+            lists =  userData?.lists ?? {};
+            listNames =  Object.keys(userData?.lists) ?? [];
+
+            //
+            for (const [listName, movieIds] of Object.entries(lists)) {
+                checkedLists.push(movieIds.includes(movieId));
+            }
+
+            // console.log(lists);
         }
     }
 
@@ -34,7 +45,7 @@ function MoviePage() {
     ////////////////////////////////////
     // FUNCTIONS
     ////////////////////////////////////
-    // fetch movie details
+    // fetch movie info
     useEffect(() => {
         (async () => {
             const fetchedMovie = await fetchMovie(movieId);
@@ -49,18 +60,54 @@ function MoviePage() {
     }
 
     function onClickOutsideAreaHandler(ev) {
+        
         setShowDialogList(false);
-        // console.log('clicked outside');
     }
 
-    function positiveButtonHandler() {
-        console.log('adding movie');
+    function onClickNegativeButtonHandler(ev, checkedItems) {
         setShowDialogList(false);
-        userDao.addToWatchlist(movieId);
     }
 
-    function negativeButtonHandler() {
+    function onClickPositiveButtonHandler(ev, checkedItems) {
+        let newLists = {...lists};
+        let newUserData = {...userData};
+
+        listNames.forEach((listName, i) => {
+            const isChecked = checkedItems[i];
+            const updatedList = [...newLists[listName]];
+            console.log(updatedList);
+            if(isChecked) {
+                // console.log('adding ', movieId ,' to list', listName );
+                if(!updatedList.includes(movieId)) {
+                    updatedList.push(movieId);
+                    userDao.addToList(listName, movieId);
+                }
+            }
+            else {
+                // console.log('removing ', movieId ,' to list', listName );
+                if(updatedList.includes(movieId)) {
+                    removeAt(updatedList, movieId);
+                    userDao.removeFromList(listName, movieId);
+                }
+            }
+
+            newLists[listName] = updatedList;
+        })
+
+        // update in-memory user data
+        newUserData.lists = newLists;
+        dispatcher(authActions.setUserData({userData: newUserData}))
+
+        //
         setShowDialogList(false);
+    }
+
+    function removeAt(array, value) {
+        if (array && array.length<=0) return;
+        const index = array.indexOf(value);
+        if (index > -1) {
+            array.splice(index, 1); // 2nd parameter means remove one item only
+        }
     }
 
 
@@ -87,13 +134,12 @@ function MoviePage() {
                                      onClick={onClickAddToListHandler}>+</button>}
 
                 {showDialogList && <OptionsDialog movieId={movieId}
-                                                  lists={lists}
+                                                  items={listNames}
+                                                  checkedItems={checkedLists}
+                                                  buttonNegativeAction={onClickNegativeButtonHandler}
+                                                  buttonPositiveAction={onClickPositiveButtonHandler}
                                                   onClickOutsideArea={onClickOutsideAreaHandler}
-                                                  buttonLeftLabel={'ok'}
-                                                  buttonRightLabel={'cancel'}
-                                                  buttonLeftAction={positiveButtonHandler}
-                                                  buttonRightAction={negativeButtonHandler}
-                                                  />}
+                />}
 
             </section>
 
