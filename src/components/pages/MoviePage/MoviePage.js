@@ -19,12 +19,17 @@ function MoviePage() {
     const [movie, setMovie] = useState({});
     const [cast, setCast] = useState([]);
     const [showDialogList, setShowDialogList] = useState(false);
-    const userData = useSelector(state => state.authSlice.userData);
-    // console.log(userData);
+    const isLogged = useSelector(state => state.authSlice.isLogged);
+
     let lists = [];
-    if (Object.keys(userData).length !== 0) {
-        lists =  userData?.lists ?? [];
+    const userData = useSelector(state => state.authSlice.userData);
+    if (isLogged) {
+        // console.log(userData);
+        if (Object.keys(userData).length !== 0) {
+            lists =  userData?.lists ?? [];
+        }
     }
+
 
     ////////////////////////////////////
     // FUNCTIONS
@@ -76,9 +81,11 @@ function MoviePage() {
                      alt={movie.title}/>
                 <h1 className={`${styles['movie-page__title']}`}>
                     {movie.title}</h1>
-                <button className={styles['movie-page__btn-add-to-list']} 
-                        type={'button'}
-                        onClick={onClickAddToListHandler}>+</button>
+
+                {isLogged && <button className={styles['movie-page__btn-add-to-list']}
+                                     type={'button'}
+                                     onClick={onClickAddToListHandler}>+</button>}
+
                 {showDialogList && <OptionsDialog movieId={movieId}
                                                   lists={lists}
                                                   onClickOutsideArea={onClickOutsideAreaHandler}

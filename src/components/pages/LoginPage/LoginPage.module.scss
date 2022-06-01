@@ -16,106 +16,108 @@
 .login-page {
   //height: 100%;
   
-
-}
-
-.login-page__logo {
-  display: block;
-  width: clamp(100px, 60%, 300px);
-  margin-inline: auto;
-  margin-top: 4em;
-  margin-bottom: 4em;
+  &__logo {
+    display: block;
+    width: clamp(100px, 60%, 300px);
+    margin: 5em auto;
+  }
   
-}
-
-.login-page__form {
-  margin-inline: 10%;
-  // width: clamp(100px, 100%, 500px);
-
-}
-
-.login-page__input-label {
-  margin-bottom: .5em;
-  display: block;
+  &__form {
+    margin-inline: 10%;
+    // width: clamp(100px, 100%, 500px);
+    
+  }
   
-  font-weight: 550;
-  font-size: 1.1rem;
-  color: var.$color-primary--light-blue
-}
-
-.login-page__input-text {
-  width: 100%;
-  padding: .7em .5em;
-  margin-bottom: 2em;
+  &__input-label {
+    margin-bottom: .5em;
+    display: block;
+    
+    font-weight: 550;
+    font-size: 1.1rem;
+    color: var.$color-primary--light-blue
+  }
   
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
+  &__input-text {
+    width: 100%;
+    padding: .7em .5em;
+    margin-bottom: 2em;
+    
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    
+    background: var.$color-primary--light-blue-200;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-top-left-radius: .3em;
+    border-top-right-radius: .3em;
+    border-color: transparent;
+    border-bottom-color: var.$color-primary--light-blue;
+  }
   
-  background: var.$color-primary--light-blue-200;
-  border-left-width: 0;
-  border-right-width: 0;
-  border-top-width: 0;
-  border-top-left-radius: .3em;
-  border-top-right-radius: .3em;
-  border-color: transparent;
-  border-bottom-color: var.$color-primary--light-blue;
-}
-
-.login-page__input-text:hover,
-.login-page__input-text:focus,
-.login-page__input-text:active {
-  border-bottom-color: var.$color-primary--yellow;
-}
-
-.login-page__input-text::placeholder {
-  color: #fff;
-  opacity: .2;
-}
-
-.login-page__btn-login {
-  display: block;
-  padding: .5em 4em;
-  margin-inline: auto;
-  margin-top: 2em;
-  margin-bottom: 1em;
+  &__input-text:hover,
+  &__input-text:focus,
+  &__input-text:active {
+    border-bottom-color: var.$color-primary--yellow;
+  }
   
-  font-family: inherit;
-  font-size: 1.3rem;
-  font-weight: bold;
+  &__input-text::placeholder {
+    color: #fff;
+    opacity: .2;
+  }
   
-  background: var.$color-primary--yellow;
-  border-radius: 1em;
-  border-width: 0;
-  box-shadow: .1em .1em 1em 0 rgba(84, 68, 21, .5);
+  &__btn-login {
+    display: block;
+    padding: .5em 4em;
+    margin-inline: auto;
+    margin-top: 3em;
+    margin-bottom: 1.5em;
+    
+    font-family: inherit;
+    font-size: 1.3rem;
+    font-weight: bold;
+    
+    background: var.$color-primary--yellow;
+    border-radius: 1em;
+    border-width: 0;
+    box-shadow: .1em .1em 1em 0 rgba(84, 68, 21, .5);
+    
+    transition: all .2s;
+  }
   
-  transition: all .2s;
-}
-
-.login-page__btn-login:active {
-  transform: scale(.97);
-  box-shadow: revert;
-}
-
-.login-page__paragraph {
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 1em;
-}
-
-.login-page__btn-signup {
-  display: block;
-  margin-inline: auto;
-  margin-bottom: 3em;
-  padding: .5em 1em;
-
-  font-weight: bold;
-  font-size: 1rem;
-  color: var.$color-primary--light-blue;
+  &__btn-login:active {
+    transform: scale(.97);
+    box-shadow: revert;
+  }
   
-  border-radius: 1em;
-  border-width: 1px;
-  border-style: solid;
-  border-color: var.$color-primary--light-blue;
-  background-color: transparent;
-}
+  &__paragraph {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1em;
+  }
+  
+  &__btn-signup {
+    display: block;
+    margin-inline: auto;
+    margin-bottom: 3em;
+    padding: .5em 1em;
+    
+    font-weight: bold;
+    font-size: 1rem;
+    color: var.$color-primary--light-blue;
+    
+    border-radius: 1em;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var.$color-primary--light-blue;
+    background-color: transparent;
+  }
+  
+}// .login-page
+
+
+
+
+
+
