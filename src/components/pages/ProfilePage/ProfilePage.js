@@ -6,9 +6,12 @@ import {authActions} from "../../../redux/slices/auth-slice";
 import {useNavigate} from "react-router-dom";
 import * as authService from '../../../services/auth-service';
 import * as cloudinaryService from '../../../services/cloudinary-service';
-import { AdvancedImage } from '@cloudinary/react';
+import {AdvancedImage} from '@cloudinary/react';
 import * as assets from '../../../utils/assets-manager';
 import * as utils from '../../../utils/utils';
+import {useState} from "react";
+import ActionDialog from "../../reusable/Dialog/ActionDialog/ActionDialog";
+
 
 function ProfilePage(props) {
     const classesHeader = `${styles['header']}`;
@@ -35,6 +38,7 @@ function ProfilePage(props) {
     const dispatcher = useDispatch();
     const userIsLogged = useSelector((state) => state.authSlice.isLogged);
 
+    const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
     /////////////////////////////
     // FUNCTIONS
@@ -43,6 +47,10 @@ function ProfilePage(props) {
         ev.preventDefault();
         if (!userIsLogged) return;
 
+        setShowConfirmationDialog(true);
+    }
+
+    function onClickPositiveButtonHandler(ev) {
         authService.logout(() => {
             console.log('LOGOUT SUCCESSFUL');
             dispatcher(authActions.setIsLogged({isLogged: false}));
@@ -54,38 +62,54 @@ function ProfilePage(props) {
         });
     }
 
+    function onClickNegativeButtonHandler(ev) {
+        setShowConfirmationDialog(false);
+
+    }
 
     /////////////////////////////
     // JSX
     /////////////////////////////
     return (
-        <div className={classesProfilePage}>
-            <HeaderWithBackButton className={classesHeader} 
-                                  backTo={assets.pathRoot} 
-                                  title={assets.stringPersonalProfile} />
+        <>
+            <div className={classesProfilePage}>
+                <HeaderWithBackButton className={classesHeader}
+                                      backTo={assets.pathRoot}
+                                      title={assets.stringPersonalProfile}/>
 
-            <main className={classesMain}>
-                <section className={classesUserData}>
-                    <AdvancedImage className={classesProfileImage}
-                                   cldImg={profileImage} 
-                                   alt={assets.stringAltProfilePicture} />
-                    <p className={classesUsername}>{'@' + username}</p>
+                <main className={classesMain}>
+                    <section className={classesUserData}>
+                        <AdvancedImage className={classesProfileImage}
+                                       cldImg={profileImage}
+                                       alt={assets.stringAltProfilePicture}/>
+                        <p className={classesUsername}>{'@' + username}</p>
 
-                </section>
+                    </section>
 
-                <section className={classesLists}>
-                    <h2 className={classesLabel}> {utils.capitalizeFirstLetter(assets.stringLists)} </h2>
+                    <section className={classesLists}>
+                        <h2 className={classesLabel}> {utils.capitalizeFirstLetter(assets.stringLists)} </h2>
 
-                </section>
-            </main>
+                    </section>
+                </main>
 
-            <footer className={classesSettings}>
-                <h2 className={classesLabel}> {utils.capitalizeFirstLetter(assets.stringSettings)} </h2>
-                <button className={classesLogoutButton}
-                        onClick={onClickLogoutHandler}> {assets.stringLogout} </button>
-            </footer>
+                <footer className={classesSettings}>
+                    <h2 className={classesLabel}> {utils.capitalizeFirstLetter(assets.stringSettings)} </h2>
+                    <button className={classesLogoutButton}
+                            onClick={onClickLogoutHandler}> {assets.stringLogout} </button>
+                </footer>
 
-        </div>
+            </div>
+
+            {showConfirmationDialog && <ActionDialog
+                buttonNegativeAction={onClickNegativeButtonHandler}
+                buttonPositiveAction={onClickPositiveButtonHandler}
+                onClickOutside={onClickNegativeButtonHandler}>
+
+                <p>Are you sure you want to logout?</p>
+
+            </ActionDialog>}
+        </>
+
     );
 
 }// ProfilePage
