@@ -1,5 +1,4 @@
 import styles from './Dialog.module.scss';
-import {useState} from "react";
 
 
 function Dialog(props) {

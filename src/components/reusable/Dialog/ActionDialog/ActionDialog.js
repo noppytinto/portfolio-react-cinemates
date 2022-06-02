@@ -1,4 +1,3 @@
-// import ReactDOM from 'react-dom';
 import styles from './ActionDialog.module.scss';
 import Dialog from '../Dialog';
 
@@ -31,7 +30,7 @@ function ActionDialog(props) {
                 onClickOutside={onClickOutsideHandler}
         >
 
-            {title ?? <h1 className={classesTitle}>{title}</h1>}
+            <h1 className={classesTitle}>{title}</h1>
 
             <div className={classesMainContent}>{props.children}</div>
 

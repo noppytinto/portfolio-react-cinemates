@@ -19,23 +19,21 @@ function MoviePage() {
     const movieId = params.id;
     const [movie, setMovie] = useState({});
     const [cast, setCast] = useState([]);
-    const [showDialogList, setShowDialogList] = useState(false);
+    const [showLists, setShowLists] = useState(false);
     const isLogged = useSelector(state => state.authSlice.isLogged);
     const dispatcher = useDispatch()
 
     let lists = {};
     let listKeys = [];
     let checkedLists = [];
-    let selectedLists = new Set();
     const userData = useSelector(state => state.authSlice.userData);
     if (isLogged) {
-        // console.log(userData);
         if (Object.keys(userData).length !== 0) {
             lists = userData?.lists ?? {};
             listKeys = Object.keys(userData?.lists) ?? [];
 
             //
-            for (const [listName, movieIds] of Object.entries(lists)) {
+            for (const [ , movieIds] of Object.entries(lists)) {
                 checkedLists.push(movieIds.includes(movieId));
             }
 
@@ -58,22 +56,19 @@ function MoviePage() {
     }, [setMovie, movieId]);
 
     function onClickAddToListHandler() {
-        setShowDialogList(true);
+        setShowLists(true);
     }
 
     function onClickOutsideHandler(ev) {
-        setShowDialogList(false);
-        selectedLists.clear();
+        setShowLists(false);
     }
 
     function onClickNegativeButtonHandler(ev) {
-        setShowDialogList(false);
-        selectedLists.clear();
+        setShowLists(false);
     }
 
     function onClickPositiveButtonHandler(ev) {
         let updatedLists = {...lists};
-        let updatedUserData = {...userData};
 
         listKeys.forEach((listName, i) => {
             const listIsChecked = checkedLists[i];
@@ -96,16 +91,14 @@ function MoviePage() {
         })
 
         // update in-memory user data
-        updatedUserData.lists = updatedLists;
-        dispatcher(authActions.setUserData({userData: updatedUserData}))
+        dispatcher(authActions.setUserLists({lists: updatedLists}))
 
         //
-        setShowDialogList(false);
+        setShowLists(false);
     }
-    
+
     function onListCheckHandler(ev, i, isChecked) {
         checkedLists[i] = isChecked;
-        console.log('list checked: ', checkedLists);
     }
 
     function removeAt(array, value) {
@@ -139,12 +132,13 @@ function MoviePage() {
                             type={'button'}
                             onClick={onClickAddToListHandler}>+</button>}
 
-                {showDialogList && <OptionsDialog items={listKeys}
-                                                  checkedItems={checkedLists}
-                                                  onItemCheck={onListCheckHandler}
-                                                  buttonNegativeAction={onClickNegativeButtonHandler}
-                                                  buttonPositiveAction={onClickPositiveButtonHandler}
-                                                  onClickOutside={onClickOutsideHandler}
+                {showLists && <OptionsDialog items={listKeys}
+                                             checkedItems={checkedLists}
+                                             onItemCheck={onListCheckHandler}
+                                             buttonNegativeAction={onClickNegativeButtonHandler}
+                                             buttonPositiveAction={onClickPositiveButtonHandler}
+                                             onClickOutside={onClickOutsideHandler}
+                                             title={'My Lists'}
                 />}
 
             </section>

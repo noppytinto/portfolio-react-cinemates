@@ -16,6 +16,10 @@ const authSlice = createSlice({
         setUserData(state, action) {
             state.userData = action.payload.userData;
         },
+
+        setUserLists(state, action) {
+            state.userData.lists = action.payload.lists;
+        }
     },
 });
 

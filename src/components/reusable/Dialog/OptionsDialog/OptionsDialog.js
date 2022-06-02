@@ -2,6 +2,7 @@ import styles from './OptionsDialog.module.scss';
 import ActionDialog from '../ActionDialog/ActionDialog';
 import Checkbox from "../../Checkbox/Checkbox";
 
+
 function OptionsDialog(props) {
     const title = props.title ?? '';
     const items = props.items ?? [];
@@ -14,8 +15,7 @@ function OptionsDialog(props) {
     const onClickOutsideHandler = props.onClickOutside;
 
     let classesDialog = `${styles['dialog']}`;
-    let classesContent = `${styles['dialog__content']}`;
-    let checkedLists = [];
+    // let classesContent = `${styles['dialog__content']}`;
 
 
     //////////////////////////////
@@ -30,10 +30,10 @@ function OptionsDialog(props) {
                 <li key={item}>
                     <Checkbox id={item}
                               value={item}
+                              label={item}
                               onChange={ev => onItemCheck(ev, i)}
                               checked={isChecked}
                     />
-                    <label htmlFor={item}>{item}</label>
                 </li>
             )
         })
@@ -55,7 +55,6 @@ function OptionsDialog(props) {
     //////////////////////////////
     // JSX
     //////////////////////////////
-
     return (
         <ActionDialog className={classesDialog}
                       title={title}
@@ -66,12 +65,11 @@ function OptionsDialog(props) {
                       onClickOutside={onClickOutsideHandler}
         >
             <form>
-                <ul>{spawnItems(items, checkedItems)}</ul>
+                <ul className={styles['dialog__items']}>{spawnItems(items, checkedItems)}</ul>
             </form>
         </ActionDialog>
     );
 
 }// OptionsDialog
-
 
 export default OptionsDialog;

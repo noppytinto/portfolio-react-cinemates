@@ -3,14 +3,15 @@
 .dialog {
   width: 80%;
   min-height: 150px;
-  
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 1.2em;
   padding: 1.5em 1.5em 0;
 
+  
   &__title {
-    font-size: 1.15rem;
+    font-size: 1.3rem;
+    font-weight: 550;
   }
 
   &__main-content {
@@ -19,7 +20,6 @@
 
   &__buttons {
     margin-top: auto;
-
     display: flex;
     justify-content: flex-end;
     gap: 1em;
@@ -29,15 +29,12 @@
   &__button {
     flex-grow: 0;
     padding: .5em .5em 1em .5em;
-
     font-size: .9rem;
     color: #B2CCDF;
     text-transform: uppercase;
     font-weight: 500;
-
     background-color: transparent;
     border-color: transparent;
-
     transition: all .2s;
   }
 
@@ -45,4 +42,5 @@
     transform: scale(1.09);
 
   }
+  
 }// .dialog

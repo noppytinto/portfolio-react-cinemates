@@ -1,11 +1,10 @@
-import ReactDOM from 'react-dom';
 import styles from './LoadingDialog.module.scss';
 import Dialog from '../Dialog';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 
 function LoadingDialog(props) {
     const message = props.message ?? '';
-    const onClickOuterAreaHandler = props.onClickOuterArea;
+    const onClickOutsideHandler = props.onClickOutside;
 
     let classesDialog = `${styles['dialog']} ${props.className}`;
     let classesMessage = `${styles['dialog__message']}`;
@@ -21,7 +20,7 @@ function LoadingDialog(props) {
     // JSX
     //////////////////////////////
     return (
-        <Dialog className={classesDialog} onClickOuterArea={onClickOuterAreaHandler}>
+        <Dialog className={classesDialog} onClickOutside={onClickOutsideHandler}>
             <LoadingSpinner />
             <p className={classesMessage}>{message}</p>
         </Dialog>
