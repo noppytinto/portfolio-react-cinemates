@@ -2,7 +2,7 @@ import * as authService from '../services/auth-service';
 import {doc, getFirestore, setDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
 
-export async function addToList(listName, movieId) {
+export async function addMovieToList(listName, movieId) {
     if (!movieId) {
         console.log('cannot insert movie: movieId is null');
         return;
@@ -21,7 +21,7 @@ export async function addToList(listName, movieId) {
     console.log(`movie:${movieId} added to: ${listName}`);
 }
 
-export async function removeFromList(listName, movieId) {
+export async function removeMovieFromList(listName, movieId) {
     if (!movieId) {
         console.log('cannot remove movie: movieId is null');
         return;
@@ -42,7 +42,7 @@ export async function removeFromList(listName, movieId) {
 
 
 
-export function addToWatchlist(movieId) {
+export function addMovieToWatchlist(movieId) {
     const WATCHLIST_KEY = 'watchlist'
-    addToList(WATCHLIST_KEY, movieId)
+    addMovieToList(WATCHLIST_KEY, movieId)
 }

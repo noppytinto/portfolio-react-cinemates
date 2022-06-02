@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import styles from './ActionDialog.module.scss';
 import Dialog from '../Dialog';
 
@@ -8,7 +8,7 @@ function ActionDialog(props) {
     const buttonPositiveLabel = props.buttonPositiveLabel ?? 'ok';
     const buttonNegativeAction = props.buttonNegativeAction ?? null;
     const buttonPositiveAction = props.buttonPositiveAction ?? null;
-    const onClickOutsideAreaHandler = props.onClickOutsideArea;
+    const onClickOutsideHandler = props.onClickOutside;
 
     let classesDialog = `${styles['dialog']}`;
     let classesTitle = `${styles['dialog__title']}`;
@@ -28,7 +28,8 @@ function ActionDialog(props) {
     //////////////////////////////
     return (
         <Dialog className={classesDialog}
-                onClickOuterArea={onClickOutsideAreaHandler}>
+                onClickOutside={onClickOutsideHandler}
+        >
 
             {title ?? <h1 className={classesTitle}>{title}</h1>}
 

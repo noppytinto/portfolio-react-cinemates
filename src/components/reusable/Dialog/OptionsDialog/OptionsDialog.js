@@ -1,25 +1,20 @@
-import ReactDOM from 'react-dom';
 import styles from './OptionsDialog.module.scss';
 import ActionDialog from '../ActionDialog/ActionDialog';
-import {v4 as uuidv4} from 'uuid';
-import {useRef} from "react";
 import Checkbox from "../../Checkbox/Checkbox";
 
 function OptionsDialog(props) {
     const title = props.title ?? '';
     const items = props.items ?? [];
     const checkedItems = props.checkedItems ?? [];
+    const onItemCheckedHandler = props.onItemCheck ?? null;
     const buttonNegativeLabel = props.buttonNegativeLabel ?? 'cancel';
     const buttonPositiveLabel = props.buttonPositiveLabel ?? 'ok';
     const buttonNegativeAction = props.buttonNegativeAction ?? null;
     const buttonPositiveAction = props.buttonPositiveAction ?? null;
-    const onClickOutsideAreaHandler = props.onClickOutsideArea;
+    const onClickOutsideHandler = props.onClickOutside;
 
     let classesDialog = `${styles['dialog']}`;
     let classesContent = `${styles['dialog__content']}`;
-
-    let formRef = useRef();
-
     let checkedLists = [];
 
 
@@ -29,24 +24,14 @@ function OptionsDialog(props) {
     function spawnItems(items, checkedItems) {
 
         return items.map((item, i) => {
-            if (checkedItems[i]) {
-                return (
-                    <li key={item}>
-                        <Checkbox id={item}
-                                  value={item}
-                                  onChange={ev => onListChecked(ev, i)}
-                                  checked={true}
-                        />
-                        <label htmlFor={item}>{item}</label>
-                    </li>
-                )
-            }
+            const isChecked = checkedItems[i];
 
             return (
                 <li key={item}>
                     <Checkbox id={item}
                               value={item}
-                              onChange={ev => onListChecked(ev, i)}
+                              onChange={ev => onItemCheck(ev, i)}
+                              checked={isChecked}
                     />
                     <label htmlFor={item}>{item}</label>
                 </li>
@@ -54,36 +39,36 @@ function OptionsDialog(props) {
         })
     }
 
-    function onListChecked(ev, i) {
-        checkedItems[i] = ev.target.checked;
+    function onItemCheck(ev, i) {
+        onItemCheckedHandler?.(ev, i, ev.target.checked);
     }
 
-    function onClickPositiveButton(ev, checkedItems) {
-        buttonPositiveAction?.(ev, checkedItems);
+    function onClickPositiveButton(ev) {
+        buttonPositiveAction?.(ev);
     }
 
-    function onClickNegativeButton(ev, checkedItems) {
-        buttonNegativeAction?.(ev, checkedItems);
+    function onClickNegativeButton(ev) {
+        buttonNegativeAction?.(ev);
     }
 
 
     //////////////////////////////
     // JSX
     //////////////////////////////
-    return ReactDOM.createPortal(
+
+    return (
         <ActionDialog className={classesDialog}
                       title={title}
                       buttonNegativeLabel={buttonNegativeLabel}
                       buttonPositiveLabel={buttonPositiveLabel}
-                      buttonNegativeAction={ev => onClickNegativeButton(ev, checkedItems)}
-                      buttonPositiveAction={ev => onClickPositiveButton(ev, checkedItems)}
-                      onClickOutsideArea={onClickOutsideAreaHandler}
+                      buttonNegativeAction={onClickNegativeButton}
+                      buttonPositiveAction={onClickPositiveButton}
+                      onClickOutside={onClickOutsideHandler}
         >
-            <form ref={formRef}>
+            <form>
                 <ul>{spawnItems(items, checkedItems)}</ul>
             </form>
         </ActionDialog>
-        , document.getElementById('dialog')
     );
 
 }// OptionsDialog
