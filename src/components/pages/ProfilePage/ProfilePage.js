@@ -8,10 +8,11 @@ import * as authService from '../../../services/auth-service';
 import * as cloudinaryService from '../../../services/cloudinary-service';
 import {AdvancedImage} from '@cloudinary/react';
 import * as assets from '../../../utils/assets-manager';
-import * as utils from '../../../utils/utils';
+// import * as utils from '../../../utils/utils';
 import {useState} from "react";
 import ActionDialog from "../../reusable/Dialog/ActionDialog/ActionDialog";
-
+import ListButton from '../../reusable/ListButton/ListButton';
+import {IconLogout} from '../../../utils/assets-manager';
 
 function ProfilePage(props) {
     const classesHeader = `${styles['header']}`;
@@ -40,6 +41,8 @@ function ProfilePage(props) {
 
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
+
+
     /////////////////////////////
     // FUNCTIONS
     /////////////////////////////
@@ -67,6 +70,15 @@ function ProfilePage(props) {
 
     }
 
+    const movies = [
+        assets.testMovie,
+        assets.testMovie,
+        assets.testMovie,
+        assets.testMovie,
+        assets.testMovie,
+    ]
+
+
     /////////////////////////////
     // JSX
     /////////////////////////////
@@ -87,23 +99,31 @@ function ProfilePage(props) {
                     </section>
 
                     <section className={classesLists}>
-                        <h2 className={classesLabel}> {utils.capitalizeFirstLetter(assets.stringLists)} </h2>
+                        <h2 className={`${classesLabel} ${styles['profile-page__label-list']}`}> {assets.stringLists} </h2>
 
+                        <ListButton className={`${styles['profile-page__list-button']}`} 
+                                    movies={movies} title={'Watchlist'} titleColor={'rgb(255, 0, 0)'}/>
+                        <ListButton className={`${styles['profile-page__list-button']}`} 
+                                    movies={movies} title={'Favorites'} titleColor={'rgb(233, 210, 0)'} />
+                        <ListButton className={`${styles['profile-page__list-button']}`} 
+                                    movies={movies} title={'Watched'} titleColor={'rgb(0, 173, 14)'} />
                     </section>
                 </main>
 
                 <footer className={classesSettings}>
-                    <h2 className={classesLabel}> {utils.capitalizeFirstLetter(assets.stringSettings)} </h2>
-                    <button className={classesLogoutButton}
-                            onClick={onClickLogoutHandler}> {assets.stringLogout} </button>
+                    <h2 className={`${classesLabel} ${styles['profile-page__label-settings']}`}> {assets.stringSettings} </h2>
+                    <button className={`${styles['profile-page__btn-option']}`}
+                            onClick={onClickLogoutHandler}> 
+                                <IconLogout />
+                                <p>{assets.stringLogout}</p>
+                            </button>
                 </footer>
 
             </div>
 
-            {showConfirmationDialog && <ActionDialog
-                buttonNegativeAction={onClickNegativeButtonHandler}
-                buttonPositiveAction={onClickPositiveButtonHandler}
-                onClickOutside={onClickNegativeButtonHandler}>
+            {showConfirmationDialog && <ActionDialog buttonNegativeAction={onClickNegativeButtonHandler}
+                                                     buttonPositiveAction={onClickPositiveButtonHandler}
+                                                     onClickOutside={onClickNegativeButtonHandler}>
 
                 <p>Are you sure you want to logout?</p>
 

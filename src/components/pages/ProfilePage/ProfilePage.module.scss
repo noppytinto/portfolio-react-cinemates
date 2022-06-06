@@ -40,11 +40,23 @@
     font-weight: bold;
   }
 
+  &__list-button {
+    margin-bottom: 2em;
+  }
+
 
   &__label {
     font-size: 1.2rem;
-    margin-bottom: 1.5em;
+    margin: 1.5em 0;
+  }
+
+  &__label-list{
+
+  }
+
+  &__label-settings{
     padding: 0 1rem;
+
   }
 
   &__btn-option {
@@ -52,18 +64,21 @@
     //margin-right: -1rem;
     
     padding: 1em;
-    
+    width: 100%;
+    display: flex;
+    gap: 1em;
+
     text-align: start;
     font-size: 1rem;
     font-weight: 500;
     color: var.$color-primary--light-blue;
-    
-    width: 100%;
+   
     border-style: solid;
     border-width: 1px;
     border-color: var.$color-primary--light-blue;
     border-left-width: 0;
     border-right-width: 0;
+    border-bottom: 0;
     background-color: transparent;
     
   }

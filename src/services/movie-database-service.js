@@ -96,7 +96,7 @@ export async function fetchMovie(movieId) {
         return movie;
     } catch (err) {
         console.log('FETCH ERROR: ', err);
-        return [];
+        return {};
     }
 }
 

@@ -9,6 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
+import MovieBuilder from "../models/MovieBuilder";
 
 // icons
 export const iconBrokenImage = '/images/icons/broken_image_black_24dp.svg';
@@ -51,8 +52,8 @@ export const stringPlaceholderSearch = 'search...';
 export const stringLabelLoading = 'loading...';
 export const stringPersonalProfile = 'Personal profile';
 export const stringProfile = 'Profile';
-export const stringSettings = 'settings';
-export const stringLists = 'lists';
+export const stringSettings = 'Settings';
+export const stringLists = 'Lists';
 export const stringLogout = 'logout';
 export const stringLogin = 'login';
 
@@ -108,10 +109,9 @@ export const moviePoster_10 = 'https://www.themoviedb.org/t/p/w1280/qAZ0pzat24kL
 export const moviePoster_11 = 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/11keFudto4QrgrXChukexJwdHPe.jpg';
 
 //
-export const testMovie = new Movie(
-    414906,
-    'The Batman'
-    ,'https://www.themoviedb.org/t/p/w1280/5P8SmMzSNYikXpxil6BYzJ16611.jpg',
-    'In his second year of fighting crime, Batman uncovers corruption in Gotham City that connects to his own family while facing a serial killer known as the Riddler.',
-    '2022-03-03'
-)
+export const testMovie = new MovieBuilder(414906,'The Batman')
+                                .setPosterUrl('https://www.themoviedb.org/t/p/w1280/5P8SmMzSNYikXpxil6BYzJ16611.jpg')
+                                .setOverview('In his second year of fighting crime, Batman uncovers corruption in Gotham City that connects to his own family while facing a serial killer known as the Riddler.',)
+                                .setReleaseDate('2022-03-03')
+                                .build();
+    
