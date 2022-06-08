@@ -105,7 +105,7 @@ function SearchPage(props) {
         <motion.div className={classesSearchPage}
                     initial="hidden"
                     animate="visible"
-                    exit="hidden"
+                    // exit="hidden"
                     variants={props.variants}
                     >
             {/**************************** SEARCH RESULTS*/}

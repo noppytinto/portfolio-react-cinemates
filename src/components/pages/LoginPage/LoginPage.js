@@ -127,7 +127,7 @@ function LoginPage(props) {
         <motion.div className={classesLoginPage}
                     initial="hidden"
                     animate="visible"
-                    exit="hidden"
+                    // exit="hidden"
                     variants={props.variants}
         >
             <HeaderWithBackButton className={classesHeader} 

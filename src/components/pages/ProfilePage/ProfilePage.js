@@ -89,7 +89,7 @@ function ProfilePage(props) {
             <motion.div className={classesProfilePage}
                         initial="hidden"
                         animate="visible"
-                        exit="hidden"
+                        // exit="hidden"
                         variants={props.variants}
             >
                 <HeaderWithBackButton className={classesHeader}

@@ -62,7 +62,7 @@ function ExplorePageList(props) {
         <motion.div className={classes}
                     initial="hidden"
                     animate="visible"
-                    exit="hidden"
+                    // exit="hidden"
                     variants={props.variants}
         >
             <HeaderWithBackButton

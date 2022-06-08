@@ -118,7 +118,7 @@ function MoviePage(props) {
         <motion.div className={classesMoviePage}
                     initial="hidden"
                     animate="visible"
-                    exit="hidden"
+                    // exit="hidden"
                     variants={props.variants}
         >
             <HeaderWithBackButton className={`${styles['header']}`}

@@ -20,7 +20,7 @@ function FeedsPage(props) {
         <motion.div  className={`${styles['home-page']}`}
                      initial="hidden"
                      animate="visible"
-                     exit="hidden"
+                     // exit="hidden"
                      variants={props.variants}
         >
             <PlaceholderPage>

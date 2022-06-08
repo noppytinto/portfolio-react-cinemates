@@ -50,7 +50,7 @@ function ExplorePage(props) {
         <motion.div className={`${styles['explore-page']}`}
         initial="hidden"
         animate="visible"
-        exit="hidden"
+        // exit="hidden"
         variants={props.variants}
         >
             <ul className={`${styles['explore-list']}`}>
