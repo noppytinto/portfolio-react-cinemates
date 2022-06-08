@@ -1,4 +1,7 @@
+@use '../../../scss/variables' as var;
+
 .list-button {
+  width: 100%;
   border-radius: .7em;
   overflow: hidden;
   border-style: solid;
@@ -34,18 +37,19 @@
 
   &__posters {
     display: flex;
-    height: 100px;
+    justify-content: right;
+    flex-direction: row-reverse;
+    height: 130px;
     
   }
 
   &__poster {
     flex-grow: 1;
-
+    flex-basis: 10px;
 
   }
   
   &__poster-image {
-    object-fit: cover;
     width: 100%;
     height: 100%;
 

@@ -30,7 +30,7 @@ const PATH_SEARCH = '/search/movie';
 // "w1280",
 // "original"
 //
-const BASE_URL_IMAGE = 'https://image.tmdb.org/t/p/w342';
+const BASE_URL_IMAGE = 'https://image.tmdb.org/t/p/w185';
 const BASE_URL_BACKDROP = 'https://image.tmdb.org/t/p/w780';
 const BASE_URL_CREDITS = 'https://image.tmdb.org/t/p/w300';
 const QUERIES = `&language=${DEFAULT_LANG}&region=${DEFAULT_REGION}`;

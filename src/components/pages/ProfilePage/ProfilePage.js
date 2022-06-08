@@ -14,6 +14,7 @@ import ActionDialog from "../../reusable/Dialog/ActionDialog/ActionDialog";
 import ListButton from '../../reusable/ListButton/ListButton';
 import {IconLogout} from '../../../utils/assets-manager';
 
+
 function ProfilePage(props) {
     const classesHeader = `${styles['header']}`;
     const classesProfilePage = `${styles['profile-page']}`;
@@ -24,7 +25,6 @@ function ProfilePage(props) {
     const classesLists = `${styles['profile-page__lists']}`;
     const classesSettings = `${styles['profile-page__settings']}`;
     const classesLabel = `${styles['profile-page__label']}`;
-    const classesLogoutButton = `${styles['profile-page__btn-option']} ${styles['profile-page__btn-logout']}`;
 
     const userData = useSelector(state => state.authSlice.userData);
     const isLogged = useSelector(state => state.authSlice);
@@ -41,6 +41,7 @@ function ProfilePage(props) {
 
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
+    const movieLists = userData.lists ?? {};
 
 
     /////////////////////////////
@@ -102,11 +103,11 @@ function ProfilePage(props) {
                         <h2 className={`${classesLabel} ${styles['profile-page__label-list']}`}> {assets.stringLists} </h2>
 
                         <ListButton className={`${styles['profile-page__list-button']}`} 
-                                    movies={movies} title={'Watchlist'} titleColor={'rgb(255, 0, 0)'}/>
+                                    movies={movieLists.watchlist} title={'Watchlist'} titleColor={'rgb(255, 0, 0)'}/>
                         <ListButton className={`${styles['profile-page__list-button']}`} 
-                                    movies={movies} title={'Favorites'} titleColor={'rgb(233, 210, 0)'} />
+                                    movies={movieLists.favorites} title={'Favorites'} titleColor={'#fed23f'} />
                         <ListButton className={`${styles['profile-page__list-button']}`} 
-                                    movies={movies} title={'Watched'} titleColor={'rgb(0, 173, 14)'} />
+                                    movies={movieLists.watched} title={'Watched'} titleColor={'rgb(0, 173, 14)'} />
                     </section>
                 </main>
 
@@ -116,7 +117,7 @@ function ProfilePage(props) {
                             onClick={onClickLogoutHandler}> 
                                 <IconLogout />
                                 <p>{assets.stringLogout}</p>
-                            </button>
+                    </button>
                 </footer>
 
             </div>

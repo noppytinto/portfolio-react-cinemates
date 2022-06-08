@@ -1,31 +1,30 @@
 import styles from './ListButton.module.scss';
-import * as assets from '../../../utils/assets-manager';
 import { v4 as uuidv4 } from 'uuid';
-import { useEffect } from 'react';
-import {fetchMovie} from '../../../services/movie-database-service';
+import MoviePoster from './MoviePoster/MoviePoster';
+
 
 function ListButton(props) {
-    const movies = props.movies ?? [];
+    const movieIds = props.movies ?? [];
 
     const title = props.title ?? '';
     const titleColor = props.titleColor ?? '#000';
 
-    // console.log(movies);
+    console.log(movieIds);
+
+    const ids = getFirstNItems(movieIds, 4);
 
 
     /////////////////////////////
     // FUNCTIONS
     /////////////////////////////
-    // useEffect();
+    function getFirstNItems(movieIds, n) {
+        const ids = [];
+        for (let i=0; i<n; i++) {
+            ids.push(movieIds[i] ?? null);
+        }
+        return ids;
+    }
 
-    // async function fetchPosters(movies) {
-    //     if (!movieId) return;
-
-    //     movies.forEach(async (movie) => {
-
-    //     });
-        
-    // }
 
 
 
@@ -45,21 +44,11 @@ function ListButton(props) {
 
             <ul className={`${styles['list-button__posters']}`}>
 
-                {movies.map((movie) => {
-                    // (async() => {
-                    //     const movieData = await fetchMovie(movie.id);
-                    //             console.log('movie data', movieData);
-                    //             const posterUrl = movieData.posterUrl;
-                    //             const movieTitle = movieData.title;
-
-
-                    // })();
-
+                {ids.map((id) => {
                     return (
                         <li key={uuidv4()} className={`${styles['list-button__poster']}`}>
-                            <img className={`${styles['list-button__poster-image']}`} 
-                                 src={movie.posterUrl} 
-                                 alt={movie.title} />
+                            <MoviePoster className={`${styles['list-button__poster-image']}`} 
+                                         movieId={id} />
                         </li>
                     );
                 })}

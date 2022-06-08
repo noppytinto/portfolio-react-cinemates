@@ -1,4 +1,3 @@
-import Movie from "../models/Movie";
 //
 import BrokenImageIcon from '@mui/icons-material/BrokenImage';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
