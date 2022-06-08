@@ -24,6 +24,12 @@ import {useDispatch} from "react-redux";
 import {authActions} from './redux/slices/auth-slice'
 import { AnimatePresence } from 'framer-motion';
 
+//
+const variants = {
+    hidden: {opacity: 0, transition:{duration: 0.2 }},
+    visible: {opacity: 1, transition:{duration: 0.2 }},
+}
+
 // init backend
 authService.init();
 
@@ -58,23 +64,23 @@ function App() {
             <AnimatePresence exitBeforeEnter>
                 <Routes location={location} key={location.pathname}>
                     <Route path={assets.pathRoot} element={<WithMainHeader />}>
-                        <Route index element={<ExplorePage />} />
-                        <Route path={assets.pathExplorePage} element={<ExplorePage />} />
-                        <Route path={assets.pathFeedsPage} element={ <FeedsPage /> } />
-                        <Route path={assets.pathSearchPage} element={<SearchPage />} />
+                        <Route index element={<ExplorePage  variants={variants}/>} />
+                        <Route path={assets.pathExplorePage} element={<ExplorePage variants={variants}/>} />
+                        <Route path={assets.pathFeedsPage} element={ <FeedsPage variants={variants}/> } />
+                        <Route path={assets.pathSearchPage} element={<SearchPage variants={variants}/>} />
 
                         <Route path={assets.pathPlayground} element={<PlaygroundPage />} />
                         <Route path={assets.pathTest} element={ <Navigate to={assets.pathPlayground} /> } />
-                        <Route path={assets.pathAny} element={<Error404Page />} />
+                        <Route path={assets.pathAny} element={<Error404Page variants={variants}/>} />
                     </Route>
 
                     <Route path={assets.pathRoot} element={<WithoutMainHeader />}>
-                        <Route path={assets.pathNotificationPage} element={<NotificationPage />} />
-                        <Route path={assets.pathMovieInfoPageWithId} element={<MoviePage />} />
-                        <Route path={assets.pathSinUpPage} element={<SignUpPage />} />
-                        <Route path={assets.pathLoginPage} element={<LoginPage />} />
-                        <Route path={assets.pathProfilePage} element={<ProfilePage />} />
-                        <Route path={assets.pathExploreList} element={<ExplorePageList />} />
+                        <Route path={assets.pathNotificationPage} element={<NotificationPage variants={variants}/>} />
+                        <Route path={assets.pathMovieInfoPageWithId} element={<MoviePage variants={variants}/>} />
+                        <Route path={assets.pathSinUpPage} element={<SignUpPage variants={variants}/>} />
+                        <Route path={assets.pathLoginPage} element={<LoginPage variants={variants}/>} />
+                        <Route path={assets.pathProfilePage} element={<ProfilePage variants={variants}/>} />
+                        <Route path={assets.pathExploreList} element={<ExplorePageList variants={variants}/>} />
                     </Route>
                 </Routes>
             </AnimatePresence>

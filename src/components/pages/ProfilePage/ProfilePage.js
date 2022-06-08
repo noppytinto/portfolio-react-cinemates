@@ -16,7 +16,6 @@ import {IconLogout} from '../../../utils/assets-manager';
 import {motion} from 'framer-motion';
 
 
-
 function ProfilePage(props) {
     const classesHeader = `${styles['header']}`;
     const classesProfilePage = `${styles['profile-page']}`;
@@ -88,10 +87,10 @@ function ProfilePage(props) {
     return (
         <>
             <motion.div className={classesProfilePage}
-                    initial={{opacity: 0}}
-                    animate={{opacity: 1}}
-                    exit={{opacity: 0}}
-                    transition={{duration: 0.1}}
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        variants={props.variants}
             >
                 <HeaderWithBackButton className={classesHeader}
                                       backTo={assets.pathRoot}

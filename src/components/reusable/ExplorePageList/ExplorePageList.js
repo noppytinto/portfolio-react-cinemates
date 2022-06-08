@@ -60,10 +60,10 @@ function ExplorePageList(props) {
     ////////////////////////////////
     return (
         <motion.div className={classes}
-        initial={{opacity: 0}}
-        animate={{opacity: 1}}
-        exit={{opacity: 0}}
-        transition={{duration: 0.1 }}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    variants={props.variants}
         >
             <HeaderWithBackButton
                 className={styles['explore-page-list__header']}

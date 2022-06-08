@@ -103,10 +103,10 @@ function SearchPage(props) {
     ////////////////////////////
     return (
         <motion.div className={classesSearchPage}
-        initial={{opacity: 0}}
-        animate={{opacity: 1}}
-        exit={{opacity: 0}}
-        transition={{duration: 0.1 }}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    variants={props.variants}
                     >
             {/**************************** SEARCH RESULTS*/}
             <p className={classesSearchLabel}>{assets.stringLabelSearch}   {searchQuery}</p>

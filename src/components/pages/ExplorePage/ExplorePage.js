@@ -6,7 +6,7 @@ import * as assets from '../../../utils/assets-manager';
 import {motion} from 'framer-motion';
 
 
-function ExplorePage() {
+function ExplorePage(props) {
     const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
     const [upcomingMovies, setUpcomingMovies] = useState([]);
     const [popularMovies, setPopularMovies] = useState([]);
@@ -48,10 +48,10 @@ function ExplorePage() {
     ////////////////////////////////////
     return (
         <motion.div className={`${styles['explore-page']}`}
-        initial={{opacity: 0}}
-        animate={{opacity: 1}}
-        exit={{opacity: 0}}
-        transition={{duration: 0.1 }}
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        variants={props.variants}
         >
             <ul className={`${styles['explore-list']}`}>
 

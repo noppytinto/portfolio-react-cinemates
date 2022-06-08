@@ -14,7 +14,7 @@ import {authActions} from '../../../redux/slices/auth-slice';
 import {motion} from 'framer-motion';
 
 
-function MoviePage() {
+function MoviePage(props) {
     const classesMoviePage = `${styles['movie-page']} `;
     const params = useParams();
     const movieId = params.id;
@@ -116,10 +116,10 @@ function MoviePage() {
     ////////////////////////////////////
     return (
         <motion.div className={classesMoviePage}
-        initial={{opacity: 0}}
-        animate={{opacity: 1}}
-        exit={{opacity: 0}}
-        transition={{duration: 0.1 }}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    variants={props.variants}
         >
             <HeaderWithBackButton className={`${styles['header']}`}
                                   title={''}/>
