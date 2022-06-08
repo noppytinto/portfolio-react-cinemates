@@ -16,6 +16,7 @@ import {IconLogout} from '../../../utils/assets-manager';
 import {motion} from 'framer-motion';
 
 
+
 function ProfilePage(props) {
     const classesHeader = `${styles['header']}`;
     const classesProfilePage = `${styles['profile-page']}`;
