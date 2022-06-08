@@ -6,7 +6,7 @@ import useSearchMovies from "../../../hooks/use-search-movies";
 import MovieList from '../../reusable/MovieList/MovieList';
 import {searchMoviePageActions} from '../../../redux/slices/search-movie-page-slice';
 import {useDispatch, useSelector} from "react-redux";
-
+import {motion} from 'framer-motion';
 
 function SearchPage(props) {
     let classesSearchPage = `${styles['search-page']} `;
@@ -102,7 +102,12 @@ function SearchPage(props) {
     // JSX
     ////////////////////////////
     return (
-        <div className={classesSearchPage}>
+        <motion.div className={classesSearchPage}
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        transition={{duration: 0.1 }}
+                    >
             {/**************************** SEARCH RESULTS*/}
             <p className={classesSearchLabel}>{assets.stringLabelSearch}   {searchQuery}</p>
 
@@ -146,7 +151,7 @@ function SearchPage(props) {
                     </div>
                 </form>
             </div>
-        </div>
+        </motion.div>
     );
 }// SearchPage
 

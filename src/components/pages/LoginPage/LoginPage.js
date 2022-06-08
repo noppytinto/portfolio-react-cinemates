@@ -9,7 +9,7 @@ import HeaderWithBackButton
 import * as authService from '../../../services/auth-service';
 import LoadingDialog from '../../reusable/Dialog/LoadingDialog/LoadingDialog';
 import TextField from '../../reusable/TextField/TextField';
-
+import {motion} from 'framer-motion';
 
 function LoginPage(props) {
     const classesLoginPage = `${styles['login-page']}`;
@@ -124,7 +124,12 @@ function LoginPage(props) {
     // JSX
     /////////////////////////////
     return (
-        <div className={classesLoginPage}>
+        <motion.div className={classesLoginPage}
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        transition={{duration: 0.1}}
+        >
             <HeaderWithBackButton className={classesHeader} 
                                   backButtonUrl={'/'} 
                                   title={'Login'} />
@@ -164,7 +169,7 @@ function LoginPage(props) {
             </main>
 
             {showDialog && <LoadingDialog message={'login...'}/>}
-        </div>
+        </motion.div>
     );
 }
 

@@ -3,6 +3,8 @@ import HorizontalMovieList from "./HorizontalMoviesList/HorizontalMovieList";
 import {useEffect, useState} from "react";
 import {getUpcoming, getPopular, getNowPlaying} from '../../../services/movie-database-service';
 import * as assets from '../../../utils/assets-manager';
+import {motion} from 'framer-motion';
+
 
 function ExplorePage() {
     const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
@@ -45,7 +47,12 @@ function ExplorePage() {
     // JSX
     ////////////////////////////////////
     return (
-        <div className={`${styles['explore-page']}`}>
+        <motion.div className={`${styles['explore-page']}`}
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        transition={{duration: 0.1 }}
+        >
             <ul className={`${styles['explore-list']}`}>
 
                 <li className={`${styles['explore-item']}`}>
@@ -59,7 +66,7 @@ function ExplorePage() {
                 </li>
 
             </ul>
-        </div>
+        </motion.div>
     );
 }// ExplorePage
 

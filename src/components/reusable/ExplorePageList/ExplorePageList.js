@@ -7,6 +7,7 @@ import HeaderWithBackButton
     from "../HeaderWithBackButton/HeaderWithBackButton";
 import useFetchMovies from "../../../hooks/use-fetch-movies";
 import Snackbar from '../../../my-packages/snackbar-system/Snackbar';
+import {motion} from 'framer-motion';
 
 
 function ExplorePageList(props) {
@@ -58,7 +59,12 @@ function ExplorePageList(props) {
     // JSX
     ////////////////////////////////
     return (
-        <div className={classes}>
+        <motion.div className={classes}
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        transition={{duration: 0.1 }}
+        >
             <HeaderWithBackButton
                 className={styles['explore-page-list__header']}
                 title={listTitle}/>
@@ -73,7 +79,7 @@ function ExplorePageList(props) {
             {isListEnded && <Snackbar text={'No more movies'}
                                       actionLabel={'ok'}
                                       onClickAction={actionHandler}/>}
-        </div>
+        </motion.div>
     );
 }
 

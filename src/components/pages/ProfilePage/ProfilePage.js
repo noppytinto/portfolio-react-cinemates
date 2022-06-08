@@ -13,6 +13,7 @@ import {useState} from "react";
 import ActionDialog from "../../reusable/Dialog/ActionDialog/ActionDialog";
 import ListButton from '../../reusable/ListButton/ListButton';
 import {IconLogout} from '../../../utils/assets-manager';
+import {motion} from 'framer-motion';
 
 
 function ProfilePage(props) {
@@ -85,7 +86,12 @@ function ProfilePage(props) {
     /////////////////////////////
     return (
         <>
-            <div className={classesProfilePage}>
+            <motion.div className={classesProfilePage}
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    exit={{opacity: 0}}
+                    transition={{duration: 0.1}}
+            >
                 <HeaderWithBackButton className={classesHeader}
                                       backTo={assets.pathRoot}
                                       title={assets.stringPersonalProfile}/>
@@ -120,7 +126,7 @@ function ProfilePage(props) {
                     </button>
                 </footer>
 
-            </div>
+            </motion.div>
 
             {showConfirmationDialog && <ActionDialog buttonNegativeAction={onClickNegativeButtonHandler}
                                                      buttonPositiveAction={onClickPositiveButtonHandler}

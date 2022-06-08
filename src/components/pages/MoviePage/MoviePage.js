@@ -11,6 +11,7 @@ import OptionsDialog from '../../reusable/Dialog/OptionsDialog/OptionsDialog';
 import * as userDao from '../../../dao/user-dao';
 import {useDispatch, useSelector} from "react-redux";
 import {authActions} from '../../../redux/slices/auth-slice';
+import {motion} from 'framer-motion';
 
 
 function MoviePage() {
@@ -114,7 +115,12 @@ function MoviePage() {
     // JSX
     ////////////////////////////////////
     return (
-        <div className={classesMoviePage}>
+        <motion.div className={classesMoviePage}
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        transition={{duration: 0.1 }}
+        >
             <HeaderWithBackButton className={`${styles['header']}`}
                                   title={''}/>
 
@@ -188,7 +194,7 @@ function MoviePage() {
                 <h2 className={`${styles['movie-page__cast-title']}`}>Cast</h2>
                 <CastList cast={cast}/>
             </section>
-        </div>
+        </motion.div>
     );
 }// MoviePage
 
