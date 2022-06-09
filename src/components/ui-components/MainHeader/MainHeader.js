@@ -6,7 +6,6 @@ import * as cloudinaryService from '../../../services/cloudinary-service';
 import { AdvancedImage } from '@cloudinary/react';
 
 function MainHeader() {
-    console.log('header called');
     const userIsLogged = useSelector((state) => state.authSlice.isLogged);
     const userData = useSelector((state) => state.authSlice.userData);
 

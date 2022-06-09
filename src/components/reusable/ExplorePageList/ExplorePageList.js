@@ -19,36 +19,40 @@ function ExplorePageList(props) {
 
     const [movies, nextPage, isLoading, isListEnded] = useFetchMovies(listTitle);
 
+    console.log('list is ended:', isListEnded);
     ////////////////////////////////////
     // functions
     ////////////////////////////////////
-    function onLastItemMounted(item) {
+    function onLastItemVisibleHandler(item) {
         if (isLoading) return;
         // console.log('last item mounted: ', item);
 
-        const observerCallback = (entries, observer) => {
-            const [entry] = entries;
+        console.log('last item intersected');
+        nextPage();
 
-            if (entry.isIntersecting) {
-                observer.unobserve(entry.target);
-
-                console.log('last item intersected');
-                if (isLoading) {
-                    return;
-                }
-
-                nextPage();
-            }
-        }
-
-        const options = {
-            root: null,
-            threshold: [1]
-        }
-
-        intersectionObserver =
-            new IntersectionObserver(observerCallback, options);
-        intersectionObserver.observe(item);
+        // const observerCallback = (entries, observer) => {
+        //     const [entry] = entries;
+        //
+        //     if (entry.isIntersecting) {
+        //         observer.unobserve(entry.target);
+        //
+        //         console.log('last item intersected');
+        //         if (isLoading) {
+        //             return;
+        //         }
+        //
+        //         nextPage();
+        //     }
+        // }
+        //
+        // const options = {
+        //     root: null,
+        //     threshold: [1]
+        // }
+        //
+        // intersectionObserver =
+        //     new IntersectionObserver(observerCallback, options);
+        // intersectionObserver.observe(item);
     }
 
     function actionHandler(snackbar) {
@@ -70,7 +74,7 @@ function ExplorePageList(props) {
                 title={listTitle}/>
 
             <MovieList movies={movies}
-                       onLastItemMounted={onLastItemMounted}/>
+                       onLastItemVisible={onLastItemVisibleHandler}/>
 
             {isLoading && <p className={styles['loading']}>Loading...</p>}
             {/*{isListEnded && <p className={styles['list-ended']}>-- fin --</p>}*/}

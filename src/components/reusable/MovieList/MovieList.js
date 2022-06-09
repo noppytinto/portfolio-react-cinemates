@@ -1,48 +1,30 @@
-import React, {useEffect} from 'react';
+import React, {memo, useEffect} from 'react';
 import styles from './MovieList.module.scss';
 import MovieListItem from './MovieListItem/MovieListItem';
 import { v4 as uuidv4 } from 'uuid';
 
+
 function MovieList(props) {
+    const movies = props.movies ?? [];
+    const onLastItemVisible = props.onLastItemVisible ?? (()=>{});
+
     let classes = `${styles['movie-list']} `;
 
-    const movies = props.movies ?? [];
-    const lastItemRef = React.createRef();
-
 
     //////////////////////////////////////
-    // functions
+    // FUNCTIONS
     //////////////////////////////////////
-
     // when the last item is mounted
     // trigger useEffect
-    useEffect(() => {
-        if (lastItemRef.current) {
-            props.onLastItemMounted(lastItemRef.current);
-        }
-    }, [lastItemRef, props])
+    // useEffect(() => {
+    //     if (lastItemRef.current) {
+    //         onLastItemMounted(lastItemRef.current);
+    //     }
+    // }, [lastItemRef, props])
 
-    function spawnMovies(movies) {
-        return (
-            movies.map((movie, index) => {
-                    // if is the last item
-                    if (index === movies.length - 1) {
-                        return (
-                            <li key={uuidv4()} ref={lastItemRef}>
-                                <MovieListItem movie={movie}/>
-                            </li>
-                        );
-                    }
-
-                    //
-                    return (
-                        <li key={uuidv4()}>
-                            <MovieListItem movie={movie}/>
-                        </li>
-                    );
-                }
-            )
-        );
+    function onItemVisibleHandler() {
+        console.log('last item visible');
+        onLastItemVisible();
     }
 
 
@@ -51,7 +33,14 @@ function MovieList(props) {
     //////////////////////////////////////
     return (
         <ul className={classes}>
-            {spawnMovies(movies)}
+            {movies.map((movie, index) => {
+                const isLastItem = (index === movies.length - 1);
+
+                return <MovieListItem key={index}
+                                      movie={movie}
+                                      onItemVisible={isLastItem ? onItemVisibleHandler : (()=>{})}
+                                      index={index} />;
+            })}
         </ul>
     );
 }// MovieList

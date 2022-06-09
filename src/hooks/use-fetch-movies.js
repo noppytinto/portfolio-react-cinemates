@@ -18,7 +18,7 @@ function useFetchMovies(type = '') {
     function nextPage() {
         console.log('current page:', page);
         console.log('current total pages:', totPages.current);
-        if (page > totPages.current) {
+        if (page >= totPages.current) {
             console.log('STOP NEXT');
             setIsListEnded(true);
             return;
@@ -39,7 +39,7 @@ function useFetchMovies(type = '') {
             console.log('fetching movies................');
 
             // setting relative fetch function
-            let fetchFunction = ((page)=>null);
+            let fetchFunction = ((page)=>{});
             if(type) {
                 if (type === assets.stringTitleNowPlaying) fetchFunction = getNowPlaying;
                 else if (type === assets.stringTitlePopular) fetchFunction = getPopular;
