@@ -5,12 +5,19 @@ export default function useIntersection(targetRef, viewport=null) {
 
     useEffect(() => {
         const observer = new IntersectionObserver(
+            // callback
             (entries, observer) => {
                 const [entry] = entries;
                 if (entry.isIntersecting) {
                     setIntersecting(entry.isIntersecting);
                     observer.disconnect();
                 }
+            },
+
+            // options
+            {
+                root: null,
+                threshold: 0.99 // for mobile safari bug
             }
         );
 
