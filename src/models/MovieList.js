@@ -1,7 +1,7 @@
 class MovieList {
-    owner,
-    movies,
-    name
+    owner;
+    movies;
+    name;
 
     constructor(name, owner) {
         this.name = name;

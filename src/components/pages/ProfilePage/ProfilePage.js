@@ -72,14 +72,6 @@ function ProfilePage(props) {
 
     }
 
-    const movies = [
-        assets.testMovie,
-        assets.testMovie,
-        assets.testMovie,
-        assets.testMovie,
-        assets.testMovie,
-    ]
-
 
     /////////////////////////////
     // JSX

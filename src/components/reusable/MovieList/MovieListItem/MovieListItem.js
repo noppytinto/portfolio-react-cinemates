@@ -1,10 +1,16 @@
 import styles from './MovieListItem.module.scss';
 import MoviePoster from '../../MoviePoster/MoviePoster';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import * as assets from '../../../../utils/assets-manager';
 import {memo, useEffect, useRef} from "react";
 import {motion} from 'framer-motion';
 import useIntersection from "./use-interesection";
+
+
+const item = {
+    hidden: {opacity: 0},
+    show: {opacity: 1}
+};
 
 function _propsAreEqual(prev, next) {
     // console.log('prev', prev);
@@ -15,7 +21,7 @@ function _propsAreEqual(prev, next) {
 const MovieListItem = memo((props) => {
     let classes = `${styles['movie-list-item']} `;
 
-    const movie =props.movie;
+    const movie = props.movie;
     const index = props.index;
 
     const ref = useRef();
@@ -42,13 +48,14 @@ const MovieListItem = memo((props) => {
     //////////////////////////////////////
     return (
         <motion.li className={classes}
-                   onClick={goToMoviePage}
-                   initial={{opacity: 0}}
-                   animate={{opacity: 1}}
                    ref={ref}
-                   transition={{duration: 0.1}}
+                   onClick={goToMoviePage}
+                   // initial={{opacity: 0}}
+                   // animate={{opacity: 1}}
+                   // transition={{duration: 0.1}}
+                   variants={item}
         >
-            <div  className={styles['movie-poster']}>
+            <div className={styles['movie-poster']}>
                 <MoviePoster shadowed={false}
                              posterImageUrl={movie.posterUrl}
                              alt={movie.title}
