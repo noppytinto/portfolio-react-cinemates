@@ -17,7 +17,7 @@ export default function useIntersection(targetRef, viewport=null) {
             // options
             {
                 root: null,
-                threshold: 0.99 // for mobile safari bug
+                threshold: 0.9 // for mobile safari bug
             }
         );
 
