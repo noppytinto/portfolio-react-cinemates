@@ -26,6 +26,7 @@ function useSearchMovies() {
         
         // scrollToTop();
         resetState();
+        setIsLoading(true);
         setSearchQuery(query);
     }
 
@@ -88,8 +89,6 @@ function useSearchMovies() {
 
         if (!searchQuery) return;
         if (!getNextPage) return;
-
-        console.log('loading additional movies................');
 
         // debounce
         if (timer.current) clearTimeout(timer.current);

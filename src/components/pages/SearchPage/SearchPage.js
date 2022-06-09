@@ -46,8 +46,6 @@ function SearchPage(props) {
     function onSubmitHandler(ev) {
         ev.preventDefault();
 
-        setMovies([]);
-
         const query = searchInputRef.current.value;
         dispatch(searchMoviePageActions.saveQueryString({query: query}));
         searchMovie(query);

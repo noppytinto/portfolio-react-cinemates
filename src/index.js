@@ -17,24 +17,24 @@ const root = createRoot(rootContainer);
 root.render(
     // enable strict in production
     // notes: components are rendered twice in strict mode + dev mode
-    // <React.StrictMode>
-    //     <BrowserRouter>
-    //         <StyledEngineProvider injectFirst>
-    //             <Provider store={mainStore}>
-    //                 <App/>
-    //             </Provider>
-    //         </StyledEngineProvider>
-    //     </BrowserRouter>
-    // </React.StrictMode>
+    <React.StrictMode>
+        <BrowserRouter>
+            <StyledEngineProvider injectFirst>
+                <Provider store={mainStore}>
+                    <App/>
+                </Provider>
+            </StyledEngineProvider>
+        </BrowserRouter>
+    </React.StrictMode>
 
 //
-<BrowserRouter>
-    <StyledEngineProvider injectFirst>
-        <Provider store={mainStore}>
-            <App/>
-        </Provider>
-    </StyledEngineProvider>
-</BrowserRouter>
+// <BrowserRouter>
+//     <StyledEngineProvider injectFirst>
+//         <Provider store={mainStore}>
+//             <App/>
+//         </Provider>
+//     </StyledEngineProvider>
+// </BrowserRouter>
 )
 ;
 
