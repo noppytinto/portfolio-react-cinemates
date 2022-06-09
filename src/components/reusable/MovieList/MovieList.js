@@ -36,7 +36,7 @@ function MovieList(props) {
             {movies.map((movie, index) => {
                 const isLastItem = (index === movies.length - 1);
 
-                return <MovieListItem key={index}
+                return <MovieListItem key={movie.id}
                                       movie={movie}
                                       onItemVisible={isLastItem ? onItemVisibleHandler : (()=>{})}
                                       index={index} />;

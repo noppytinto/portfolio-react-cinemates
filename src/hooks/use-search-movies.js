@@ -12,35 +12,31 @@ function useSearchMovies() {
     const [getNextPage, setGetNextPage] = useState(false);
     const [isListEnded, setIsListEnded] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isNewSearch, setIsNewSearch] = useState(false);
     // const willUseCached = useRef(false);
 
     ////////////////////////////////////
     // functions
     ////////////////////////////////////
+    
+    console.log('searchQuery:', searchQuery);
 
     function searchMovie(query, useCached = false) {
         if (!query) return;
-
-        // willUseCached.current = useCached;
-
-        scrollToTop();
-
-        // reset nextPage state
-        setIsListEnded(false);
-        setGetNextPage(false);
-        setPage(1);
-
-        //
+        
+        // scrollToTop();
+        resetState();
         setSearchQuery(query);
     }
 
     function resetState() {
+        setSearchQuery('');
         setIsLoading(false);
         setIsListEnded(false);
         setGetNextPage(false);
         setPage(1);
-        setSearchQuery('');
         setMovies([]);
+        setIsNewSearch(true);
     }
 
     function scrollToTop() {
@@ -54,7 +50,7 @@ function useSearchMovies() {
     function nextPage() {
         console.log('current page:', page);
         console.log('current total pages:', totPages.current);
-        if (page > totPages.current) {
+        if (page >= totPages.current) {
             console.log('STOP NEXT');
             setIsListEnded(true);
             setGetNextPage(false);
@@ -73,28 +69,10 @@ function useSearchMovies() {
         if (!searchQuery) return;
 
         // debounce
+        setIsNewSearch(false);
         if (timer.current) clearTimeout(timer.current);
         timer.current = setTimeout(async () => {
             console.log('searching movies................');
-
-            // fetching
-            // let fetched = [];
-            // let totalPages = 0;
-            // if (willUseCached) {
-            //     fetched = localStorage.setItem('searchPageMovies');
-            //     localStorage.setItem('searchPageTotalPage');
-            //     totalPages = localStorage.getItem('searchPageTotalPages');
-            // }
-            // else {
-            //     [fetched, totalPages] = await searchMovies(searchQuery);
-
-            //     // cache results
-            //     // useDispatch(searchMoviePageActions.setHasCachedResults(true));
-            //     localStorage.setItem('searchPageMovies', fetched);
-            //     localStorage.setItem('searchPageTotalPage', page);
-            //     localStorage.setItem('searchPageTotalPages', totalPages);
-            // }
-
             const [fetched, totalPages] = await searchMovies(searchQuery);
             
             //
@@ -103,12 +81,15 @@ function useSearchMovies() {
             setIsLoading(false);
 
         }, delay);
-    }, [totPages, setMovies, setIsLoading, timer, delay, searchQuery]);
+    }, [totPages, setMovies, setIsLoading, timer, delay, searchQuery, isNewSearch, setIsNewSearch]);
 
     // effect for next page
     useEffect(() => {
+
         if (!searchQuery) return;
         if (!getNextPage) return;
+
+        console.log('loading additional movies................');
 
         // debounce
         if (timer.current) clearTimeout(timer.current);
@@ -134,7 +115,7 @@ function useSearchMovies() {
 
     //////////////////////////////////////
     //////////////////////////////////////
-    return [movies, nextPage, isLoading, isListEnded, searchMovie, searchQuery, resetState];
+    return [movies, nextPage, isLoading, isListEnded, searchMovie, searchQuery, resetState, setSearchQuery, setMovies];
 }// useSearchMovies
 
 export default useSearchMovies;

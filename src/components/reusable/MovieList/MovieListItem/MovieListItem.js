@@ -9,7 +9,7 @@ import useIntersection from "./use-interesection";
 function _propsAreEqual(prev, next) {
     // console.log('prev', prev);
     // console.log('next', next);
-    return prev.index === next.index;
+    return prev.movie.id === next.movie.id;
 }
 
 const MovieListItem = memo((props) => {

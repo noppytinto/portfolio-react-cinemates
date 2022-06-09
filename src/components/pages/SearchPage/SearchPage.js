@@ -25,10 +25,9 @@ function SearchPage(props) {
     const previousQueryString = useSelector((state) => state.searchMoviePageSlice.query);
     // const previousQueryString = localStorage.getItem('previousQueryString');
 
-    const [movies, nextPage, isLoading, isListEnded, searchMovie, searchQuery, resetState] = useSearchMovies();
+    const [movies, nextPage, isLoading, isListEnded, searchMovie, searchQuery, resetState, setSearchQuery, setMovies] = useSearchMovies();
 
     const searchInputRef = useRef();
-    let intersectionObserver = useRef();
 
 
     ////////////////////////////
@@ -46,39 +45,17 @@ function SearchPage(props) {
 
     function onSubmitHandler(ev) {
         ev.preventDefault();
+
+        setMovies([]);
+
         const query = searchInputRef.current.value;
         dispatch(searchMoviePageActions.saveQueryString({query: query}));
-
         searchMovie(query);
     }
     
-    function onLastItemMounted(item) {
+    function onLastItemVisibleHandler(item) {
         if (isLoading) return;
-        // console.log('last item mounted: ', item);
-
-        const observerCallback = (entries, observer) => {
-            const [entry] = entries;
-
-            if (entry.isIntersecting) {
-                observer.unobserve(entry.target);
-
-                console.log('last item intersected');
-                if (isLoading) {
-                    return;
-                }
-
-                nextPage();
-            }
-        }
-
-        const options = {
-            root: null,
-            threshold: [1]
-        }
-
-        intersectionObserver =
-            new IntersectionObserver(observerCallback, options);
-        intersectionObserver.observe(item);
+        nextPage();
     }
 
     function snackbarActionHandler(snackbar) {
@@ -113,7 +90,7 @@ function SearchPage(props) {
 
             <div className={classesSearchResults}>
                 <MovieList movies={movies}
-                           onLastItemMounted={onLastItemMounted}/>
+                           onLastItemVisible={onLastItemVisibleHandler}/>
                 {isLoading && <p className={styles['loading']}>{assets.stringLabelLoading}</p>}
                 {isListEnded && <Snackbar text={'No more movies'}
                                           actionLabel={'ok'}
