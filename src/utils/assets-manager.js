@@ -75,6 +75,7 @@ export const pathNotificationPage = '/notification';
 export const pathMovieInfoPageWithId = '/movie/:id';
 export const pathMovieInfoPage = '/movie';
 export const pathExploreList = '/explore-list';
+export const pathMoviesListPage = '/movies-list';
 export const pathTest = '/test';
 export const pathAny = '*';
 export const pathPlayground = '/playground';

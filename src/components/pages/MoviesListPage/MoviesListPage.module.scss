@@ -1,0 +1,20 @@
+.header {
+  margin-bottom: 3em;
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.movies-list-page {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 100px));
+    row-gap: 2em;
+    column-gap: 1em;
+    justify-content: space-between;
+  }
+  
+}// .movies-list-page

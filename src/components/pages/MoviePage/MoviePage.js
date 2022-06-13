@@ -162,7 +162,6 @@ function MoviePage(props) {
             <section className={`${styles['movie-page__container-details']}`}>
                 <MoviePoster className={`${styles['movie-page__poster']}`}
                              posterImageUrl={movie.posterUrl}
-                             alt={movie.title}
                              movieTitle={movie.title}/>
 
                 <div className={`${styles['movie-page__container-listing']}`}>

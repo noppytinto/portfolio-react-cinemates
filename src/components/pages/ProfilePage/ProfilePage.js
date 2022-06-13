@@ -28,8 +28,7 @@ function ProfilePage(props) {
     const classesLabel = `${styles['profile-page__label']}`;
 
     const userData = useSelector(state => state.authSlice.userData);
-    const isLogged = useSelector(state => state.authSlice);
-    console.log(isLogged);
+    const isLogged = useSelector(state => state.authSlice.isLogged);
     const username = userData?.username ?? '';
     const imageId = userData?.imageId ?? '';
     const profileImage = cloudinaryService.getTransformedImage(imageId);
@@ -42,7 +41,7 @@ function ProfilePage(props) {
 
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
-    const movieLists = userData.lists ?? {};
+    const movieLists = userData?.lists ?? {};
 
 
     /////////////////////////////

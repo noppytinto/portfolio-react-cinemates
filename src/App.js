@@ -23,11 +23,18 @@ import LoginPage from "./components/pages/LoginPage/LoginPage";
 import {useDispatch} from "react-redux";
 import {authActions} from './redux/slices/auth-slice'
 import { AnimatePresence } from 'framer-motion';
+import MoviesListPage from "./components/pages/MoviesListPage/MoviesListPage";
+import {pathMoviesListPage} from "./utils/assets-manager";
 
 //
 const duration = 0.15;
 const ease = "easeIn";
 const variants = {
+    hidden: {opacity: 0, transition:{duration, ease}},
+    visible: {opacity: 1, transition:{duration, ease}},
+}
+
+const fadeInVariants = {
     hidden: {opacity: 0, transition:{duration, ease}},
     visible: {opacity: 1, transition:{duration, ease}},
 }
@@ -83,6 +90,7 @@ function App() {
                         <Route path={assets.pathLoginPage} element={<LoginPage variants={variants}/>} />
                         <Route path={assets.pathProfilePage} element={<ProfilePage variants={variants}/>} />
                         <Route path={assets.pathExploreList} element={<ExplorePageList variants={variants}/>} />
+                        <Route path={assets.pathMoviesListPage} element={<MoviesListPage variants={fadeInVariants}/>} />
                     </Route>
                 </Routes>
             </AnimatePresence>

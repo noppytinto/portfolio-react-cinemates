@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import * as assets from '../../../../utils/assets-manager';
 import {memo, useEffect, useRef} from "react";
 import {motion} from 'framer-motion';
-import useIntersection from "./use-interesection";
+import useIntersection from "../../../../hooks/use-interesection";
 
 
 const item = {
@@ -58,7 +58,6 @@ const MovieListItem = memo((props) => {
             <div className={styles['movie-poster']}>
                 <MoviePoster shadowed={false}
                              posterImageUrl={movie.posterUrl}
-                             alt={movie.title}
                              movieTitle={movie.title}/>
             </div>
 
