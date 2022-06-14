@@ -15,8 +15,8 @@ export function withCheckbox(MoviePoster){
         // FUNCTIONS
         ////////////////////////////////////
         function onClickHandler(ev) {
+            onChangeHandler(!isChecked, props.movieId);
             setIsChecked(!isChecked);
-            onChangeHandler(isChecked);
         }
 
 

@@ -19,6 +19,13 @@ function MoviesListPage(props) {
     const title = props.title ?? location.state?.title ?? '';
     const movieIds = props.movieIds ?? location.state?.movieIds ?? [];
     const [inEditMode, setInEditMode] = useState(true);
+    const moviesToRemove = new Set();
+
+    function onChangeHandler(isChecked, movieId) {
+        isChecked ? moviesToRemove.add(movieId) : moviesToRemove.delete(movieId);
+    
+        // console.log('moviesToRemove: ', moviesToRemove);
+    }
 
 
     //////////////////////////////////////
@@ -29,7 +36,8 @@ function MoviesListPage(props) {
             <li className={styles['movies-list-page__grid-item']} key={movieId}>
                 {inEditMode ?
                     <MoviePosterWithFetcherAndCheckbox className={styles['movie-poster']}
-                                                       movieId={movieId} />
+                                                       movieId={movieId} 
+                                                       onChange={onChangeHandler}/>
                     :
                     <NavLink className={styles['movie-poster-link']}
                         to={`${assets.pathMovieInfoPage}/${movieId}`}>
