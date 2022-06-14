@@ -21,16 +21,17 @@ function MoviesListPage(props) {
     const [inEditMode, setInEditMode] = useState(true);
     const [moviesToRemove, setMoviesToRemove] = useState(new Set());
 
+
+
+    //////////////////////////////////////
+    // FUNCTIONS
+    //////////////////////////////////////
     function onChangeHandler(isChecked, movieId) {
         isChecked ? moviesToRemove.add(movieId) : moviesToRemove.delete(movieId);
         console.log('moviesToRemove: ', moviesToRemove);
         setMoviesToRemove(new Set(moviesToRemove));
     }
 
-
-    //////////////////////////////////////
-    // FUNCTIONS
-    //////////////////////////////////////
     function spawnPoster(movieId) {
         return (
             <li className={styles['movies-list-page__grid-item']} key={movieId}>
@@ -49,6 +50,11 @@ function MoviesListPage(props) {
         );
     }
 
+    function onClickCancelHandler(ev) {
+        setMoviesToRemove(new Set);
+        setInEditMode(false);
+    }
+
 
 
     //////////////////////////////////////
@@ -63,7 +69,7 @@ function MoviesListPage(props) {
             {inEditMode ?
                 <ActionBar className={styles['action-bar']}
                     title={'Selected: ' + moviesToRemove.size}
-                    onClickCancel={() => { setInEditMode(false) }} />
+                    onClickCancel={onClickCancelHandler} />
 
                 :
 
