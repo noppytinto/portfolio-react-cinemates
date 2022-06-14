@@ -55,6 +55,12 @@ function MoviesListPage(props) {
         setInEditMode(false);
     }
 
+    function onClickEditHandler(ev) {
+        setInEditMode(true);
+        console.log('inEditMode:', inEditMode);
+    }
+
+
 
 
     //////////////////////////////////////
@@ -82,6 +88,16 @@ function MoviesListPage(props) {
             <ul className={`${styles['movies-list-page__grid']}`}>
                 {movieIds.map(id => spawnPoster(id))}
             </ul>
+
+
+            {!inEditMode &&
+                <button className={`${styles['movies-list-page__btn-edit']}`} 
+                        type={'button'}
+                        onClick={onClickEditHandler}>
+                    <assets.IconEdit  className={`${styles['movies-list-page__icon-edit']}`}/>
+                </button>
+            }
+            
         </motion.div>
     );
 }// MoviesListPage
