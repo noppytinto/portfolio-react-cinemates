@@ -18,7 +18,7 @@ function MoviesListPage(props) {
     const location = useLocation();
     const title = props.title ?? location.state?.title ?? '';
     const movieIds = props.movieIds ?? location.state?.movieIds ?? [];
-    const [inEditMode, setInEditMode] = useState(true);
+    const [inEditMode, setInEditMode] = useState(false);
     const [moviesToRemove, setMoviesToRemove] = useState(new Set());
 
 
