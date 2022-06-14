@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './MainHeader.module.scss';
 import * as assets from '../../../utils/assets-manager';
 import { NavLink } from 'react-router-dom';
@@ -5,7 +6,8 @@ import {useSelector} from "react-redux";
 import * as cloudinaryService from '../../../services/cloudinary-service';
 import { AdvancedImage } from '@cloudinary/react';
 
-function MainHeader() {
+
+function MainHeader(props) {
     const userIsLogged = useSelector((state) => state.authSlice.isLogged);
     const userData = useSelector((state) => state.authSlice.userData);
 

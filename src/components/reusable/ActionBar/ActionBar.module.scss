@@ -1,16 +1,20 @@
-.header {
+@use '../../../scss/variables' as var;
+
+
+.action-bar {
   --icon-size: 2.5em;
   --icon-color: #fff;
 
-  padding: .5em 0 .5em 0;
+  padding: .5em .5rem .5em .5rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 1em;
-  background-color: var(--color-primary--blue);
+  background-color: var.$color-primary--yellow;
+  color: black;
 
 
-  &__btn-back {
+  &__btn {
     background-color: transparent;
     border-color: transparent;
   
@@ -19,8 +23,8 @@
     justify-content: center;
   }
   
-  &__icon-back {
-    color: var(--icon-color);
+  &__icon {
+    // color: var(--icon-color);
     font-size: var(--icon-size);
   }
   
@@ -29,4 +33,4 @@
     font-size: 1rem;
   }
 
-}// .header
+}// .action-bar

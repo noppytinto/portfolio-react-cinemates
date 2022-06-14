@@ -4,6 +4,16 @@
   margin-right: -1rem;
 }
 
+.action-bar {
+  margin-top: -1rem;
+  margin-bottom: 3em;
+  margin-left: -2rem;
+  margin-right: -2rem;
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 .movies-list-page {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -18,3 +28,7 @@
   }
   
 }// .movies-list-page
+
+.hidden {
+  display: none;
+}

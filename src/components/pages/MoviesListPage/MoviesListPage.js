@@ -1,16 +1,24 @@
 import styles from './MoviesListPage.module.scss';
-import {motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 import HeaderWithBackButton
     from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
 import * as assets from "../../../utils/assets-manager";
-import {NavLink, useLocation} from "react-router-dom";
-import MoviePoster from "../../reusable/MoviePoster/MoviePoster";
+import { NavLink, useLocation } from "react-router-dom";
+import ActionBar from '../../reusable/ActionBar/ActionBar';
+import { useState } from 'react';
+import { withFetcher } from '../../reusable/MoviePoster/MoviePosterWithFetcher/MoviePosterWithFetcher';
+import MoviePoster from '../../reusable/MoviePoster/MoviePoster';
+import { withCheckbox } from '../../reusable/MoviePoster/MoviePosterWithCheckbox/MoviePosterWithCheckbox';
+
+const MoviePosterWithFetcher = withFetcher(MoviePoster);
+const MoviePosterWithFetcherAndCheckbox = withCheckbox(withFetcher(MoviePoster));
 
 
 function MoviesListPage(props) {
     const location = useLocation();
     const title = props.title ?? location.state?.title ?? '';
     const movieIds = props.movieIds ?? location.state?.movieIds ?? [];
+    const [inEditMode, setInEditMode] = useState(true);
 
 
     //////////////////////////////////////
@@ -19,13 +27,16 @@ function MoviesListPage(props) {
     function spawnPoster(movieId) {
         return (
             <li className={styles['movies-list-page__grid-item']} key={movieId}>
-                <NavLink className={styles['movie-poster-link']}
-                         to={`${assets.pathMovieInfoPage}/${movieId}`}>
-
-                    <MoviePoster className={styles['movie-poster']}
-                                 movieId={movieId}/>
-
-                </NavLink>
+                {inEditMode ?
+                    <MoviePosterWithFetcherAndCheckbox className={styles['movie-poster']}
+                                                       movieId={movieId} />
+                    :
+                    <NavLink className={styles['movie-poster-link']}
+                        to={`${assets.pathMovieInfoPage}/${movieId}`}>
+                        <MoviePosterWithFetcher className={styles['movie-poster']}
+                                                movieId={movieId} />
+                    </NavLink>
+                }
             </li>
         );
     }
@@ -37,12 +48,22 @@ function MoviesListPage(props) {
     //////////////////////////////////////
     return (
         <motion.div className={`${styles['movies-list-page']}`}
-                    initial={'hidden'}
-                    animate={'visible'}
-                    variants={props.variants}>
-            <HeaderWithBackButton className={`${styles['header']}`}
-                                  backTo={assets.pathProfilePage}
-                                  title={title}/>
+            initial={'hidden'}
+            animate={'visible'}
+            variants={props.variants}>
+
+            {inEditMode ?
+                <ActionBar className={styles['action-bar']}
+                    title={'Selected: 2'}
+                    onClickCancel={() => { setInEditMode(false) }} />
+
+                :
+
+                <HeaderWithBackButton className={`${styles['header']}`}
+                    backTo={assets.pathProfilePage}
+                    title={title} />
+            }
+
 
             <ul className={`${styles['movies-list-page__grid']}`}>
                 {movieIds.map(id => spawnPoster(id))}

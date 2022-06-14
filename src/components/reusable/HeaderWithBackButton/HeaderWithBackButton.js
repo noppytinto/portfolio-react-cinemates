@@ -1,10 +1,11 @@
+import React from 'react';
 import styles from './HeaderWithBackButton.module.scss';
 import * as assets from '../../../utils/assets-manager';
 import {useNavigate} from 'react-router-dom';
 
 
-function HeaderWithBackButton(props) {
-    let classes = `${styles['header']} ${props.className} `;
+const HeaderWithBackButton = (props)=> {
+    const classes = `${styles['header']} ${props.className} `;
     const title = props.title ?? assets.stringTitleMissing;
     const backTo = props.backTo ?? -1;
     const navigate = useNavigate();
@@ -35,6 +36,6 @@ function HeaderWithBackButton(props) {
             <p className={styles['header__title']}>{title}</p>
         </header>
     );
-}// HeaderWithBackButton
+};// HeaderWithBackButton
 
-export default HeaderWithBackButton;
+export default React.memo(HeaderWithBackButton);

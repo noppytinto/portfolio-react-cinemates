@@ -9,6 +9,8 @@ import ClearIcon from '@mui/icons-material/Clear';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MovieBuilder from "../models/MovieBuilder";
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 // icons
 export const iconBrokenImage = '/images/icons/broken_image_black_24dp.svg';
@@ -26,6 +28,8 @@ export const IconSearch = SearchIcon;
 export const IconClear = ClearIcon;
 export const IconPerson = PersonIcon;
 export const IconLogout = LogoutIcon;
+export const IconUnchecked = RadioButtonUncheckedIcon;
+export const IconChecked = CheckCircleIcon;
 
 
 // colors
