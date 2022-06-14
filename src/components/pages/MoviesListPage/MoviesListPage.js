@@ -24,9 +24,7 @@ function MoviesListPage(props) {
     function onChangeHandler(isChecked, movieId) {
         isChecked ? moviesToRemove.add(movieId) : moviesToRemove.delete(movieId);
         console.log('moviesToRemove: ', moviesToRemove);
-
-        const newSet = new Set(moviesToRemove);
-        setMoviesToRemove(newSet);
+        setMoviesToRemove(new Set(moviesToRemove));
     }
 
 
