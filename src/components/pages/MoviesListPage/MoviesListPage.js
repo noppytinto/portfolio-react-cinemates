@@ -19,12 +19,14 @@ function MoviesListPage(props) {
     const title = props.title ?? location.state?.title ?? '';
     const movieIds = props.movieIds ?? location.state?.movieIds ?? [];
     const [inEditMode, setInEditMode] = useState(true);
-    const moviesToRemove = new Set();
+    const [moviesToRemove, setMoviesToRemove] = useState(new Set());
 
     function onChangeHandler(isChecked, movieId) {
         isChecked ? moviesToRemove.add(movieId) : moviesToRemove.delete(movieId);
-    
-        // console.log('moviesToRemove: ', moviesToRemove);
+        console.log('moviesToRemove: ', moviesToRemove);
+
+        const newSet = new Set(moviesToRemove);
+        setMoviesToRemove(newSet);
     }
 
 
@@ -62,7 +64,7 @@ function MoviesListPage(props) {
 
             {inEditMode ?
                 <ActionBar className={styles['action-bar']}
-                    title={'Selected: 2'}
+                    title={'Selected: ' + moviesToRemove.size}
                     onClickCancel={() => { setInEditMode(false) }} />
 
                 :
