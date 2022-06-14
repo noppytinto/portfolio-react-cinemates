@@ -12,6 +12,8 @@ import MovieBuilder from "../models/MovieBuilder";
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SelectAllIcon from '@mui/icons-material/SelectAll';
 
 
 // icons
@@ -33,6 +35,8 @@ export const IconLogout = LogoutIcon;
 export const IconUnchecked = RadioButtonUncheckedIcon;
 export const IconChecked = CheckCircleIcon;
 export const IconEdit = EditIcon;
+export const IconBin = DeleteIcon;
+export const IconSelectAll = SelectAllIcon;
 
 
 // colors

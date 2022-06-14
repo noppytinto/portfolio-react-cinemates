@@ -7,7 +7,6 @@
 
   padding: .5em .5rem .5em .5rem;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   gap: 1em;
   background-color: var.$color-primary--yellow;
@@ -31,6 +30,15 @@
   &__title {
     font-weight: 500;
     font-size: 1rem;
+  }
+
+  &__action-buttons {
+    padding-right: .5em;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 1.5em;
   }
 
 }// .action-bar

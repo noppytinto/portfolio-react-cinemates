@@ -60,6 +60,14 @@ function MoviesListPage(props) {
         console.log('inEditMode:', inEditMode);
     }
 
+    function onClickSelectAllHandler(ev) {
+
+    }
+
+    function onClickDeleteHandler(ev) {
+
+    }
+
 
 
 
@@ -75,7 +83,10 @@ function MoviesListPage(props) {
             {inEditMode ?
                 <ActionBar className={styles['action-bar']}
                     title={'Selected: ' + moviesToRemove.size}
-                    onClickCancel={onClickCancelHandler} />
+                    onClickCancel={onClickCancelHandler} 
+                    onClickSelectAll={onClickSelectAllHandler} 
+                    onClickDelete={onClickDeleteHandler} 
+                    />
 
                 :
 
