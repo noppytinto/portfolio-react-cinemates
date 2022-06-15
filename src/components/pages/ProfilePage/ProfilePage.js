@@ -28,7 +28,9 @@ function ProfilePage(props) {
     const classesLabel = `${styles['profile-page__label']}`;
 
     const userData = useSelector(state => state.authSlice.userData);
+    //console.log('user data:',userData);
     const isLogged = useSelector(state => state.authSlice.isLogged);
+    //console.log('PROFILE PAGE, user is logged:', isLogged);
     const username = userData?.username ?? '';
     const imageId = userData?.imageId ?? '';
     const profileImage = cloudinaryService.getTransformedImage(imageId);
@@ -100,11 +102,11 @@ function ProfilePage(props) {
                         <h2 className={`${classesLabel} ${styles['profile-page__label-list']}`}> {assets.stringLists} </h2>
 
                         <ListButton className={`${styles['profile-page__list-button']}`} 
-                                    movies={movieLists.watchlist} title={'Watchlist'} titleColor={'rgb(255, 0, 0)'}/>
+                                    movies={movieLists.watchlist} listName={'watchlist'} title={'Watchlist'} titleColor={'rgb(255, 0, 0)'}/>
                         <ListButton className={`${styles['profile-page__list-button']}`} 
-                                    movies={movieLists.favorites} title={'Favorites'} titleColor={'#fed23f'} />
+                                    movies={movieLists.favorites} listName={'favorites'} title={'Favorites'} titleColor={'#fed23f'} />
                         <ListButton className={`${styles['profile-page__list-button']}`} 
-                                    movies={movieLists.watched} title={'Watched'} titleColor={'rgb(0, 173, 14)'} />
+                                    movies={movieLists.watched} listName={'watched'} title={'Watched'} titleColor={'rgb(0, 173, 14)'} />
                     </section>
                 </main>
 

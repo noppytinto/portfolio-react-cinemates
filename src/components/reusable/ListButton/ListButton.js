@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 
 function ListButton(props) {
     const movieIds = props.movies ?? [];
+    const listName = props.listName ?? '';
     const title = props.title ?? '';
     const titleColor = props.titleColor ?? '#000';
     const ids = getFirstNItems(movieIds, 4);
@@ -24,7 +25,7 @@ function ListButton(props) {
     }
 
     function navigateTo() {
-        navigate('/movies-list', {state: {title, movieIds}});
+        navigate('/movies-list', {state: {title, movieIds, listName}});
     }
 
 

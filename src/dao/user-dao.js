@@ -1,5 +1,5 @@
 import * as authService from '../services/auth-service';
-import {doc, getFirestore, setDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import {doc, getFirestore, setDoc, arrayUnion, arrayRemove, updateDoc } from "firebase/firestore";
 
 
 export async function addMovieToList(listName, movieId) {
@@ -39,6 +39,26 @@ export async function removeMovieFromList(listName, movieId) {
 
     console.log(`movie:${movieId} removed from: ${listName}`);
 }
+
+export async function updateMovieList(listName, updatedList) {
+    if (!listName || !updatedList) {
+        console.log('cannot update list: listName/updatedList is null');
+        return;
+    }
+
+    const firebaseApp = authService.getFirebaseApp();
+    const db = getFirestore(firebaseApp);
+    const currentUserId = authService.getFirebaseAuth().currentUser.uid;
+
+    const listRef = doc(db, "users", currentUserId);
+    const newData = {
+        [`lists.${listName}`]: updatedList
+    }
+    await updateDoc(listRef, newData);
+
+    console.log(`list:${listName} updated with: ${updatedList}`);
+}
+
 
 
 

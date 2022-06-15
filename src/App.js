@@ -68,6 +68,12 @@ function App() {
 
     const location = useLocation();
 
+    function logout() {
+        //dispatcher(authActions.setIsLogged({isLogged: false}));
+        dispatcher(authActions.changeState(false));
+
+    }
+
     return (
         <div className={'App'}>
             <AnimatePresence exitBeforeEnter>
@@ -90,7 +96,7 @@ function App() {
                         <Route path={assets.pathLoginPage} element={<LoginPage variants={variants}/>} />
                         <Route path={assets.pathProfilePage} element={<ProfilePage variants={variants}/>} />
                         <Route path={assets.pathExploreList} element={<ExplorePageList variants={variants}/>} />
-                        <Route path={assets.pathMoviesListPage} element={<MoviesListPage variants={fadeInVariants}/>} />
+                        <Route path={assets.pathMoviesListPage} element={<MoviesListPage logout={logout}variants={fadeInVariants}/>} />
                     </Route>
                 </Routes>
             </AnimatePresence>

@@ -3,13 +3,14 @@ import {motion} from 'framer-motion';
 import HeaderWithBackButton
     from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
 import * as assets from "../../../utils/assets-manager";
-import {NavLink, useLocation} from "react-router-dom";
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import ActionBar from '../../reusable/ActionBar/ActionBar';
 import {useEffect, useState} from 'react';
 import MoviePoster from '../../reusable/MoviePoster/MoviePoster';
 import withFetcher from '../../reusable/MoviePoster/withFetcher/withFetcher';
 import withCheckbox from '../../reusable/MoviePoster/withCheckbox/withCheckbox';
-
+import {useDispatch, useSelector} from "react-redux";
+import authSlice, {authActions} from '../../../redux/slices/auth-slice';
 const MoviePosterWithFetcher = withFetcher(MoviePoster);
 const MoviePosterWithFetcherAndCheckbox = withCheckbox(withFetcher(MoviePoster));
 
@@ -17,10 +18,17 @@ const MoviePosterWithFetcherAndCheckbox = withCheckbox(withFetcher(MoviePoster))
 function MoviesListPage(props) {
     const location = useLocation();
     const title = props.title ?? location.state?.title ?? '';
+    const listName = props.listName ?? location.state?.listName ?? '';
     const movieIds = props.movieIds ?? location.state?.movieIds ?? [];
+    const [currentMovieIds, setCurrentMovieIds] = useState(movieIds);
     const [inEditMode, setInEditMode] = useState(false);
     const [moviesToRemove, setMoviesToRemove] = useState(new Set());
     const [inSelectAllMode, setInSelectAllMode] = useState(false);
+    const dispatcher = useDispatch();
+    const isLogged = useSelector(state => state.authSlice.isLogged);
+    const userData = useSelector(state => state.authSlice.userData);
+    console.log('user is logged', isLogged);
+    const navigate = useNavigate();
 
 
     //////////////////////////////////////
@@ -65,8 +73,11 @@ function MoviesListPage(props) {
     }
 
     function onClickEditHandler(ev) {
-        setInEditMode(true);
-        console.log('inEditMode:', inEditMode);
+        // setInEditMode(true);
+        // console.log('inEditMode:', inEditMode);
+
+        dispatcher(authActions.setIsLogged({isLogged: false}));
+        navigate('/');
     }
 
     function onClickSelectAllHandler(ev) {
@@ -77,7 +88,7 @@ function MoviesListPage(props) {
         if (!inEditMode) return;
 
         inSelectAllMode ?
-            setMoviesToRemove(new Set(movieIds)) : setMoviesToRemove(new Set());
+            setMoviesToRemove(new Set(currentMovieIds)) : setMoviesToRemove(new Set());
     }, [inSelectAllMode])
 
     // useEffect(() => {
@@ -89,7 +100,26 @@ function MoviesListPage(props) {
 
 
     function onClickDeleteHandler(ev) {
-        
+        if (moviesToRemove.size <=0 ) return;
+
+        const newList = new Set(currentMovieIds);
+        for (let id of moviesToRemove) {
+            newList.delete(id);
+        }
+
+        // TODO: update redux state
+        // TODO: update remote db
+        //const oldLists = userData.lists;
+        // const newList2 = {
+        //     ...oldLists,
+        //     [listName]: [...newList]
+        // }
+        //dispatcher(authActions.setUserLists({listName, updatedList: [...newList] }))
+
+        setMoviesToRemove(new Set());
+        setCurrentMovieIds([...newList]);
+
+        console.log('deleting movies: ', [...newList]);
     }
 
 
@@ -120,8 +150,8 @@ function MoviesListPage(props) {
 
             <ul className={`${styles['movies-list-page__grid']}`}>
                 {inEditMode ?
-                    movieIds.map(id => spawnCheckablePoster(id)) :
-                    movieIds.map(id => spawnPoster(id))
+                    currentMovieIds.map(id => spawnCheckablePoster(id)) :
+                    currentMovieIds.map(id => spawnPoster(id))
                 }
             </ul>
 
