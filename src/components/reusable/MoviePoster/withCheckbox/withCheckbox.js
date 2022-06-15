@@ -6,8 +6,10 @@ import {useState} from 'react';
 
 function withCheckbox(MoviePoster){
     return ({...props}) => {
-        const [isChecked, setIsChecked] = useState(false);
+        const checked = props.checked ?? false;
+        const [isChecked, setIsChecked] = useState(checked);
         const onChangeHandler = props.onChange ?? (()=>{});
+
 
 
         ////////////////////////////////////
