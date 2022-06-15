@@ -15,10 +15,10 @@ function useSearchMovies() {
     const [isNewSearch, setIsNewSearch] = useState(false);
     // const willUseCached = useRef(false);
 
+
     ////////////////////////////////////
-    // functions
+    // FUNCTIONS
     ////////////////////////////////////
-    
     console.log('searchQuery:', searchQuery);
 
     function searchMovie(query, useCached = false) {
