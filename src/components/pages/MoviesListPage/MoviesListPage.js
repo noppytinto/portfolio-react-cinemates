@@ -73,11 +73,11 @@ function MoviesListPage(props) {
     }
 
     function onClickEditHandler(ev) {
-        // setInEditMode(true);
-        // console.log('inEditMode:', inEditMode);
+        setInEditMode(true);
+        console.log('inEditMode:', inEditMode);
 
-        dispatcher(authActions.setIsLogged({isLogged: false}));
-        navigate('/');
+        // dispatcher(authActions.setIsLogged({isLogged: false}));
+        // navigate('/');
     }
 
     function onClickSelectAllHandler(ev) {
