@@ -6,9 +6,9 @@ import * as assets from "../../../utils/assets-manager";
 import { NavLink, useLocation } from "react-router-dom";
 import ActionBar from '../../reusable/ActionBar/ActionBar';
 import { useState } from 'react';
-import { withFetcher } from '../../reusable/MoviePoster/MoviePosterWithFetcher/MoviePosterWithFetcher';
+import withFetcher from '../../reusable/MoviePoster/withFetcher/withFetcher';
 import MoviePoster from '../../reusable/MoviePoster/MoviePoster';
-import { withCheckbox } from '../../reusable/MoviePoster/MoviePosterWithCheckbox/MoviePosterWithCheckbox';
+import withCheckbox from '../../reusable/MoviePoster/withCheckbox/withCheckbox';
 
 const MoviePosterWithFetcher = withFetcher(MoviePoster);
 const MoviePosterWithFetcherAndCheckbox = withCheckbox(withFetcher(MoviePoster));

@@ -1,10 +1,10 @@
-// WithRoundBorders(WithFetcher(MoviePoster))
+// WithRoundBorders(withFetcher(MoviePoster))
 import MoviePoster from "../MoviePoster";
 import {useEffect, useState} from "react";
 import {fetchMovie} from "../../../../services/movie-database-service";
 
 
-export function withFetcher(MoviePoster){
+function withFetcher(MoviePoster){
     return ({...props}) => {
         const movieId = props.movieId ?? null;
         const [movie, setMovie] = useState({title: '', posterUrl: null});
@@ -36,6 +36,6 @@ export function withFetcher(MoviePoster){
 } 
 
 
-export default withFetcher(MoviePoster);
+export default withFetcher;
 
    

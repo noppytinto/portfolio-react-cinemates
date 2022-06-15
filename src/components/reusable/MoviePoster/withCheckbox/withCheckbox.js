@@ -1,11 +1,10 @@
-// WithRoundBorders(WithFetcher(MoviePoster))
 import MoviePoster from "../MoviePoster";
-import styles from './MoviePosterWithCheckbox.module.scss';
+import styles from './withCheckbox.module.scss';
 import * as assets from '../../../../utils/assets-manager';
 import {useState} from 'react';
 
 
-export function withCheckbox(MoviePoster){
+function withCheckbox(MoviePoster){
     return ({...props}) => {
         const [isChecked, setIsChecked] = useState(false);
         const onChangeHandler = props.onChange ?? (()=>{});
@@ -38,6 +37,6 @@ export function withCheckbox(MoviePoster){
     };
 } 
 
-export default withCheckbox(MoviePoster);
+export default withCheckbox;
 
    
