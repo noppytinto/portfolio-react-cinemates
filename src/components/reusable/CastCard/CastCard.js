@@ -1,9 +1,9 @@
 import styles from './CastCard.module.scss';
-import * as assetsManager from '../../../utils/assets-manager';
+import * as assets from '../../../utils/assets-manager';
 
 function CastCard({
         className,
-        imageUrl=assetsManager.iconBrokenImage,
+        imageUrl=assets.iconBrokenImage,
         alt='', 
         name='',}
     ) {
@@ -14,12 +14,11 @@ function CastCard({
     let containerCastNameClasses = `${styles['cast-card__container-name']}`;
     let castNameClasses = `${styles['cast-card__name']}`;
 
-
     return (
         <div className={classes} >
             <div className={containerImageClasses} >
                 <img className={imageClasses}
-                     src={imageUrl}
+                     src={imageUrl || assets.iconBrokenImage}
                      alt={alt}
                      draggable={'false'}
                      loading={'lazy'}/>

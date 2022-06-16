@@ -128,7 +128,7 @@ function MoviePage(props) {
             <section className={`${styles['movie-page__container-backdrop']}`}>
                 <div className={`${styles['movie-page__gradient']}`}></div>
                 <img className={`${styles['movie-page__backdrop']}`}
-                     src={movie.backdropUrl}
+                     src={movie.backdropUrl || assets.iconBrokenImage}
                      alt={movie.title}/>
                 <h1 className={`${styles['movie-page__title']}`}>
                     {movie.title}</h1>

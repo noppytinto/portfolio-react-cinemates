@@ -33,7 +33,7 @@ function ProfilePage(props) {
     //console.log('PROFILE PAGE, user is logged:', isLogged);
     const username = userData?.username ?? '';
     const imageId = userData?.imageId ?? '';
-    const profileImage = cloudinaryService.getTransformedImage(imageId);
+    const profileImage = cloudinaryService.getTransformedImage(imageId) || assets.iconBrokenImage;
     // const email = userData.email;
 
     const navigate = useNavigate();

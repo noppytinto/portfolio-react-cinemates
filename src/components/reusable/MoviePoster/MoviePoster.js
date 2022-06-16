@@ -5,14 +5,15 @@ import * as assetsManager from '../../../utils/assets-manager';
 function MoviePoster(props) {
     let movieTitle = props.movieTitle ?? '';
     let shadowed = props.shadowed ?? true;
-    let posterUrl = props.posterImageUrl ?? assetsManager.iconBrokenImage;
+    let posterUrl = props.posterImageUrl || '';
 
     let classes = `${styles['movie-poster']} ${props.className} `;
     let imageClasses = `${styles['movie-poster-image']} `;
     let movieTitleClasses = `${styles['movie-title']} hidden`;
 
     if (shadowed) classes = `${classes} ${styles['movie-poster--shadowed']} `;
-    if (posterUrl === assetsManager.iconBrokenImage) {
+    if (!posterUrl) {
+        posterUrl = assetsManager.iconBrokenImage
         classes = classes + styles['movie-poster--broken'];
         imageClasses = imageClasses + styles['movie-poster-image--broken'];
         movieTitleClasses = `${styles['movie-title']}`;

@@ -248,17 +248,17 @@ function buildGenres(genres) {
 }
 
 function buildImageUrl(path) {
-    if(!Boolean(path)) return assets.iconBrokenImage;
+    if(!Boolean(path)) return '';
     return BASE_URL_IMAGE + path;
 }
 
 function buildProfilePictureUrl(path) {
-    if(!Boolean(path)) return assets.iconBrokenImage;
+    if(!Boolean(path)) return '';
     return BASE_URL_CREDITS + path;
 }
 
 
 function buildBackdropUrl(path) {
-    if(!Boolean(path)) return assets.iconBrokenImage;
+    if(!Boolean(path)) return '';
     return BASE_URL_BACKDROP + path;
 }

@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {fetchMovie} from "../../../../services/movie-database-service";
 
 
-function withFetcher(MoviePoster){
+function withFetcher(MoviePoster) {
     return ({...props}) => {
         const movieId = props.movieId ?? null;
         const [movie, setMovie] = useState({title: '', posterUrl: null});

@@ -32,9 +32,11 @@ function MainHeader(props) {
         return (
             <NavLink className={styles['main-header__link']} to={assets.pathProfilePage}>
                 <div className={`${styles['main-header__icon-container']}`}>
-                    <AdvancedImage className={`${styles['main-header__icon']} ${styles['main-header__icon-profile']}`}
-                                   cldImg={userImage}
-                                   alt={assets.stringAltUserProfile}/>
+                    {userImage &&
+                        <AdvancedImage className={`${styles['main-header__icon']} ${styles['main-header__icon-profile']}`}
+                                       cldImg={userImage}
+                                       alt={assets.stringAltUserProfile}/>
+                    }
                 </div>
             </NavLink>
         );
