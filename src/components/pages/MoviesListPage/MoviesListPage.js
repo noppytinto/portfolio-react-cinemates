@@ -14,6 +14,7 @@ import authSlice, {authActions} from '../../../redux/slices/auth-slice';
 import RoundButton from "../../reusable/RoundButton/RoundButton";
 import ActionDialog from "../../reusable/Dialog/ActionDialog/ActionDialog";
 import * as authService from "../../../services/auth-service";
+import {updateMovieList} from "../../../dao/user-dao";
 const MoviePosterWithFetcher = withFetcher(MoviePoster);
 const MoviePosterWithFetcherAndCheckbox = withCheckbox(withFetcher(MoviePoster));
 
@@ -104,7 +105,7 @@ function MoviesListPage(props) {
         setShowConfirmationDialog(true);
     }
 
-    function removeMovies(moviesToRemove) {
+    async function removeMovies(moviesToRemove) {
         if (moviesToRemove.size <=0 ) return;
 
         const newList = new Set(currentMovieIds);
@@ -112,8 +113,9 @@ function MoviesListPage(props) {
             newList.delete(id);
         }
 
-        dispatcher(authActions.updateUserList({listKey: listName, updatedList: [...newList] }))
         // TODO: update remote db
+        await updateMovieList(listName, [...newList]);
+        dispatcher(authActions.updateUserList({listKey: listName, updatedList: [...newList] }))
 
         setMoviesToRemove(new Set());
         setCurrentMovieIds([...newList]);
@@ -164,10 +166,11 @@ function MoviesListPage(props) {
             </ul>
 
 
-            {!inEditMode &&
+
+            {(movieIds.length > 0 ) && (!inEditMode &&
                 <RoundButton className={`${styles['movies-list-page__btn-edit']}`}
                              onClick={handleClickEdit}
-                             icon={<assets.IconEdit />} />
+                             icon={<assets.IconEdit />} />)
             }
 
             {showConfirmationDialog &&

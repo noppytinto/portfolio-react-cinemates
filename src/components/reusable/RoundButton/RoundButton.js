@@ -8,7 +8,7 @@ function RoundButton(props) {
     // FUNCTIONS
     //////////////////////////////////////
     function handleClick(ev) {
-        props.onClick(ev);
+        props.onClick?.(ev);
     }
 
     //////////////////////////////////////
