@@ -56,8 +56,7 @@ function MovieList(props) {
                 return <MovieListItem
                     key={movie.id}
                     movie={movie}
-                    onItemVisible={isLastItem ? onItemVisibleHandler : (() => {
-                    })}
+                    onItemVisible={isLastItem ? onItemVisibleHandler : (() => {})}
                     index={index}
                 />
             })}

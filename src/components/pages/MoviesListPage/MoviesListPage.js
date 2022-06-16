@@ -41,7 +41,6 @@ function MoviesListPage(props) {
                          to={`${assets.pathMovieInfoPage}/${movieId}`}>
                     <MoviePosterWithFetcher className={styles['movie-poster']}
                                             movieId={movieId}
-                                            lazy={false}
                     />
                 </NavLink>
             </li>
@@ -57,7 +56,6 @@ function MoviesListPage(props) {
                     movieId={movieId}
                     onChange={onChangeHandler}
                     checked={inSelectAllMode}
-                    lazy={false}
                 />
             </li>
         )

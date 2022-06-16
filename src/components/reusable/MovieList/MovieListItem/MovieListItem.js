@@ -58,7 +58,9 @@ const MovieListItem = memo((props) => {
             <div className={styles['movie-poster']}>
                 <MoviePoster shadowed={false}
                              posterImageUrl={movie.posterUrl}
-                             movieTitle={movie.title}/>
+                             movieTitle={movie.title}
+                             lazy={true}
+                />
             </div>
 
             <div className={styles['text-content']}>

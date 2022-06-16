@@ -6,7 +6,7 @@ function MoviePoster(props) {
     let movieTitle = props.movieTitle ?? '';
     let shadowed = props.shadowed ?? true;
     let posterUrl = props.posterImageUrl || '';
-    let lazy = props.lazy ?? true;
+    let lazy = props.lazy ?? false;
 
     let classes = `${styles['movie-poster']} ${props.className} `;
     let imageClasses = `${styles['movie-poster__image']} `;

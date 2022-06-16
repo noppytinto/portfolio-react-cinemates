@@ -26,7 +26,9 @@ function HorizontalMovieList({
                     <MoviePoster className={styles['movie-poster']}
                                  posterImageUrl={movie.posterUrl}
                                  alt={movie.title}
-                                 movieTitle={movie.title}/>
+                                 movieTitle={movie.title}
+                                 lazy={true}
+                    />
                                  
                 </NavLink>
             </li>
