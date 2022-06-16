@@ -11,6 +11,9 @@ import withFetcher from '../../reusable/MoviePoster/withFetcher/withFetcher';
 import withCheckbox from '../../reusable/MoviePoster/withCheckbox/withCheckbox';
 import {useDispatch, useSelector} from "react-redux";
 import authSlice, {authActions} from '../../../redux/slices/auth-slice';
+import RoundButton from "../../reusable/RoundButton/RoundButton";
+import ActionDialog from "../../reusable/Dialog/ActionDialog/ActionDialog";
+import * as authService from "../../../services/auth-service";
 const MoviePosterWithFetcher = withFetcher(MoviePoster);
 const MoviePosterWithFetcherAndCheckbox = withCheckbox(withFetcher(MoviePoster));
 
@@ -25,10 +28,7 @@ function MoviesListPage(props) {
     const [moviesToRemove, setMoviesToRemove] = useState(new Set());
     const [inSelectAllMode, setInSelectAllMode] = useState(false);
     const dispatcher = useDispatch();
-    const isLogged = useSelector(state => state.authSlice.isLogged);
-    const userData = useSelector(state => state.authSlice.userData);
-    console.log('user is logged', isLogged);
-    const navigate = useNavigate();
+    const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
 
     //////////////////////////////////////
@@ -72,7 +72,7 @@ function MoviesListPage(props) {
         setInSelectAllMode(false);
     }
 
-    function onClickEditHandler(ev) {
+    function handleClickEdit(ev) {
         setInEditMode(true);
         console.log('inEditMode:', inEditMode);
 
@@ -101,25 +101,33 @@ function MoviesListPage(props) {
 
     function onClickDeleteHandler(ev) {
         if (moviesToRemove.size <=0 ) return;
+        setShowConfirmationDialog(true);
+    }
+
+    function removeMovies(moviesToRemove) {
+        if (moviesToRemove.size <=0 ) return;
 
         const newList = new Set(currentMovieIds);
         for (let id of moviesToRemove) {
             newList.delete(id);
         }
 
-        // TODO: update redux state
+        dispatcher(authActions.updateUserList({listKey: listName, updatedList: [...newList] }))
         // TODO: update remote db
-        //const oldLists = userData.lists;
-        // const newList2 = {
-        //     ...oldLists,
-        //     [listName]: [...newList]
-        // }
-        //dispatcher(authActions.setUserLists({listName, updatedList: [...newList] }))
 
         setMoviesToRemove(new Set());
         setCurrentMovieIds([...newList]);
+        setShowConfirmationDialog(false);
 
         console.log('deleting movies: ', [...newList]);
+    }
+
+    function handleClickPositiveButton(ev) {
+        removeMovies(moviesToRemove);
+    }
+
+    function handleClickNegativeButton(ev) {
+        setShowConfirmationDialog(false);
     }
 
 
@@ -157,14 +165,17 @@ function MoviesListPage(props) {
 
 
             {!inEditMode &&
-                <button className={`${styles['movies-list-page__btn-edit']}`}
-                        type={'button'}
-                        onClick={onClickEditHandler}>
-                    <assets.IconEdit
-                        className={`${styles['movies-list-page__icon-edit']}`}/>
-                </button>
+                <RoundButton className={`${styles['movies-list-page__btn-edit']}`}
+                             onClick={handleClickEdit}
+                             icon={<assets.IconEdit />} />
             }
 
+            {showConfirmationDialog &&
+                <ActionDialog buttonNegativeAction={handleClickNegativeButton}
+                              buttonPositiveAction={handleClickPositiveButton}
+                              onClickOutside={handleClickNegativeButton}>
+                    <p>Are you sure you want remove selected movies?</p>
+                </ActionDialog>}
         </motion.div>
     );
 }// MoviesListPage

@@ -53,9 +53,7 @@ function LoginPage(props) {
             userData.firebaseId = user.uid;
             dispatcher(authActions.setUserData({userData}));
 
-            setEmailIsValid(true);
-            setPasswordIsValid(true);
-            setShowDialog(false);
+            _resetState();
            
             navigate('/profile');
 
@@ -63,6 +61,12 @@ function LoginPage(props) {
             setShowDialog(false);
             processErrorCodes(errorCode, errorMessage);
         })
+    }
+
+    function _resetState() {
+        setEmailIsValid(true);
+        setPasswordIsValid(true);
+        setShowDialog(false);
     }
 
     function processErrorCodes(errorCode, errorMessage) {

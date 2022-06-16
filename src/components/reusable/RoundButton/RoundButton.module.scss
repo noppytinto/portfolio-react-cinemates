@@ -1,0 +1,29 @@
+@use "../../../scss/variables" as var;
+@use "../../../scss/mixins" as mix;
+
+.round-button {
+  border-radius: 50%;
+  padding: 1em;
+  border-color: transparent;
+  background-color: var.$color-primary--yellow;
+  
+  @include mix.shadowed;
+  transition: all .2s;
+  transition-timing-function: ease-out;
+  
+  &__icon svg,
+  &__icon img,
+  &__icon canvas {
+    display: block;
+    aspect-ratio: 1;
+    
+  }
+  
+}// .round-button
+
+.round-button:active {
+  @include mix.not-shadowed;
+  //transform: scale(.8) ;
+  transform: scale(.8) ;
+  
+}

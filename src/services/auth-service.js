@@ -1,37 +1,39 @@
+import {initializeApp} from "firebase/app";
 import {
     getAuth,
     onAuthStateChanged,
-    setPersistence,
-    browserSessionPersistence,
-    browserLocalPersistence,
+    // setPersistence,
+    // browserSessionPersistence,
+    // browserLocalPersistence,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut
 } from "firebase/auth";
-import {initializeApp} from "firebase/app";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import {
+    getFirestore,
+    doc,
+    getDoc
+} from "firebase/firestore";
 import { getStorage, ref } from "firebase/storage";
 
-// global properties
-let firebaseApp = null;
-let auth = null;
+// init firebase
+const firebaseConfig = {
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth();
+const db = getFirestore(firebaseApp);
+console.log('auth service initialized');
 
 //
 export function init() {
-    const firebaseConfig = {
-        apiKey: process.env.REACT_APP_API_KEY,
-        authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-        projectId: process.env.REACT_APP_PROJECT_ID,
-        storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-        messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-        appId: process.env.REACT_APP_APP_ID,
-        measurementId: process.env.REACT_APP_MEASUREMENT_ID
-    };
-
-    firebaseApp = initializeApp(firebaseConfig);
-    console.log('auth service initilized');
-
-    auth = getAuth();
 
 }
 
@@ -45,7 +47,7 @@ export function getFirebaseAuth() {
 
 export function listenAuthStateChanges(onStateChanged) {
     // listen for authentication state changes
-    onAuthStateChanged(auth, (user) => {
+    return onAuthStateChanged(auth, (user) => {
         onStateChanged(user);
     });
 }
@@ -100,7 +102,6 @@ export function logout(onSuccess, onFailure) {
 export async function getUserData(userId) {
     let userData = null;
 
-    const db = getFirestore(firebaseApp);
     const docRef = doc(db, "users", userId);
     const docSnap = await getDoc(docRef);
 
@@ -113,6 +114,10 @@ export async function getUserData(userId) {
     }
 
     return userData;
+}
+
+export function getUserId(user) {
+    return user.uid;
 }
 
 export function getProfileImageByUsername(username) {

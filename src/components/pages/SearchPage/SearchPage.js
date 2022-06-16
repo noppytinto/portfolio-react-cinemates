@@ -7,6 +7,7 @@ import MovieList from '../../reusable/MovieList/MovieList';
 import {searchMoviePageActions} from '../../../redux/slices/search-movie-page-slice';
 import {useDispatch, useSelector} from "react-redux";
 import {motion} from 'framer-motion';
+import RoundButton from "../../reusable/RoundButton/RoundButton";
 
 function SearchPage(props) {
     let classesSearchPage = `${styles['search-page']} `;
@@ -18,7 +19,6 @@ function SearchPage(props) {
     let classesSearchInputField = `${styles['search-page__input-field']} `;
     let classesSearchButton = `${styles['search-page__btn-search']} `;
     let classesClearButton = `${styles['search-page__btn-clear']} `;
-    let classesSearchIcon = `${styles['search-page__icon-search']} `;
     let classesClearIcon = `${styles['search-page__icon-clear']} `;
 
     const dispatch = useDispatch();
@@ -118,11 +118,9 @@ function SearchPage(props) {
 
                         
                         {/**************************** SEARCH BUTTON */}
-                        <button className={classesSearchButton} 
-                                type={'submit'}>
-                            <assets.IconSearch  className={classesSearchIcon}/>
-                        </button>
-
+                        <RoundButton className={classesSearchButton}
+                                     type={'submit'}
+                                     icon={<assets.IconSearch />} />
                     </div>
                 </form>
             </div>

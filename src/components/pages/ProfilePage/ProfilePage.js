@@ -60,6 +60,7 @@ function ProfilePage(props) {
         authService.logout(() => {
             console.log('LOGOUT SUCCESSFUL');
             dispatcher(authActions.setIsLogged({isLogged: false}));
+            dispatcher(authActions.setUserData({}));
             navigate('/');
         }, (errorCode, errorMessage) => {
             console.log('LOGOUT FAIL');

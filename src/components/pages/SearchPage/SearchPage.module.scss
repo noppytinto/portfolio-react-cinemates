@@ -105,30 +105,6 @@
 //  color: var.$color-primary--yellow;
 //}
 
-.search-page__btn-search {
-
-  border-radius: 50%;
-  padding: 1em;
-  border-color: transparent;
-  background-color: var.$color-primary--yellow;
-
-  @include mix.shadowed;
-  transition: all .2s;
-  transition-timing-function: ease-out;
-}
-
-.search-page__btn-search:active {
-  @include mix.not-shadowed;
-  transform: scale(.8) ;
-}
-
-
-.search-page__icon-search {
-  display: block;
-  color: #000;
-
-}
-
 .search-page__btn-clear{
   position: absolute;
   z-index: 10;

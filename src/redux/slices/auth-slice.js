@@ -28,11 +28,11 @@ const authSlice = createSlice({
 
         updateUserList(state, action) {
             const updatedList = action.payload.updatedList;
-            const listName = action.payload.listName;
-            const oldLists = state.userData.lists;
+            const listKey = action.payload.listKey;
+            const oldLists = state.userData.lists ?? {};
             const newLists = {
                 ...oldLists,
-                [listName]: updatedList,
+                [listKey]: updatedList,
             };
             state.userData.lists = newLists;
         }

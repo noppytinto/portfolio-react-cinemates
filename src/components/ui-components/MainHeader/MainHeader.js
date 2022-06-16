@@ -9,9 +9,7 @@ import { AdvancedImage } from '@cloudinary/react';
 
 function MainHeader(props) {
     const userIsLogged = useSelector((state) => state.authSlice.isLogged);
-    console.log('MAIN HEADER user is logged: ', userIsLogged);
     const userData = useSelector((state) => state.authSlice.userData);
-
 
 
     /////////////////////////////

@@ -9,11 +9,10 @@
 }
 
 .action-bar {
-  margin-top: -1rem;
-  margin-bottom: 3em;
-  margin-left: -2rem;
-  margin-right: -2rem;
-
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin: -1rem -2rem 3em;
   padding-left: 1rem;
   padding-right: 1rem;
 }
@@ -35,14 +34,6 @@
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    border-radius: 50%;
-    padding: 1em;
-    border-color: transparent;
-    background-color: var.$color-primary--yellow;
-  
-    @include mix.shadowed;
-    transition: all .2s;
-    transition-timing-function: ease-out;
   }
   
   
@@ -50,6 +41,4 @@
 
 .hidden {
   display: none;
-
-
 }
