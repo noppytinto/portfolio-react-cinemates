@@ -3,17 +3,16 @@ import {motion} from 'framer-motion';
 import HeaderWithBackButton
     from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
 import * as assets from "../../../utils/assets-manager";
-import {NavLink, useLocation, useNavigate} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 import ActionBar from '../../reusable/ActionBar/ActionBar';
 import {useEffect, useState} from 'react';
 import MoviePoster from '../../reusable/MoviePoster/MoviePoster';
 import withFetcher from '../../reusable/MoviePoster/withFetcher/withFetcher';
 import withCheckbox from '../../reusable/MoviePoster/withCheckbox/withCheckbox';
-import {useDispatch, useSelector} from "react-redux";
-import authSlice, {authActions} from '../../../redux/slices/auth-slice';
+import {useDispatch} from "react-redux";
+import {authActions} from '../../../redux/slices/auth-slice';
 import RoundButton from "../../reusable/RoundButton/RoundButton";
 import ActionDialog from "../../reusable/Dialog/ActionDialog/ActionDialog";
-import * as authService from "../../../services/auth-service";
 import {updateMovieList} from "../../../dao/user-dao";
 const MoviePosterWithFetcher = withFetcher(MoviePoster);
 const MoviePosterWithFetcherAndCheckbox = withCheckbox(withFetcher(MoviePoster));
@@ -41,7 +40,9 @@ function MoviesListPage(props) {
                 <NavLink className={styles['movie-poster-link']}
                          to={`${assets.pathMovieInfoPage}/${movieId}`}>
                     <MoviePosterWithFetcher className={styles['movie-poster']}
-                                            movieId={movieId}/>
+                                            movieId={movieId}
+                                            lazy={false}
+                    />
                 </NavLink>
             </li>
         );
@@ -56,6 +57,7 @@ function MoviesListPage(props) {
                     movieId={movieId}
                     onChange={onChangeHandler}
                     checked={inSelectAllMode}
+                    lazy={false}
                 />
             </li>
         )
