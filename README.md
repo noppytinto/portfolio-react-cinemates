@@ -7,13 +7,17 @@
 <br/>
 
 ### Description:
+
 ---
-Cinemates is a mobile Web App, that allow users to find/explore movies and save them in lists, using the largest movie database (The Movie Database).
+
+Cinemates is a ***mobile*** Web App, that allow users to find/explore movies and save them in lists, using the largest movie database (The Movie Database).
 
 <br/>
 
 ### Features:
+
 ---
+
 - explore Upcomings, Popular and Now Playing movies
 - search movies in the TMDB database
 - view movie details
@@ -23,7 +27,9 @@ Cinemates is a mobile Web App, that allow users to find/explore movies and save 
 <br/>
 
 ### Stack:
+
 ---
+
 - HTML, CSS (SASS)
 - Javascript
 - React
@@ -34,7 +40,9 @@ Cinemates is a mobile Web App, that allow users to find/explore movies and save 
 <br/>
 
 ### Technologies:
+
 ---
+
 - React Router
 - Redux
 - Netlify
