@@ -6,3 +6,27 @@
 ### Link:
 [cinemates.netlify.com](https://cinemates.netlify.com)
 
+### Description:
+Cinemates is a mobile Web App, that allow users to find/explore movies and save them in lists, using the largest movie database (The Movie Database).
+
+### Features:
+- explore Upcomings, Popular and Now Playing movies
+- search movies in the TMDB database
+- view movie details
+- add movies to Watchlist
+- create and manage personal lists
+
+### Stack:
+- HTML, CSS (SASS)
+- Javascript
+- React
+- Firebase
+- Cloudinary
+- TMDB API
+
+### Technologies:
+- React Router
+- Redux
+- Netlify
+- Material UI Icons
+- Framer Motion
