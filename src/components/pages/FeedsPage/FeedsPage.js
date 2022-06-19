@@ -25,7 +25,7 @@ function FeedsPage(props) {
         >
             <PlaceholderPage>
                 <p>
-                    Home
+                    (work in progress)
                 </p>
                 <br />
                 <br />
