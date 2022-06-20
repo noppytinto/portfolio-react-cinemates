@@ -2,7 +2,7 @@ import * as authService from '../services/auth-service';
 import {
     doc,
     getFirestore,
-    //setDoc,
+    setDoc,
     arrayUnion,
     arrayRemove,
     updateDoc
@@ -69,4 +69,20 @@ export async function updateMovieList(listKey, updatedList) {
 export function addMovieToWatchlist(movieId) {
     const WATCHLIST_KEY = 'watchlist'
     addMovieToList(WATCHLIST_KEY, movieId)
+}
+
+export async function createUser(id, email, username, imageId='') {
+    const firebaseApp = authService.getFirebaseApp();
+    const db = getFirestore(firebaseApp);
+    
+    await setDoc(doc(db, "users", id), {
+        email: email,
+        username: username,
+        imageId: imageId,
+        lists: {
+            favorites: [],
+            watched: [],
+            watchlist: [],
+        }
+      });
 }

@@ -11,6 +11,7 @@ import LoadingDialog from '../../reusable/Dialog/LoadingDialog/LoadingDialog';
 import TextField from '../../reusable/TextField/TextField';
 import {motion} from 'framer-motion';
 
+
 function LoginPage(props) {
     const classesLoginPage = `${styles['login-page']}`;
     const classesHeader = `${styles['header']}`;
@@ -123,6 +124,9 @@ function LoginPage(props) {
         return isValid;
     }
 
+    function handleOnClickSignUp(ev) {
+        navigate('/signup');
+    }
 
     /////////////////////////////
     // JSX
@@ -168,13 +172,16 @@ function LoginPage(props) {
                 </form>
 
                 <p className={classesParagraph}>or</p>
+
                 <button className={classesSignUpButton}
-                        type={'button'}> SIGN UP </button>
+                        type={'button'}
+                        onClick={handleOnClickSignUp}> SIGN UP </button>
             </main>
 
             {showDialog && <LoadingDialog message={'login...'}/>}
         </motion.div>
     );
-}
+
+}// LoginPage
 
 export default LoginPage;
