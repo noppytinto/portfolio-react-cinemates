@@ -26,14 +26,90 @@
     gap: 1em;
   }
 
+  &__profile-image-container {
+    position: relative;
+  }
+
   &__profile-image {
     border-style: solid;
     border-radius: 50%;
     border-width: 3px;
     border-color: var.$color-primary--light-blue;
-    box-shadow: .1em .1em 1em 0 rgba($color: #000000, $alpha: .5);
   }
 
+  &__btn-edit-photo {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    aspect-ratio: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-color: transparent;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px 0px rgba(61, 28, 0, 0.5);
+    background-color: rgba(255, 115, 0, 0.3);
+    backdrop-filter: blur(10px);
+
+    transition: all .1s ease-out;
+  }
+
+  &__btn-edit-photo:active {
+    transform: scale(.9);
+    box-shadow: none;
+
+  }
+
+  &__edit-icon {
+    color: var.$color-primary--yellow;
+
+  }
+
+  &__photo-confirmation {
+    width: 100vw;
+    margin-bottom: 1em;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+
+    background-color: var.$color-primary--light-blue;
+  }
+
+  &__confirmation-message {
+    margin-bottom: 1em;
+    color: var.$color-primary--blue;
+    font-weight: bold;
+  }
+
+  &__confirmation-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+  }
+
+  &__confirmation-button {
+    width: 50px;
+    height: 30px;
+    border-radius: .3em;
+    border-color: transparent;
+
+    font-weight: bold;
+
+    background-color: var.$color-primary--yellow;
+    color: #352c0e;
+
+  }
+
+  &__confirmation-button--yes {
+    background-color: #4892c7;
+    color: #172d3d;
+  }
 
   &__username {
     font-size: 1rem;
@@ -87,3 +163,6 @@
 }// .profile-page
 
 
+.hidden {
+  display: none;
+}

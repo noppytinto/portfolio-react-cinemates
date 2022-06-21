@@ -48,12 +48,12 @@ function MainNav() {
                     </NavLink>
                 </li>
 
-                <li className={`${styles['main-nav__item']}`}>
+                {/* <li className={`${styles['main-nav__item']}`}>
                     <NavLink className={homeLinkStyle}
                              to={assets.pathFeedsPage}>
                         <assets.IconHome className={homeIconStyle} />
                     </NavLink>
-                </li>
+                </li> */}
 
                 <li className={`${styles['main-nav__item']}`}>
                     <NavLink className={searchLinkStyle}

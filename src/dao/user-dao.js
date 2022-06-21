@@ -66,6 +66,25 @@ export async function updateMovieList(listKey, updatedList) {
     console.log(`list:${listKey} updated with: ${updatedList}`);
 }
 
+export async function updateProfilePicture(newImageId) {
+    if (!newImageId) {
+        console.log('cannot update profile picture: newImageId is null');
+        return;
+    }
+
+    const firebaseApp = authService.getFirebaseApp();
+    const db = getFirestore(firebaseApp);
+    const currentUserId = authService.getFirebaseAuth().currentUser.uid;
+
+    const userRef = doc(db, "users", currentUserId);
+    const newData = {
+        imageId: newImageId
+    }
+    await updateDoc(userRef, newData);
+
+    console.log(`profile picture updated with: ${newImageId}`);
+}
+
 export function addMovieToWatchlist(movieId) {
     const WATCHLIST_KEY = 'watchlist'
     addMovieToList(WATCHLIST_KEY, movieId)

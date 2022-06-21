@@ -35,6 +35,10 @@ const authSlice = createSlice({
                 [listKey]: updatedList,
             };
             state.userData.lists = newLists;
+        },
+
+        updateProfilePicture(state, action) {
+            state.userData.imageId = action.imageId;
         }
     },
 });

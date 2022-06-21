@@ -8,13 +8,13 @@ import * as authService from '../../../services/auth-service';
 import * as cloudinaryService from '../../../services/cloudinary-service';
 import {AdvancedImage} from '@cloudinary/react';
 import * as assets from '../../../utils/assets-manager';
-// import * as utils from '../../../utils/utils';
-import {useState} from "react";
+import {useRef, useState} from "react";
 import ActionDialog from "../../reusable/Dialog/ActionDialog/ActionDialog";
 import ListButton from '../../reusable/ListButton/ListButton';
 import {IconLogout} from '../../../utils/assets-manager';
 import {motion} from 'framer-motion';
-
+import { v4 as uuidv4 } from 'uuid';
+import * as userDao from '../../../dao/user-dao';
 
 function ProfilePage(props) {
     const classesHeader = `${styles['header']}`;
@@ -28,13 +28,9 @@ function ProfilePage(props) {
     const classesLabel = `${styles['profile-page__label']}`;
 
     const userData = useSelector(state => state.authSlice.userData);
-    //console.log('user data:',userData);
-    const isLogged = useSelector(state => state.authSlice.isLogged);
-    //console.log('PROFILE PAGE, user is logged:', isLogged);
     const username = userData?.username ?? '';
-    const imageId = userData?.imageId ?? '';
-    const profileImage = cloudinaryService.getTransformedImage(imageId) || assets.iconBrokenImage;
-    // const email = userData.email;
+    const oldImageId = userData?.imageId ?? '';
+    const profileImage = cloudinaryService.getTransformedImage(oldImageId) || assets.iconBrokenImage;
 
     const navigate = useNavigate();
 
@@ -45,6 +41,11 @@ function ProfilePage(props) {
 
     const movieLists = userData?.lists ?? {};
 
+    const [showEditPhoto, setShowEditPhoto] = useState(false);
+    const [showConfirmationPhoto, setShowConfirmationPhoto] = useState(false);
+    // const [newProfileImage, setShowEditPhoto] = useState(false);
+    const formRef = useRef();
+    const fileRef = useRef(null);
 
     /////////////////////////////
     // FUNCTIONS
@@ -74,6 +75,41 @@ function ProfilePage(props) {
 
     }
 
+    function handleOnClickUploadYes(ev) {
+        const newImageId = uuidv4();
+        cloudinaryService.uploadImage(fileRef.current, `${newImageId}`, (data) => {
+            console.log('UPLOAD SUCCESSFUL: ',  data);
+            userDao.updateProfilePicture(newImageId);
+            dispatcher(authActions.updateProfilePicture({imageId: newImageId}))
+
+
+        }, (err) => {
+            console.log('UPLOAD FAILED: ',  err);
+        });
+        setShowConfirmationPhoto(false);
+    }
+
+
+    function handleOnClickUploadNo(ev) {
+        if (!showConfirmationPhoto) return;
+
+        setShowConfirmationPhoto(false);
+    }
+
+    function handleOnClickEdit(ev) {
+        console.log('edit button');
+    }
+
+    function handleOnChangeUploadPhoto(ev) {
+        // TODO: show thumbnail
+        
+        fileRef.current = ev.target.files[0];
+        console.log('local file:', fileRef.current);
+
+        //if (!fileRef?.current) return;
+
+        setShowConfirmationPhoto(true);
+    }
 
     /////////////////////////////
     // JSX
@@ -92,10 +128,41 @@ function ProfilePage(props) {
 
                 <main className={classesMain}>
                     <section className={classesUserData}>
-                        <AdvancedImage className={classesProfileImage}
-                                       cldImg={profileImage}
-                                       alt={assets.stringAltProfilePicture}/>
+                        <div className={`${styles['profile-page__profile-image-container']}`}>
+                            <AdvancedImage className={classesProfileImage}
+                                           cldImg={profileImage}
+                                           alt={assets.stringAltProfilePicture}/>
+
+                            <form ref={formRef} method="post" encType="multipart/form-data">
+                                <label onClick={handleOnClickEdit} className={`${styles['profile-page__btn-edit-photo']}`} htmlFor="upload-photo">
+                                    <assets.IconEdit  className={`${styles['profile-page__edit-icon']}`}/>
+                                </label>
+                                <input className={'hidden'} 
+                                       id={"upload-photo"} 
+                                       type={'file'} 
+                                       name={'photoFile'} 
+                                       onChange={handleOnChangeUploadPhoto}></input>
+                            </form>
+                        </div>
+
+                        {showConfirmationPhoto && 
+                        
+                            <div className={`${styles['profile-page__photo-confirmation']}`}>
+                                <p className={`${styles['profile-page__confirmation-message']}`}>update photo?</p>
+                                <div className={`${styles['profile-page__confirmation-buttons']}`}>
+                                    <button  className={`${styles['profile-page__confirmation-button']} ${styles['profile-page__confirmation-button--yes']}`}
+                                             onClick={handleOnClickUploadYes}>
+                                        YES</button>
+                                    <button  className={`${styles['profile-page__confirmation-button']} ${styles['profile-page__confirmation-button--no']}`}
+                                             onClick={handleOnClickUploadNo}>
+                                        NO</button>
+                                </div>
+                            </div>
+                        }
+
+          
                         <p className={classesUsername}>{'@' + username}</p>
+      
 
                     </section>
 

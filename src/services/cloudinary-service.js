@@ -47,6 +47,10 @@ function _getImageBaseUrl() {
     return `https://res.cloudinary.com/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload/`;
 }
 
+function _getImageUploadBaseUrl() {
+    return `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/upload/`;
+}
+
 export function buildImageUrl(imageName, extension='.jpg') {
     const baseUrl = _getImageBaseUrl();
     return baseUrl + imageName + extension;
@@ -64,4 +68,29 @@ export function getTransformedImage(imageId) {
         .roundCorners(byRadius(100));    // Round the corners.
 
     return myImage;
+}
+
+export function uploadImage(file, publicId, onSuccess, onFailure) {
+    const formData = new FormData();
+    const url = _getImageUploadBaseUrl();
+
+    formData.append("file", file);
+    formData.append("upload_preset", "qvrfptez");
+    formData.append("public_id", publicId);
+
+    const options= {
+        method: "POST",
+        body: formData
+      };
+
+    fetch(url, options)
+        .then((response) => {
+          return response.text();
+        })
+        .then((data) => {
+            onSuccess(data);
+        })
+        .catch(err => {
+            onFailure(err);
+        });
 }

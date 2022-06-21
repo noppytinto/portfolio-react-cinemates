@@ -1,9 +1,5 @@
 import styles from './SignUpPage.module.scss';
 import { useRef, useState } from 'react';
-// import * as assets from '../../../utils/assets-manager';
-// import { NavLink } from 'react-router-dom';
-// import {authActions} from '../../../redux/slices/auth-slice'
-// import {useDispatch, useSelector} from "react-redux";
 import * as authService from '../../../services/auth-service';
 import HeaderWithBackButton
     from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
@@ -14,23 +10,23 @@ import {motion} from 'framer-motion';
 import Snackbar from '../../../my-packages/snackbar-system/Snackbar';
 import * as userDao from '../../../dao/user-dao';
 
+
 function SignUpPage(props) {
     const classesSignUpPage = `${styles['signup-page']} ${props.className} `;
-    const emailRef = useRef('');
-    const passwordRef = useRef('');
-    const repeatPasswordRef = useRef('');
-    const usernameRef = useRef('');
-    const navigate = useNavigate();
-
-    // const dispatcher = useDispatch();
-    // const userIsLogged = useSelector((state) => state.authSlice.isLogged);
-
+    
     const [emailIsValid, setEmailIsValid] = useState(true);
     const [passwordIsValid, setPasswordIsValid] = useState(true);
     const [repeatPasswordIsValid, setRepeatPasswordIsValid] = useState(true);
     const [usernameIsValid, setUsernameIsValid] = useState(true);
     const [showDialog, setShowDialog] = useState(false);
     const [showSnackbar, setShowSnackbar] = useState(false);
+
+    const navigate = useNavigate();
+
+    const emailRef = useRef('');
+    const passwordRef = useRef('');
+    const repeatPasswordRef = useRef('');
+    const usernameRef = useRef('');
 
     const emailErrorText = useRef('');
     const passwordErrorText = useRef('');
@@ -54,7 +50,6 @@ function SignUpPage(props) {
         authService.createUserAccount(email.trim(), pass.trim(), async (user) => {
             console.log('SIGNUP SUCCESSFUL:', user);
         
-
             try {
                 userDao.createUser(user.uid, email.trim(), username.trim(), '');
                 navigate('/login');
@@ -70,13 +65,6 @@ function SignUpPage(props) {
             setShowDialog(false);
             processErrorCodes(errorCode, errorMessage);
         })
-    }
-
-    function _resetState() {
-        setEmailIsValid(true);
-        setPasswordIsValid(true);
-        setRepeatPasswordIsValid(true);
-        setUsernameIsValid(true);
     }
 
     function validateInput(email, password, repeatPassword, username) {
@@ -97,22 +85,20 @@ function SignUpPage(props) {
         }
         else setPasswordIsValid(true);
         
-
-        if (!repeatPassword.trim()) {
+        const repeat = repeatPassword.trim();
+        if (!repeat.trim()) {
             repeatPasswordErrorText.current = 'empty field';
             setRepeatPasswordIsValid(false);
             isValid = false;
         }
         else {
             const pass = password.trim();
-            const repeat = repeatPassword.trim();
             if (pass !== repeat) {
                 repeatPasswordErrorText.current = 'passwords do not match';
                 setRepeatPasswordIsValid(false);
                 isValid = false;
             }
             else setRepeatPasswordIsValid(true);
-
         }
 
         if (!username.trim()) {
@@ -133,6 +119,7 @@ function SignUpPage(props) {
         snackbarMessage.current = errorMessage;
         setShowSnackbar(true);
 
+        // TODO: process error codes
         // switch(errorCode) {
         //     case 'auth/invalid-email': 
         //         emailErrorText.current = 'invalid email';
@@ -173,60 +160,64 @@ function SignUpPage(props) {
     // JSX
     /////////////////////////////
     return (
-        <>
+        <motion.div className={classesSignUpPage}
+                    initial="hidden"
+                    animate="visible"
+                    variants={props.variants} >
+
             <HeaderWithBackButton className={`${styles['header']}`} title={'Sign Up (work in progress)'} />
-            <div className={classesSignUpPage}>
-                <section className={`${styles['signup-page__welcome']}`}>
-                    <h1 className={`${styles['signup-page__title']}`}>
-                        Welcome to <span className={`${styles['signup-page__app-name']}`}>Cinemates</span>
-                    </h1>
-                    <p className={`${styles['signup-page__subtitle']}`}>Create a new account to unlock the full experience.</p>
-                </section>
 
-                <form className={`${styles['signup-page__form']}`}>
-                    <TextField type={'email'}
-                               name={'signupEmail'}
-                               placeholder={'user@mail.com'}
-                               ref={emailRef}
-                               label={'Email'}
-                               errorText={emailErrorText.current}
-                               inputIsValid={emailIsValid}/>
+            <section className={`${styles['signup-page__welcome']}`}>
+                <h1 className={`${styles['signup-page__title']}`}>
+                    Welcome to <span className={`${styles['signup-page__app-name']}`}>Cinemates</span>
+                </h1>
+                <p className={`${styles['signup-page__subtitle']}`}>Create a new account to unlock the full experience.</p>
+            </section>
 
-                    <TextField type={'password'}
-                               name={'signupPassword'}
-                               placeholder={'******'}
-                               ref={passwordRef}
-                               label={'Password'}
-                               errorText={passwordErrorText.current}
-                               inputIsValid={passwordIsValid}/>
+            <form className={`${styles['signup-page__form']}`}>
+                <TextField type={'email'}
+                           name={'signupEmail'}
+                           placeholder={'user@mail.com'}
+                           ref={emailRef}
+                           label={'Email'}
+                           errorText={emailErrorText.current}
+                           inputIsValid={emailIsValid}/>
 
-                    <TextField type={'password'}
-                               name={'signupRepeatPassword'}
-                               placeholder={'******'}
-                               ref={repeatPasswordRef}
-                               label={'Repeat Password'}
-                               errorText={repeatPasswordErrorText.current}
-                               inputIsValid={repeatPasswordIsValid}/>
-                    
-                    
-                    <TextField type={'text'}
-                               name={'signupUsername'}
-                               placeholder={'foo'}
-                               ref={usernameRef}
-                               label={'@username'}
-                               errorText={usernameErrorText.current}
-                               inputIsValid={usernameIsValid}/>
+                <TextField type={'password'}
+                           name={'signupPassword'}
+                           placeholder={'******'}
+                           ref={passwordRef}
+                           label={'Password'}
+                           errorText={passwordErrorText.current}
+                           inputIsValid={passwordIsValid}/>
 
-                    <button className={`${styles['signup-page__btn-signup']}`}
-                            type={'button'}
-                            onClick={handleOnClickSignup}> SIGNUP </button>
-                </form>
-            </div>
+                <TextField type={'password'}
+                           name={'signupRepeatPassword'}
+                           placeholder={'******'}
+                           ref={repeatPasswordRef}
+                           label={'Repeat Password'}
+                           errorText={repeatPasswordErrorText.current}
+                           inputIsValid={repeatPasswordIsValid}/>
+                
+                
+                <TextField type={'text'}
+                           name={'signupUsername'}
+                           placeholder={'foo'}
+                           ref={usernameRef}
+                           label={'@username'}
+                           errorText={usernameErrorText.current}
+                           inputIsValid={usernameIsValid}/>
+
+                <button className={`${styles['signup-page__btn-signup']}`}
+                        type={'button'}
+                        onClick={handleOnClickSignup}> SIGNUP </button>
+            </form>
+
             {showDialog && <LoadingDialog message={'signing up...'}/>}
             {showSnackbar && <Snackbar text={snackbarMessage.current}
-                                       actionLabel={'ok'}
-                                       onClickAction={handleSnackbar}/>}
-        </>
+                                    actionLabel={'ok'}
+                                    onClickAction={handleSnackbar}/>}
+        </motion.div>
 
     );
 }// SignUpPage
