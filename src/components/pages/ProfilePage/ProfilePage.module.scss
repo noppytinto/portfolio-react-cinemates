@@ -28,13 +28,17 @@
     position: relative;
   }
 
-  &__profile-image {
+  &__profile-image--preview {
     width: 150px;
     height: 150px;
     border-style: solid;
     border-radius: 50%;
     border-width: 3px;
     border-color: var.$color-primary--light-blue;
+  }
+
+  &__profile-image--preview {
+    object-fit: cover;
   }
 
   &__btn-edit-photo {

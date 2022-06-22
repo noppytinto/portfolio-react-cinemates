@@ -134,7 +134,7 @@ function ProfilePage(props) {
                         <div className={`${styles['profile-page__profile-image-container']}`}>
 
                             {showPreviewFile ?
-                                <img className={ `${styles['profile-page__profile-image']}`} src={previewFile} alt={'thumbnail'} /> :
+                                <img className={ `${styles['profile-page__profile-image']} ${styles['profile-page__profile-image--preview']}`} src={previewFile} alt={'thumbnail'} /> :
                                 <AdvancedImage className={ `${styles['profile-page__profile-image']}`}
                                                cldImg={profileImage}
                                                alt={assets.stringAltProfilePicture}/>
