@@ -1,12 +1,16 @@
-
-
 .dialog {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1em;
   padding: 1.5em;
+
+
+  .loading-spinner {
+  }
 
   &__message {
     text-align: center;
   }
-}
+
+}// .dialog
