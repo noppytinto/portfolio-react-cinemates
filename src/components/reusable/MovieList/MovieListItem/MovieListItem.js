@@ -13,20 +13,15 @@ const item = {
 };
 
 function _propsAreEqual(prev, next) {
-    // console.log('prev', prev);
-    // console.log('next', next);
     return prev.movie.id === next.movie.id;
 }
 
 const MovieListItem = memo((props) => {
-    let classes = `${styles['movie-list-item']} `;
-
     const movie = props.movie;
-    const index = props.index;
-
     const ref = useRef();
     const isVisible = useIntersection(ref);
     const navigate = useNavigate();
+
 
     //////////////////////////////////////
     // FUNCTIONS
@@ -34,7 +29,7 @@ const MovieListItem = memo((props) => {
     useEffect(() => {
         if (isVisible) props.onItemVisible?.();
 
-    }, [props, isVisible]);
+    }, [props.onItemVisible, isVisible]);
 
 
     function goToMoviePage(ev) {
@@ -47,14 +42,11 @@ const MovieListItem = memo((props) => {
     // JSX
     //////////////////////////////////////
     return (
-        <motion.li className={classes}
+        <motion.li className={`${styles['movie-list-item']} ${props.className}`}
                    ref={ref}
                    onClick={goToMoviePage}
-                   // initial={{opacity: 0}}
-                   // animate={{opacity: 1}}
-                   // transition={{duration: 0.1}}
-                   variants={item}
-        >
+                   variants={item}>
+                    
             <div className={styles['movie-poster']}>
                 <MoviePoster shadowed={false}
                              posterImageUrl={movie.posterUrl}

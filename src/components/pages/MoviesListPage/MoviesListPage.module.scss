@@ -30,14 +30,23 @@
     justify-content: space-between;
   }
 
+  @media screen and (max-width: 395px) {
+    &__grid {
+      grid-template-columns: repeat(auto-fill, minmax(50px, 90px));
+  
+    }
+  }
+
   &__btn-edit {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
   }
-  
-  
+
+
 }// .movies-list-page
+
+
 
 .hidden {
   display: none;

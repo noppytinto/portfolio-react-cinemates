@@ -19,15 +19,16 @@ const MoviePosterWithFetcherAndCheckbox = withCheckbox(withFetcher(MoviePoster))
 
 
 function MoviesListPage(props) {
+    const dispatcher = useDispatch();
     const location = useLocation();
     const title = props.title ?? location.state?.title ?? '';
     const listName = props.listName ?? location.state?.listName ?? '';
     const movieIds = props.movieIds ?? location.state?.movieIds ?? [];
+    
     const [currentMovieIds, setCurrentMovieIds] = useState(movieIds);
     const [inEditMode, setInEditMode] = useState(false);
     const [moviesToRemove, setMoviesToRemove] = useState(new Set());
     const [inSelectAllMode, setInSelectAllMode] = useState(false);
-    const dispatcher = useDispatch();
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
 
@@ -39,9 +40,9 @@ function MoviesListPage(props) {
             <li className={styles['movies-list-page__grid-item']} key={movieId}>
                 <NavLink className={styles['movie-poster-link']}
                          to={`${assets.pathMovieInfoPage}/${movieId}`}>
+
                     <MoviePosterWithFetcher className={styles['movie-poster']}
-                                            movieId={movieId}
-                    />
+                                            movieId={movieId} />
                 </NavLink>
             </li>
         );
@@ -51,12 +52,11 @@ function MoviesListPage(props) {
         return (
             <li className={styles['movies-list-page__grid-item']}
                 key={movieId + inSelectAllMode}>
-                <MoviePosterWithFetcherAndCheckbox
-                    className={styles['movie-poster']}
-                    movieId={movieId}
-                    onChange={onChangeHandler}
-                    checked={inSelectAllMode}
-                />
+                    
+                <MoviePosterWithFetcherAndCheckbox className={styles['movie-poster']}
+                                                   movieId={movieId}
+                                                   onChange={onChangeHandler}
+                                                   checked={inSelectAllMode} />
             </li>
         )
     }

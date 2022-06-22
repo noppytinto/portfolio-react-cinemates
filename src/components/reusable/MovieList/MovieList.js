@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './MovieList.module.scss';
 import MovieListItem from './MovieListItem/MovieListItem';
-// import { v4 as uuidv4 } from 'uuid';
 import {motion} from 'framer-motion';
 
-const container = {
+const containerVariants = {
     hidden: {opacity: 0},
     show: {
         opacity: 1,
@@ -17,24 +16,13 @@ const container = {
 
 function MovieList(props) {
     const movies = props.movies ?? [];
-    const onLastItemVisible = props.onLastItemVisible ?? (() => {
-    });
-
-    let classes = `${styles['movie-list']} `;
+    const onLastItemVisible = props.onLastItemVisible ?? (() => {});
 
 
     //////////////////////////////////////
     // FUNCTIONS
     //////////////////////////////////////
-    // when the last item is mounted
-    // trigger useEffect
-    // useEffect(() => {
-    //     if (lastItemRef.current) {
-    //         onLastItemMounted(lastItemRef.current);
-    //     }
-    // }, [lastItemRef, props])
-
-    function onItemVisibleHandler() {
+    function handleOnItemVisible() {
         console.log('last item visible');
         onLastItemVisible();
     }
@@ -44,21 +32,18 @@ function MovieList(props) {
     // JSX
     //////////////////////////////////////
     return (movies.length > 0) ? (
-
-        <motion.ul className={classes}
-                   variants={container}
+        <motion.ul className={`${styles['movie-list']} ${props.className}`}
+                   variants={containerVariants}
                    initial="hidden"
                    animate="show">
 
             {movies.map((movie, index) => {
                 const isLastItem = (index === movies.length - 1);
 
-                return <MovieListItem
-                    key={movie.id}
-                    movie={movie}
-                    onItemVisible={isLastItem ? onItemVisibleHandler : (() => {})}
-                    index={index}
-                />
+                return <MovieListItem key={movie.id}
+                                      movie={movie}
+                                      onItemVisible={isLastItem ? handleOnItemVisible : (() => {})}
+                                      index={index} />
             })}
 
         </motion.ul>
