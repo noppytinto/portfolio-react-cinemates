@@ -8,7 +8,7 @@ import * as authService from '../../../services/auth-service';
 import * as cloudinaryService from '../../../services/cloudinary-service';
 import {AdvancedImage} from '@cloudinary/react';
 import * as assets from '../../../utils/assets-manager';
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import ActionDialog from "../../reusable/Dialog/ActionDialog/ActionDialog";
 import ListButton from '../../reusable/ListButton/ListButton';
 import {IconLogout} from '../../../utils/assets-manager';
@@ -16,44 +16,38 @@ import {motion} from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
 import * as userDao from '../../../dao/user-dao';
 
+
 function ProfilePage(props) {
-    const classesHeader = `${styles['header']}`;
-    const classesProfilePage = `${styles['profile-page']}`;
-    const classesMain = `${styles['profile-page__main']}`;
-    const classesUserData = `${styles['profile-page__user-data']}`;
-    const classesProfileImage = `${styles['profile-page__profile-image']}`;
-    const classesUsername = `${styles['profile-page__profile-username']}`;
-    const classesLists = `${styles['profile-page__lists']}`;
-    const classesSettings = `${styles['profile-page__settings']}`;
-    const classesLabel = `${styles['profile-page__label']}`;
-
-    const userData = useSelector(state => state.authSlice.userData);
-    const username = userData?.username ?? '';
-    const oldImageId = userData?.imageId ?? '';
-    const profileImage = cloudinaryService.getTransformedImage(oldImageId) || assets.iconBrokenImage;
-
     const navigate = useNavigate();
-
     const dispatcher = useDispatch();
-    const userIsLogged = useSelector((state) => state.authSlice.isLogged);
-
+    const userData = useSelector(state => state.authSlice.userData);
+    const [profileImage, setProfileImage] = useState(null);
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
-
-    const movieLists = userData?.lists ?? {};
-
-    const [showEditPhoto, setShowEditPhoto] = useState(false);
     const [showConfirmationPhoto, setShowConfirmationPhoto] = useState(false);
+    // const [showEditPhoto, setShowEditPhoto] = useState(false);
     // const [newProfileImage, setShowEditPhoto] = useState(false);
     const formRef = useRef();
     const fileRef = useRef(null);
+
+    const username = userData?.username ?? '';
+    const movieLists = userData?.lists ?? {};
+    const oldImageId = userData?.imageId ?? '';
+
+
+    /////////////////////////////
+    // EFFECTS
+    /////////////////////////////
+    useEffect(() => {
+        const transformedImage = cloudinaryService.getTransformedImage(oldImageId);
+        setProfileImage(transformedImage);
+    }, [oldImageId, setProfileImage]);
+
 
     /////////////////////////////
     // FUNCTIONS
     /////////////////////////////
     function onClickLogoutHandler(ev) {
         ev.preventDefault();
-        if (!userIsLogged) return;
-
         setShowConfirmationDialog(true);
     }
 
@@ -72,7 +66,6 @@ function ProfilePage(props) {
 
     function onClickNegativeButtonHandler(ev) {
         setShowConfirmationDialog(false);
-
     }
 
     function handleOnClickUploadYes(ev) {
@@ -88,7 +81,6 @@ function ProfilePage(props) {
         });
         setShowConfirmationPhoto(false);
     }
-
 
     function handleOnClickUploadNo(ev) {
         if (!showConfirmationPhoto) return;
@@ -111,25 +103,25 @@ function ProfilePage(props) {
         setShowConfirmationPhoto(true);
     }
 
+
     /////////////////////////////
     // JSX
     /////////////////////////////
     return (
         <>
-            <motion.div className={classesProfilePage}
+            <motion.div className={`${styles['profile-page']}`}
                         initial="hidden"
                         animate="visible"
-                        // exit="hidden"
-                        variants={props.variants}
-            >
-                <HeaderWithBackButton className={classesHeader}
+                        variants={props.variants}>
+
+                <HeaderWithBackButton className={`${styles['header']}`}
                                       backTo={assets.pathRoot}
                                       title={assets.stringPersonalProfile}/>
 
-                <main className={classesMain}>
-                    <section className={classesUserData}>
+                <main className={`${styles['profile-page__main']}`}>
+                    <section className={`${styles['profile-page__user-data']}`}>
                         <div className={`${styles['profile-page__profile-image-container']}`}>
-                            <AdvancedImage className={classesProfileImage}
+                            <AdvancedImage className={ `${styles['profile-page__profile-image']}`}
                                            cldImg={profileImage}
                                            alt={assets.stringAltProfilePicture}/>
 
@@ -146,7 +138,6 @@ function ProfilePage(props) {
                         </div>
 
                         {showConfirmationPhoto && 
-                        
                             <div className={`${styles['profile-page__photo-confirmation']}`}>
                                 <p className={`${styles['profile-page__confirmation-message']}`}>update photo?</p>
                                 <div className={`${styles['profile-page__confirmation-buttons']}`}>
@@ -161,13 +152,13 @@ function ProfilePage(props) {
                         }
 
           
-                        <p className={classesUsername}>{'@' + username}</p>
+                        <p className={`${styles['profile-page__profile-username']}`}>{'@' + username}</p>
       
 
                     </section>
 
-                    <section className={classesLists}>
-                        <h2 className={`${classesLabel} ${styles['profile-page__label-list']}`}> {assets.stringLists} </h2>
+                    <section className={`${styles['profile-page__lists']}`}>
+                        <h2 className={`${styles['profile-page__label']} ${styles['profile-page__label-list']}`}> {assets.stringLists} </h2>
 
                         <ListButton className={`${styles['profile-page__list-button']}`} 
                                     movies={movieLists.watchlist} listName={'watchlist'} title={'Watchlist'} titleColor={'rgb(255, 0, 0)'}/>
@@ -178,8 +169,8 @@ function ProfilePage(props) {
                     </section>
                 </main>
 
-                <footer className={classesSettings}>
-                    <h2 className={`${classesLabel} ${styles['profile-page__label-settings']}`}> {assets.stringSettings} </h2>
+                <footer className={`${styles['profile-page__settings']}`}>
+                    <h2 className={`${styles['profile-page__label']} ${styles['profile-page__label-settings']}`}> {assets.stringSettings} </h2>
                     <button className={`${styles['profile-page__btn-option']}`}
                             onClick={onClickLogoutHandler}> 
                                 <IconLogout />
@@ -189,13 +180,12 @@ function ProfilePage(props) {
 
             </motion.div>
 
-            {showConfirmationDialog && <ActionDialog buttonNegativeAction={onClickNegativeButtonHandler}
-                                                     buttonPositiveAction={onClickPositiveButtonHandler}
-                                                     onClickOutside={onClickNegativeButtonHandler}>
-
-                <p>Are you sure you want to logout?</p>
-
-            </ActionDialog>}
+            {showConfirmationDialog && 
+                <ActionDialog buttonNegativeAction={onClickNegativeButtonHandler}
+                              buttonPositiveAction={onClickPositiveButtonHandler}
+                              onClickOutside={onClickNegativeButtonHandler}>
+                    <p>Are you sure you want to logout?</p>
+                </ActionDialog>}
         </>
 
     );
