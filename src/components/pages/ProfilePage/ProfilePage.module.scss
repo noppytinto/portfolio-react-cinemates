@@ -29,10 +29,13 @@
   }
 
   &__profile-image {
+    width: 150px;
+    height: 150px;
     border-style: solid;
     border-radius: 50%;
     border-width: 3px;
     border-color: var.$color-primary--light-blue;
+    overflow: hidden;
   }
 
   &__btn-edit-photo {

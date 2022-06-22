@@ -26,8 +26,9 @@ function ProfilePage(props) {
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
     const [showConfirmationPhoto, setShowConfirmationPhoto] = useState(false);
     const [showUploadingDialog, setShowUploadingDialog] = useState(false);
-    // const [showEditPhoto, setShowEditPhoto] = useState(false);
-    // const [newProfileImage, setShowEditPhoto] = useState(false);
+    const [showThumbnailFile, setShowThumbnailFile] = useState(false);
+    const [thumbnailFile, setThumbnailFile] = useState();
+
     const formRef = useRef();
     const inputFileRef = useRef(null);
     const fileRef = useRef(null);
@@ -92,6 +93,7 @@ function ProfilePage(props) {
         fileRef.current = null;
         inputFileRef.current.value = ''; // reset filelist
         setShowConfirmationPhoto(false);
+        setShowThumbnailFile(false);
     }
 
     function handleOnClickEdit(ev) {
@@ -101,12 +103,14 @@ function ProfilePage(props) {
     function handleOnChangeUploadPhoto(ev) {
         // TODO: show thumbnail
         
-        console.log(ev.target.files);
-        fileRef.current = ev.target.files[0];
-        console.log('local file:', fileRef.current);
+        const file = ev.target.files[0];
 
-        //if (!fileRef?.current) return;
+        if (!file) return;
+        fileRef.current = file;
+        console.log('local file:', file);
 
+        setShowThumbnailFile(true);
+        setThumbnailFile(URL.createObjectURL(file));
         setShowConfirmationPhoto(true);
     }
 
@@ -128,9 +132,14 @@ function ProfilePage(props) {
                 <main className={`${styles['profile-page__main']}`}>
                     <section className={`${styles['profile-page__user-data']}`}>
                         <div className={`${styles['profile-page__profile-image-container']}`}>
-                            <AdvancedImage className={ `${styles['profile-page__profile-image']}`}
-                                           cldImg={profileImage}
-                                           alt={assets.stringAltProfilePicture}/>
+
+                            {showThumbnailFile ?
+                                <img className={ `${styles['profile-page__profile-image']}`} src={thumbnailFile} alt={'thumbnail'} /> :
+                                <AdvancedImage className={ `${styles['profile-page__profile-image']}`}
+                                               cldImg={profileImage}
+                                               alt={assets.stringAltProfilePicture}/>
+                            }
+
 
                             <form ref={formRef} method="post" encType="multipart/form-data">
                                 <label onClick={handleOnClickEdit} className={`${styles['profile-page__btn-edit-photo']}`} htmlFor="upload-photo">
