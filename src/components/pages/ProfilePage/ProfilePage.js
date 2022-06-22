@@ -15,6 +15,7 @@ import {IconLogout} from '../../../utils/assets-manager';
 import {motion} from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
 import * as userDao from '../../../dao/user-dao';
+import LoadingDialog from '../../reusable/Dialog/LoadingDialog/LoadingDialog';
 
 
 function ProfilePage(props) {
@@ -24,6 +25,7 @@ function ProfilePage(props) {
     const [profileImage, setProfileImage] = useState(null);
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
     const [showConfirmationPhoto, setShowConfirmationPhoto] = useState(false);
+    const [showUploadingDialog, setShowUploadingDialog] = useState(false);
     // const [showEditPhoto, setShowEditPhoto] = useState(false);
     // const [newProfileImage, setShowEditPhoto] = useState(false);
     const formRef = useRef();
@@ -70,14 +72,17 @@ function ProfilePage(props) {
 
     function handleOnClickUploadYes(ev) {
         const newImageId = uuidv4();
+
+        setShowUploadingDialog(true);
         cloudinaryService.uploadImage(fileRef.current, `${newImageId}`, (data) => {
             console.log('UPLOAD SUCCESSFUL: ',  data);
             userDao.updateProfilePicture(newImageId);
             dispatcher(authActions.updateProfilePicture({imageId: newImageId}))
 
-
+            setShowUploadingDialog(false);
         }, (err) => {
             console.log('UPLOAD FAILED: ',  err);
+            setShowUploadingDialog(false);
         });
         setShowConfirmationPhoto(false);
     }
@@ -186,6 +191,9 @@ function ProfilePage(props) {
                               onClickOutside={onClickNegativeButtonHandler}>
                     <p>Are you sure you want to logout?</p>
                 </ActionDialog>}
+
+            {showUploadingDialog && <LoadingDialog message={'uploading photo...'}/>}
+        
         </>
 
     );

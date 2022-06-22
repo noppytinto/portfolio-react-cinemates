@@ -6,7 +6,6 @@ import React from 'react';
 
 
 function ListButton(props) {
-    console.log('list button rendered');
     const movieIds = props.movies ?? [];
     const listName = props.listName ?? '';
     const title = props.title ?? '';
@@ -59,16 +58,4 @@ function ListButton(props) {
 }// ListButton
 
 
-function _propsAreEqual(prev, next) {
-    const prevArray = prev.movieIds ?? [];
-    const nextArray = next.movieIds ?? [];
-
-    const arraysAreEqual = 
-        prevArray.length === nextArray.length && 
-        prevArray.every((value, index) => { return value === nextArray[index]});
-
-    return arraysAreEqual;
-}
-
-export default React.memo(ListButton, _propsAreEqual);
-// export default ListButton;
+export default ListButton;
