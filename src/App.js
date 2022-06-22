@@ -6,7 +6,6 @@ import * as assets from './utils/assets-manager';
 import { AnimatePresence } from 'framer-motion';
 import {useDispatch} from "react-redux";
 import {authActions} from './redux/slices/auth-slice'
-// import {pathMoviesListPage} from "./utils/assets-manager";
 
 import WithMainHeader from './components/reusable/WithMainHeader/WithMainHeader';
 import WithoutMainHeader from './components/reusable/WithoutMainHeader/WithoutMainHeader';

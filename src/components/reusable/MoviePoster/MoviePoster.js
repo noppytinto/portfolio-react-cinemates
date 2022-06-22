@@ -1,11 +1,12 @@
 import styles from './MoviePoster.module.scss';
 import * as assets from '../../../utils/assets-manager';
+import { useEffect, useState } from 'react';
 
 
 function MoviePoster(props) {
     let movieTitle = props.movieTitle ?? '';
     let shadowed = props.shadowed ?? true;
-    let posterUrl = props.posterImageUrl || '';
+    let posterUrl= props.posterImageUrl || '';
     let lazy = props.lazy ?? false;
 
     let classes = `${styles['movie-poster']} ${props.className} `;
@@ -13,13 +14,17 @@ function MoviePoster(props) {
     let movieTitleClasses = `${styles['movie-title']} hidden`;
 
     if (shadowed) classes = `${classes} ${styles['movie-poster--shadowed']} `;
+
     if (!posterUrl) {
-        posterUrl = assets.iconBrokenImage
+        posterUrl = assets.iconBrokenImage;
         classes = `${styles['movie-poster']} ${props.className} ${styles['movie-poster--broken']}`;
         imageClasses = `${styles['movie-poster__image']} ${styles['movie-poster__image--broken']}`;
         movieTitleClasses = `${styles['movie-title']}`;
     }
 
+    function handleOnErrorImageSource(ev) {
+
+    }
 
     ////////////////////////////////////
     // FUNCTIONS
@@ -36,8 +41,12 @@ function MoviePoster(props) {
                  alt={movieTitle}
                  draggable={'false'}
                  loading={lazy ? 'lazy' : 'eager'}
+                 data-testid={"image"}
+                 onError={handleOnErrorImageSource}
                  />
-            <p className={movieTitleClasses}> {movieTitle} </p>
+            <p className={movieTitleClasses}
+               data-testid={"title"}> 
+               {movieTitle} </p>
         </div>
     );
 }
