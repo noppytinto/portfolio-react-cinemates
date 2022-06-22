@@ -29,6 +29,7 @@ function ProfilePage(props) {
     // const [showEditPhoto, setShowEditPhoto] = useState(false);
     // const [newProfileImage, setShowEditPhoto] = useState(false);
     const formRef = useRef();
+    const inputFileRef = useRef(null);
     const fileRef = useRef(null);
 
     const username = userData?.username ?? '';
@@ -88,8 +89,8 @@ function ProfilePage(props) {
     }
 
     function handleOnClickUploadNo(ev) {
-        if (!showConfirmationPhoto) return;
-
+        fileRef.current = null;
+        inputFileRef.current.value = ''; // reset filelist
         setShowConfirmationPhoto(false);
     }
 
@@ -100,6 +101,7 @@ function ProfilePage(props) {
     function handleOnChangeUploadPhoto(ev) {
         // TODO: show thumbnail
         
+        console.log(ev.target.files);
         fileRef.current = ev.target.files[0];
         console.log('local file:', fileRef.current);
 
@@ -137,7 +139,8 @@ function ProfilePage(props) {
                                 <input className={'hidden'} 
                                        id={"upload-photo"} 
                                        type={'file'} 
-                                       name={'photoFile'} 
+                                       name={'photoFile'}
+                                       ref={inputFileRef} 
                                        onChange={handleOnChangeUploadPhoto}></input>
                             </form>
                         </div>
