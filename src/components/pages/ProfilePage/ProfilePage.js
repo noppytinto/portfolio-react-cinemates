@@ -26,11 +26,11 @@ function ProfilePage(props) {
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
     const [showConfirmationPhoto, setShowConfirmationPhoto] = useState(false);
     const [showUploadingDialog, setShowUploadingDialog] = useState(false);
-    const [showThumbnailFile, setShowThumbnailFile] = useState(false);
-    const [thumbnailFile, setThumbnailFile] = useState();
+    const [showPreviewFile, setShowPreviewFile] = useState(false);
+    const [previewFile, setPreviewFile] = useState();
 
     const formRef = useRef();
-    const inputFileRef = useRef(null);
+    const inputFormRef = useRef(null);
     const fileRef = useRef(null);
 
     const username = userData?.username ?? '';
@@ -91,9 +91,9 @@ function ProfilePage(props) {
 
     function handleOnClickUploadNo(ev) {
         fileRef.current = null;
-        inputFileRef.current.value = ''; // reset filelist
+        inputFormRef.current.value = ''; // reset filelist
         setShowConfirmationPhoto(false);
-        setShowThumbnailFile(false);
+        setShowPreviewFile(false);
     }
 
     function handleOnClickEdit(ev) {
@@ -109,8 +109,8 @@ function ProfilePage(props) {
         fileRef.current = file;
         console.log('local file:', file);
 
-        setShowThumbnailFile(true);
-        setThumbnailFile(URL.createObjectURL(file));
+        setShowPreviewFile(true);
+        setPreviewFile(URL.createObjectURL(file));
         setShowConfirmationPhoto(true);
     }
 
@@ -133,8 +133,8 @@ function ProfilePage(props) {
                     <section className={`${styles['profile-page__user-data']}`}>
                         <div className={`${styles['profile-page__profile-image-container']}`}>
 
-                            {showThumbnailFile ?
-                                <img className={ `${styles['profile-page__profile-image']}`} src={thumbnailFile} alt={'thumbnail'} /> :
+                            {showPreviewFile ?
+                                <img className={ `${styles['profile-page__profile-image']}`} src={previewFile} alt={'thumbnail'} /> :
                                 <AdvancedImage className={ `${styles['profile-page__profile-image']}`}
                                                cldImg={profileImage}
                                                alt={assets.stringAltProfilePicture}/>
@@ -149,7 +149,7 @@ function ProfilePage(props) {
                                        id={"upload-photo"} 
                                        type={'file'} 
                                        name={'photoFile'}
-                                       ref={inputFileRef} 
+                                       ref={inputFormRef} 
                                        onChange={handleOnChangeUploadPhoto}></input>
                             </form>
                         </div>
