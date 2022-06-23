@@ -57,6 +57,7 @@ export function buildImageUrl(imageName, extension='.jpg') {
 }
 
 export function getTransformedImage(imageId) {
+    if (!imageId) return null;
     const myImage = cld.image(imageId); 
 
     // Apply the transformation.

@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import {useSelector} from "react-redux";
 import * as cloudinaryService from '../../../services/cloudinary-service';
 import { AdvancedImage } from '@cloudinary/react';
+import ProfilePicture from "../../reusable/ProfilePicture/ProfilePicture";
 
 
 function MainHeader(props) {
@@ -18,10 +19,7 @@ function MainHeader(props) {
     function showAnonymousUserButton() {
         return (
             <NavLink className={styles['main-header__link']} to={assets.pathLoginPage}>
-                <div className={`${styles['main-header__icon-container']}`}>
-                    <assets.IconPerson className={`${styles['main-header__icon']}`}/>
-
-                </div>
+                <ProfilePicture className={`${styles['main-header__icon']}`} />
             </NavLink>
         );
     }
@@ -31,13 +29,10 @@ function MainHeader(props) {
 
         return (
             <NavLink className={styles['main-header__link']} to={assets.pathProfilePage}>
-                <div className={`${styles['main-header__icon-container']}`}>
-                    {userImage &&
-                        <AdvancedImage className={`${styles['main-header__icon']} ${styles['main-header__icon-profile']}`}
-                                       cldImg={userImage}
-                                       alt={assets.stringAltUserProfile}/>
-                    }
-                </div>
+                {userImage &&
+                    <ProfilePicture className={`${styles['main-header__icon']} ${styles['main-header__icon-profile']}`}
+                                    src={userImage}/>
+                }
             </NavLink>
         );
     }

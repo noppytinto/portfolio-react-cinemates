@@ -47,21 +47,14 @@
   justify-content: center;
 }
 
-.main-header__icon-container {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.main-header__icon {
+  width: 34px;
+  height: 34px;
+  
 }
 
-.main-header__icon {
-  width: 30px;
-  height: 30px;
-  color: var.$color-primary--light-blue;
-  
+.main-header__icon-profile {
+  box-shadow: 0 0 .5em  rgba(0, 0, 0, 0.5);
 }
 
 .main-header__icon-notification{
@@ -69,15 +62,4 @@
   font-size: 2em;
 }
 
-.main-header__icon-profile {
-  width: 34px;
-  height: 34px;
-
-  border-radius: 50%;
-  border-width: 2px;
-  border-color: var(--color-primary--light-blue);
-  border-style: solid;
-
-  box-shadow: 0 0 .5em  rgba(0, 0, 0, 0.5);
-}
 

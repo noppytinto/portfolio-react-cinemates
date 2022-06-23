@@ -16,6 +16,7 @@ import {motion} from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
 import * as userDao from '../../../dao/user-dao';
 import LoadingDialog from '../../reusable/Dialog/LoadingDialog/LoadingDialog';
+import ProfilePicture from "../../reusable/ProfilePicture/ProfilePicture";
 
 
 function ProfilePage(props) {
@@ -134,10 +135,12 @@ function ProfilePage(props) {
                         <div className={`${styles['profile-page__profile-image-container']}`}>
 
                             {showPreviewFile ?
-                                <img className={ `${styles['profile-page__profile-image']} ${styles['profile-page__profile-image--preview']}`} src={previewFile} alt={'thumbnail'} /> :
-                                <AdvancedImage className={ `${styles['profile-page__profile-image']}`}
-                                               cldImg={profileImage}
-                                               alt={assets.stringAltProfilePicture}/>
+                                <img className={ `${styles['profile-page__profile-image']} ${styles['profile-page__profile-image--preview']}`}
+                                     src={previewFile}
+                                     alt={'thumbnail'} />
+                                :
+                                <ProfilePicture className={ `${styles['profile-page__profile-image']}`}
+                                                src={profileImage}/>
                             }
 
 

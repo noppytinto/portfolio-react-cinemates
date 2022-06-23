@@ -1,0 +1,25 @@
+@use '../../../scss/variables' as var;
+@use '../../../scss/mixins' as mix;
+
+
+.profile-picture {
+  max-width: 100px;
+  max-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  color: var.$color-primary--light-blue;
+  
+  border-style: solid;
+  border-radius: 50%;
+  border-width: 2px;
+  border-color: var.$color-primary--light-blue;
+  
+  &__default-icon {
+    width: 80%;
+    height: 80%;
+    
+  }
+  
+}//
