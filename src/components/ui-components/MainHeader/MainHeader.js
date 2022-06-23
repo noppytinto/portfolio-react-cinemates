@@ -25,14 +25,11 @@ function MainHeader(props) {
     }
 
     function showLoggedUserButton() {
-        const userImage = cloudinaryService.getTransformedImage(userData.imageId);
 
         return (
             <NavLink className={styles['main-header__link']} to={assets.pathProfilePage}>
-                {userImage &&
-                    <ProfilePicture className={`${styles['main-header__icon']} ${styles['main-header__icon-profile']}`}
-                                    src={userImage}/>
-                }
+                <ProfilePicture className={`${styles['main-header__icon']} ${styles['main-header__icon-profile']}`}
+                                imageId={userData.imageId}/>
             </NavLink>
         );
     }

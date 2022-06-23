@@ -6,9 +6,8 @@ import {authActions} from "../../../redux/slices/auth-slice";
 import {useNavigate} from "react-router-dom";
 import * as authService from '../../../services/auth-service';
 import * as cloudinaryService from '../../../services/cloudinary-service';
-import {AdvancedImage} from '@cloudinary/react';
 import * as assets from '../../../utils/assets-manager';
-import {useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import ActionDialog from "../../reusable/Dialog/ActionDialog/ActionDialog";
 import ListButton from '../../reusable/ListButton/ListButton';
 import {IconLogout} from '../../../utils/assets-manager';
@@ -23,7 +22,6 @@ function ProfilePage(props) {
     const navigate = useNavigate();
     const dispatcher = useDispatch();
     const userData = useSelector(state => state.authSlice.userData);
-    const [profileImage, setProfileImage] = useState(null);
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
     const [showConfirmationPhoto, setShowConfirmationPhoto] = useState(false);
     const [showUploadingDialog, setShowUploadingDialog] = useState(false);
@@ -42,10 +40,7 @@ function ProfilePage(props) {
     /////////////////////////////
     // EFFECTS
     /////////////////////////////
-    useEffect(() => {
-        const transformedImage = cloudinaryService.getTransformedImage(oldImageId);
-        setProfileImage(transformedImage);
-    }, [oldImageId, setProfileImage]);
+
 
 
     /////////////////////////////
@@ -140,7 +135,7 @@ function ProfilePage(props) {
                                      alt={'thumbnail'} />
                                 :
                                 <ProfilePicture className={ `${styles['profile-page__profile-image']}`}
-                                                src={profileImage}/>
+                                                imageId={oldImageId}/>
                             }
 
 

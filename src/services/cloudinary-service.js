@@ -58,15 +58,24 @@ export function buildImageUrl(imageName, extension='.jpg') {
 
 export function getTransformedImage(imageId) {
     if (!imageId) return null;
-    const myImage = cld.image(imageId); 
 
-    // Apply the transformation.
-    myImage
-        .resize(thumbnail()
-                    .width(100)
-                    .height(100)
-                    .gravity(focusOn(FocusOn.face())))  // Crop the image, focusing on the face.
-        .roundCorners(byRadius(100));    // Round the corners.
+    let myImage = null;
+
+    try {
+        // fetch image from cloud
+        myImage = cld.image(imageId);
+
+        // apply the transformation.
+        myImage
+            .resize(thumbnail()
+                .width(100)
+                .height(100)
+                .gravity(focusOn(FocusOn.face())))  // Crop the image, focusing on the face.
+            .roundCorners(byRadius(100));    // Round the corners.
+
+    } catch (err) {
+        console.log('ERROR CLOUDINARY IMAGE: ', err);
+    }
 
     return myImage;
 }

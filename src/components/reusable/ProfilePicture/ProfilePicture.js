@@ -1,17 +1,24 @@
 import styles from './ProfilePicture.module.scss';
 import * as assets from "../../../utils/assets-manager";
 import {AdvancedImage} from "@cloudinary/react";
+import * as cloudinaryService from "../../../services/cloudinary-service";
+import {useEffect, useState} from "react";
 
 
 function ProfilePicture(props) {
-    const src = props.src || null;
+    const imageId = props.imageId || null;
     const alt = props.alt || 'profile picture';
-    console.log('CLASSES:', props.className);
+    const [cloudinaryImage, setCloudinaryImage] = useState(null);
+
 
     //////////////////////////////////////
-    // FUNCTIONS
+    // EFFECTS
     //////////////////////////////////////
+    useEffect(() => {
+        if(!imageId) return;
 
+        setCloudinaryImage(cloudinaryService.getTransformedImage(imageId));
+    }, [imageId, setCloudinaryImage])
 
 
     //////////////////////////////////////
@@ -19,9 +26,9 @@ function ProfilePicture(props) {
     //////////////////////////////////////
     return (
         <>
-            { (src) ?
+            { (imageId) ?
                 <AdvancedImage className={ `${styles['profile-picture']} ${props.className}`}
-                               cldImg={src}
+                               cldImg={cloudinaryImage}
                                alt={alt}/>
                 :
                 <div className={`${styles['profile-picture']} ${props.className}`}>
