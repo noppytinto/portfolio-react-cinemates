@@ -13,28 +13,18 @@ const TextField = React.forwardRef((props, ref) => {
     const errorText = props.errorText ?? '';
     const inputIsValid = props.inputIsValid ?? true;
     
-    let classesTextField = inputIsValid ? 
-        `${styles['textfield']} ${props.className}` :
-        `${styles['textfield']} ${props.className} ${styles['textfield--error']}`;
-    const classesContainer = `${styles['textfield-container']}`;
-    const classesLabel = `${styles['textfield__label']}`;
+    const classesTextField = inputIsValid ?
+        `${styles['textfield']} ` :
+        `${styles['textfield']} ${styles['textfield--error']}`;
     // const classesIcon = `${styles['textfield__icon']}`;
-    const classesHelperText = `${styles['textfield__helper-text']}`;
-    const classesErrorText = `${styles['textfield__error-text']}`;
-    
-
-    //////////////////////////////
-    // FUNCTIONS
-    //////////////////////////////
-
 
 
     //////////////////////////////
     // JSX
     //////////////////////////////
     return (
-        <div className={classesContainer}>
-            <label className={classesLabel} htmlFor={name}>{label}</label>
+        <div className={`${styles['textfield-container']} ${props.className}`}>
+            <label className={`${styles['textfield__label']}`} htmlFor={name}>{label}</label>
             <input id={name}
                    className={classesTextField}
                    type={type}
@@ -45,8 +35,8 @@ const TextField = React.forwardRef((props, ref) => {
                    ref={ref} />
 
             {inputIsValid ? 
-                <p className={classesHelperText}>{helperText}</p> :
-                <p className={classesErrorText}>{errorText}</p>
+                <p className={`${styles['textfield__helper-text']}`}>{helperText}</p> :
+                <p className={`${styles['textfield__error-text']}`}>{errorText}</p>
             }
             
         </div>

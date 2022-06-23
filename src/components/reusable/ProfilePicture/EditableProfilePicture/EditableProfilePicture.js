@@ -1,6 +1,6 @@
 import styles from './EditableProfilePicture.module.scss';
 import * as assets from "../../../../utils/assets-manager";
-import React, {useRef, useState} from "react";
+import React, {useState} from "react";
 import ProfilePicture from "../ProfilePicture";
 
 
@@ -39,16 +39,15 @@ const EditableProfilePicture = React.forwardRef((props, forwardRef) => {
     // JSX
     //////////////////////////////////////
     return (
-        <div className={`${styles['editable-profile-picture']}`}>
+        <div className={`${styles['editable-profile-picture']} ${props.className}`}>
 
             {(showPreviewFile) ?
                 <ProfilePicture className={ `${styles['editable-profile-picture__image']} 
-                                             ${styles['editable-profile-picture__image--preview']} 
-                                             ${props.className}`}
+                                             ${styles['editable-profile-picture__image--preview']}`}
                                 src={previewFile}
                                 alt={'preview'} />
                 :
-                <ProfilePicture className={ `${styles['editable-profile-picture__image']} ${props.className}`}
+                <ProfilePicture className={ `${styles['editable-profile-picture__image']}}`}
                                 imageId={imageId}/>
             }
 

@@ -120,8 +120,7 @@ function ProfilePage(props) {
                                                 imageId={oldImageId}
                                                 onChange={handleOnChangeUploadPhoto}
                                                 ref={inputFormRef}
-                                                showPreview={showPreview}
-                        />
+                                                showPreview={showPreview}/>
 
                         {showConfirmationPhoto && 
                             <div className={`${styles['profile-page__photo-confirmation']}`}>

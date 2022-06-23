@@ -1,5 +1,5 @@
 import styles from './SignUpPage.module.scss';
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import * as authService from '../../../services/auth-service';
 import HeaderWithBackButton
     from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
@@ -9,17 +9,23 @@ import LoadingDialog from '../../reusable/Dialog/LoadingDialog/LoadingDialog';
 import {motion} from 'framer-motion';
 import Snackbar from '../../../my-packages/snackbar-system/Snackbar';
 import * as userDao from '../../../dao/user-dao';
+import EditableProfilePicture
+    from "../../reusable/ProfilePicture/EditableProfilePicture/EditableProfilePicture";
+import * as cloudinaryService from '../../../services/cloudinary-service';
+import {authActions} from "../../../redux/slices/auth-slice";
+import {v4 as uuidv4} from "uuid";
 
 
 function SignUpPage(props) {
     const classesSignUpPage = `${styles['signup-page']} ${props.className} `;
-    
+
     const [emailIsValid, setEmailIsValid] = useState(true);
     const [passwordIsValid, setPasswordIsValid] = useState(true);
     const [repeatPasswordIsValid, setRepeatPasswordIsValid] = useState(true);
     const [usernameIsValid, setUsernameIsValid] = useState(true);
     const [showDialog, setShowDialog] = useState(false);
     const [showSnackbar, setShowSnackbar] = useState(false);
+    const [showPreview, setShowPreview] = useState(true);
 
     const navigate = useNavigate();
 
@@ -27,6 +33,8 @@ function SignUpPage(props) {
     const passwordRef = useRef('');
     const repeatPasswordRef = useRef('');
     const usernameRef = useRef('');
+    const inputFormRef = React.createRef();
+    const fileRef = useRef(null);
 
     const emailErrorText = useRef('');
     const passwordErrorText = useRef('');
@@ -49,9 +57,23 @@ function SignUpPage(props) {
         setShowDialog(true);
         authService.createUserAccount(email.trim(), pass.trim(), async (user) => {
             console.log('SIGNUP SUCCESSFUL:', user);
-        
+            let newImageId = '';
+
+            if (fileRef?.current) {
+                newImageId = uuidv4();
+            }
+
             try {
-                userDao.createUser(user.uid, email.trim(), username.trim(), '');
+                await userDao.createUser(user.uid, email.trim(), username.trim(), newImageId);
+
+                if (fileRef?.current) {
+                    cloudinaryService.uploadImage(fileRef.current, `${newImageId}`, (data) => {
+                        console.log('UPLOAD SUCCESSFUL: ',  data);
+                    }, (err) => {
+                        console.log('UPLOAD FAILED: ',  err);
+                    });
+                }
+
                 navigate('/login');
 
             } catch(e) {
@@ -155,6 +177,13 @@ function SignUpPage(props) {
         setShowSnackbar(false);
     }
 
+    function handleOnChangeUploadPhoto(ev, file) {
+        if (!file) return;
+
+        fileRef.current = file;
+        // setShowConfirmationPhoto(true);
+        setShowPreview(true);
+    }
 
     /////////////////////////////
     // JSX
@@ -175,7 +204,13 @@ function SignUpPage(props) {
             </section>
 
             <form className={`${styles['signup-page__form']}`}>
-                <TextField type={'email'}
+                <EditableProfilePicture className={`${styles['signup-page__profile-image']}`}
+                                        onChange={handleOnChangeUploadPhoto}
+                                        ref={inputFormRef}
+                                        showPreview={showPreview}/>
+
+                <TextField className={`${styles['signup-page__textfield']}`}
+                           type={'email'}
                            name={'signupEmail'}
                            placeholder={'user@mail.com'}
                            ref={emailRef}
@@ -183,7 +218,8 @@ function SignUpPage(props) {
                            errorText={emailErrorText.current}
                            inputIsValid={emailIsValid}/>
 
-                <TextField type={'password'}
+                <TextField className={`${styles['signup-page__textfield']}`}
+                           type={'password'}
                            name={'signupPassword'}
                            placeholder={'******'}
                            ref={passwordRef}
@@ -191,7 +227,8 @@ function SignUpPage(props) {
                            errorText={passwordErrorText.current}
                            inputIsValid={passwordIsValid}/>
 
-                <TextField type={'password'}
+                <TextField className={`${styles['signup-page__textfield']}`}
+                           type={'password'}
                            name={'signupRepeatPassword'}
                            placeholder={'******'}
                            ref={repeatPasswordRef}
@@ -200,7 +237,8 @@ function SignUpPage(props) {
                            inputIsValid={repeatPasswordIsValid}/>
                 
                 
-                <TextField type={'text'}
+                <TextField className={`${styles['signup-page__textfield']}`}
+                           type={'text'}
                            name={'signupUsername'}
                            placeholder={'foo'}
                            ref={usernameRef}

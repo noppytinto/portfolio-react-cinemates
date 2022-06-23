@@ -3,8 +3,6 @@ import styles from './MainHeader.module.scss';
 import * as assets from '../../../utils/assets-manager';
 import { NavLink } from 'react-router-dom';
 import {useSelector} from "react-redux";
-import * as cloudinaryService from '../../../services/cloudinary-service';
-import { AdvancedImage } from '@cloudinary/react';
 import ProfilePicture from "../../reusable/ProfilePicture/ProfilePicture";
 
 
