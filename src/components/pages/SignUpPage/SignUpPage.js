@@ -25,7 +25,7 @@ function SignUpPage(props) {
     const [usernameIsValid, setUsernameIsValid] = useState(true);
     const [showDialog, setShowDialog] = useState(false);
     const [showSnackbar, setShowSnackbar] = useState(false);
-    const [showPreview, setShowPreview] = useState(true);
+    const [showPreview, setShowPreview] = useState(true); // TODO: add ability to discard photo
 
     const navigate = useNavigate();
 
