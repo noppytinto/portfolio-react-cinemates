@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import * as authService from '../../../services/auth-service';
 import * as cloudinaryService from '../../../services/cloudinary-service';
 import * as assets from '../../../utils/assets-manager';
-import {useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import ActionDialog from "../../reusable/Dialog/ActionDialog/ActionDialog";
 import ListButton from '../../reusable/ListButton/ListButton';
 import {IconLogout} from '../../../utils/assets-manager';
@@ -15,7 +15,8 @@ import {motion} from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
 import * as userDao from '../../../dao/user-dao';
 import LoadingDialog from '../../reusable/Dialog/LoadingDialog/LoadingDialog';
-import ProfilePicture from "../../reusable/ProfilePicture/ProfilePicture";
+import EditableProfilePicture
+    from "../../reusable/ProfilePicture/EditableProfilePicture/EditableProfilePicture";
 
 
 function ProfilePage(props) {
@@ -25,11 +26,9 @@ function ProfilePage(props) {
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
     const [showConfirmationPhoto, setShowConfirmationPhoto] = useState(false);
     const [showUploadingDialog, setShowUploadingDialog] = useState(false);
-    const [showPreviewFile, setShowPreviewFile] = useState(false);
-    const [previewFile, setPreviewFile] = useState();
+    const [showPreview, setShowPreview] = useState(false);
 
-    const formRef = useRef();
-    const inputFormRef = useRef(null);
+    const inputFormRef = React.createRef();
     const fileRef = useRef(null);
 
     const username = userData?.username ?? '';
@@ -89,25 +88,15 @@ function ProfilePage(props) {
         fileRef.current = null;
         inputFormRef.current.value = ''; // reset filelist
         setShowConfirmationPhoto(false);
-        setShowPreviewFile(false);
+        setShowPreview(false);
     }
 
-    function handleOnClickEdit(ev) {
-        console.log('edit button');
-    }
-
-    function handleOnChangeUploadPhoto(ev) {
-        // TODO: show thumbnail
-        
-        const file = ev.target.files[0];
-
+    function handleOnChangeUploadPhoto(ev, file) {
         if (!file) return;
-        fileRef.current = file;
-        console.log('local file:', file);
 
-        setShowPreviewFile(true);
-        setPreviewFile(URL.createObjectURL(file));
+        fileRef.current = file;
         setShowConfirmationPhoto(true);
+        setShowPreview(true);
     }
 
 
@@ -127,30 +116,12 @@ function ProfilePage(props) {
 
                 <main className={`${styles['profile-page__main']}`}>
                     <section className={`${styles['profile-page__user-data']}`}>
-                        <div className={`${styles['profile-page__profile-image-container']}`}>
-
-                            {showPreviewFile ?
-                                <img className={ `${styles['profile-page__profile-image']} ${styles['profile-page__profile-image--preview']}`}
-                                     src={previewFile}
-                                     alt={'thumbnail'} />
-                                :
-                                <ProfilePicture className={ `${styles['profile-page__profile-image']}`}
-                                                imageId={oldImageId}/>
-                            }
-
-
-                            <form ref={formRef} method="post" encType="multipart/form-data">
-                                <label onClick={handleOnClickEdit} className={`${styles['profile-page__btn-edit-photo']}`} htmlFor="upload-photo">
-                                    <assets.IconEdit  className={`${styles['profile-page__edit-icon']}`}/>
-                                </label>
-                                <input className={'hidden'} 
-                                       id={"upload-photo"} 
-                                       type={'file'} 
-                                       name={'photoFile'}
-                                       ref={inputFormRef} 
-                                       onChange={handleOnChangeUploadPhoto}></input>
-                            </form>
-                        </div>
+                        <EditableProfilePicture className={`${styles['profile-page__profile-image']}`}
+                                                imageId={oldImageId}
+                                                onChange={handleOnChangeUploadPhoto}
+                                                ref={inputFormRef}
+                                                showPreview={showPreview}
+                        />
 
                         {showConfirmationPhoto && 
                             <div className={`${styles['profile-page__photo-confirmation']}`}>
@@ -166,9 +137,7 @@ function ProfilePage(props) {
                             </div>
                         }
 
-          
                         <p className={`${styles['profile-page__profile-username']}`}>{'@' + username}</p>
-      
 
                     </section>
 

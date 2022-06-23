@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 function ProfilePicture(props) {
     const imageId = props.imageId || null;
     const alt = props.alt || 'profile picture';
+    const src = props.src || '';
     const [cloudinaryImage, setCloudinaryImage] = useState(null);
 
 
@@ -31,9 +32,14 @@ function ProfilePicture(props) {
                                cldImg={cloudinaryImage}
                                alt={alt}/>
                 :
-                <div className={`${styles['profile-picture']} ${props.className}`}>
-                    <assets.IconPerson className={`${styles['profile-picture__default-icon']}`} />
-                </div>
+                ((src) ?
+                    <img className={`${styles['profile-picture']} ${props.className}`}
+                         src={src} alt={alt}/>
+                    :
+                    <div className={`${styles['profile-picture']} ${props.className}`}>
+                        <assets.IconPerson className={`${styles['profile-picture__default-icon']}`} />
+                    </div>
+                )
             }
         </>
     );
