@@ -15,14 +15,13 @@ import {motion} from 'framer-motion';
 
 
 function MoviePage(props) {
-    const classesMoviePage = `${styles['movie-page']} `;
     const params = useParams();
     const movieId = params.id;
+    const dispatcher = useDispatch()
+    const isLogged = useSelector(state => state.authSlice.isLogged);
     const [movie, setMovie] = useState({});
     const [cast, setCast] = useState([]);
-    const [showLists, setShowLists] = useState(false);
-    const isLogged = useSelector(state => state.authSlice.isLogged);
-    const dispatcher = useDispatch()
+    const [showListDialog, setShowListDialog] = useState(false);
 
     let lists = {};
     let listKeys = [];
@@ -37,14 +36,12 @@ function MoviePage(props) {
             for (const [ , movieIds] of Object.entries(lists)) {
                 checkedLists.push(movieIds.includes(movieId));
             }
-
-            // console.log(lists);
         }
     }
 
 
     ////////////////////////////////////
-    // FUNCTIONS
+    // EFFECTS
     ////////////////////////////////////
     // fetch movie info
     useEffect(() => {
@@ -56,16 +53,20 @@ function MoviePage(props) {
         })();
     }, [setMovie, movieId]);
 
+
+    ////////////////////////////////////
+    // FUNCTIONS
+    ////////////////////////////////////
     function onClickAddToListHandler() {
-        setShowLists(true);
+        setShowListDialog(true);
     }
 
     function onClickOutsideHandler(ev) {
-        setShowLists(false);
+        setShowListDialog(false);
     }
 
     function onClickNegativeButtonHandler(ev) {
-        setShowLists(false);
+        setShowListDialog(false);
     }
 
     function onClickPositiveButtonHandler(ev) {
@@ -95,7 +96,7 @@ function MoviePage(props) {
         dispatcher(authActions.setUserLists({lists: updatedLists}))
 
         //
-        setShowLists(false);
+        setShowListDialog(false);
     }
 
     function onListCheckHandler(ev, i, isChecked) {
@@ -115,10 +116,9 @@ function MoviePage(props) {
     // JSX
     ////////////////////////////////////
     return (
-        <motion.div className={classesMoviePage}
+        <motion.div className={`${styles['movie-page']} `}
                     initial="hidden"
                     animate="visible"
-                    // exit="hidden"
                     variants={props.variants}
         >
             <HeaderWithBackButton className={`${styles['header']}`}
@@ -138,7 +138,7 @@ function MoviePage(props) {
                             type={'button'}
                             onClick={onClickAddToListHandler}>+</button>}
 
-                {showLists && <OptionsDialog items={listKeys}
+                {showListDialog && <OptionsDialog items={listKeys}
                                              checkedItems={checkedLists}
                                              onItemCheck={onListCheckHandler}
                                              buttonNegativeAction={onClickNegativeButtonHandler}

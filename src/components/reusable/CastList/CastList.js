@@ -4,27 +4,21 @@ import {v4 as uuidv4} from 'uuid';
 import CastCard from "../CastCard/CastCard";
 
 function CastList(props) {
-    let classes = `${styles['cast-list']} `;
     const cast = props.cast ?? [];
 
 
     //////////////////////////////////////
-    // functions
+    // FUNCTIONS
     //////////////////////////////////////
     function spawnCards(cast) {
-        return (
-            cast.map((castMember) => {
-                    return (
-                        <li key={uuidv4()}>
-                            <CastCard id={castMember.id}
-                                      imageUrl={castMember.profilePictureUrl}
-                                      alt={castMember.name}
-                                      name={castMember.name}
-                            />
-                        </li>
-                    );
-                }
-            )
+        return cast.map((castMember) =>
+            <li key={uuidv4()}>
+                <CastCard id={castMember.id}
+                          imageUrl={castMember.profilePictureUrl}
+                          alt={castMember.name}
+                          name={castMember.name}
+                />
+            </li>
         );
     }
 
@@ -33,7 +27,7 @@ function CastList(props) {
     // JSX
     //////////////////////////////////////
     return (
-        <div className={classes}>
+        <div className={`${styles['cast-list']} `}>
             <ul>
                 {spawnCards(cast)}
             </ul>
