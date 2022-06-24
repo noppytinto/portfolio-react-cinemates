@@ -15,7 +15,6 @@ function ExplorePage(props) {
     ////////////////////////////////////
     // FUNCTIONS
     ////////////////////////////////////
-
     // fetch movies on page mounted
     useEffect(() => {
         ( async () => {
@@ -31,15 +30,13 @@ function ExplorePage(props) {
     }, [])
 
     function buildListProps(title, movies) {
-        const props = {
+        return {
             title,
             movies,
             buttonText: assets.stringLabelSeeAll,
             seeAllUrl: assets.pathExploreList,
             seeAllData: {title}
-        }
-
-        return props;
+        };
     }
 
 
@@ -50,24 +47,23 @@ function ExplorePage(props) {
         <motion.div className={`${styles['explore-page']}`}
         initial="hidden"
         animate="visible"
-        // exit="hidden"
-        variants={props.variants}
-        >
+        variants={props.variants}>
+
             <ul className={`${styles['explore-list']}`}>
 
                 <li className={`${styles['explore-item']}`}>
-                    <HorizontalMovieList {...(buildListProps(assets.stringTitleNowPlaying, nowPlayingMovies))}/>
-                </li>
+                    <HorizontalMovieList {...(buildListProps(assets.stringTitleNowPlaying, nowPlayingMovies))}/></li>
+
                 <li className={`${styles['explore-item']}`}>
-                    <HorizontalMovieList {...(buildListProps(assets.stringTitleUpcoming, upcomingMovies))}/>
-                </li>
+                    <HorizontalMovieList {...(buildListProps(assets.stringTitleUpcoming, upcomingMovies))}/></li>
+
                 <li className={`${styles['explore-item']}`}>
-                    <HorizontalMovieList {...(buildListProps(assets.stringTitlePopular, popularMovies))}/>
-                </li>
+                    <HorizontalMovieList {...(buildListProps(assets.stringTitlePopular, popularMovies))}/></li>
 
             </ul>
         </motion.div>
     );
+
 }// ExplorePage
 
 export default ExplorePage;

@@ -101,11 +101,38 @@ export async function fetchMovie(movieId) {
 }
 
 async function fetchMovies(url, page=1) {
+    const finalUrl = url + PAGE_QUERY  + `${page}`;
+    const expiration = 86_400_000; // 1 day
+
     try {
-        const res = await fetch(url + PAGE_QUERY  + `${page}`);
+        const cachedData = localStorage.getItem(finalUrl);
+        console.log('CACHED DATA: ', cachedData);
+        if (cachedData) {
+            const fetchDateInMillis =  localStorage.getItem('date-' + finalUrl);
+            const currentDateInMillis = Date.now();
+
+            const diff = currentDateInMillis - fetchDateInMillis;
+
+            console.log('DIFF: ', diff);
+            if (diff < expiration) {
+                console.log('USING CACHED DATA of: ', finalUrl);
+
+                const data = JSON.parse(cachedData);
+                const results = data.results;
+                const totalPages = data['total_pages'];
+                return [results, totalPages];
+            }
+        }
+
+        //
+        const res = await fetch(finalUrl);
         if (!res.ok) throw new Error(res.status);
+
         const data = await res.json();
 
+        _cacheRequestData(finalUrl, data);
+
+        //
         const results = data.results;
         const totalPages = data['total_pages'];
 
@@ -114,6 +141,11 @@ async function fetchMovies(url, page=1) {
         console.log('FETCH ERROR: ', err);
         return [];
     }
+}
+
+function _cacheRequestData(key, requestData) {
+    localStorage.setItem(key, JSON.stringify(requestData));
+    localStorage.setItem('date-' + key, Date.now());
 }
 
 export async function searchMovies(query, page = 1) {
