@@ -12,7 +12,6 @@ import * as userDao from '../../../dao/user-dao';
 import EditableProfilePicture
     from "../../reusable/ProfilePicture/EditableProfilePicture/EditableProfilePicture";
 import * as cloudinaryService from '../../../services/cloudinary-service';
-import {authActions} from "../../../redux/slices/auth-slice";
 import {v4 as uuidv4} from "uuid";
 
 
@@ -184,6 +183,7 @@ function SignUpPage(props) {
         // setShowConfirmationPhoto(true);
         setShowPreview(true);
     }
+
 
     /////////////////////////////
     // JSX
