@@ -23,7 +23,6 @@ function MainHeader(props) {
     }
 
     function showLoggedUserButton() {
-
         return (
             <NavLink className={styles['main-header__link']} to={assets.pathProfilePage}>
                 <ProfilePicture className={`${styles['main-header__icon']} ${styles['main-header__icon-profile']}`}
