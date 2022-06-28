@@ -112,20 +112,9 @@ export async function searchMovies(query, page = 1) {
 //////////////////////////////////////
 export async function fetchMovie(movieId) {
     const finalUrl = `${URL_MOVIE_INFO}/${movieId}?api_key=${API_KEY}${PARAM_LANGUAGE}${LANG_ENGLISH}`;
-    let data = null;
 
     try {
-        const cachedData = localStorage.getItem(finalUrl);
-        if (cachedData && _cachedDataIsStillValid(finalUrl)) {
-            console.log('USING CACHED DATA of: ', finalUrl);
-            data = JSON.parse(cachedData);
-        }
-        else {
-            const res = await fetch(finalUrl);
-            if (!res.ok) throw new Error(res.status);
-            data = await res.json();
-            _cacheRequestData(finalUrl, data);
-        }
+        const data = await _fetchData(finalUrl);
 
         //
         const movie = buildFullMovie(data);
@@ -138,20 +127,9 @@ export async function fetchMovie(movieId) {
 
 async function fetchMovies(url, page=1) {
     const finalUrl = url + PAGE_QUERY  + `${page}`;
-    let data = null;
 
     try {
-        const cachedData = localStorage.getItem(finalUrl);
-        if (cachedData && _cachedDataIsStillValid(finalUrl)) {
-            console.log('USING CACHED DATA of: ', finalUrl);
-            data = JSON.parse(cachedData);
-        }
-        else {
-            const res = await fetch(finalUrl);
-            if (!res.ok) throw new Error(res.status);
-            data = await res.json();
-            _cacheRequestData(finalUrl, data);
-        }
+        const data = await _fetchData(finalUrl);
 
         //
         const results = data.results;
@@ -166,20 +144,9 @@ async function fetchMovies(url, page=1) {
 
 async function queryMovies(query, page) {
     const finalUrl = `${BASE_URL_TMDB}${PATH_SEARCH}?api_key=${API_KEY}&language=en&query=${query}&page=${page}&include_adult=false&region=it`;
-    let data = null;
 
     try {
-        const cachedData = localStorage.getItem(finalUrl);
-        if (cachedData && _cachedDataIsStillValid(finalUrl)) {
-            console.log('USING CACHED DATA of: ', finalUrl);
-            data = JSON.parse(cachedData);
-        }
-        else {
-            const res = await fetch(finalUrl);
-            if (!res.ok) throw new Error(res.status);
-            data = await res.json();
-            _cacheRequestData(finalUrl, data);
-        }
+        const data = await _fetchData(finalUrl);
 
         //
         const results = data.results;
@@ -193,21 +160,11 @@ async function queryMovies(query, page) {
 
 export async function fetchCast(movieId) {
     const finalUrl = `${BASE_URL_TMDB}${PATH_MOVIE}/${movieId}${PATH_CREDITS}?api_key=${API_KEY}${PARAM_LANGUAGE}${LANG_ENGLISH}`;
-    let data = null;
 
     try {
-        const cachedData = localStorage.getItem(finalUrl);
-        if (cachedData && _cachedDataIsStillValid(finalUrl)) {
-            console.log('USING CACHED DATA of: ', finalUrl);
-            data = JSON.parse(cachedData);
-        }
-        else {
-            const res = await fetch(finalUrl);
-            if (!res.ok) throw new Error(res.status);
-            data = await res.json();
-            _cacheRequestData(finalUrl, data);
-        }
+        const data = await _fetchData(finalUrl);
 
+        //
         const cast = buildCredits(data.cast);
         return cast;
     } catch (err) {
@@ -216,6 +173,22 @@ export async function fetchCast(movieId) {
     }
 }
 
+async function _fetchData(url) {
+    const cachedData = localStorage.getItem(url);
+
+    if (cachedData && _cachedDataIsStillValid(url)) {
+        console.log('USING CACHED DATA of: ', url);
+        return JSON.parse(cachedData);
+    }
+    else {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(res.status);
+        const data = await res.json();
+        _cacheRequestData(url, data);
+
+        return data;
+    }
+}
 
 //////////////////////////////////////
 // MISC
