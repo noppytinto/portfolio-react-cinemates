@@ -1,11 +1,12 @@
 import * as authService from './services/auth-service';
 import React, {useEffect, Suspense} from 'react';
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
-import './App.scss';
 import * as assets from './utils/assets-manager';
 import { AnimatePresence } from 'framer-motion';
 import {useDispatch} from "react-redux";
 import {authActions} from './redux/slices/auth-slice'
+import './App.scss';
+import LoadingPage from "./components/pages/LoadingPage/LoadingPage";
 
 
 const WithMainHeader =      React.lazy(() => import('./components/reusable/WithMainHeader/WithMainHeader'));
@@ -75,7 +76,7 @@ function App() {
     return (
         <div className={'App'}>
             <AnimatePresence exitBeforeEnter>
-                <Suspense fallback={<p>loading...</p>}>
+                <Suspense fallback={<LoadingPage />}>
                     <Routes location={location} key={location.pathname}>
                         <Route path={assets.pathRoot} element={<WithMainHeader />}>
                             <Route index element={ <ExplorePage  variants={fadeInVariants}/> } />

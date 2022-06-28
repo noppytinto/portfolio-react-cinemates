@@ -1,14 +1,16 @@
 import styles from './Error404Page.module.scss';
 
-
 function Error404Page() {
-    const classes = `${styles['error-404']}`;
-    
+
+
+    //////////////////////////////
+    // JSX
+    //////////////////////////////
     return (
-        <div className={classes}>
+        <div className={`${styles['error-404']}`}>
             <h1>404 - Not Found!</h1>
         </div>
     );
-}
+}// Error404Page
 
 export default Error404Page;
