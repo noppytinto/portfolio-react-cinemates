@@ -1,4 +1,3 @@
-import styles from './ExplorePageList.module.scss';
 import * as assets from '../../../utils/assets-manager';
 import {useLocation} from 'react-router-dom';
 import {useRef} from "react";
@@ -8,6 +7,7 @@ import HeaderWithBackButton
 import useFetchMovies from "../../../hooks/use-fetch-movies";
 import Snackbar from '../../../my-packages/snackbar-system/Snackbar';
 import {motion} from 'framer-motion';
+import styles from './ExplorePageList.module.scss';
 
 
 function ExplorePageList(props) {

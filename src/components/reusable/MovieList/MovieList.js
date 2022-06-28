@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from './MovieList.module.scss';
 import MovieListItem from './MovieListItem/MovieListItem';
 import {motion} from 'framer-motion';
+import styles from './MovieList.module.scss';
+
 
 const containerVariants = {
     hidden: {opacity: 0},

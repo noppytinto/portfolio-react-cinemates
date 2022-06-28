@@ -1,16 +1,16 @@
 .explore-page-list {
-
+  &__header {
+    position: sticky;
+    top: 0;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    margin-bottom: 2em;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
-.explore-page-list__header {
-  position: sticky;
-  top: 0;
-  margin-left: -1rem;
-  margin-right: -1rem;
-  margin-bottom: 2em;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
+
 
 @keyframes fade-in {
   from {opacity: 0}
