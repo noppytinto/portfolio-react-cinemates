@@ -9,7 +9,7 @@ function LoadingPage() {
     //////////////////////////////
     return (
         <div className={`${styles['loading-page']}`}>
-            <LoadingSpinner>404 - Not Found!</LoadingSpinner>
+            <LoadingSpinner />
         </div>
     );
 }// LoadingPage

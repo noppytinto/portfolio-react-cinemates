@@ -12,8 +12,9 @@ import CastList from "../../reusable/CastList/CastList";
 import OptionsDialog from '../../reusable/Dialog/OptionsDialog/OptionsDialog';
 import HeaderWithBackButton
     from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
-
 import styles from './MoviePage.module.scss';
+import LoadingPage from "../LoadingPage/LoadingPage";
+
 
 function MoviePage(props) {
     const params = useParams();
@@ -23,6 +24,7 @@ function MoviePage(props) {
     const [movie, setMovie] = useState({});
     const [cast, setCast] = useState([]);
     const [showListDialog, setShowListDialog] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     let lists = {};
     let listKeys = [];
@@ -49,6 +51,7 @@ function MoviePage(props) {
         (async () => {
             const fetchedMovie = await fetchMovie(movieId);
             const fetchedCast = await fetchCast(movieId);
+            setIsLoading(false);
             setMovie(fetchedMovie);
             setCast(fetchedCast);
         })();
@@ -116,12 +119,14 @@ function MoviePage(props) {
     ////////////////////////////////////
     // JSX
     ////////////////////////////////////
-    return (
-        <motion.div className={`${styles['movie-page']} `}
+    return isLoading?
+        (<LoadingPage />)
+        :
+        ( <motion.div className={`${styles['movie-page']} `}
                     initial="hidden"
                     animate="visible"
-                    variants={props.variants}
-        >
+                    variants={props.variants}>
+
             <HeaderWithBackButton className={`${styles['header']}`}
                                   title={''}/>
 
@@ -194,8 +199,7 @@ function MoviePage(props) {
                 <h2 className={`${styles['movie-page__cast-title']}`}>Cast</h2>
                 <CastList cast={cast}/>
             </section>
-        </motion.div>
-    );
+        </motion.div>);
 }// MoviePage
 
 export default MoviePage;
