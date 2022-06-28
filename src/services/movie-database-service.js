@@ -183,7 +183,9 @@ async function _fetchData(url) {
     else {
         const res = await fetch(url);
         if (!res.ok) throw new Error(res.status);
+
         const data = await res.json();
+
         _cacheRequestData(url, data);
 
         return data;
