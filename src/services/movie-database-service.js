@@ -44,6 +44,12 @@ const URL_NOW_PLAYING = `${BASE_URL_TMDB}${PATH_MOVIE}${PATH_NOW_PLAYING}?api_ke
 const URL_MOVIE_INFO = `${BASE_URL_TMDB}${PATH_MOVIE}/`;
 // const URL_SEARCH_MOVIE = `${BASE_URL_TMDB}${PATH_MOVIE}/`;
 
+const expiration = 86_400_000; // 1 day
+
+
+//////////////////////////////////////
+//
+//////////////////////////////////////
 export async function getUpcoming(page = 1) {
     try {
         const [rawMovies, totalPages] = await fetchMovies(URL_UPCOMING, page);
@@ -86,11 +92,50 @@ export async function getPopular(page = 1) {
     }
 }
 
-export async function fetchMovie(movieId) {
+export async function searchMovies(query, page = 1) {
     try {
-        const res = await fetch(`${URL_MOVIE_INFO}/${movieId}?api_key=${API_KEY}${PARAM_LANGUAGE}${LANG_ENGLISH}`);
+        const [rawMovies, totalPages] = await queryMovies(query, page);
+        if (!rawMovies) throw new Error('');
+
+        //
+        const movies = buildMovies(rawMovies);
+        return [movies, totalPages];
+    } catch (err) {
+        console.log('SEARCH ERROR: ', err);
+        return [];
+    }
+}
+
+
+//////////////////////////////////////
+// FETCHERS
+//////////////////////////////////////
+export async function fetchMovie(movieId) {
+    const finalUrl = `${URL_MOVIE_INFO}/${movieId}?api_key=${API_KEY}${PARAM_LANGUAGE}${LANG_ENGLISH}`;
+
+    try {
+        const cachedData = localStorage.getItem(finalUrl);
+        if (cachedData) {
+            const fetchDateInMillis =  localStorage.getItem('date-' + finalUrl);
+            const currentDateInMillis = Date.now();
+
+            const diff = currentDateInMillis - fetchDateInMillis;
+
+            console.log('DIFF: ', diff);
+            if (diff < expiration) {
+                console.log('USING CACHED DATA of: ', finalUrl);
+
+                const data = JSON.parse(cachedData);
+                const movie = buildFullMovie(data);
+                return movie;
+            }
+        }
+
+        //
+        const res = await fetch(finalUrl);
         if (!res.ok) throw new Error(res.status);
         const data = await res.json();
+        _cacheRequestData(finalUrl, data);
 
         const movie = buildFullMovie(data);
         return movie;
@@ -102,11 +147,9 @@ export async function fetchMovie(movieId) {
 
 async function fetchMovies(url, page=1) {
     const finalUrl = url + PAGE_QUERY  + `${page}`;
-    const expiration = 86_400_000; // 1 day
 
     try {
         const cachedData = localStorage.getItem(finalUrl);
-        console.log('CACHED DATA: ', cachedData);
         if (cachedData) {
             const fetchDateInMillis =  localStorage.getItem('date-' + finalUrl);
             const currentDateInMillis = Date.now();
@@ -143,35 +186,36 @@ async function fetchMovies(url, page=1) {
     }
 }
 
-function _cacheRequestData(key, requestData) {
-    localStorage.setItem(key, JSON.stringify(requestData));
-    localStorage.setItem('date-' + key, Date.now());
-}
-
-export async function searchMovies(query, page = 1) {
-    try {
-        const [rawMovies, totalPages] = await queryMovies(query, page);
-        if (!rawMovies) throw new Error('');
-
-        //
-        const movies = buildMovies(rawMovies);
-        return [movies, totalPages];
-    } catch (err) {
-        console.log('SEARCH ERROR: ', err);
-        return [];
-    }
-}
-
-
 async function queryMovies(query, page) {
+    const finalUrl = `${BASE_URL_TMDB}${PATH_SEARCH}?api_key=${API_KEY}&language=en&query=${query}&page=${page}&include_adult=false&region=it`;
+
     try {
-        const res = await fetch(`${BASE_URL_TMDB}${PATH_SEARCH}?api_key=${API_KEY}&language=en&query=${query}&page=${page}&include_adult=false&region=it`);
+        const cachedData = localStorage.getItem(finalUrl);
+        if (cachedData) {
+            const fetchDateInMillis =  localStorage.getItem('date-' + finalUrl);
+            const currentDateInMillis = Date.now();
+
+            const diff = currentDateInMillis - fetchDateInMillis;
+
+            console.log('DIFF: ', diff);
+            if (diff < expiration) {
+                console.log('USING CACHED DATA of: ', finalUrl);
+                const data = JSON.parse(cachedData);
+
+                const results = data.results;
+                const totalPages = data['total_pages'];
+                return [results, totalPages];
+            }
+        }
+
+        const res = await fetch(finalUrl);
         if (!res.ok) throw new Error(res.status);
         const data = await res.json();
 
+        _cacheRequestData(finalUrl, data);
+
         const results = data.results;
         const totalPages = data['total_pages'];
-
         return [results, totalPages];
     } catch (err) {
         console.log('FETCH ERROR: ', err);
@@ -180,10 +224,30 @@ async function queryMovies(query, page) {
 }
 
 export async function fetchCast(movieId) {
+    const finalUrl = `${BASE_URL_TMDB}${PATH_MOVIE}/${movieId}${PATH_CREDITS}?api_key=${API_KEY}${PARAM_LANGUAGE}${LANG_ENGLISH}`;
+
     try {
-        const res = await fetch(`${BASE_URL_TMDB}${PATH_MOVIE}/${movieId}${PATH_CREDITS}?api_key=${API_KEY}${PARAM_LANGUAGE}${LANG_ENGLISH}`);
+        const cachedData = localStorage.getItem(finalUrl);
+        if (cachedData) {
+            const fetchDateInMillis =  localStorage.getItem('date-' + finalUrl);
+            const currentDateInMillis = Date.now();
+
+            const diff = currentDateInMillis - fetchDateInMillis;
+
+            console.log('DIFF: ', diff);
+            if (diff < expiration) {
+                console.log('USING CACHED DATA of: ', finalUrl);
+
+                const data = JSON.parse(cachedData);
+                const cast = buildCredits(data.cast);
+                return cast;
+            }
+        }
+
+        const res = await fetch(finalUrl);
         if (!res.ok) throw new Error(res.status);
         const data = await res.json();
+        _cacheRequestData(finalUrl, data);
 
         const cast = buildCredits(data.cast);
         return cast;
@@ -193,6 +257,18 @@ export async function fetchCast(movieId) {
     }
 }
 
+
+//////////////////////////////////////
+// MISC
+//////////////////////////////////////
+function _cacheRequestData(key, requestData) {
+    localStorage.setItem(key, JSON.stringify(requestData));
+    localStorage.setItem('date-' + key, Date.now());
+}
+
+//////////////////////////////////////
+// BUILDERS
+//////////////////////////////////////
 function buildCredits(rawData) {
     const cast = [];
 
@@ -216,7 +292,6 @@ function buildSimpleCastMember(jsonObj) {
     member.setCharacter(character);
     return member;
 }
-
 
 function buildMovies(rawData) {
     const movies = [];
@@ -288,7 +363,6 @@ function buildProfilePictureUrl(path) {
     if(!Boolean(path)) return '';
     return BASE_URL_CREDITS + path;
 }
-
 
 function buildBackdropUrl(path) {
     if(!Boolean(path)) return '';
