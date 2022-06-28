@@ -1,4 +1,3 @@
-import styles from './ProfilePage.module.scss';
 import HeaderWithBackButton
     from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
 import {useDispatch, useSelector} from "react-redux";
@@ -17,6 +16,7 @@ import * as userDao from '../../../dao/user-dao';
 import LoadingDialog from '../../reusable/Dialog/LoadingDialog/LoadingDialog';
 import EditableProfilePicture
     from "../../reusable/ProfilePicture/EditableProfilePicture/EditableProfilePicture";
+import styles from './ProfilePage.module.scss';
 
 
 function ProfilePage(props) {

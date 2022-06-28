@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './MainHeader.module.scss';
 import * as assets from '../../../utils/assets-manager';
 import { NavLink } from 'react-router-dom';
 import {useSelector} from "react-redux";
 import ProfilePicture from "../../reusable/ProfilePicture/ProfilePicture";
+import styles from './MainHeader.module.scss';
 
 
 function MainHeader(props) {

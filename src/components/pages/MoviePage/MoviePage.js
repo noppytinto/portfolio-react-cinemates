@@ -1,18 +1,19 @@
-import styles from './MoviePage.module.scss';
 import * as assets from '../../../utils/assets-manager';
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import HeaderWithBackButton
-    from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
 import {fetchCast, fetchMovie} from '../../../services/movie-database-service';
-import MoviePoster from "../../reusable/MoviePoster/MoviePoster";
-import CastList from "../../reusable/CastList/CastList";
-import OptionsDialog from '../../reusable/Dialog/OptionsDialog/OptionsDialog';
 import * as userDao from '../../../dao/user-dao';
 import {useDispatch, useSelector} from "react-redux";
 import {authActions} from '../../../redux/slices/auth-slice';
 import {motion} from 'framer-motion';
 
+import MoviePoster from "../../reusable/MoviePoster/MoviePoster";
+import CastList from "../../reusable/CastList/CastList";
+import OptionsDialog from '../../reusable/Dialog/OptionsDialog/OptionsDialog';
+import HeaderWithBackButton
+    from "../../reusable/HeaderWithBackButton/HeaderWithBackButton";
+
+import styles from './MoviePage.module.scss';
 
 function MoviePage(props) {
     const params = useParams();

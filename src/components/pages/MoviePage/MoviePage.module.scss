@@ -1,25 +1,6 @@
 @use '../../../scss/variables' as var;
 
-.header {
-  position: fixed;
-  top: 0;
-  z-index: 100;
-
-  background-color: transparent;
-}
-
-.header button {
-  padding: .1em;
-  border-radius: 50%;
-
-  box-shadow: 1px 1px 5px 0 rgba(0,0,0,.5);
-  background-color: rgba(0, 157, 255, 0.1);
-  backdrop-filter: blur(5px);
-}
-
-
 .movie-page {
-  
   
   &__container-backdrop {
     position: relative;
@@ -140,5 +121,22 @@
     margin-bottom: 3em;
   }
 
+}//
+
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  
+  background-color: transparent;
+}
+
+.header button {
+  padding: .1em;
+  border-radius: 50%;
+  
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,.5);
+  background-color: rgba(0, 157, 255, 0.1);
+  backdrop-filter: blur(5px);
 }
 

@@ -1,5 +1,5 @@
 import * as authService from './services/auth-service';
-import React, {useEffect} from 'react';
+import React, {useEffect, Suspense} from 'react';
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import './App.scss';
 import * as assets from './utils/assets-manager';
@@ -7,21 +7,22 @@ import { AnimatePresence } from 'framer-motion';
 import {useDispatch} from "react-redux";
 import {authActions} from './redux/slices/auth-slice'
 
-import WithMainHeader from './components/reusable/WithMainHeader/WithMainHeader';
-import WithoutMainHeader from './components/reusable/WithoutMainHeader/WithoutMainHeader';
+
+const WithMainHeader =      React.lazy(() => import('./components/reusable/WithMainHeader/WithMainHeader'));
+const WithoutMainHeader =   React.lazy(() => import('./components/reusable/WithoutMainHeader/WithoutMainHeader'));
 // pages
-import ExplorePage from "./components/pages/ExplorePage/ExplorePage";
-import FeedsPage from './components/pages/FeedsPage/FeedsPage';
-import SearchPage from "./components/pages/SearchPage/SearchPage";
-import NotificationPage from './components/pages/NotificationPage/NotificationPage';
-import ProfilePage from './components/pages/ProfilePage/ProfilePage';
-import PlaygroundPage from './components/pages/PlaygroundPage/PlaygroundPage';
-import Error404Page from './components/pages/Error404Page/Error404Page';
-import MoviePage from "./components/pages/MoviePage/MoviePage";
-import ExplorePageList from './components/reusable/ExplorePageList/ExplorePageList';
-import SignUpPage from "./components/pages/SignUpPage/SignUpPage";
-import LoginPage from "./components/pages/LoginPage/LoginPage";
-import MoviesListPage from "./components/pages/MoviesListPage/MoviesListPage";
+const ExplorePage =         React.lazy(() => import('./components/pages/ExplorePage/ExplorePage'));
+const FeedsPage =           React.lazy(() => import('./components/pages/FeedsPage/FeedsPage'));
+const SearchPage =          React.lazy(() => import('./components/pages/SearchPage/SearchPage'));
+const NotificationPage =    React.lazy(() => import('./components/pages/NotificationPage/NotificationPage'));
+const ProfilePage =         React.lazy(() => import('./components/pages/ProfilePage/ProfilePage'));
+const PlaygroundPage =      React.lazy(() => import('./components/pages/PlaygroundPage/PlaygroundPage'));
+const Error404Page =        React.lazy(() => import('./components/pages/Error404Page/Error404Page'));
+const MoviePage =           React.lazy(() => import('./components/pages/MoviePage/MoviePage'));
+const ExplorePageList =     React.lazy(() => import('./components/reusable/ExplorePageList/ExplorePageList'));
+const SignUpPage =          React.lazy(() => import('./components/pages/SignUpPage/SignUpPage'));
+const LoginPage =           React.lazy(() => import('./components/pages/LoginPage/LoginPage'));
+const MoviesListPage =      React.lazy(() => import("./components/pages/MoviesListPage/MoviesListPage"));
 
 
 //
@@ -74,28 +75,30 @@ function App() {
     return (
         <div className={'App'}>
             <AnimatePresence exitBeforeEnter>
-                <Routes location={location} key={location.pathname}>
-                    <Route path={assets.pathRoot} element={<WithMainHeader />}>
-                        <Route index element={<ExplorePage  variants={fadeInVariants}/>} />
-                        <Route path={assets.pathExplorePage} element={<ExplorePage variants={fadeInVariants}/>} />
-                        <Route path={assets.pathFeedsPage} element={ <FeedsPage variants={fadeInVariants}/> } />
-                        <Route path={assets.pathSearchPage} element={<SearchPage variants={fadeInVariants}/>} />
+                <Suspense fallback={<p>loading...</p>}>
+                    <Routes location={location} key={location.pathname}>
+                        <Route path={assets.pathRoot} element={<WithMainHeader />}>
+                            <Route index element={ <ExplorePage  variants={fadeInVariants}/> } />
+                            <Route path={assets.pathExplorePage} element={ <ExplorePage variants={fadeInVariants}/> } />
+                            <Route path={assets.pathFeedsPage} element={  <FeedsPage variants={fadeInVariants}/> } />
+                            <Route path={assets.pathSearchPage} element={ <SearchPage variants={fadeInVariants}/> } />
 
-                        <Route path={assets.pathPlayground} element={<PlaygroundPage />} />
-                        <Route path={assets.pathTest} element={ <Navigate to={assets.pathPlayground} /> } />
-                        <Route path={assets.pathAny} element={<Error404Page variants={fadeInVariants}/>} />
-                    </Route>
+                            <Route path={assets.pathPlayground} element={ <PlaygroundPage />} />
+                            <Route path={assets.pathTest} element={  <Navigate to={assets.pathPlayground} /> } />
+                            <Route path={assets.pathAny} element={ <Error404Page variants={fadeInVariants}/> } />
+                        </Route>
 
-                    <Route path={assets.pathRoot} element={<WithoutMainHeader />}>
-                        <Route path={assets.pathNotificationPage} element={<NotificationPage variants={fadeInVariants}/>} />
-                        <Route path={assets.pathMovieInfoPageWithId} element={<MoviePage variants={fadeInVariants}/>} />
-                        <Route path={assets.pathSinUpPage} element={<SignUpPage variants={fadeInVariants}/>} />
-                        <Route path={assets.pathLoginPage} element={<LoginPage variants={fadeInVariants}/>} />
-                        <Route path={assets.pathProfilePage} element={<ProfilePage variants={fadeInVariants}/>} />
-                        <Route path={assets.pathExploreList} element={<ExplorePageList variants={fadeInVariants}/>} />
-                        <Route path={assets.pathMoviesListPage} element={<MoviesListPage variants={fadeInVariants}/>} />
-                    </Route>
-                </Routes>
+                        <Route path={assets.pathRoot} element={<WithoutMainHeader />}>
+                            <Route path={assets.pathNotificationPage} element={ <NotificationPage variants={fadeInVariants}/>} />
+                            <Route path={assets.pathMovieInfoPageWithId} element={ <MoviePage variants={fadeInVariants}/>} />
+                            <Route path={assets.pathSinUpPage} element={ <SignUpPage variants={fadeInVariants}/>} />
+                            <Route path={assets.pathLoginPage} element={ <LoginPage variants={fadeInVariants}/>} />
+                            <Route path={assets.pathProfilePage} element={ <ProfilePage variants={fadeInVariants}/>} />
+                            <Route path={assets.pathExploreList} element={ <ExplorePageList variants={fadeInVariants}/>} />
+                            <Route path={assets.pathMoviesListPage} element={ <MoviesListPage variants={fadeInVariants}/>} />
+                        </Route>
+                    </Routes>
+                </Suspense>
             </AnimatePresence>
         </div>
     );

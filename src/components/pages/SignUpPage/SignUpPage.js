@@ -1,4 +1,3 @@
-import styles from './SignUpPage.module.scss';
 import React, { useRef, useState } from 'react';
 import * as authService from '../../../services/auth-service';
 import HeaderWithBackButton
@@ -13,6 +12,7 @@ import EditableProfilePicture
     from "../../reusable/ProfilePicture/EditableProfilePicture/EditableProfilePicture";
 import * as cloudinaryService from '../../../services/cloudinary-service';
 import {v4 as uuidv4} from "uuid";
+import styles from './SignUpPage.module.scss';
 
 
 function SignUpPage(props) {
