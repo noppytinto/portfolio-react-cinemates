@@ -2,12 +2,18 @@ import styles from './ProfilePicture.module.scss';
 import * as assets from "../../../utils/assets-manager";
 import {AdvancedImage} from "@cloudinary/react";
 import * as cloudinaryService from "../../../services/cloudinary-service";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 
-function ProfilePicture(props) {
+function _propsAreEqual(prev, next) {
+    console.log('props are equal');
+    return prev.imageId === next.imageId;
+}
+
+const ProfilePicture = React.memo((props) => {
+    console.log('profile image rendered');
     const imageId = props.imageId || null;
-    const alt = props.alt || 'profile picture';
+    const alt = props.alt || '';
     const src = props.src || '';
     const [cloudinaryImage, setCloudinaryImage] = useState(null);
 
@@ -43,6 +49,8 @@ function ProfilePicture(props) {
             }
         </>
     );
-}// ProfilePicture
+}, _propsAreEqual);// ProfilePicture
+
+
 
 export default ProfilePicture;

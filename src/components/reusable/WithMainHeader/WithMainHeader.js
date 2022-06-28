@@ -3,9 +3,8 @@ import MainHeader from '../../ui-components/MainHeader/MainHeader';
 import { Outlet } from 'react-router-dom';
 import MainNav from "../../ui-components/MainNav/MainNav";
 
+
 function WithMainHeader(props) {
-    const classes = `${styles['with-main-header']} ${props.className}`;
-    const outletClasses = ``;
     // const headerRef = React.createRef();
     // const outletRef = React.createRef();
 
@@ -25,11 +24,11 @@ function WithMainHeader(props) {
 
     return (
         <>
-            <header className={classes} >
+            <header className={`${styles['with-main-header']} ${props.className}`} >
                 <MainHeader />
                 <MainNav />
             </header>
-            <Outlet className={outletClasses}/>
+            <Outlet/>
         </>
     );
 }

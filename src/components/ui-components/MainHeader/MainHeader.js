@@ -1,4 +1,3 @@
-import React from 'react';
 import * as assets from '../../../utils/assets-manager';
 import { NavLink } from 'react-router-dom';
 import {useSelector} from "react-redux";
