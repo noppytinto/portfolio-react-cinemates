@@ -23,8 +23,6 @@ Cinemates is a ***mobile*** Web App, that allow users to find/explore movies and
 
 ## Stack:
 
-- HTML, CSS (SASS)
-- Javascript
 - React
 - Firebase
 - Cloudinary
