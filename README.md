@@ -17,8 +17,7 @@ Cinemates is a ***mobile*** Web App, that allow users to find/explore movies and
 - explore Upcomings, Popular and Now Playing movies
 - search movies in the TMDB database
 - view movie details
-- add movies to Watchlist
-- create and manage personal lists
+- add movies to Watchlist, Watched and Favorites
 
 <br/>
 
