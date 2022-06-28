@@ -112,31 +112,22 @@ export async function searchMovies(query, page = 1) {
 //////////////////////////////////////
 export async function fetchMovie(movieId) {
     const finalUrl = `${URL_MOVIE_INFO}/${movieId}?api_key=${API_KEY}${PARAM_LANGUAGE}${LANG_ENGLISH}`;
+    let data = null;
 
     try {
         const cachedData = localStorage.getItem(finalUrl);
-        if (cachedData) {
-            const fetchDateInMillis =  localStorage.getItem('date-' + finalUrl);
-            const currentDateInMillis = Date.now();
-
-            const diff = currentDateInMillis - fetchDateInMillis;
-
-            console.log('DIFF: ', diff);
-            if (diff < expiration) {
-                console.log('USING CACHED DATA of: ', finalUrl);
-
-                const data = JSON.parse(cachedData);
-                const movie = buildFullMovie(data);
-                return movie;
-            }
+        if (cachedData && _cachedDataIsStillValid(finalUrl)) {
+            console.log('USING CACHED DATA of: ', finalUrl);
+            data = JSON.parse(cachedData);
+        }
+        else {
+            const res = await fetch(finalUrl);
+            if (!res.ok) throw new Error(res.status);
+            data = await res.json();
+            _cacheRequestData(finalUrl, data);
         }
 
         //
-        const res = await fetch(finalUrl);
-        if (!res.ok) throw new Error(res.status);
-        const data = await res.json();
-        _cacheRequestData(finalUrl, data);
-
         const movie = buildFullMovie(data);
         return movie;
     } catch (err) {
@@ -147,33 +138,20 @@ export async function fetchMovie(movieId) {
 
 async function fetchMovies(url, page=1) {
     const finalUrl = url + PAGE_QUERY  + `${page}`;
+    let data = null;
 
     try {
         const cachedData = localStorage.getItem(finalUrl);
-        if (cachedData) {
-            const fetchDateInMillis =  localStorage.getItem('date-' + finalUrl);
-            const currentDateInMillis = Date.now();
-
-            const diff = currentDateInMillis - fetchDateInMillis;
-
-            console.log('DIFF: ', diff);
-            if (diff < expiration) {
-                console.log('USING CACHED DATA of: ', finalUrl);
-
-                const data = JSON.parse(cachedData);
-                const results = data.results;
-                const totalPages = data['total_pages'];
-                return [results, totalPages];
-            }
+        if (cachedData && _cachedDataIsStillValid(finalUrl)) {
+            console.log('USING CACHED DATA of: ', finalUrl);
+            data = JSON.parse(cachedData);
         }
-
-        //
-        const res = await fetch(finalUrl);
-        if (!res.ok) throw new Error(res.status);
-
-        const data = await res.json();
-
-        _cacheRequestData(finalUrl, data);
+        else {
+            const res = await fetch(finalUrl);
+            if (!res.ok) throw new Error(res.status);
+            data = await res.json();
+            _cacheRequestData(finalUrl, data);
+        }
 
         //
         const results = data.results;
@@ -188,32 +166,22 @@ async function fetchMovies(url, page=1) {
 
 async function queryMovies(query, page) {
     const finalUrl = `${BASE_URL_TMDB}${PATH_SEARCH}?api_key=${API_KEY}&language=en&query=${query}&page=${page}&include_adult=false&region=it`;
+    let data = null;
 
     try {
         const cachedData = localStorage.getItem(finalUrl);
-        if (cachedData) {
-            const fetchDateInMillis =  localStorage.getItem('date-' + finalUrl);
-            const currentDateInMillis = Date.now();
-
-            const diff = currentDateInMillis - fetchDateInMillis;
-
-            console.log('DIFF: ', diff);
-            if (diff < expiration) {
-                console.log('USING CACHED DATA of: ', finalUrl);
-                const data = JSON.parse(cachedData);
-
-                const results = data.results;
-                const totalPages = data['total_pages'];
-                return [results, totalPages];
-            }
+        if (cachedData && _cachedDataIsStillValid(finalUrl)) {
+            console.log('USING CACHED DATA of: ', finalUrl);
+            data = JSON.parse(cachedData);
+        }
+        else {
+            const res = await fetch(finalUrl);
+            if (!res.ok) throw new Error(res.status);
+            data = await res.json();
+            _cacheRequestData(finalUrl, data);
         }
 
-        const res = await fetch(finalUrl);
-        if (!res.ok) throw new Error(res.status);
-        const data = await res.json();
-
-        _cacheRequestData(finalUrl, data);
-
+        //
         const results = data.results;
         const totalPages = data['total_pages'];
         return [results, totalPages];
@@ -225,29 +193,20 @@ async function queryMovies(query, page) {
 
 export async function fetchCast(movieId) {
     const finalUrl = `${BASE_URL_TMDB}${PATH_MOVIE}/${movieId}${PATH_CREDITS}?api_key=${API_KEY}${PARAM_LANGUAGE}${LANG_ENGLISH}`;
+    let data = null;
 
     try {
         const cachedData = localStorage.getItem(finalUrl);
-        if (cachedData) {
-            const fetchDateInMillis =  localStorage.getItem('date-' + finalUrl);
-            const currentDateInMillis = Date.now();
-
-            const diff = currentDateInMillis - fetchDateInMillis;
-
-            console.log('DIFF: ', diff);
-            if (diff < expiration) {
-                console.log('USING CACHED DATA of: ', finalUrl);
-
-                const data = JSON.parse(cachedData);
-                const cast = buildCredits(data.cast);
-                return cast;
-            }
+        if (cachedData && _cachedDataIsStillValid(finalUrl)) {
+            console.log('USING CACHED DATA of: ', finalUrl);
+            data = JSON.parse(cachedData);
         }
-
-        const res = await fetch(finalUrl);
-        if (!res.ok) throw new Error(res.status);
-        const data = await res.json();
-        _cacheRequestData(finalUrl, data);
+        else {
+            const res = await fetch(finalUrl);
+            if (!res.ok) throw new Error(res.status);
+            data = await res.json();
+            _cacheRequestData(finalUrl, data);
+        }
 
         const cast = buildCredits(data.cast);
         return cast;
@@ -265,6 +224,16 @@ function _cacheRequestData(key, requestData) {
     localStorage.setItem(key, JSON.stringify(requestData));
     localStorage.setItem('date-' + key, Date.now());
 }
+
+function _cachedDataIsStillValid(key) {
+    const fetchDateInMillis =  localStorage.getItem('date-' + key);
+    const currentDateInMillis = Date.now();
+
+    const diff = currentDateInMillis - fetchDateInMillis;
+
+    return diff < expiration;
+}
+
 
 //////////////////////////////////////
 // BUILDERS
