@@ -80,7 +80,7 @@ function ExplorePageList(props) {
             {/*{isListEnded && <p className={styles['list-ended']}>-- fin --</p>}*/}
             {/*{<p className={styles['loading']}>Loading...</p>}*/}
 
-            {isListEnded && <Snackbar text={'No more movies'}
+            {isListEnded && <Snackbar text={'End of the list.'}
                                       actionLabel={'ok'}
                                       onClickAction={actionHandler}/>}
         </motion.div>
