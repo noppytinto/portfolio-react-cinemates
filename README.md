@@ -8,7 +8,7 @@
 
 ## Description:
 
-Cinemates is a ***mobile*** Web App, that allow users to find/explore movies and save them into lists, using the largest movie database (The Movie Database).
+Cinemates is a ***mobile*** Web App, that allows users to find/explore movies and save them into predefined lists, using the largest movie database (The Movie Database).
 
 <br/>
 
