@@ -194,7 +194,7 @@ function SignUpPage(props) {
                     animate="visible"
                     variants={props.variants} >
 
-            <HeaderWithBackButton className={`${styles['header']}`} title={'Sign Up (work in progress)'} />
+            <HeaderWithBackButton className={`${styles['header']}`} title={'Sign Up'} />
 
             <section className={`${styles['signup-page__welcome']}`}>
                 <h1 className={`${styles['signup-page__title']}`}>

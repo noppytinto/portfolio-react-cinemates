@@ -16,7 +16,6 @@ const TextField = React.forwardRef((props, ref) => {
     const classesTextField = inputIsValid ?
         `${styles['textfield']} ` :
         `${styles['textfield']} ${styles['textfield--error']}`;
-    // const classesIcon = `${styles['textfield__icon']}`;
 
 
     //////////////////////////////

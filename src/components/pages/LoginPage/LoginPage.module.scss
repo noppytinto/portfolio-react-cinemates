@@ -7,14 +7,9 @@
   left: 0;
   right: 0;
   padding-left: 1rem;
-
-  // border-bottom-color: #0068b3;
-  // border-bottom-width: 1px;
-  // border-bottom-style: solid;
 }
 
 .login-page {
-  //height: 100%;
   
   &__logo {
     display: block;
@@ -24,14 +19,12 @@
   
   &__form {
     margin-inline: 10%;
-    // width: clamp(100px, 100%, 500px);
     
   }
   
   &__input-label {
     margin-bottom: .5em;
     display: block;
-    
     font-weight: 550;
     font-size: 1.1rem;
     color: var.$color-primary--light-blue
@@ -67,23 +60,38 @@
     opacity: .2;
   }
   
+  &__btn-demo {
+    display: block;
+    padding: .5em 4em;
+    margin-inline: auto;
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+    font-family: inherit;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var.$color-primary--yellow;
+    background: transparent;
+    border-radius: 1em;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color: rgba(var.$color-primary--yellow, .5);
+    transition: all .2s;
+  }
+  
   &__btn-login {
     display: block;
     padding: .5em 4em;
     margin-inline: auto;
     margin-top: 3em;
     margin-bottom: 1.5em;
-    
     font-family: inherit;
     font-size: 1.3rem;
     font-weight: bold;
     color: #000;
-  
     background: var.$color-primary--yellow;
     border-radius: 1em;
     border-width: 0;
     box-shadow: .1em .1em 1em 0 rgba(84, 68, 21, .5);
-  
     transition: all .2s;
   }
   

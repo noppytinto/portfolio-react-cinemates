@@ -1,17 +1,11 @@
 
-.textfield-container {
-  //margin-bottom: 2em;
-}
-
-
 .textfield {
   width: 100%;
   padding: .7em .5em;
-  
+  margin-bottom: 1em;
   font-family: inherit;
   font-size: inherit;
   color: inherit;
-  
   background: #3d7eab;
   border-left-width: 0;
   border-right-width: 0;
@@ -34,18 +28,14 @@
 
   &--error {
     border-bottom-color: #ff6551;
-
   }
-
 
   &__label {
     margin-bottom: .5em;
     display: block;
-    
     font-weight: 550;
     font-size: 1.1rem;
     color: #B2CCDF
-    
   }
 
   &__helper-text {
@@ -56,7 +46,6 @@
   &__error-text {
     padding: .3em .7em;
     font-size: .8rem;
-
     font-weight: 550;
     color: #ff5640;
   }
@@ -68,6 +57,6 @@
   .hidden {
     opacity: 0;
   }
-
-}
+  
+}// .textfield
 

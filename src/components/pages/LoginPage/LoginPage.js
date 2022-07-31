@@ -39,9 +39,14 @@ function LoginPage(props) {
     /////////////////////////////
     // FUNCTIONS
     /////////////////////////////
-    function onClickLoginHandler(ev) {
-        const email = emailRef.current.value;
-        const pass = passwordRef.current.value;
+    function onClickLoginHandler(ev, demoMode = false) {
+        let email = emailRef.current.value;
+        let pass = passwordRef.current.value;
+
+        if (demoMode) {
+            email = 'test@mail.com';
+            pass = '123456';
+        }
 
         if (! validateInput(email, pass)) return;
 
@@ -158,13 +163,17 @@ function LoginPage(props) {
                                />
 
                     <TextField type={'password'}
-                        name={'password'}
-                        placeholder={'******'}
-                        ref={passwordRef}
-                        label={'Password'}
-                        errorText={passwordErrorText.current}
-                        inputIsValid={passwordIsValid}
+                               name={'password'}
+                               placeholder={'******'}
+                               ref={passwordRef}
+                               label={'Password'}
+                               errorText={passwordErrorText.current}
+                               inputIsValid={passwordIsValid}
                         />
+
+                    <button className={styles['login-page__btn-demo']}
+                            type={'button'}
+                            onClick={(ev) => onClickLoginHandler(ev, true)}> DEMO </button>
 
                     <button className={classesLoginButton}
                             type={'button'}
