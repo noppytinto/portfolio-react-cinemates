@@ -8,16 +8,17 @@
 
 ## Description:
 
-Cinemates is a ***mobile*** Web App, that allows users to find/explore movies and save them into predefined lists, using the largest movie database (The Movie Database).
+Developed as a university Software Engineering exam project, Cinemates is a feature-rich Android movie app designed to provide a comprehensive and social movie-watching experience.
 
 <br/>
 
 ## Features:
 
-- explore Upcomings, Popular and Now Playing movies
-- search movies in the TMDB database
-- view movie details
-- add movies to Watchlist, Watched and Favorites
+- Explore and Search Movies: Browse and find movies with an intuitive interface.
+- Personal Lists: Create, manage, and share personalized movie lists.
+- Social Features: Engage with friends through a dynamic news feed, notifications, comments, and reactions.
+- Community Interaction: Subscribe to friends' lists and share movie recommendations.
+- Desktop CRM: Manage user interactions and profiles efficiently with a desktop Customer Relationship Management system.
 
 <br/>
 
